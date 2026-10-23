@@ -169,7 +169,7 @@ function renderPower(data) {
         warnEl.hidden = !data.bus_low;
     } else {
         valueEl.innerHTML = '--<span class="unit">Вт</span>';
-        detailsEl.textContent = 'нет данных от INA226';
+        detailsEl.textContent = 'нет данных';
         warnEl.hidden = true;
     }
     const energyEl = document.getElementById('energy-val');
