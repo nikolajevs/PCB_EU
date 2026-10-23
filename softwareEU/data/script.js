@@ -120,7 +120,7 @@ function renderStatus(data) {
 
     // В сушке свет и полив выключены всегда, поэтому лампу и насос с главной убираем
     document.querySelectorAll('[data-growing-only]').forEach(el => { el.hidden = drying; });
-    document.getElementById('power-title').textContent = drying ? 'Силовые цепи' : 'Освещение и Силовые цепи';
+    document.getElementById('live-grid').classList.toggle('drying', drying);
 
     // Без доверенных часов прошивка не начинает полив. Раньше любая проблема с часами
     // показывалась как "Часы не выставлены", даже когда микросхема RTC просто не отвечала.
