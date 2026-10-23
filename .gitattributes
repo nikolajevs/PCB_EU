@@ -1,0 +1,6 @@
+# Keep text and saved report hashes consistent across operating systems
+* text=auto eol=lf
+
+# Preserve original vendor model bytes and recorded SHA-256 values
+*.step -text
+*.stp -text

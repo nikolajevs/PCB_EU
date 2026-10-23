@@ -1,0 +1,3564 @@
+{
+  "stage": "fully routed board",
+  "date": "2026-10-22",
+  "kicad_version": "10.0.7",
+  "repository_target_version": "10.0.7",
+  "target_version_verified": true,
+  "erc_errors": 0,
+  "erc_warnings": 0,
+  "default_ignored_erc_checks": [
+    "footprint_filter",
+    "four_way_junction",
+    "simulation_model_issue",
+    "single_global_label"
+  ],
+  "project_erc_exclusions": [],
+  "connectivity_checks": 56,
+  "connected_pins": 498,
+  "purchased_electrical_components": 188,
+  "footprints": {
+    "assigned_references": 196,
+    "unique": 35,
+    "drawing_checked_references": 27,
+    "missing": [],
+    "checks_passed": 2198,
+    "native_KiCad_load_and_plot": true,
+    "physical_fit_verified": false
+  },
+  "pcb_placement": {
+    "stage": "two-sided placement with partial routing; not fabrication release",
+    "date": "2026-10-21",
+    "pcbnew_build": "10.0.7-10.0.7~ubuntu24.04.1",
+    "checks_passed": 22991,
+    "netlisted_references": 196,
+    "board_only_mounting_holes": 4,
+    "copper_layers": 4,
+    "board_mm": [
+      100,
+      100
+    ],
+    "face_counts": {
+      "F": 113,
+      "B": 83
+    },
+    "back_side_references": [
+      "BT301",
+      "C105",
+      "C106",
+      "C107",
+      "C109",
+      "C110",
+      "C111",
+      "C113",
+      "C114",
+      "C115",
+      "C503",
+      "C504",
+      "C505",
+      "C506",
+      "C507",
+      "C511",
+      "C603",
+      "C604",
+      "C605",
+      "C606",
+      "C607",
+      "C803",
+      "D103",
+      "D801",
+      "F106",
+      "L501",
+      "L502",
+      "L601",
+      "Q102",
+      "Q701",
+      "Q702",
+      "R102",
+      "R103",
+      "R104",
+      "R105",
+      "R106",
+      "R107",
+      "R108",
+      "R109",
+      "R110",
+      "R111",
+      "R112",
+      "R113",
+      "R503",
+      "R504",
+      "R505",
+      "R506",
+      "R507",
+      "R508",
+      "R509",
+      "R510",
+      "R511",
+      "R603",
+      "R604",
+      "R605",
+      "R606",
+      "R607",
+      "R608",
+      "R609",
+      "R610",
+      "R611",
+      "R701",
+      "R702",
+      "R703",
+      "R704",
+      "R705",
+      "R706",
+      "R803",
+      "R804",
+      "R808",
+      "R809",
+      "R810",
+      "R811",
+      "R812",
+      "R813",
+      "R814",
+      "R815",
+      "R816",
+      "R817",
+      "TP06",
+      "U102",
+      "U501",
+      "U601"
+    ],
+    "connected_physical_pads": 514,
+    "connected_netlist_pins": 498,
+    "mapped_netlist_pins_including_nc": 525,
+    "pad_net_parity": true,
+    "routed_tracks": 1451,
+    "routed_vias": 345,
+    "copper_zones": 3,
+    "geometry_scope": "2D same-face courtyards >= 0.15 mm; opposite-face THT joint guards +0.5 mm; mounting reserves; ESP body and RF reserve; heatsink body reserves",
+    "lm3429_gate_path_straight_line_mm": {
+      "LED1": {
+        "gate_pin_to_resistor": 7.54,
+        "resistor_to_mosfet_gate": 3.71
+      },
+      "LED2": {
+        "gate_pin_to_resistor": 3.45,
+        "resistor_to_mosfet_gate": 18.03
+      }
+    },
+    "gate_driver_note": "Straight-line pin distances, not routed lengths; dedicated return paths, ringing and further placement optimisation remain unqualified.",
+    "mechanical_fit_verified": false,
+    "heatsink_mounting_pin_coordinates_verified": false,
+    "heatsink_pin_coordinates_source": "supplier STEP (user-supplied 2026-10-22); not measured on a physical part",
+    "routing_feasibility_verified": false,
+    "thermal_verified": false,
+    "source_sha256": {
+      "PCB_EU.kicad_pcb": "b9acdd6aaac6252e1b8a4ee9f8b63254e8c6d92cf578061c2cfdd366e3daf8cf",
+      "placement.json": "d6f920cacab23ac8ef522d21cca8c9045977e8cbf65691864844b187c07e85f0",
+      "netlist.xml": "042b2dbd2721f1c3ebdf2d0d1bc10b145fb9ebfe7034b3055110975f5d4872ff"
+    }
+  },
+  "pcb_routing": {
+    "stage": "fully routed board",
+    "date": "2026-10-22",
+    "pcbnew_build": "10.0.7-10.0.7~ubuntu24.04.1",
+    "planned_copper_objects_checked": 328,
+    "tracks": 1451,
+    "vias": 345,
+    "tracks_by_layer": {
+      "F.Cu": 667,
+      "In2.Cu": 278,
+      "B.Cu": 506
+    },
+    "copper_zones": [
+      {
+        "net": "GND",
+        "layer": "F.Cu",
+        "filled_area_mm2": 5838.0
+      },
+      {
+        "net": "GND",
+        "layer": "B.Cu",
+        "filled_area_mm2": 6974.41
+      },
+      {
+        "net": "GND",
+        "layer": "In1.Cu",
+        "filled_area_mm2": 8849.38
+      }
+    ],
+    "actual_copper_connected_groups": [
+      {
+        "net": "LED1_SW",
+        "pads": [
+          "L502.2",
+          "Q501.2",
+          "D501.2"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "LED1_IS",
+        "pads": [
+          "Q501.3",
+          "R501.1"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "LED1_OUT",
+        "pads": [
+          "D501.1",
+          "R502.1",
+          "C511.1",
+          "C508.1"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "LED1_LED_POS",
+        "pads": [
+          "R502.2",
+          "J501.1"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "LED1_L_MID",
+        "pads": [
+          "L501.2",
+          "L502.1"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "+24V_LED1",
+        "pads": [
+          "F103.2",
+          "C501.1",
+          "C502.1",
+          "L501.1"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "LED1_GATE",
+        "pads": [
+          "R803.2",
+          "Q501.1",
+          "R804.1"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      },
+      {
+        "net": "GND",
+        "pads": [
+          "R501.2",
+          "C511.2",
+          "C508.2",
+          "J501.2",
+          "C501.2",
+          "C502.2"
+        ],
+        "physical_pad_count": 6,
+        "copper_connected": true
+      },
+      {
+        "net": "LED2_SW",
+        "pads": [
+          "L601.2",
+          "Q601.2",
+          "D601.2"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "LED2_IS",
+        "pads": [
+          "Q601.3",
+          "R601.1",
+          "TP08.1",
+          "U601.12"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "LED2_OUT",
+        "pads": [
+          "D601.1",
+          "C608.1",
+          "C609.1",
+          "C611.1",
+          "R602.1"
+        ],
+        "physical_pad_count": 5,
+        "copper_connected": true
+      },
+      {
+        "net": "LED2_LED_POS",
+        "pads": [
+          "R602.2",
+          "J602.1",
+          "J601.1"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      },
+      {
+        "net": "+24V_LED2",
+        "pads": [
+          "F104.2",
+          "C601.1",
+          "C602.1",
+          "L601.1"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "LED2_GATE",
+        "pads": [
+          "R807.2",
+          "R808.1",
+          "Q601.1"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      },
+      {
+        "net": "LED2_GATE_RAW",
+        "pads": [
+          "U601.10",
+          "R807.1"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "GND",
+        "pads": [
+          "R601.2",
+          "C611.2",
+          "C609.2"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      },
+      {
+        "net": "RTN_SHUNT",
+        "pads": [
+          "Q102.3",
+          "R111.2",
+          "R112.2",
+          "U102.9"
+        ],
+        "physical_pad_count": 4,
+        "copper_connected": true
+      },
+      {
+        "net": "INA_VBUS",
+        "pads": [
+          "U102.8",
+          "D103.1",
+          "R113.2"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      },
+      {
+        "net": "REVP_GATE",
+        "pads": [
+          "Q102.1",
+          "R110.1",
+          "R109.2"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      },
+      {
+        "net": "+24V_RAW",
+        "pads": [
+          "J101.1",
+          "F101.1"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "PSU_RTN",
+        "pads": [
+          "J101.2",
+          "Q102.2"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "+24V_PTC",
+        "pads": [
+          "F102.2",
+          "J701.1"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "PTC_DRAIN",
+        "pads": [
+          "J701.2",
+          "Q703.2"
+        ],
+        "physical_pad_count": 2,
+        "copper_connected": true
+      },
+      {
+        "net": "+24V_FUSED",
+        "pads": [
+          "F101.2",
+          "C101.1",
+          "F105.1",
+          "F103.1",
+          "F102.1",
+          "F104.1",
+          "F106.1"
+        ],
+        "physical_pad_count": 7,
+        "copper_connected": true
+      },
+      {
+        "net": "GND",
+        "pads": [
+          "R111.1",
+          "R112.1",
+          "Q703.3",
+          "J501.2",
+          "J602.2"
+        ],
+        "physical_pad_count": 5,
+        "copper_connected": true
+      },
+      {
+        "net": "+12V",
+        "pads": [
+          "L101.2",
+          "F401.1",
+          "U201.2"
+        ],
+        "physical_pad_count": 3,
+        "copper_connected": true
+      }
+    ],
+    "scope": "LED1 and LED2 local boost power loops (inductors, switch, diode, IS shunt, output bank, LED shunt, terminals, input bank, gate path); In1 ground reference. INA226 power monitor: shunt trunk RTN_SHUNT, Kelvin sense tracks, VS/GND/VBUS, Q102 gate divider and the +3V3 links to U402/U401, with a fill keepout around the IN+ Kelvin track. Hand-planned escapes for LM3429 pins between the via-free heatsink reserves (U501 IS/HSP, U601 IS/RCT/CSH/OVP/COMP and the nine-part block above U601), BLOCK_OC at U101.12 and the R706/Q701 ground. The rest of the board is autorouted by tools/route_board.py. Session copper of the nets in replace_session_nets is discarded on import because the plan now routes them. 1 oz power copper (2026-10-22): input +24V_RAW and PSU_RTN trunks widened, the 9.5 A F101.2 to C101.1 trunk doubled on F.Cu and B.Cu with via clusters, hub branch to F104/F106, the PTC feed F102.1, the PTC leg F102.2 to J701.1 and the LED1 feed F103.1 moved off In2.Cu onto the outer layers with parallel vias; BLOCK_OC reroute around the new hub branch. All electrolytic capacitors on the front (2026-10-22): the LED2 output bank C608/C609 is chained from D601 on F.Cu, C611 joins D601 directly, the LED2 input C601 is fed from F104.2 on F.Cu and feeds L601 on B.Cu, C508 sits beside C510 and is autorouted like C509/C510. Pre-prototype copper review (2026-10-22): extra parallel 0.5 mm drill vias on RAW, PTC, FUSED and both shunt ground banks; current-sharing model tested at 0.5/1/2 assumed via resistance. A 0.8 mm parallel 12 V fan-feed path (four 0.5 mm drill layer transitions) reduces current in the former 0.6 mm In2 feed. Existing routes and component placements retained.",
+    "limits": [
+      "Widths/via banks receive DC pre-prototype screening at documented currents; transient, switching-loop, thermal and EMC qualification still require prototype measurements and factory copper/plating confirmation.",
+      "Q501 heatsink HS1 stands on two soldered pins in plated GND holes (placement.json heatsink_legs, geometry from the supplier STEP); the left hole displaced the autorouted LED1_IS copper on In2.Cu and R803/R804 moved right, so LED1_IS, LED1_GATE_RAW and LED1_RT_MID were re-completed by the grid router. Body/access reserve remains; isolation, clamping and fit need physical checks."
+    ],
+    "unrouted_connections": 0,
+    "complete_board_routing": true,
+    "router": "LED1 plan (routing.json) + tools/route_board.py: Freerouting 2.4.1 sessions in routing/, grid completion, GND ties and pours",
+    "min_track_width_mm": {
+      "HEAVY24": 0.25,
+      "LOAD": 0.25,
+      "PWR": 0.25,
+      "Default": 0.25
+    },
+    "ampacity_verified": false,
+    "thermal_verified": false,
+    "source_sha256": {
+      "PCB_EU.kicad_pcb": "b9acdd6aaac6252e1b8a4ee9f8b63254e8c6d92cf578061c2cfdd366e3daf8cf",
+      "routing.json": "c9e280fda0ced6a43611624f22a69e2ed7a0e9886878cbc569dc25f3750e2c3d",
+      "routing/pass1.ses": "0e29afdf339c00523d525d4c8c9d65bcb68ff5d3f7b5eddb88518d6eb9ed4b14",
+      "routing/pass2.ses": "b9d40cecfa04c8486c993525682be3d1839c0bc032b3f6c30c4abcbc6b61d5e7"
+    }
+  },
+  "pcb_drc": {
+    "geometric_violations": 0,
+    "schematic_parity_violations": 0,
+    "unconnected_items": 0,
+    "routing_status": "all connections routed"
+  },
+  "firmware_build": "not performed: old firmware is incompatible",
+  "source_sha256": {
+    "BOM_allocated.json": "0efbb08060b071d6cf3464c82d9ceae7f25eb5b9dfadf157e711b598d73c35e7",
+    "Control.kicad_sch": "f0e7c51402eafc42f5f519517b477988d95ccedd2f084c0d69fdbdeed20d9e60",
+    "InputPower.kicad_sch": "6ed3f809ddee24c510fe1fda7bc164978afdd85dfd94328b6a730f496def4ab7",
+    "Interfaces.kicad_sch": "5f7f02a2ea82395b3924dbffcb31cc673bb774030ea0b601fdbafdad615ea29a",
+    "LED1.kicad_sch": "c86d7464e926494727de7ad22caa6700345484864ed15133318beedf3bc589e4",
+    "LED2.kicad_sch": "20d7876cedd3739a5863762e76f942b533409a20736a2f5a57c293439dc301a7",
+    "Loads.kicad_sch": "d62644f8131b0f4273e91101c9255dedec30f0eb296e43aaa08d868f98b6381d",
+    "MCU.kicad_sch": "bc294675ea29a8ce9669fddfdc3ab996d28ee702aac3d3bbb72aba3a2e471605",
+    "PCB_EU.kicad_dru": "edd74546c3a662048c2f81cace7014020026bf6586abc6b7333db7df5644bfc7",
+    "PCB_EU.kicad_pcb": "b9acdd6aaac6252e1b8a4ee9f8b63254e8c6d92cf578061c2cfdd366e3daf8cf",
+    "PCB_EU.kicad_pro": "02fb70ad0e05f8349c0fc30971c060124be88b2549d11875d55cba16f6c270dd",
+    "PCB_EU.kicad_sch": "4295ae39daaedf4b19b5068e78e25fc3eef03648ffb7d849730882b372d55ce2",
+    "Peripherals.kicad_sch": "d7766fa43979e18867d36862b1f0f6bbce00f99196558eb6cb2518c910d13341",
+    "design.json": "51e93bffacdc764c6869bfbdc5725a509631a083a7b35f6c9f8ea7262cd1434b",
+    "fab_exceptions.json": "1b16b6e03e70126c4ee3aade51f21fc9bc4c64444bf24f5a57174f39890657b4",
+    "footprint_assignments.json": "b316e90b185b24420782d793953bf588e81239dd2723da5f6b642db6945d0aca",
+    "fp-lib-table": "77a832bbdace056ccc5423e454d344be3140a48a658c0b9cf0388a7462439b1a",
+    "libraries/Capacitor_SMD.pretty/C_0805_2012Metric.kicad_mod": "09140d95987b1f7e3dd12bae3ef264d2d6d7c465b69c2894abebdc1f50e3581f",
+    "libraries/Capacitor_SMD.pretty/C_1206_3216Metric.kicad_mod": "086ebca74c6e7ba5115d2070d6ba08a54c2599b07546233dd7aa082fc64a08e4",
+    "libraries/Capacitor_THT.pretty/CP_Radial_D10.0mm_P5.00mm.kicad_mod": "b8f3874639396a7ac300091c530daf22648720a6dd95031cccf5db0d75ed4e58",
+    "libraries/Capacitor_THT.pretty/CP_Radial_D8.0mm_P5.00mm.kicad_mod": "4fa16ff8846adcb0403fd4bd94142e4694c7881e9de99d730c28b9839efa9d2f",
+    "libraries/Connector_JST.pretty/JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal.kicad_mod": "52e2401d758e0f1cb88827465d1fdf589b428100f4295d59061257a5838946cb",
+    "libraries/Connector_Molex.pretty/Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical.kicad_mod": "8781c2110dfdf6403aa5df619bfdaeeddff5105c4a1725ef77102f9083dffadd",
+    "libraries/Connector_PinHeader_2.54mm.pretty/PinHeader_1x06_P2.54mm_Vertical.kicad_mod": "4832053ad569fbf62d0a78b570a46bcd07f204933d04be4dcf46efbff7d98a83",
+    "libraries/Diode_SMD.pretty/D_MiniMELF.kicad_mod": "2c82c5267b15842ba9644827a3fe9948c541d261b7daa37d5a8d4d2683627c70",
+    "libraries/Diode_SMD.pretty/D_SMB.kicad_mod": "586717fabe033883b8afb7a6277e0f6360132f06ef929566c55d17eddf84be56",
+    "libraries/Diode_SMD.pretty/D_SMC.kicad_mod": "c3e34a0c4f57967ce36258220b23e85f77ef00e8b6624d77c8ae71f7d13626a9",
+    "libraries/EU.3dshapes/Battery_COMF_BC-2001_with_CR2032.step": "93ed589b3312f2c1cd4a274ce6f202f45dcec058780cf23d55c78895eed500a1",
+    "libraries/EU.3dshapes/C_0805_2012Metric.step": "9a669c1a2f1ea25b88b401acef6efeaa80a067bd7da9db6993de719a7fbe155c",
+    "libraries/EU.3dshapes/C_1206_3216Metric.step": "11e948c72c90e2b6322436b72745f40ff4e8ba0da64fb2a0df943dfa61e89c1a",
+    "libraries/EU.3dshapes/Crystal_Abracon_ABS07.step": "6f7607accf336ea8e9ce6e288f3c11eae49c27065b94a8b31cf084c45b7475d3",
+    "libraries/EU.3dshapes/D_MiniMELF.step": "bab3a3356a14efb0438caca9adf53472dea34425715606e933f092f87f73f650",
+    "libraries/EU.3dshapes/D_SMB.step": "029466277d91e9f5492556be93e46611049e07115c7913880c547afa96058ed4",
+    "libraries/EU.3dshapes/D_SMC.step": "30dab4c2e22239b7e3694a4d45304e04255c6b70a79d28e9c34c6072ba647991",
+    "libraries/EU.3dshapes/ESP32-WROOM-32E.step": "57f41a512434023f19bef010df050e42a80a478b62cf87b8b96868b490791bee",
+    "libraries/EU.3dshapes/Fuse_Schurter_UMT250.step": "d0c99042d8c578fb3cc0eed44e95057f25545a6871ddaecb291aa0f9d15fc6a7",
+    "libraries/EU.3dshapes/Fuse_Schurter_UST_USI1206.step": "3a1ba04aab1b68adad3c31ffc4731e5b5faffac31504a07d5f9dd0c64cd04f89",
+    "libraries/EU.3dshapes/JST_XH_1x04_P2.50mm_Horizontal_NoSupports.step": "f8273dba31216ceab2e7e465d64367bdecb5be82b9851c1e0d8468de8dac97ae",
+    "libraries/EU.3dshapes/LICENSE-KiCad.md": "ffc92f47ff4e8b80e00e48a871d3ab61cd312938bf60bec08558051a7862ba15",
+    "libraries/EU.3dshapes/LICENSE-own-models.txt": "974e847afeafbfb331c59a4c7134df661bcce7b08e50065b99acbb2f401f363a",
+    "libraries/EU.3dshapes/L_Bourns_SRN6045.step": "ea9eb4b09f5029b99fde1bc08824ea25d8082378a5a8b8ec112abf69e7617fb3",
+    "libraries/EU.3dshapes/L_Jantek_JNRH1207.step": "203c31d29b8ed8438fcb6d9de9011daa611d3ef5223ce20fea08bc44d48f6a8f",
+    "libraries/EU.3dshapes/Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical.step": "162d03c3e228dbcf98794cbe9d3bed5d3db4945818c2ff1c5db545aa62a12827",
+    "libraries/EU.3dshapes/Nichicon_UPW1H221MPD_D10_L16_P5.step": "36f71d84c287c07407186d5467a784fa7bfd64334dbc589f25ccdf62f1e7ec25",
+    "libraries/EU.3dshapes/Panasonic_EEUFR1E102_D10_L20_P5.step": "31137472befbab616b7f9d89c48067bc9c84ff44db8633e811ddf257e7103622",
+    "libraries/EU.3dshapes/Panasonic_EEUFR1J101LB_D8_L15_P5.step": "9cb15b5b34bf4397c6a1b853a43decec58b97f6f1bd1f76c9bca94fa479ccfe3",
+    "libraries/EU.3dshapes/PinHeader_1x06_P2.54mm_Vertical.step": "d6113af109a14a67c50dcefd1cfc7b43b59b59afa85d808b2319e2452da91318",
+    "libraries/EU.3dshapes/RAD-DY-GF_3.stp": "7a41909fb41255472588ab0983f94f9c1da848f34777b2347e76eb3f405a20b8",
+    "libraries/EU.3dshapes/R_0603_1608Metric.step": "1875571c326d0d9e96f36b4efeb8094068ef7619f0a449c781caf0b49c2e5861",
+    "libraries/EU.3dshapes/R_1206_3216Metric.step": "f5d1ea5c47935091292bd1c6c698e0df88d3d4bbf92bf66b4c97e49df5be9ebc",
+    "libraries/EU.3dshapes/R_2512_6332Metric.step": "76b2052a3c120193de7cdc0af99157b6f375e9a4af7721e3e3d012968c877f27",
+    "libraries/EU.3dshapes/SOIC-8_3.9x4.9mm_P1.27mm.step": "d9b46f6dd6cf8c5e2028838eed38e2a6a7f26235856078511e5a71a594ca809e",
+    "libraries/EU.3dshapes/SOT-23-6.step": "9491de18305b16fe125ee3d603109a29edd837d50d22305b6f929886492ce755",
+    "libraries/EU.3dshapes/SOT-23.step": "9fe9af3cc6cf3d3bc3bd3da71731af2037c67f690245102a20e1e39a33e9ade4",
+    "libraries/EU.3dshapes/ST_HTSSOP16_L7987.step": "5bc79d92b053d22195f7364f2a9706f9e05c9ae61899f3cde9a1fd0f34d8b15f",
+    "libraries/EU.3dshapes/SW_Ninigi_TACTB-64K-F.step": "43f1b425c4501fc04486e23244667696af348603f23438bf0e5aea8d82be50ec",
+    "libraries/EU.3dshapes/TI_PWP0014A_LM3429.step": "6c39e54087a36bf012322a0ee50f1fe1358ebbaf52c55619fae329b2c7eb6271",
+    "libraries/EU.3dshapes/TO-220-3_Vertical.step": "7cb065d935df5771f0ba6e48ddd180863a121af76483dad7f18e667a7b68204a",
+    "libraries/EU.3dshapes/TO-263-2.step": "38b99b642c57bd27a214706192f9383c4ae998782666158ebe749982bf727d60",
+    "libraries/EU.3dshapes/TO-277A.step": "69a9aa5a47db4a2792452bac34f2cad6cb0c5d3a4713f4b3c03b779f23d194ed",
+    "libraries/EU.3dshapes/TSOT-23-6.step": "2d3e717db8a1e3f896db8524674f4f96ade77e4b2c5f3bde252f8124c6cb543a",
+    "libraries/EU.3dshapes/TerminalBlock_Degson_DG301R-5.0_1x02.step": "ddd7fac3777859a52dafdd7171fd583e7a3d5cb323cc7889b2e198b86cc751f9",
+    "libraries/EU.3dshapes/TerminalBlock_Degson_DG306-5.0_1x02.step": "dcec70d241037efd2fe0835a48c8cc1a7b714739ec3bc0aa0bb700809671e678",
+    "libraries/EU.3dshapes/VSSOP-10_3x3mm_P0.5mm.step": "24fb2bd055d0d988ec8582e8a5f473ecf890c4d247091414c8b38e75833411d0",
+    "libraries/EU.3dshapes/microSD_GCT_MEM2061-01-188-00-A.step": "49cd155741e29910282b855415dc151f9f40c41b26abf110a18b91e289cfe771",
+    "libraries/EU.kicad_sym": "dc60f9d43f43a0436d385e78fc08673991ac68056b60ad1fd8ce3887f97c7545",
+    "libraries/EU_Mechanical.pretty/Battery_COMF_BC-2001.kicad_mod": "44d0c801c0b21db71cf506523624815dad30d4c5dc75d0ad66259096341f5626",
+    "libraries/EU_Mechanical.pretty/Crystal_Abracon_ABS07.kicad_mod": "82144f0ee788182b8fa0424a398ca0c3cf6e483230caea44ce4a5994daa2d5a2",
+    "libraries/EU_Mechanical.pretty/Fuse_Schurter_UMT250.kicad_mod": "1b5abc0ae27c742522804b9e0d9a0fb41b7d67692b11faf10fe03025fa58dfd4",
+    "libraries/EU_Mechanical.pretty/Fuse_Schurter_UST_USI1206_Reflow.kicad_mod": "9c6b04171cd944639a60860446542b0716674d9bd9d4a1cd1817120a131c8904",
+    "libraries/EU_Mechanical.pretty/HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3x3mm.kicad_mod": "636e780106e1ce87dbd13478ff9f28e4f91c914f5e1b09a88662b1b89f056bd7",
+    "libraries/EU_Mechanical.pretty/L_Bourns_SRN6045.kicad_mod": "452c3ab77a4321255e5174dd8eacbf7289c4e846411fb1c16da5654619250ffb",
+    "libraries/EU_Mechanical.pretty/L_Jantek_JNRH1207.kicad_mod": "c91ab8153cbfe1156e8bb2a660c90c142fae5a9278cc70d701e169beda05ad81",
+    "libraries/EU_Mechanical.pretty/SW_Ninigi_TACTB-64K-F.kicad_mod": "eaa8d1696070ede3f425a3c57d828fb299280f5c6f0b0b2ab4fac43cf4d65563",
+    "libraries/EU_Mechanical.pretty/TI_PWP0014A_LM3429.kicad_mod": "4fb47c06f73cd9adb6a1298ac7b2c8ef6b4fa0f240f2c8284d871f8dd0d106ed",
+    "libraries/EU_Mechanical.pretty/TerminalBlock_Degson_DG301R-5.0_1x02.kicad_mod": "f93a026a86f02f3437954b8d37da89b4ebef0ea488ed7e85565601909582a9f7",
+    "libraries/EU_Mechanical.pretty/TerminalBlock_Degson_DG306-5.0_1x02.kicad_mod": "faef6e7196989e57be92f609f4ea114459824232c3c372fb28818d90492df7f0",
+    "libraries/EU_Mechanical.pretty/microSD_GCT_MEM2061-01-188-00-A.kicad_mod": "3d4ca95eba815dc83eb8e5454955771122b7a344ea663a7d47b7252808e4c4cb",
+    "libraries/EU_Parts.pretty/ESP32-WROOM-32E_NoVias.kicad_mod": "27cb170b1d1f384da638403110224a27495b5eee11e29c7915efea659f7d8f22",
+    "libraries/EU_Parts.pretty/Vishay_TO-277A_D_K1_A2.kicad_mod": "14a2446f329e31e8d6af928395be372d7a3dbe7844588f6e1be2763d992b9768",
+    "libraries/Package_DIP.pretty/DIP-8_W7.62mm.kicad_mod": "df768bdefad864b7c7fea02d41c2313b27cf7f5e59e5caac956b8c76cce7c034",
+    "libraries/Package_SO.pretty/SOIC-8_3.9x4.9mm_P1.27mm.kicad_mod": "3e3443ca6b68c2bdfc7c6414c3633f2d7abd35a82343124072aa0f525f426128",
+    "libraries/Package_SO.pretty/VSSOP-10_3x3mm_P0.5mm.kicad_mod": "e1602ac04008b409a19c3def885b85b92539e6e8d58865b3ec9701adf645fea4",
+    "libraries/Package_TO_SOT_SMD.pretty/SOT-23-6.kicad_mod": "7b11a385819ca5e06c19495fe8b1c951f1e68402298ea046faf97bd5b719cf1b",
+    "libraries/Package_TO_SOT_SMD.pretty/SOT-23.kicad_mod": "344b1c3614143b448c2addd759f06b0a35c14ed7e5027ff3ea2eb5a75cb93976",
+    "libraries/Package_TO_SOT_SMD.pretty/TO-263-2.kicad_mod": "fa0cce393fe7d7c9039e143ed102ece6630f8087273ef294660df628c15b0d93",
+    "libraries/Package_TO_SOT_SMD.pretty/TSOT-23-6.kicad_mod": "0e3506866d2d3d3b9c1bd77661b3d535d59de878d1f29af79ddf964344ddcc5f",
+    "libraries/Package_TO_SOT_THT.pretty/TO-220-3_Vertical.kicad_mod": "9dc6991bc272c02cc79cd22c365e99d6044d904a8f288de92bda9b6f55b043af",
+    "libraries/Resistor_SMD.pretty/R_0603_1608Metric.kicad_mod": "36d0bdc5e0a9da649fc0b756df1e215d351c9be36662e53bb2ffd171c6c48253",
+    "libraries/Resistor_SMD.pretty/R_1206_3216Metric.kicad_mod": "63307caf675e2c1602ccc769f48ff311532e63ce2d8a15a69705675cf1fce80f",
+    "libraries/Resistor_SMD.pretty/R_2512_6332Metric.kicad_mod": "288a53fad2a613aeaf4ef9577ad7bfb63a8bcbecd8a2dc108d85499baf619be2",
+    "libraries/TestPoint.pretty/TestPoint_Pad_D1.0mm.kicad_mod": "94cfe0c5bc119601c27b70b1027adfd7a136336b6af513b1c35fbe9cd859ab86",
+    "models3d.json": "f3c318d391a2d0ae0450c13351f596e37ed51a61492e3a8c942a7973cead1302",
+    "placement.json": "d6f920cacab23ac8ef522d21cca8c9045977e8cbf65691864844b187c07e85f0",
+    "routing/pass1.ses": "0e29afdf339c00523d525d4c8c9d65bcb68ff5d3f7b5eddb88518d6eb9ed4b14",
+    "routing/pass2.ses": "b9d40cecfa04c8486c993525682be3d1839c0bc032b3f6c30c4abcbc6b61d5e7",
+    "routing.json": "c9e280fda0ced6a43611624f22a69e2ed7a0e9886878cbc569dc25f3750e2c3d",
+    "sym-lib-table": "5841b81e90fe3d0162d39abf67b0319073ad80122469018df6212ccd5957381f",
+    "tools/ampacity.py": "368714ea66e75eea576c74e96e4980297c1a54cf8f794a695792e5178885d3f4",
+    "tools/aux_power.py": "8d7e449acba1320bda23aadebd27de50c1bd840d7300b6f1a07afbae1662e061",
+    "tools/build_board.py": "8b0d63156dfdbc66e3a0feef63ffe575d6ae1e8abcc789f2dc1db6bac816fbd8",
+    "tools/check_footprint_drc.py": "54a1309792ef0f017b702e243baa542a95173165322e42d049ed9be08a89aef5",
+    "tools/dfm_tracks.py": "4bff84a3ccbaacc764b855a971c52fb62b32eb419b8e15e7c774f1974f89ad99",
+    "tools/generate.py": "bcac0b8d48f39f82d6ff538de25e6c80cbea11724bbd611016d515b7800ed528",
+    "tools/generate_footprints.py": "e16f315320019a0747ca112ff991d4df7a48aa936959ee1e30c60bc40468705d",
+    "tools/make_models3d.py": "4f45398b01471da10d0c605568eaae8cec75ef0036a55a64cc8e4bf2e8c14ae3",
+    "tools/models3d.py": "491287f88f63985e4a46d99b68576b706aa1df4590c4b2987ba5b0b3f95c269f",
+    "tools/plot_board.py": "9e92878aa440640dd6ff0dd9e7b19e3b0f4c1e5bc6dd9029c1100fbb9576b975",
+    "tools/power_checks.py": "0934ee53d90abab07cb904935754eb1459a93d778936e737207bf8bb375defc8",
+    "tools/route_board.py": "6b3670c33fb442e79912e367cb24f3e9f1645717c403c44b66482f31345c9328",
+    "tools/route_complete.py": "1ccaeaa4f03939eb219083405b890aac8c94249e47fc50554b7dd982132a12fc",
+    "tools/route_power.py": "a24ba232dda227646f6c6046a6590eadca91ffd5591dbfea27b02d2c185dc6e5",
+    "tools/run_checks.py": "335cfca303bf9f86dcb82ce41733f3b46faec4a7970fc673537f3a9faa03b2ce",
+    "tools/silk_clean.py": "518544ab4da8e5f6f4dc25e36802fa50159c9f7f582d366cd0c1d04c21255694",
+    "tools/silkscreen.py": "631b7115de22c0a93acd9462da49e07ba80bf504f1e7f64c2af954a0e5c605e0",
+    "tools/stackup.py": "8ab24b26b550af7d1779c8fd813678de520c7cb059785811340bd65b4ad4eea3",
+    "tools/test_ampacity.py": "c5882ae84cfc02b1cf80890c060e3361e713a12d96ed8d467b6d304d0ca7c616",
+    "tools/verify.py": "0888dda856a3d2472cc4244e877f3830742cab3af9ebbeddc41476e244fad58b",
+    "tools/verify_board.py": "2a45c5ff561278770d0d9b7e08f4465a06df052ddc0405ee788e375b8c58ec4f",
+    "tools/verify_footprints.py": "88ef857a544842462dac457bdb179947675bcd86aed6b2e8a4ab46ef54f7a4d4",
+    "tools/verify_library_match.py": "203920bd55837c57ae7b5e6b9db30261b8940b1da7c2ef5c2ca6802bb202b0df",
+    "tools/verify_routing.py": "baca276675bad8e54e9c4d13c679f5b5e189fc101feb5c3aa1bf75c35b12c6c4",
+    "check_fab.py": "4f09a2f341e428810473ee2cf3f0b4f582844868ba3c4c9d9e953409b6ed0509"
+  },
+  "models3d": {
+    "physical_components": 188,
+    "local_resolvable_models": 188,
+    "board_only_model_refs": [
+      "HS1"
+    ],
+    "board_only_resolvable_models": 1,
+    "total_resolvable_models": 189,
+    "unique_attached_models": 36,
+    "missing_models": [],
+    "model_files": 36,
+    "library_footprints": 34,
+    "known_fit_issues": [],
+    "mechanical_qualification": false
+  },
+  "silkscreen": {
+    "pcbnew_version": "10.0.7",
+    "minimum_text_mm": 1.0,
+    "stroke_mm": 0.15,
+    "generated_labels": 169,
+    "labels_by_face": {
+      "F": 68,
+      "B": 101
+    },
+    "references_placed": 80,
+    "ic_pin1_dots": 7,
+    "ic_native_pin1_marks": [
+      "U202",
+      "U501"
+    ],
+    "preserved_native_marks": "electrolytic + / negative half-disc, diode cathode outlines; library IC footprints without a silk pin-1 mark get a dot; native marks are kept; Fab references unchanged",
+    "non_silkscreen_data_unchanged": true,
+    "labels": [
+      {
+        "name": "J101/pin/1/F",
+        "text": "+",
+        "ref": "J101",
+        "side": "F",
+        "at": [
+          8.75,
+          46.5068
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "ccb16cf1-c82a-51ad-9fab-234751777552",
+        "pin": "1",
+        "net": "+24V_RAW"
+      },
+      {
+        "name": "J101/pin/1/B",
+        "text": "+",
+        "ref": "J101",
+        "side": "B",
+        "at": [
+          6.006,
+          50.65
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "735bb511-b29a-5f36-8be1-174754db20e8",
+        "pin": "1",
+        "net": "+24V_RAW"
+      },
+      {
+        "name": "J101/pin/2/F",
+        "text": "-",
+        "ref": "J101",
+        "side": "F",
+        "at": [
+          8.25,
+          60.3932
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8bd65b77-4dfb-5dde-ae75-d44b203d23f1",
+        "pin": "2",
+        "net": "PSU_RTN"
+      },
+      {
+        "name": "J101/pin/2/B",
+        "text": "-",
+        "ref": "J101",
+        "side": "B",
+        "at": [
+          6.006,
+          55.65
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "336cc0d3-828c-56a0-85e4-8391fa04812a",
+        "pin": "2",
+        "net": "PSU_RTN"
+      },
+      {
+        "name": "J501/pin/1/F",
+        "text": "+",
+        "ref": "J501",
+        "side": "F",
+        "at": [
+          96.06,
+          52.9432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "bb7b777d-3f9c-5780-a1c4-873fa91cbec6",
+        "pin": "1",
+        "net": "LED1_LED_POS"
+      },
+      {
+        "name": "J501/pin/1/B",
+        "text": "+",
+        "ref": "J501",
+        "side": "B",
+        "at": [
+          93.516,
+          48.2
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "92b32350-3beb-57cc-b5cc-f36c57c38728",
+        "pin": "1",
+        "net": "LED1_LED_POS"
+      },
+      {
+        "name": "J501/pin/2/B",
+        "text": "-",
+        "ref": "J501",
+        "side": "B",
+        "at": [
+          93.516,
+          43.2
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8ed104b5-547c-50d7-9099-12e52b7576bb",
+        "pin": "2",
+        "net": "GND"
+      },
+      {
+        "name": "J601/pin/1/B",
+        "text": "+",
+        "ref": "J601",
+        "side": "B",
+        "at": [
+          55.456,
+          96.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "1c7baa3b-7a41-5971-ab86-69bf8fea6b46",
+        "pin": "1",
+        "net": "LED2_LED_POS"
+      },
+      {
+        "name": "J601/pin/2/B",
+        "text": "-",
+        "ref": "J601",
+        "side": "B",
+        "at": [
+          65.544,
+          96.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b07f3de9-3f95-5a67-890a-a06e47f0a468",
+        "pin": "2",
+        "net": "GND"
+      },
+      {
+        "name": "J602/pin/1/B",
+        "text": "+",
+        "ref": "J602",
+        "side": "B",
+        "at": [
+          67.306,
+          96.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "bd20b9d9-38ad-50db-9230-f3de9fd199dc",
+        "pin": "1",
+        "net": "LED2_LED_POS"
+      },
+      {
+        "name": "J602/pin/2/F",
+        "text": "-",
+        "ref": "J602",
+        "side": "F",
+        "at": [
+          78.889,
+          96.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "da85e8de-766f-5004-8194-b685914a7210",
+        "pin": "2",
+        "net": "GND"
+      },
+      {
+        "name": "J602/pin/2/B",
+        "text": "-",
+        "ref": "J602",
+        "side": "B",
+        "at": [
+          74.85,
+          93.3518
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a83152f4-13a8-5281-bd66-8011d89c56b6",
+        "pin": "2",
+        "net": "GND"
+      },
+      {
+        "name": "J701/pin/1/B",
+        "text": "+",
+        "ref": "J701",
+        "side": "B",
+        "at": [
+          43.456,
+          96.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "11626606-f5dd-5515-99ed-8c2e95b27311",
+        "pin": "1",
+        "net": "+24V_PTC"
+      },
+      {
+        "name": "J701/pin/2/B",
+        "text": "-",
+        "ref": "J701",
+        "side": "B",
+        "at": [
+          53.544,
+          96.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "90e5f739-02b7-541c-9a72-f5396103f5af",
+        "pin": "2",
+        "net": "PTC_DRAIN"
+      },
+      {
+        "name": "J702/pin/1/F",
+        "text": "+",
+        "ref": "J702",
+        "side": "F",
+        "at": [
+          96.06,
+          68.7432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "ed412f06-d081-5161-9042-e1fc58f03d90",
+        "pin": "1",
+        "net": "+24V_PUMP"
+      },
+      {
+        "name": "J702/pin/1/B",
+        "text": "+",
+        "ref": "J702",
+        "side": "B",
+        "at": [
+          93.516,
+          64.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "ec23c4ef-9436-550e-a0cd-f6853636e5e6",
+        "pin": "1",
+        "net": "+24V_PUMP"
+      },
+      {
+        "name": "J702/pin/2/F",
+        "text": "-",
+        "ref": "J702",
+        "side": "F",
+        "at": [
+          96.06,
+          54.8568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a02c0346-980c-537c-ac85-70f26300d722",
+        "pin": "2",
+        "net": "PUMP_DRAIN"
+      },
+      {
+        "name": "J702/pin/2/B",
+        "text": "-",
+        "ref": "J702",
+        "side": "B",
+        "at": [
+          93.516,
+          59.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "7b6b709d-a71b-5661-a15a-8b9a2a92bd42",
+        "pin": "2",
+        "net": "PUMP_DRAIN"
+      },
+      {
+        "name": "J403/pin/1/B",
+        "text": "SIG",
+        "ref": "J403",
+        "side": "B",
+        "at": [
+          33.0,
+          98.6482
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a05c1e57-61ab-553e-ac6e-eb75cbc15b34",
+        "pin": "1",
+        "net": "FLOAT_EXT"
+      },
+      {
+        "name": "J403/pin/2/B",
+        "text": "GND",
+        "ref": "J403",
+        "side": "B",
+        "at": [
+          38.0,
+          93.3518
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e029837b-48e5-5edb-8328-4bbd796f1d20",
+        "pin": "2",
+        "net": "GND"
+      },
+      {
+        "name": "J401/pin/1/F",
+        "text": "3V3",
+        "ref": "J401",
+        "side": "F",
+        "at": [
+          17.2,
+          86.1518
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "476b77d7-86de-5c34-8bfb-a3454d9dd2cb",
+        "pin": "1",
+        "net": "+3V3"
+      },
+      {
+        "name": "J401/pin/1/B",
+        "text": "3V3",
+        "ref": "J401",
+        "side": "B",
+        "at": [
+          17.2,
+          92.3482
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "aacefb8d-d9bd-5a60-831b-cf93c02a2346",
+        "pin": "1",
+        "net": "+3V3"
+      },
+      {
+        "name": "J401/pin/2/B",
+        "text": "GND",
+        "ref": "J401",
+        "side": "B",
+        "at": [
+          20.2,
+          86.0568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "47e34ac7-2a2b-544a-a406-f919866a271d",
+        "pin": "2",
+        "net": "GND"
+      },
+      {
+        "name": "J401/pin/3/F",
+        "text": "SDA",
+        "ref": "J401",
+        "side": "F",
+        "at": [
+          22.2,
+          86.1518
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "bb6e1499-073f-50c6-afcc-ad49a436bde6",
+        "pin": "3",
+        "net": "SHT_SDA"
+      },
+      {
+        "name": "J401/pin/3/B",
+        "text": "SDA",
+        "ref": "J401",
+        "side": "B",
+        "at": [
+          22.2,
+          92.3482
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "be1c42f0-42ae-5bc6-924b-b35e4596d4da",
+        "pin": "3",
+        "net": "SHT_SDA"
+      },
+      {
+        "name": "J401/pin/4/B",
+        "text": "SCL",
+        "ref": "J401",
+        "side": "B",
+        "at": [
+          24.7,
+          87.6518
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "59b21d55-f671-5130-b200-e88b8623a24a",
+        "pin": "4",
+        "net": "SHT_SCL"
+      },
+      {
+        "name": "J411/pin/1/B",
+        "text": "GND",
+        "ref": "J411",
+        "side": "B",
+        "at": [
+          7.1488,
+          26.3
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "52efa96d-bb5f-5544-b091-9a18be6b11a2",
+        "pin": "1",
+        "net": "GND"
+      },
+      {
+        "name": "J411/pin/2/B",
+        "text": "+12V",
+        "ref": "J411",
+        "side": "B",
+        "at": [
+          7.625,
+          28.84
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3caba751-06df-5ad0-8f22-e54480c3e268",
+        "pin": "2",
+        "net": "+12V_FANS"
+      },
+      {
+        "name": "J411/pin/3/F",
+        "text": "TACH",
+        "ref": "J411",
+        "side": "F",
+        "at": [
+          9.6733,
+          31.38
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "60f2839e-803a-5885-abea-5af15cd544bc",
+        "pin": "3",
+        "net": "FAN1_TACH_EXT"
+      },
+      {
+        "name": "J411/pin/3/B",
+        "text": "TACH",
+        "ref": "J411",
+        "side": "B",
+        "at": [
+          7.4583,
+          31.38
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "28116cf0-7f64-5eb8-a081-f460422756f5",
+        "pin": "3",
+        "net": "FAN1_TACH_EXT"
+      },
+      {
+        "name": "J411/pin/4/F",
+        "text": "PWM",
+        "ref": "J411",
+        "side": "F",
+        "at": [
+          9.4829,
+          33.92
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a48c8759-35d1-5db5-b63d-6267ad07d3ec",
+        "pin": "4",
+        "net": "FAN1_PWM"
+      },
+      {
+        "name": "J411/pin/4/B",
+        "text": "PWM",
+        "ref": "J411",
+        "side": "B",
+        "at": [
+          7.2679,
+          33.92
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "00e49284-366d-52da-ae4f-b4e58cc5e0b5",
+        "pin": "4",
+        "net": "FAN1_PWM"
+      },
+      {
+        "name": "J421/pin/1/F",
+        "text": "GND",
+        "ref": "J421",
+        "side": "F",
+        "at": [
+          9.3638,
+          37.7
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "79914de7-15c8-5dec-8fd1-e09761fc2115",
+        "pin": "1",
+        "net": "GND"
+      },
+      {
+        "name": "J421/pin/1/B",
+        "text": "GND",
+        "ref": "J421",
+        "side": "B",
+        "at": [
+          7.1488,
+          37.7
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "19a54ef5-aac6-57b5-81d3-e966e2ef9740",
+        "pin": "1",
+        "net": "GND"
+      },
+      {
+        "name": "J421/pin/2/F",
+        "text": "+12V",
+        "ref": "J421",
+        "side": "F",
+        "at": [
+          9.84,
+          40.24
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c0c06eb0-1aa3-5f1f-a193-6663c7de8245",
+        "pin": "2",
+        "net": "+12V_FANS"
+      },
+      {
+        "name": "J421/pin/2/B",
+        "text": "+12V",
+        "ref": "J421",
+        "side": "B",
+        "at": [
+          7.625,
+          40.24
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a8c3eeb3-f0ef-52fe-9d44-74cb4c8c639e",
+        "pin": "2",
+        "net": "+12V_FANS"
+      },
+      {
+        "name": "J421/pin/3/B",
+        "text": "TACH",
+        "ref": "J421",
+        "side": "B",
+        "at": [
+          7.4583,
+          42.78
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e0464aa7-5df6-55fb-918b-5122f292d6e1",
+        "pin": "3",
+        "net": "FAN2_TACH_EXT"
+      },
+      {
+        "name": "J421/pin/4/B",
+        "text": "PWM",
+        "ref": "J421",
+        "side": "B",
+        "at": [
+          4.0,
+          47.6683
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3e799d46-b5a2-5540-8152-10daea4ad315",
+        "pin": "4",
+        "net": "FAN2_PWM"
+      },
+      {
+        "name": "J201/pin/1/F",
+        "text": "GND",
+        "ref": "J201",
+        "side": "F",
+        "at": [
+          2.0,
+          6.8068
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "49d73359-906d-59f6-b550-a200c8d2f611",
+        "pin": "1",
+        "net": "GND"
+      },
+      {
+        "name": "J201/pin/1/B",
+        "text": "GND",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          4.0,
+          7.4017
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f914b1e8-3ef6-5c52-bde3-f3e84cd871ff",
+        "pin": "1",
+        "net": "GND"
+      },
+      {
+        "name": "J201/pin/2/F",
+        "text": "3V3",
+        "ref": "J201",
+        "side": "F",
+        "at": [
+          7.601,
+          12.29
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "565986d3-9629-5467-9b5d-8ca97db0b550",
+        "pin": "2",
+        "net": "+3V3"
+      },
+      {
+        "name": "J201/pin/2/B",
+        "text": "3V3",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          7.006,
+          12.29
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "59362aa6-8c4b-5fd9-bc12-4b29c4d7774e",
+        "pin": "2",
+        "net": "+3V3"
+      },
+      {
+        "name": "J201/pin/3/F",
+        "text": "TX",
+        "ref": "J201",
+        "side": "F",
+        "at": [
+          7.0771,
+          14.83
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4177c6ae-aa58-5c81-b96f-b23d7fa0c47e",
+        "pin": "3",
+        "net": "UART_TX"
+      },
+      {
+        "name": "J201/pin/3/B",
+        "text": "TX",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          1.5179,
+          14.83
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "ee11426e-578e-5831-bc4c-e5aaddfa2726",
+        "pin": "3",
+        "net": "UART_TX"
+      },
+      {
+        "name": "J201/pin/4/F",
+        "text": "RX",
+        "ref": "J201",
+        "side": "F",
+        "at": [
+          7.1962,
+          17.37
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f899e409-f517-5d11-a099-b35680320179",
+        "pin": "4",
+        "net": "UART_RX"
+      },
+      {
+        "name": "J201/pin/4/B",
+        "text": "RX",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          6.6012,
+          17.37
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b8b94840-c5be-5ab5-b744-2b6927fea9a1",
+        "pin": "4",
+        "net": "UART_RX"
+      },
+      {
+        "name": "J201/pin/5/F",
+        "text": "EN",
+        "ref": "J201",
+        "side": "F",
+        "at": [
+          7.1962,
+          19.91
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f5cec328-f939-5237-833c-a0f2dd895160",
+        "pin": "5",
+        "net": "ESP_EN"
+      },
+      {
+        "name": "J201/pin/5/B",
+        "text": "EN",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          6.6012,
+          19.91
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "851df8ae-9a64-541c-beb6-9bfaa978b020",
+        "pin": "5",
+        "net": "ESP_EN"
+      },
+      {
+        "name": "J201/pin/6/B",
+        "text": "BOOT",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          7.5536,
+          22.45
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "881ce00f-9337-5e33-8170-1fc603596995",
+        "pin": "6",
+        "net": "ESP_BOOT"
+      },
+      {
+        "name": "J101/function/B",
+        "text": "J101 24V IN",
+        "ref": "J101",
+        "side": "B",
+        "at": [
+          1.5533,
+          54.1057
+        ],
+        "rotation_deg": 90,
+        "size_mm": 1.0,
+        "uuid": "fe8edeec-29e7-53f7-a8a4-aaed38ac294e"
+      },
+      {
+        "name": "J501/function/B",
+        "text": "J501 LED1",
+        "ref": "J501",
+        "side": "B",
+        "at": [
+          95.36,
+          50.6468
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4f94d046-b2f7-5307-98a7-8df796973af4"
+      },
+      {
+        "name": "J601/function/B",
+        "text": "J601 LED2",
+        "ref": "J601",
+        "side": "B",
+        "at": [
+          60.2,
+          92.1532
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8c6d0f00-3a73-5e52-9c81-6d167655366d"
+      },
+      {
+        "name": "J602/function/B",
+        "text": "J602 LED2 BAR2",
+        "ref": "J602",
+        "side": "B",
+        "at": [
+          72.05,
+          98.4468
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "10ef7ab5-0dc4-523f-8712-eaeaa72dabd1"
+      },
+      {
+        "name": "J701/function/B",
+        "text": "J701 PTC",
+        "ref": "J701",
+        "side": "B",
+        "at": [
+          48.2,
+          92.1532
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "d76d54a7-0217-5bd7-be2c-0bd795adbd3b"
+      },
+      {
+        "name": "J702/function/F",
+        "text": "J702 PUMP",
+        "ref": "J702",
+        "side": "F",
+        "at": [
+          94.86,
+          70.9432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b9055014-289a-5a6e-9f79-d9ee761374ad"
+      },
+      {
+        "name": "J702/function/B",
+        "text": "J702 PUMP",
+        "ref": "J702",
+        "side": "B",
+        "at": [
+          94.9443,
+          66.4468
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "7f80ea61-1895-5df0-9b4a-cdce6b289e72"
+      },
+      {
+        "name": "J401/function/F",
+        "text": "J401 SHT4x",
+        "ref": "J401",
+        "side": "F",
+        "at": [
+          20.95,
+          83.8568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "1ecb49bf-74e6-524d-9790-737e7ad63ca5"
+      },
+      {
+        "name": "J401/function/B",
+        "text": "J401 SHT4x",
+        "ref": "J401",
+        "side": "B",
+        "at": [
+          20.95,
+          98.5468
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "202e3abb-db75-5066-a2e7-bb8fc933177d"
+      },
+      {
+        "name": "J411/function/B",
+        "text": "J411 FAN1",
+        "ref": "J411",
+        "side": "B",
+        "at": [
+          1.7732,
+          29.0076
+        ],
+        "rotation_deg": 90,
+        "size_mm": 1.0,
+        "uuid": "1f79fd1e-dea5-568f-a411-5ac65b0fb397"
+      },
+      {
+        "name": "J421/function/B",
+        "text": "J421 FAN2",
+        "ref": "J421",
+        "side": "B",
+        "at": [
+          1.7732,
+          41.51
+        ],
+        "rotation_deg": 90,
+        "size_mm": 1.0,
+        "uuid": "0e404958-fb9a-54f9-b722-b37b10da0ce3"
+      },
+      {
+        "name": "J201/function/B",
+        "text": "J201 UART",
+        "ref": "J201",
+        "side": "B",
+        "at": [
+          10.2438,
+          15.1
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4c9e55bf-d443-53d2-b94b-59a6256c4e7a"
+      },
+      {
+        "name": "BT301/function",
+        "text": "BT301 CR2032",
+        "ref": "BT301",
+        "side": "B",
+        "at": [
+          45.3152,
+          37.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "2ba94c5e-af7e-5b9f-a327-c512c38eceac"
+      },
+      {
+        "name": "BT301/pin/1/B",
+        "text": "+",
+        "ref": "BT301",
+        "side": "B",
+        "at": [
+          29.5,
+          52.9932
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "71bd0227-f1bb-5387-b7e7-7609bceadefb",
+        "pin": "1",
+        "net": "VBAT"
+      },
+      {
+        "name": "C101/pin/1/B",
+        "text": "+",
+        "ref": "C101",
+        "side": "B",
+        "at": [
+          25.2548,
+          54.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4d2cb142-dbef-5e46-8150-e62305c80754",
+        "pin": "1",
+        "net": "+24V_FUSED"
+      },
+      {
+        "name": "C102/pin/1/B",
+        "text": "+",
+        "ref": "C102",
+        "side": "B",
+        "at": [
+          39.2548,
+          54.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f08d9487-3539-56ff-8c78-5daa8fdf81ac",
+        "pin": "1",
+        "net": "+24V_AUX"
+      },
+      {
+        "name": "C112/pin/1/B",
+        "text": "+",
+        "ref": "C112",
+        "side": "B",
+        "at": [
+          44.7428,
+          80.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c3a19832-8dcd-5588-a997-a414220007d7",
+        "pin": "1",
+        "net": "+12V"
+      },
+      {
+        "name": "C501/pin/1/B",
+        "text": "+",
+        "ref": "C501",
+        "side": "B",
+        "at": [
+          39.2548,
+          13.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "30b88da9-90d2-5dd9-b352-fffd1aadeff9",
+        "pin": "1",
+        "net": "+24V_LED1"
+      },
+      {
+        "name": "C502/pin/1/B",
+        "text": "+",
+        "ref": "C502",
+        "side": "B",
+        "at": [
+          43.7428,
+          26.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c84352ae-0d77-5e64-9fd9-8a5e1f6e6574",
+        "pin": "1",
+        "net": "+24V_LED1"
+      },
+      {
+        "name": "C508/pin/1/B",
+        "text": "+",
+        "ref": "C508",
+        "side": "B",
+        "at": [
+          67.756,
+          56.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "9d013ee0-d15e-5a42-9f94-988df75c025e",
+        "pin": "1",
+        "net": "LED1_OUT"
+      },
+      {
+        "name": "C509/pin/1/B",
+        "text": "+",
+        "ref": "C509",
+        "side": "B",
+        "at": [
+          52.0072,
+          45.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "83a9f356-20d5-5c17-a4fc-7a86c4b5ddf7",
+        "pin": "1",
+        "net": "LED1_OUT"
+      },
+      {
+        "name": "C510/pin/1/B",
+        "text": "+",
+        "ref": "C510",
+        "side": "B",
+        "at": [
+          56.4952,
+          56.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "55d3b58a-af19-576f-ad90-e266e013edfd",
+        "pin": "1",
+        "net": "LED1_OUT"
+      },
+      {
+        "name": "C601/pin/1/B",
+        "text": "+",
+        "ref": "C601",
+        "side": "B",
+        "at": [
+          65.756,
+          70.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8056faa1-e05e-5bfd-8ef1-52efc9343480",
+        "pin": "1",
+        "net": "+24V_LED2"
+      },
+      {
+        "name": "C602/pin/1/B",
+        "text": "+",
+        "ref": "C602",
+        "side": "B",
+        "at": [
+          51.0048,
+          85.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "fa39ce20-e5b1-5c35-93f0-9cb9da654d70",
+        "pin": "1",
+        "net": "+24V_LED2"
+      },
+      {
+        "name": "C608/pin/1/B",
+        "text": "+",
+        "ref": "C608",
+        "side": "B",
+        "at": [
+          65.756,
+          86.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "70f6aaf9-6cc7-54ea-ba3e-c111e4d579af",
+        "pin": "1",
+        "net": "LED2_OUT"
+      },
+      {
+        "name": "C609/pin/1/B",
+        "text": "+",
+        "ref": "C609",
+        "side": "B",
+        "at": [
+          66.756,
+          80.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "af802235-567f-5eff-88dd-76720b3d9373",
+        "pin": "1",
+        "net": "LED2_OUT"
+      },
+      {
+        "name": "D101/pin/1/F",
+        "text": "K",
+        "ref": "D101",
+        "side": "F",
+        "at": [
+          55.25,
+          28.7933
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "5c001b31-b045-5a4b-86dc-cc8b5557bf70",
+        "pin": "1",
+        "net": "+24V_FUSED"
+      },
+      {
+        "name": "D102/pin/1/F",
+        "text": "K",
+        "ref": "D102",
+        "side": "F",
+        "at": [
+          24.35,
+          80.1932
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "7c5ef1c8-263f-5353-b3ad-3dbd6e38c7b7",
+        "pin": "1",
+        "net": "AUX_SW"
+      },
+      {
+        "name": "D103/pin/1/B",
+        "text": "K",
+        "ref": "D103",
+        "side": "B",
+        "at": [
+          13.75,
+          90.4432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "2e18f3ba-af67-5d44-9d58-1f4d84de44bd",
+        "pin": "1",
+        "net": "INA_VBUS"
+      },
+      {
+        "name": "D501/pin/1/F",
+        "text": "K",
+        "ref": "D501",
+        "side": "F",
+        "at": [
+          72.43,
+          49.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "11708aac-4c83-57b6-915c-3c90ad36caf2",
+        "pin": "1",
+        "net": "LED1_OUT"
+      },
+      {
+        "name": "D601/pin/1/F",
+        "text": "K",
+        "ref": "D601",
+        "side": "F",
+        "at": [
+          72.82,
+          84.3068
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "be577322-5b19-5dee-bf7b-2888686857a9",
+        "pin": "1",
+        "net": "LED2_OUT"
+      },
+      {
+        "name": "D701/pin/1/F",
+        "text": "K",
+        "ref": "D701",
+        "side": "F",
+        "at": [
+          87.4,
+          67.5432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4d9b79bc-c9ee-5b8e-b391-7371904d45ab",
+        "pin": "1",
+        "net": "+24V_PUMP"
+      },
+      {
+        "name": "D801/pin/3/B",
+        "text": "K",
+        "ref": "D801",
+        "side": "B",
+        "at": [
+          46.0,
+          56.4068
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c7ac1d81-ff1a-5452-9b86-2e37c3263b6c",
+        "pin": "3",
+        "net": "BLOCK_OC"
+      },
+      {
+        "name": "U101/pin/1/dot/F",
+        "kind": "dot",
+        "ref": "U101",
+        "side": "F",
+        "pin": "1",
+        "net": "+12V",
+        "at": [
+          20.525,
+          63.9858
+        ],
+        "diameter_mm": 0.6,
+        "nearer_than_other_pads_mm": 0.25,
+        "nearer_than_other_parts_mm": 0.3,
+        "under_body": false,
+        "uuid": "b60ac201-9262-5b6f-bf03-b65a5f556e4b"
+      },
+      {
+        "name": "U102/pin/1/dot/B",
+        "kind": "dot",
+        "ref": "U102",
+        "side": "B",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          13.2084,
+          86.5818
+        ],
+        "diameter_mm": 0.6,
+        "nearer_than_other_pads_mm": 0.25,
+        "nearer_than_other_parts_mm": 0.3,
+        "under_body": false,
+        "uuid": "f8ebc403-e897-54b4-b57e-7687e73175b0"
+      },
+      {
+        "name": "U201/pin/1/dot/F",
+        "kind": "dot",
+        "ref": "U201",
+        "side": "F",
+        "pin": "1",
+        "net": "+3V3",
+        "at": [
+          37.741,
+          38.0542
+        ],
+        "diameter_mm": 0.5,
+        "nearer_than_other_pads_mm": 0.05,
+        "nearer_than_other_parts_mm": null,
+        "under_body": true,
+        "uuid": "2311c710-77bb-5648-aebb-72a5e44f8629"
+      },
+      {
+        "name": "U301/pin/1/dot/F",
+        "kind": "dot",
+        "ref": "U301",
+        "side": "F",
+        "pin": "1",
+        "net": "RTC_X1",
+        "at": [
+          24.0478,
+          41.8345
+        ],
+        "diameter_mm": 0.6,
+        "nearer_than_other_pads_mm": 0.25,
+        "nearer_than_other_parts_mm": 0.3,
+        "under_body": false,
+        "uuid": "473a1541-63e5-5d39-adf3-9239f1105da3"
+      },
+      {
+        "name": "U401/pin/1/dot/F",
+        "kind": "dot",
+        "ref": "U401",
+        "side": "F",
+        "pin": "1",
+        "net": "SHT_SDA",
+        "at": [
+          11.05,
+          87.0375
+        ],
+        "diameter_mm": 0.5,
+        "nearer_than_other_pads_mm": 0.05,
+        "nearer_than_other_parts_mm": null,
+        "under_body": true,
+        "uuid": "b86c5cc7-d356-5650-967a-39c059fbc7c6"
+      },
+      {
+        "name": "U402/pin/1/dot/F",
+        "kind": "dot",
+        "ref": "U402",
+        "side": "F",
+        "pin": "1",
+        "net": "FLOAT_EXT",
+        "at": [
+          11.241,
+          82.5542
+        ],
+        "diameter_mm": 0.5,
+        "nearer_than_other_pads_mm": 0.05,
+        "nearer_than_other_parts_mm": null,
+        "under_body": true,
+        "uuid": "e09810ff-f230-52fe-8a0e-29372d189b9c"
+      },
+      {
+        "name": "U802/pin/1/dot/F",
+        "kind": "dot",
+        "ref": "U802",
+        "side": "F",
+        "pin": "1",
+        "net": "BLOCK_OC",
+        "at": [
+          42.0478,
+          60.8555
+        ],
+        "diameter_mm": 0.6,
+        "nearer_than_other_pads_mm": 0.25,
+        "nearer_than_other_parts_mm": 0.3,
+        "under_body": false,
+        "uuid": "074759e0-cff3-5192-9306-ac29bfeb3fbf"
+      },
+      {
+        "name": "BT301/reference",
+        "text": "BT301",
+        "ref": "BT301",
+        "side": "B",
+        "at": [
+          14.9705,
+          34.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "85dfdd8e-7f78-513d-b1cf-b92add48f08d"
+      },
+      {
+        "name": "C102/reference",
+        "text": "C102",
+        "ref": "C102",
+        "side": "F",
+        "at": [
+          44.0,
+          47.6092
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "30a2eb04-fce0-523e-9178-e7697cfc36f5"
+      },
+      {
+        "name": "C202/reference",
+        "text": "C202",
+        "ref": "C202",
+        "side": "F",
+        "at": [
+          44.9986,
+          36.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "deecf72d-3b3c-5f51-b321-d8d1038ee952"
+      },
+      {
+        "name": "C208/reference",
+        "text": "C208",
+        "ref": "C208",
+        "side": "F",
+        "at": [
+          12.0,
+          13.6233
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "797baac7-7a5f-521d-976e-f58860114128"
+      },
+      {
+        "name": "C301/reference",
+        "text": "C301",
+        "ref": "C301",
+        "side": "F",
+        "at": [
+          21.6486,
+          40.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3936f07c-bffc-5ab9-a4ff-29bf73228d8f"
+      },
+      {
+        "name": "C402/reference",
+        "text": "C402",
+        "ref": "C402",
+        "side": "F",
+        "at": [
+          6.0,
+          91.6232
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a086d919-768f-5e71-adcf-c4b41241b2f9"
+      },
+      {
+        "name": "C501/reference",
+        "text": "C501",
+        "ref": "C501",
+        "side": "F",
+        "at": [
+          51.5974,
+          13.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "7e6aa3e5-1e1c-594e-af4a-1583f99a769c"
+      },
+      {
+        "name": "C502/reference",
+        "text": "C502",
+        "ref": "C502",
+        "side": "F",
+        "at": [
+          44.5,
+          32.3908
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "62013881-8173-5136-ac8b-278371e9aaa4"
+      },
+      {
+        "name": "C503/reference",
+        "text": "C503",
+        "ref": "C503",
+        "side": "B",
+        "at": [
+          66.5,
+          53.1433
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "dbdea36f-e592-54ea-84d1-2d324c3123d6"
+      },
+      {
+        "name": "C504/reference",
+        "text": "C504",
+        "ref": "C504",
+        "side": "B",
+        "at": [
+          85.4986,
+          46.8
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "38ad1c4d-42bb-5ee8-b650-a171847cd206"
+      },
+      {
+        "name": "C508/reference",
+        "text": "C508",
+        "ref": "C508",
+        "side": "F",
+        "at": [
+          65.9988,
+          49.8055
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "67523910-da56-5b5d-a1e9-b2f631dd660c"
+      },
+      {
+        "name": "C509/reference",
+        "text": "C509",
+        "ref": "C509",
+        "side": "F",
+        "at": [
+          56.75,
+          50.8945
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e2b3c02a-5038-5f5e-91ef-9b51b7f78cd2"
+      },
+      {
+        "name": "C510/reference",
+        "text": "C510",
+        "ref": "C510",
+        "side": "F",
+        "at": [
+          56.75,
+          61.8945
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e6875c9c-2b6f-5423-8980-49965893e6be"
+      },
+      {
+        "name": "C511/reference",
+        "text": "C511",
+        "ref": "C511",
+        "side": "B",
+        "at": [
+          83.3286,
+          52.9
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3fa37269-6cc7-5823-9afb-2268050c481c"
+      },
+      {
+        "name": "C601/reference",
+        "text": "C601",
+        "ref": "C601",
+        "side": "F",
+        "at": [
+          60.4039,
+          67.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "72a646bf-2533-5059-b116-34623e5febaa"
+      },
+      {
+        "name": "C602/reference",
+        "text": "C602",
+        "ref": "C602",
+        "side": "F",
+        "at": [
+          55.75,
+          79.1092
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "5f888dac-ae01-5734-999b-fcf2fe8f7765"
+      },
+      {
+        "name": "C609/reference",
+        "text": "C609",
+        "ref": "C609",
+        "side": "F",
+        "at": [
+          62.3989,
+          77.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "57d82365-5550-5290-a9ad-eda3688d5488"
+      },
+      {
+        "name": "C611/reference",
+        "text": "C611",
+        "ref": "C611",
+        "side": "F",
+        "at": [
+          83.2,
+          96.9432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "cad11ccc-9ca4-55dd-975e-5f964aaeb7d9"
+      },
+      {
+        "name": "C803/reference",
+        "text": "C803",
+        "ref": "C803",
+        "side": "B",
+        "at": [
+          51.5,
+          53.8567
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c580a7ae-6530-50b8-9a57-6694771dd3b1"
+      },
+      {
+        "name": "D101/reference",
+        "text": "D101",
+        "ref": "D101",
+        "side": "F",
+        "at": [
+          59.8486,
+          24.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "9974eabf-a2a8-5d33-aeaf-e80f52c19b2a"
+      },
+      {
+        "name": "D102/reference",
+        "text": "D102",
+        "ref": "D102",
+        "side": "F",
+        "at": [
+          21.45,
+          80.1932
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "d182d9ad-c095-5588-874f-b02a6ec97573"
+      },
+      {
+        "name": "D103/reference",
+        "text": "D103",
+        "ref": "D103",
+        "side": "B",
+        "at": [
+          12.5,
+          92.6432
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "22853639-7954-57c5-94bb-081f51df7122"
+      },
+      {
+        "name": "D501/reference",
+        "text": "D501",
+        "ref": "D501",
+        "side": "F",
+        "at": [
+          75.5,
+          52.7933
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3d5a08eb-d7e3-5277-9d04-233cbafaf05e"
+      },
+      {
+        "name": "D701/reference",
+        "text": "D701",
+        "ref": "D701",
+        "side": "F",
+        "at": [
+          81.7014,
+          62.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f7f2b659-cb90-5bc1-9737-ffe96068129d"
+      },
+      {
+        "name": "F101/reference",
+        "text": "F101",
+        "ref": "F101",
+        "side": "F",
+        "at": [
+          16.0,
+          57.0933
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3d1471db-706b-57e0-98a7-54e7dbbd5661"
+      },
+      {
+        "name": "F103/reference",
+        "text": "F103",
+        "ref": "F103",
+        "side": "F",
+        "at": [
+          51.5,
+          16.7568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b2090aa7-8d3e-5d55-8bb7-4ae0e7f03764"
+      },
+      {
+        "name": "F104/reference",
+        "text": "F104",
+        "ref": "F104",
+        "side": "F",
+        "at": [
+          55.4771,
+          68.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "d7f77286-9178-54d3-8b06-f194db51d942"
+      },
+      {
+        "name": "F106/reference",
+        "text": "F106",
+        "ref": "F106",
+        "side": "B",
+        "at": [
+          50.4071,
+          70.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "64db3e75-a7cf-5c68-a72e-84b2ee86c4d0"
+      },
+      {
+        "name": "Q102/reference",
+        "text": "Q102",
+        "ref": "Q102",
+        "side": "B",
+        "at": [
+          2.7776,
+          65.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4bf2412c-d968-583a-a623-facc532bd80f"
+      },
+      {
+        "name": "Q601/reference",
+        "text": "Q601",
+        "ref": "Q601",
+        "side": "F",
+        "at": [
+          83.0,
+          81.9568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3813a656-92ea-5272-8922-fd8d34b86d2a"
+      },
+      {
+        "name": "Q702/reference",
+        "text": "Q702",
+        "ref": "Q702",
+        "side": "B",
+        "at": [
+          29.5,
+          86.8932
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "5682dfc8-0a84-5b5a-83f4-091f2c26b771"
+      },
+      {
+        "name": "Q704/reference",
+        "text": "Q704",
+        "ref": "Q704",
+        "side": "F",
+        "at": [
+          86.5,
+          51.6068
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e8994e77-48fb-5ad2-801f-ef5240599e02"
+      },
+      {
+        "name": "U301/reference",
+        "text": "U301",
+        "ref": "U301",
+        "side": "F",
+        "at": [
+          26.0,
+          40.1568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "0dfbb89b-f79b-5fcb-838e-c0394425baa7"
+      },
+      {
+        "name": "U802/reference",
+        "text": "U802",
+        "ref": "U802",
+        "side": "F",
+        "at": [
+          52.0724,
+          61.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b59048c7-1754-53ae-88bc-cad7289d229b"
+      },
+      {
+        "name": "L101/reference",
+        "text": "L101",
+        "ref": "L101",
+        "side": "F",
+        "at": [
+          35.5,
+          59.1567
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "1c603359-44ff-5e7d-96d6-8b2268ce9f4d"
+      },
+      {
+        "name": "L201/reference",
+        "text": "L201",
+        "ref": "L201",
+        "side": "F",
+        "at": [
+          42.6533,
+          42.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f367c0d5-565c-56ed-8f11-c196ad14fe0d"
+      },
+      {
+        "name": "L501/reference",
+        "text": "L501",
+        "ref": "L501",
+        "side": "B",
+        "at": [
+          80.0,
+          8.4568
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b6b0446c-f139-5738-84e4-3a3cbe9d1659"
+      },
+      {
+        "name": "L502/reference",
+        "text": "L502",
+        "ref": "L502",
+        "side": "B",
+        "at": [
+          71.2467,
+          30.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c17526b7-6de1-5679-b399-21be4010c3b4"
+      },
+      {
+        "name": "L601/reference",
+        "text": "L601",
+        "ref": "L601",
+        "side": "B",
+        "at": [
+          80.0,
+          67.9567
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f3b25566-8413-59c6-af10-48cbdb492707"
+      },
+      {
+        "name": "R101/reference",
+        "text": "R101",
+        "ref": "R101",
+        "side": "F",
+        "at": [
+          53.0,
+          76.7632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "2ec43e7e-5825-57ac-8969-6206561ceefd"
+      },
+      {
+        "name": "R102/reference",
+        "text": "R102",
+        "ref": "R102",
+        "side": "B",
+        "at": [
+          22.0,
+          57.0367
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "292ce1db-a806-536c-8023-4dcf9c9a2921"
+      },
+      {
+        "name": "R103/reference",
+        "text": "R103",
+        "ref": "R103",
+        "side": "B",
+        "at": [
+          27.0,
+          74.7632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "31b80204-bd0b-52a8-8a06-0ecb515709fb"
+      },
+      {
+        "name": "R104/reference",
+        "text": "R104",
+        "ref": "R104",
+        "side": "B",
+        "at": [
+          32.5286,
+          64.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "27da0862-1ee8-5804-8220-ed910d3d4f86"
+      },
+      {
+        "name": "R105/reference",
+        "text": "R105",
+        "ref": "R105",
+        "side": "B",
+        "at": [
+          23.5,
+          76.9232
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "1e6b2a78-63eb-553d-a435-be85a1001eb8"
+      },
+      {
+        "name": "R106/reference",
+        "text": "R106",
+        "ref": "R106",
+        "side": "B",
+        "at": [
+          31.5,
+          71.2632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8738abd9-8383-57a2-baa5-e700f068f0c0"
+      },
+      {
+        "name": "R107/reference",
+        "text": "R107",
+        "ref": "R107",
+        "side": "B",
+        "at": [
+          29.5,
+          61.3367
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a02b9be0-674e-56e1-a1b6-7e8c9aff2300"
+      },
+      {
+        "name": "R108/reference",
+        "text": "R108",
+        "ref": "R108",
+        "side": "B",
+        "at": [
+          19.92,
+          80.8632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "af89e022-c8d9-5a43-bf2a-9b6ca2d9775e"
+      },
+      {
+        "name": "R113/reference",
+        "text": "R113",
+        "ref": "R113",
+        "side": "B",
+        "at": [
+          16.8,
+          84.0268
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "6175f003-bb24-5c7d-b981-dcbc101aea59"
+      },
+      {
+        "name": "R304/reference",
+        "text": "R304",
+        "ref": "R304",
+        "side": "F",
+        "at": [
+          2.5,
+          93.5732
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "fdaa7473-6f17-593a-ac4f-c7d9be2cd6a8"
+      },
+      {
+        "name": "R306/reference",
+        "text": "R306",
+        "ref": "R306",
+        "side": "F",
+        "at": [
+          22.5,
+          53.8768
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "6efac351-bc44-58ce-bd5f-e277556ced7e"
+      },
+      {
+        "name": "R307/reference",
+        "text": "R307",
+        "ref": "R307",
+        "side": "F",
+        "at": [
+          12.0,
+          92.6732
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "4ab1786e-3688-5e54-9731-234368b42fd2"
+      },
+      {
+        "name": "R413/reference",
+        "text": "R413",
+        "ref": "R413",
+        "side": "F",
+        "at": [
+          11.5,
+          18.1267
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "10ee44d8-a1e9-5348-be15-a1e7e3efe654"
+      },
+      {
+        "name": "R423/reference",
+        "text": "R423",
+        "ref": "R423",
+        "side": "F",
+        "at": [
+          22.5,
+          36.8732
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "ac479bd5-2827-5c3e-8d15-ad6a55957dd1"
+      },
+      {
+        "name": "R503/reference",
+        "text": "R503",
+        "ref": "R503",
+        "side": "B",
+        "at": [
+          85.0486,
+          49.81
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "de8a68f7-ce6c-544a-b211-26e67defe828"
+      },
+      {
+        "name": "R504/reference",
+        "text": "R504",
+        "ref": "R504",
+        "side": "B",
+        "at": [
+          76.0,
+          60.7632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b58d7908-48f2-58b9-869f-4e53a6bb609d"
+      },
+      {
+        "name": "R508/reference",
+        "text": "R508",
+        "ref": "R508",
+        "side": "B",
+        "at": [
+          61.3714,
+          41.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "14595f2e-580a-546e-8ecf-ca225948ecb7"
+      },
+      {
+        "name": "R509/reference",
+        "text": "R509",
+        "ref": "R509",
+        "side": "B",
+        "at": [
+          69.3714,
+          58.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "a5b8f1dd-2387-55ec-9548-38aacf9368a0"
+      },
+      {
+        "name": "R510/reference",
+        "text": "R510",
+        "ref": "R510",
+        "side": "B",
+        "at": [
+          62.0,
+          51.2632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "9ffa1065-e299-5f53-adcb-0ced6bbd7f10"
+      },
+      {
+        "name": "R511/reference",
+        "text": "R511",
+        "ref": "R511",
+        "side": "B",
+        "at": [
+          66.0,
+          36.7368
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "ff94636e-4b55-5795-96a6-39fdf7fd9a7c"
+      },
+      {
+        "name": "R604/reference",
+        "text": "R604",
+        "ref": "R604",
+        "side": "B",
+        "at": [
+          90.5,
+          96.7632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b9b4b24d-b422-5730-bd11-2f0052f4fbd4"
+      },
+      {
+        "name": "R606/reference",
+        "text": "R606",
+        "ref": "R606",
+        "side": "B",
+        "at": [
+          90.6,
+          73.1768
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "83828102-d366-5c4c-8436-d12f5d648307"
+      },
+      {
+        "name": "R609/reference",
+        "text": "R609",
+        "ref": "R609",
+        "side": "B",
+        "at": [
+          95.8,
+          73.1768
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "f7d13540-49bc-5722-8640-cb081692de57"
+      },
+      {
+        "name": "R611/reference",
+        "text": "R611",
+        "ref": "R611",
+        "side": "B",
+        "at": [
+          93.2,
+          70.9768
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "b14ed16e-ca3e-58ec-8311-25f13f8d5b51"
+      },
+      {
+        "name": "R701/reference",
+        "text": "R701",
+        "ref": "R701",
+        "side": "B",
+        "at": [
+          39.0,
+          78.6268
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e66d164c-d0d0-55ac-983b-f178b1e4ee1a"
+      },
+      {
+        "name": "R702/reference",
+        "text": "R702",
+        "ref": "R702",
+        "side": "B",
+        "at": [
+          31.2314,
+          93.35
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "acd07bfe-1958-5bd6-94a1-f6123cef2d68"
+      },
+      {
+        "name": "R703/reference",
+        "text": "R703",
+        "ref": "R703",
+        "side": "B",
+        "at": [
+          41.4686,
+          84.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "14239178-971d-5917-9a24-490b650cb8ef"
+      },
+      {
+        "name": "R704/reference",
+        "text": "R704",
+        "ref": "R704",
+        "side": "B",
+        "at": [
+          35.0,
+          76.6268
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "5803936b-6e3d-56c8-b42e-43a682e5c9d8"
+      },
+      {
+        "name": "R705/reference",
+        "text": "R705",
+        "ref": "R705",
+        "side": "B",
+        "at": [
+          29.3714,
+          89.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "e7f6aeb3-9a88-5f00-9064-33cf67397bc3"
+      },
+      {
+        "name": "R706/reference",
+        "text": "R706",
+        "ref": "R706",
+        "side": "B",
+        "at": [
+          29.3714,
+          79.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "16f355d9-5546-5846-9918-90457ffefd5e"
+      },
+      {
+        "name": "R707/reference",
+        "text": "R707",
+        "ref": "R707",
+        "side": "F",
+        "at": [
+          79.9214,
+          56.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "c5af83dd-a81f-58b5-b577-5575b3c855d8"
+      },
+      {
+        "name": "R708/reference",
+        "text": "R708",
+        "ref": "R708",
+        "side": "F",
+        "at": [
+          79.9214,
+          59.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8e86050c-e9e6-55c5-b128-a9b9eb45e707"
+      },
+      {
+        "name": "R804/reference",
+        "text": "R804",
+        "ref": "R804",
+        "side": "B",
+        "at": [
+          85.1786,
+          38.8
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "dfeab301-0de0-5ed9-afd3-5ca08f4b7630"
+      },
+      {
+        "name": "R807/reference",
+        "text": "R807",
+        "ref": "R807",
+        "side": "F",
+        "at": [
+          97.2,
+          83.0368
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "bf7e3857-43f4-558f-818c-f48b24197963"
+      },
+      {
+        "name": "R808/reference",
+        "text": "R808",
+        "ref": "R808",
+        "side": "B",
+        "at": [
+          76.1714,
+          88.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "3607740c-a659-5fb3-bc1b-ebe0d01d7d49"
+      },
+      {
+        "name": "R810/reference",
+        "text": "R810",
+        "ref": "R810",
+        "side": "B",
+        "at": [
+          37.0314,
+          60.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "fd62b34b-58f2-52bc-9356-980aa7c44b08"
+      },
+      {
+        "name": "R811/reference",
+        "text": "R811",
+        "ref": "R811",
+        "side": "B",
+        "at": [
+          41.0,
+          68.7632
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "8c2c4d3c-3b1b-55bf-9c8c-98da5b39be3f"
+      },
+      {
+        "name": "R813/reference",
+        "text": "R813",
+        "ref": "R813",
+        "side": "B",
+        "at": [
+          53.5,
+          64.9633
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "091b4460-8602-5390-ac7d-b16cdb8e91cd"
+      },
+      {
+        "name": "R817/reference",
+        "text": "R817",
+        "ref": "R817",
+        "side": "B",
+        "at": [
+          52.8786,
+          67.0
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "589810f8-821c-5587-88fa-dd78787526a5"
+      },
+      {
+        "name": "TP05/reference",
+        "text": "TP05",
+        "ref": "TP05",
+        "side": "F",
+        "at": [
+          57.7533,
+          71.5
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "760961df-c580-52e6-a161-a387f809f18f"
+      },
+      {
+        "name": "TP07/reference",
+        "text": "TP07",
+        "ref": "TP07",
+        "side": "F",
+        "at": [
+          49.0,
+          32.3555
+        ],
+        "rotation_deg": 0,
+        "size_mm": 1.0,
+        "uuid": "bed90249-e7ff-55cc-ae95-f6ceb77a34a7"
+      }
+    ],
+    "omitted": [
+      {
+        "ref": "J403",
+        "reason": "connector title has no clear space"
+      },
+      {
+        "ref": "J301",
+        "reason": "no clear space for function label"
+      },
+      {
+        "ref": "U601",
+        "pin": "1",
+        "reason": "no clear unambiguous space for a pin-1 dot within 1.0 mm of the pad or between its pad rows"
+      },
+      {
+        "ref": "C101",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C103",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C104",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C105",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C106",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C107",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C108",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C109",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C110",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C111",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C112",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C113",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C114",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C115",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C201",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C203",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C204",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C205",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C206",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C207",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C302",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C303",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C304",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C305",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C401",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C403",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C505",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C506",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C507",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C603",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C604",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C605",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C606",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C607",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "C608",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "D411",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "D421",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "D601",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "D801",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "F102",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "F105",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "F401",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "Q411",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "Q421",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "Q501",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "Q701",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "Q703",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U101",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U102",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U201",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U202",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U401",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U402",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U501",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "U601",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R109",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R110",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R111",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R112",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R201",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R202",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R301",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R302",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R303",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R305",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R308",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R309",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R401",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R402",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R403",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R404",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R411",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R412",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R414",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R421",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R422",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R424",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R501",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R502",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R505",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R506",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R507",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R601",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R602",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R603",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R605",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R607",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R608",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R610",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R803",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R809",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R812",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R814",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R815",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "R816",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "SW201",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "SW202",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "TP01",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "TP02",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "TP03",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "TP04",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "TP06",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "TP08",
+        "reason": "no clear space for readable reference on component side"
+      },
+      {
+        "ref": "Y301",
+        "reason": "no clear space for readable reference on component side"
+      }
+    ],
+    "library_silk_cut": {},
+    "base_pcb_sha256": "7e08f538c8d6b8edfb4d38dffd1b4056608515a135cc6900aef52459ae0e0acc",
+    "source_sha256": "b9acdd6aaac6252e1b8a4ee9f8b63254e8c6d92cf578061c2cfdd366e3daf8cf"
+  },
+  "stackup": {
+    "board_mm": 1.6062,
+    "copper_layers": 4,
+    "copper_um": {
+      "F.Cu": 35.0,
+      "In1.Cu": 15.2,
+      "In2.Cu": 15.2,
+      "B.Cu": 35.0
+    },
+    "stack_total_including_masks_mm": 1.6062,
+    "dielectric_schedule": "JLCPCB JLC04161H-7628, same as PCB_V1 and cheap-version (FAB.md)",
+    "factory_stackup_approved": false,
+    "impedance_control_verified": false,
+    "plating_and_finished_copper_tolerances_verified": false
+  },
+  "library_match": {
+    "pcbnew_version": "10.0.7",
+    "compared": 196,
+    "identical": 119,
+    "silk_only": [
+      "C101",
+      "C102",
+      "C104",
+      "C106",
+      "C108",
+      "C111",
+      "C112",
+      "C114",
+      "C115",
+      "C202",
+      "C204",
+      "C301",
+      "C302",
+      "C403",
+      "C506",
+      "C508",
+      "C510",
+      "D101",
+      "D102",
+      "D103",
+      "D411",
+      "D701",
+      "D801",
+      "F104",
+      "F105",
+      "F106",
+      "F401",
+      "J101",
+      "J301",
+      "J403",
+      "J411",
+      "L101",
+      "L201",
+      "Q102",
+      "Q411",
+      "Q501",
+      "Q601",
+      "Q703",
+      "Q704",
+      "R102",
+      "R103",
+      "R104",
+      "R105",
+      "R107",
+      "R108",
+      "R110",
+      "R112",
+      "R301",
+      "R305",
+      "R501",
+      "R502",
+      "R505",
+      "R508",
+      "R509",
+      "R601",
+      "R603",
+      "R604",
+      "R609",
+      "R702",
+      "R705",
+      "R803",
+      "R807",
+      "R809",
+      "R812",
+      "R816",
+      "TP01",
+      "TP02",
+      "TP03",
+      "TP04",
+      "TP05",
+      "TP06",
+      "TP07",
+      "TP08",
+      "U101",
+      "U501",
+      "U601",
+      "U802"
+    ],
+    "without_library_link": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "HS1"
+    ],
+    "scope": "KiCad FootprintNeedsUpdate on the board footprint and the library footprint, silkscreen graphics removed from both"
+  },
+  "fab_check": {
+    "report": "review/fab_check.txt",
+    "summary": "0 FAIL, 3 WARN",
+    "checks": 35
+  },
+  "power_copper": {
+    "report": "review/power_copper.json",
+    "dc_screening_cases": 27,
+    "unresolved_screening_flags": 0,
+    "source_sha256": "b9acdd6aaac6252e1b8a4ee9f8b63254e8c6d92cf578061c2cfdd366e3daf8cf",
+    "thermal_qualified": false
+  }
+}

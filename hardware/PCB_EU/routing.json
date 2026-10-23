@@ -1,0 +1,3341 @@
+{
+  "stage": "PARTIAL_LED1_POWER_ROUTING",
+  "date": "2026-10-22",
+  "scope": "LED1 and LED2 local boost power loops (inductors, switch, diode, IS shunt, output bank, LED shunt, terminals, input bank, gate path); In1 ground reference. INA226 power monitor: shunt trunk RTN_SHUNT, Kelvin sense tracks, VS/GND/VBUS, Q102 gate divider and the +3V3 links to U402/U401, with a fill keepout around the IN+ Kelvin track. Hand-planned escapes for LM3429 pins between the via-free heatsink reserves (U501 IS/HSP, U601 IS/RCT/CSH/OVP/COMP and the nine-part block above U601), BLOCK_OC at U101.12 and the R706/Q701 ground. The rest of the board is autorouted by tools/route_board.py. Session copper of the nets in replace_session_nets is discarded on import because the plan now routes them. 1 oz power copper (2026-10-22): input +24V_RAW and PSU_RTN trunks widened, the 9.5 A F101.2 to C101.1 trunk doubled on F.Cu and B.Cu with via clusters, hub branch to F104/F106, the PTC feed F102.1, the PTC leg F102.2 to J701.1 and the LED1 feed F103.1 moved off In2.Cu onto the outer layers with parallel vias; BLOCK_OC reroute around the new hub branch. All electrolytic capacitors on the front (2026-10-22): the LED2 output bank C608/C609 is chained from D601 on F.Cu, C611 joins D601 directly, the LED2 input C601 is fed from F104.2 on F.Cu and feeds L601 on B.Cu, C508 sits beside C510 and is autorouted like C509/C510. Pre-prototype copper review (2026-10-22): extra parallel 0.5 mm drill vias on RAW, PTC, FUSED and both shunt ground banks; current-sharing model tested at 0.5/1/2 assumed via resistance. A 0.8 mm parallel 12 V fan-feed path (four 0.5 mm drill layer transitions) reduces current in the former 0.6 mm In2 feed. Existing routes and component placements retained.",
+  "limits": [
+    "Widths/via banks receive DC pre-prototype screening at documented currents; transient, switching-loop, thermal and EMC qualification still require prototype measurements and factory copper/plating confirmation.",
+    "Q501 heatsink HS1 stands on two soldered pins in plated GND holes (placement.json heatsink_legs, geometry from the supplier STEP); the left hole displaced the autorouted LED1_IS copper on In2.Cu and R803/R804 moved right, so LED1_IS, LED1_GATE_RAW and LED1_RT_MID were re-completed by the grid router. Body/access reserve remains; isolation, clamping and fit need physical checks."
+  ],
+  "replace_session_nets": [
+    "+24V_LED2",
+    "LED2_SW",
+    "LED2_OUT",
+    "LED2_LED_POS",
+    "LED2_IS",
+    "LED2_GATE",
+    "LED2_GATE_RAW",
+    "LED1_GATE",
+    "LED1_GATE_RAW",
+    "REVP_GATE",
+    "REVP_MID",
+    "+24V_FUSED",
+    "+24V_PTC",
+    "+24V_RAW",
+    "PSU_RTN",
+    "PTC_DRAIN",
+    "BLOCK_OC",
+    "LED2_COMP"
+  ],
+  "vias": [
+    {
+      "id": "sw-a",
+      "net": "LED1_SW",
+      "at": [
+        79.5,
+        44.8
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "sw-b",
+      "net": "LED1_SW",
+      "at": [
+        80.5,
+        44.8
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "out-a",
+      "net": "LED1_OUT",
+      "at": [
+        76,
+        51
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "led-pos-a",
+      "net": "LED1_LED_POS",
+      "at": [
+        77.2,
+        41.1
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "led-pos-b",
+      "net": "LED1_LED_POS",
+      "at": [
+        78.2,
+        41.3
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "vin-a",
+      "net": "+24V_LED1",
+      "at": [
+        61,
+        18
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "vin-b",
+      "net": "+24V_LED1",
+      "at": [
+        61,
+        19.2
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "led2-rct-land",
+      "net": "LED2_RCT",
+      "at": [
+        88.0,
+        84.5
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-csh-land",
+      "net": "LED2_CSH",
+      "at": [
+        93.2,
+        84.45
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-ovp-land",
+      "net": "LED2_OVP",
+      "at": [
+        95.8,
+        84.45
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-ovp-pin",
+      "net": "LED2_OVP",
+      "at": [
+        87.1,
+        86.2
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-rct-pin",
+      "net": "LED2_RCT",
+      "at": [
+        87.1,
+        87.5
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-csh-pin",
+      "net": "LED2_CSH",
+      "at": [
+        86.2,
+        88.15
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-comp-pin",
+      "net": "LED2_COMP",
+      "at": [
+        87.44,
+        88.85
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-comp-cap",
+      "net": "LED2_COMP",
+      "at": [
+        88.5,
+        90.6
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led1-is",
+      "net": "LED1_IS",
+      "at": [
+        83.8,
+        48.3
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-is",
+      "net": "LED2_IS",
+      "at": [
+        96.1,
+        88.15
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "block-oc",
+      "net": "BLOCK_OC",
+      "at": [
+        28.25,
+        67.3
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "ptc-gnd",
+      "net": "GND",
+      "at": [
+        35.0,
+        84.6
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-gnd-a",
+      "net": "GND",
+      "at": [
+        77.85,
+        89.4
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-gnd-b",
+      "net": "GND",
+      "at": [
+        77.85,
+        90.9
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-gate",
+      "net": "LED2_GATE",
+      "at": [
+        95.0,
+        92.6
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-gate-raw",
+      "net": "LED2_GATE_RAW",
+      "at": [
+        95.75,
+        86.85
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-pos-a",
+      "net": "LED2_LED_POS",
+      "at": [
+        87.3,
+        92.6
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "led2-pos-b",
+      "net": "LED2_LED_POS",
+      "at": [
+        87.3,
+        93.6
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "ina-3v3",
+      "net": "+3V3",
+      "at": [
+        5.4,
+        79.4
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "ina-3v3-sht",
+      "net": "+3V3",
+      "at": [
+        12.0,
+        86.75
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "u402-gnd",
+      "net": "GND",
+      "at": [
+        14.6,
+        82.5
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "cu-hub-led2-1",
+      "net": "+24V_FUSED",
+      "at": [
+        43.5,
+        71.65
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-raw-1",
+      "net": "+24V_RAW",
+      "at": [
+        9.81,
+        51.93
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-raw-2",
+      "net": "+24V_RAW",
+      "at": [
+        10.7,
+        52.66
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-raw-3",
+      "net": "+24V_RAW",
+      "at": [
+        11.54,
+        53.39
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-trunk-start-1",
+      "net": "+24V_FUSED",
+      "at": [
+        16.8,
+        53.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-trunk-start-2",
+      "net": "+24V_FUSED",
+      "at": [
+        16.8,
+        54.2
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-trunk-start-3",
+      "net": "+24V_FUSED",
+      "at": [
+        18.0,
+        53.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-trunk-start-4",
+      "net": "+24V_FUSED",
+      "at": [
+        18.0,
+        54.2
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-ptc-leg-1",
+      "net": "+24V_PTC",
+      "at": [
+        46.6,
+        84.9
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-ptc-leg-2",
+      "net": "+24V_PTC",
+      "at": [
+        45.65,
+        83.95
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-ptc-leg-3",
+      "net": "+24V_PTC",
+      "at": [
+        44.7,
+        83.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-led1-top-1",
+      "net": "+24V_FUSED",
+      "at": [
+        51.0,
+        28.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-led1-top-2",
+      "net": "+24V_FUSED",
+      "at": [
+        51.0,
+        29.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-led1-mid-1",
+      "net": "+24V_FUSED",
+      "at": [
+        39.7,
+        56.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-led1-low-1",
+      "net": "+24V_FUSED",
+      "at": [
+        29.9,
+        58.4
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-hub-led2-2",
+      "net": "+24V_FUSED",
+      "at": [
+        42.6,
+        71.3
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-hub-led2-3",
+      "net": "+24V_FUSED",
+      "at": [
+        44.4,
+        70.9
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-led1-mid-2",
+      "net": "+24V_FUSED",
+      "at": [
+        40.6,
+        56.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-led1-low-2",
+      "net": "+24V_FUSED",
+      "at": [
+        30.5,
+        59.2
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "block-oc-2",
+      "net": "BLOCK_OC",
+      "at": [
+        34.55,
+        68.07
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "block-oc-3",
+      "net": "BLOCK_OC",
+      "at": [
+        35.95,
+        62.47
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "id": "block-oc-4",
+      "net": "BLOCK_OC",
+      "at": [
+        43.35,
+        58.77
+      ],
+      "diameter": 0.6,
+      "drill": 0.3
+    },
+    {
+      "net": "+24V_RAW",
+      "at": [
+        12.39,
+        52.39
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-1"
+    },
+    {
+      "net": "+24V_RAW",
+      "at": [
+        10.99,
+        54.19
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-2"
+    },
+    {
+      "net": "+24V_RAW",
+      "at": [
+        11.59,
+        52.39
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-3"
+    },
+    {
+      "net": "+24V_PTC",
+      "at": [
+        45.95,
+        85.35
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-4"
+    },
+    {
+      "net": "+24V_PTC",
+      "at": [
+        44.8,
+        84.1
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-5"
+    },
+    {
+      "net": "+24V_FUSED",
+      "at": [
+        43.4,
+        70.7
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-6"
+    },
+    {
+      "net": "+24V_FUSED",
+      "at": [
+        30.7,
+        58.4
+      ],
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-7"
+    },
+    {
+      "at": [
+        13.7125,
+        77.6
+      ],
+      "net": "GND",
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-8"
+    },
+    {
+      "at": [
+        13.7125,
+        78.6
+      ],
+      "net": "GND",
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-9"
+    },
+    {
+      "at": [
+        2.7875,
+        77.8
+      ],
+      "net": "GND",
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-10"
+    },
+    {
+      "at": [
+        2.7875,
+        78.8
+      ],
+      "net": "GND",
+      "diameter": 1,
+      "drill": 0.5,
+      "id": "cu-review-11"
+    },
+    {
+      "id": "cu-aux12-via-1",
+      "net": "+12V",
+      "at": [
+        33.75,
+        66.5
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-aux12-via-2",
+      "net": "+12V",
+      "at": [
+        21.5,
+        58.75
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-aux12-via-3",
+      "net": "+12V",
+      "at": [
+        19.0,
+        49.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    },
+    {
+      "id": "cu-aux12-via-4",
+      "net": "+12V",
+      "at": [
+        15.25,
+        24.0
+      ],
+      "diameter": 1.0,
+      "drill": 0.5
+    }
+  ],
+  "routes": [
+    {
+      "id": "series-inductors",
+      "net": "LED1_L_MID",
+      "layer": "B.Cu",
+      "width": 2,
+      "points": [
+        {
+          "pad": "L501.2"
+        },
+        [
+          84.1,
+          23
+        ],
+        [
+          75.9,
+          23
+        ],
+        {
+          "pad": "L502.1"
+        }
+      ]
+    },
+    {
+      "id": "inductor-switch",
+      "net": "LED1_SW",
+      "layer": "B.Cu",
+      "width": 1.8,
+      "points": [
+        {
+          "pad": "L502.2"
+        },
+        [
+          84.1,
+          39.5
+        ],
+        [
+          83,
+          40.6
+        ],
+        {
+          "pad": "Q501.2"
+        }
+      ]
+    },
+    {
+      "id": "switch-neck",
+      "net": "LED1_SW",
+      "layer": "B.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "Q501.2"
+        },
+        [
+          83,
+          44.8
+        ]
+      ]
+    },
+    {
+      "id": "switch-vias-back",
+      "net": "LED1_SW",
+      "layer": "B.Cu",
+      "width": 1.8,
+      "points": [
+        [
+          83,
+          44.8
+        ],
+        {
+          "via": "sw-b"
+        },
+        {
+          "via": "sw-a"
+        }
+      ]
+    },
+    {
+      "id": "switch-vias-front",
+      "net": "LED1_SW",
+      "layer": "F.Cu",
+      "width": 1.8,
+      "points": [
+        {
+          "via": "sw-a"
+        },
+        {
+          "via": "sw-b"
+        }
+      ]
+    },
+    {
+      "id": "switch-diode",
+      "net": "LED1_SW",
+      "layer": "F.Cu",
+      "width": 1.8,
+      "points": [
+        {
+          "via": "sw-b"
+        },
+        [
+          79.765,
+          45.235
+        ],
+        {
+          "pad": "D501.2"
+        },
+        {
+          "pad": "D501.2",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "source-neck",
+      "net": "LED1_IS",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "Q501.3"
+        },
+        [
+          85.54,
+          43.8
+        ]
+      ]
+    },
+    {
+      "id": "source-shunt",
+      "net": "LED1_IS",
+      "layer": "F.Cu",
+      "width": 2,
+      "points": [
+        [
+          85.54,
+          43.8
+        ],
+        {
+          "pad": "R501.1"
+        }
+      ]
+    },
+    {
+      "id": "diode-output-via",
+      "net": "LED1_OUT",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "D501.1"
+        },
+        {
+          "via": "out-a"
+        }
+      ]
+    },
+    {
+      "id": "output-bypass",
+      "net": "LED1_OUT",
+      "layer": "B.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "via": "out-a"
+        },
+        {
+          "pad": "C511.1"
+        },
+        [
+          81.88,
+          50.95
+        ]
+      ]
+    },
+    {
+      "id": "output-current-shunt",
+      "net": "LED1_OUT",
+      "layer": "F.Cu",
+      "width": 1.5,
+      "points": [
+        {
+          "pad": "D501.1"
+        },
+        [
+          70.5375,
+          49
+        ],
+        {
+          "pad": "R502.1"
+        }
+      ]
+    },
+    {
+      "id": "output-current-via-a",
+      "net": "LED1_LED_POS",
+      "layer": "F.Cu",
+      "width": 0.9,
+      "points": [
+        {
+          "pad": "R502.2"
+        },
+        {
+          "via": "led-pos-a"
+        }
+      ]
+    },
+    {
+      "id": "output-current-via-b",
+      "net": "LED1_LED_POS",
+      "layer": "F.Cu",
+      "width": 0.9,
+      "points": [
+        {
+          "pad": "R502.2"
+        },
+        {
+          "via": "led-pos-b"
+        }
+      ]
+    },
+    {
+      "id": "output-to-terminal",
+      "net": "LED1_LED_POS",
+      "layer": "In2.Cu",
+      "width": 2,
+      "points": [
+        {
+          "via": "led-pos-a"
+        },
+        [
+          77.5,
+          41.4
+        ],
+        [
+          77.5,
+          46.7
+        ],
+        [
+          93.8,
+          46.7
+        ],
+        {
+          "pad": "J501.1"
+        }
+      ]
+    },
+    {
+      "id": "output-via-tie",
+      "net": "LED1_LED_POS",
+      "layer": "In2.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "via": "led-pos-b"
+        },
+        [
+          77.5,
+          42
+        ]
+      ]
+    },
+    {
+      "id": "input-cap-bank",
+      "net": "+24V_LED1",
+      "layer": "F.Cu",
+      "width": 2,
+      "points": [
+        {
+          "pad": "C501.1"
+        },
+        {
+          "pad": "C502.1"
+        }
+      ]
+    },
+    {
+      "id": "input-fuse",
+      "net": "+24V_LED1",
+      "layer": "F.Cu",
+      "width": 1.5,
+      "points": [
+        [
+          41.4988,
+          18.7
+        ],
+        {
+          "pad": "F103.2"
+        }
+      ]
+    },
+    {
+      "id": "input-via-front",
+      "net": "+24V_LED1",
+      "layer": "F.Cu",
+      "width": 2,
+      "points": [
+        {
+          "pad": "F103.2"
+        },
+        [
+          59.5,
+          18.7
+        ],
+        {
+          "via": "vin-a"
+        },
+        {
+          "via": "vin-b"
+        }
+      ]
+    },
+    {
+      "id": "input-via-back",
+      "net": "+24V_LED1",
+      "layer": "B.Cu",
+      "width": 2,
+      "points": [
+        {
+          "via": "vin-b"
+        },
+        {
+          "via": "vin-a"
+        },
+        [
+          62.5,
+          16.5
+        ],
+        {
+          "pad": "L501.1"
+        }
+      ]
+    },
+    {
+      "id": "gate-series",
+      "net": "LED1_GATE",
+      "layer": "B.Cu",
+      "width": 0.5,
+      "points": [
+        {
+          "pad": "R803.2"
+        },
+        [
+          80.46,
+          40.5975
+        ],
+        {
+          "pad": "Q501.1"
+        }
+      ]
+    },
+    {
+      "id": "gate-pulldown",
+      "net": "LED1_GATE",
+      "layer": "B.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "pad": "R804.1"
+        },
+        [
+          80.46,
+          40.5975
+        ]
+      ]
+    },
+    {
+      "id": "led2-rct-caps",
+      "net": "LED2_RCT",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R608.2"
+        },
+        {
+          "pad": "C606.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-rct-land",
+      "net": "LED2_RCT",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R608.2"
+        },
+        {
+          "via": "led2-rct-land"
+        }
+      ]
+    },
+    {
+      "id": "led2-rt-mid",
+      "net": "LED2_RT_MID",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R608.1"
+        },
+        {
+          "pad": "R607.2"
+        }
+      ]
+    },
+    {
+      "id": "led2-rt-sw",
+      "net": "LED2_SW",
+      "layer": "B.Cu",
+      "width": 0.5,
+      "points": [
+        {
+          "pad": "R607.1"
+        },
+        [
+          85.5,
+          75.1375
+        ]
+      ]
+    },
+    {
+      "id": "led2-csh-land",
+      "net": "LED2_CSH",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R605.1"
+        },
+        {
+          "via": "led2-csh-land"
+        }
+      ]
+    },
+    {
+      "id": "led2-csh-mid",
+      "net": "LED2_CSH_MID",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R605.2"
+        },
+        [
+          92.2,
+          79.1
+        ],
+        {
+          "pad": "R606.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-ovp-land",
+      "net": "LED2_OVP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R610.2"
+        },
+        {
+          "via": "led2-ovp-land"
+        }
+      ]
+    },
+    {
+      "id": "led2-ovp-cap",
+      "net": "LED2_OVP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R610.2"
+        },
+        {
+          "pad": "C607.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-ovp-r611",
+      "net": "LED2_OVP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R610.2"
+        },
+        [
+          94.5,
+          82.2
+        ],
+        [
+          94.5,
+          79.0
+        ],
+        {
+          "pad": "R611.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-ovp-mid",
+      "net": "LED2_OVP_MID",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R610.1"
+        },
+        {
+          "pad": "R609.2"
+        }
+      ]
+    },
+    {
+      "id": "led2-agnd-ep",
+      "net": "GND",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U601.5"
+        },
+        [
+          90.2,
+          86.85
+        ]
+      ]
+    },
+    {
+      "id": "led2-ovp-pin",
+      "net": "LED2_OVP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U601.6"
+        },
+        {
+          "via": "led2-ovp-pin"
+        }
+      ]
+    },
+    {
+      "id": "led2-rct-pin",
+      "net": "LED2_RCT",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U601.4"
+        },
+        {
+          "via": "led2-rct-pin"
+        }
+      ]
+    },
+    {
+      "id": "led2-csh-pin",
+      "net": "LED2_CSH",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U601.3"
+        },
+        {
+          "via": "led2-csh-pin"
+        }
+      ]
+    },
+    {
+      "id": "led2-ovp-in2",
+      "net": "LED2_OVP",
+      "layer": "In2.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "led2-ovp-pin"
+        },
+        [
+          87.1,
+          83.6
+        ],
+        [
+          95.0,
+          83.6
+        ],
+        {
+          "via": "led2-ovp-land"
+        }
+      ]
+    },
+    {
+      "id": "led2-csh-in2",
+      "net": "LED2_CSH",
+      "layer": "In2.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "led2-csh-pin"
+        },
+        [
+          88.2,
+          88.15
+        ],
+        [
+          89.5,
+          86.85
+        ],
+        [
+          91.5,
+          86.85
+        ],
+        [
+          92.2,
+          85.14
+        ],
+        {
+          "via": "led2-csh-land"
+        }
+      ]
+    },
+    {
+      "id": "led2-rct-f",
+      "net": "LED2_RCT",
+      "layer": "F.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "led2-rct-pin"
+        },
+        [
+          87.9,
+          87.0
+        ],
+        [
+          87.9,
+          85.0
+        ],
+        {
+          "via": "led2-rct-land"
+        }
+      ]
+    },
+    {
+      "id": "led2-comp-pin",
+      "net": "LED2_COMP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U601.2"
+        },
+        {
+          "via": "led2-comp-pin"
+        }
+      ]
+    },
+    {
+      "id": "led2-comp-in2",
+      "net": "LED2_COMP",
+      "layer": "In2.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "led2-comp-pin"
+        },
+        {
+          "via": "led2-comp-cap"
+        }
+      ]
+    },
+    {
+      "id": "led2-comp-cap",
+      "net": "LED2_COMP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "led2-comp-cap"
+        },
+        {
+          "pad": "C605.1"
+        }
+      ]
+    },
+    {
+      "id": "led1-hsp-res-out",
+      "net": "LED1_OUT",
+      "layer": "B.Cu",
+      "width": 0.5,
+      "points": [
+        {
+          "pad": "R503.1"
+        },
+        [
+          81.88,
+          50.95
+        ]
+      ]
+    },
+    {
+      "id": "led1-is-shunt",
+      "net": "LED1_IS",
+      "layer": "F.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "via": "led1-is"
+        },
+        {
+          "pad": "R501.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-is-pin",
+      "net": "LED2_IS",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U601.12"
+        },
+        {
+          "via": "led2-is"
+        }
+      ]
+    },
+    {
+      "id": "led1-is-pin",
+      "net": "LED1_IS",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U501.12"
+        },
+        [
+          78.45,
+          47.15
+        ],
+        [
+          78.45,
+          48.07
+        ],
+        [
+          83.6,
+          48.07
+        ],
+        {
+          "via": "led1-is"
+        }
+      ]
+    },
+    {
+      "id": "led1-hsp",
+      "net": "LED1_HSP",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U501.13"
+        },
+        [
+          77.99,
+          47.8
+        ],
+        [
+          77.99,
+          48.3
+        ],
+        [
+          78.6,
+          48.9
+        ],
+        {
+          "pad": "R503.2"
+        }
+      ]
+    },
+    {
+      "id": "block-oc-pin",
+      "net": "BLOCK_OC",
+      "layer": "F.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U101.12"
+        },
+        [
+          27.9,
+          67.625
+        ],
+        {
+          "via": "block-oc"
+        }
+      ]
+    },
+    {
+      "id": "ptc-gnd",
+      "net": "GND",
+      "layer": "B.Cu",
+      "width": 0.3,
+      "points": [
+        {
+          "pad": "R706.2"
+        },
+        {
+          "pad": "Q701.2"
+        },
+        {
+          "via": "ptc-gnd"
+        }
+      ]
+    },
+    {
+      "id": "led2-sw-back",
+      "net": "LED2_SW",
+      "layer": "B.Cu",
+      "width": 1.8,
+      "points": [
+        {
+          "pad": "L601.2"
+        },
+        [
+          84.1,
+          82.2
+        ],
+        [
+          83.0,
+          83.3
+        ],
+        {
+          "pad": "Q601.2"
+        }
+      ]
+    },
+    {
+      "id": "led2-sw-front",
+      "net": "LED2_SW",
+      "layer": "F.Cu",
+      "width": 1.1,
+      "points": [
+        {
+          "pad": "Q601.2"
+        },
+        [
+          83.0,
+          84.7
+        ],
+        [
+          76.625,
+          84.7
+        ],
+        {
+          "pad": "D601.2"
+        },
+        {
+          "pad": "D601.2",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "id": "led2-is-neck",
+      "net": "LED2_IS",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "Q601.3"
+        },
+        [
+          85.0,
+          88.0
+        ],
+        {
+          "pad": "R601.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-is-kelvin",
+      "net": "LED2_IS",
+      "layer": "F.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R601.1"
+        },
+        [
+          85.9,
+          91.3
+        ],
+        [
+          94.0,
+          91.3
+        ],
+        {
+          "pad": "TP08.1"
+        },
+        [
+          95.3,
+          91.3
+        ],
+        [
+          95.6,
+          91.0
+        ],
+        [
+          95.6,
+          88.6
+        ],
+        {
+          "via": "led2-is"
+        }
+      ]
+    },
+    {
+      "id": "led2-shunt-return",
+      "net": "GND",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "R601.2"
+        },
+        [
+          79.6,
+          92.75
+        ],
+        {
+          "pad": "C611.2"
+        }
+      ]
+    },
+    {
+      "id": "led2-shunt-via-a",
+      "net": "GND",
+      "layer": "F.Cu",
+      "width": 0.6,
+      "points": [
+        {
+          "via": "led2-gnd-a"
+        },
+        {
+          "pad": "R601.2"
+        }
+      ]
+    },
+    {
+      "id": "led2-shunt-via-b",
+      "net": "GND",
+      "layer": "F.Cu",
+      "width": 0.6,
+      "points": [
+        {
+          "via": "led2-gnd-b"
+        },
+        {
+          "pad": "R601.2"
+        }
+      ]
+    },
+    {
+      "id": "led2-out-bulk-left",
+      "net": "LED2_OUT",
+      "layer": "F.Cu",
+      "width": 1.5,
+      "points": [
+        {
+          "pad": "D601.1"
+        },
+        {
+          "pad": "C608.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-out-bulk-up",
+      "net": "LED2_OUT",
+      "layer": "F.Cu",
+      "width": 1.5,
+      "points": [
+        {
+          "pad": "C608.1"
+        },
+        {
+          "pad": "C609.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-out-bulk",
+      "net": "LED2_OUT",
+      "layer": "F.Cu",
+      "width": 1.5,
+      "points": [
+        {
+          "pad": "D601.1"
+        },
+        [
+          74.0,
+          91.0
+        ],
+        [
+          76.3,
+          93.3
+        ],
+        [
+          79.5,
+          94.6
+        ],
+        {
+          "pad": "C611.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-out-sense",
+      "net": "LED2_OUT",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "C611.1"
+        },
+        [
+          84.0,
+          97.6
+        ],
+        {
+          "pad": "R602.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-pos-vias",
+      "net": "LED2_LED_POS",
+      "layer": "F.Cu",
+      "width": 1.0,
+      "points": [
+        {
+          "via": "led2-pos-a"
+        },
+        {
+          "pad": "R602.2"
+        },
+        {
+          "via": "led2-pos-b"
+        }
+      ]
+    },
+    {
+      "id": "led2-pos-terminals",
+      "net": "LED2_LED_POS",
+      "layer": "In2.Cu",
+      "width": 1.0,
+      "points": [
+        {
+          "via": "led2-pos-b"
+        },
+        [
+          87.3,
+          98.1
+        ],
+        [
+          71.0,
+          98.1
+        ],
+        {
+          "pad": "J602.1"
+        },
+        [
+          68.8,
+          98.1
+        ],
+        [
+          59.2,
+          98.1
+        ],
+        {
+          "pad": "J601.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-pos-tie",
+      "net": "LED2_LED_POS",
+      "layer": "In2.Cu",
+      "width": 1.0,
+      "points": [
+        {
+          "via": "led2-pos-a"
+        },
+        {
+          "via": "led2-pos-b"
+        }
+      ]
+    },
+    {
+      "id": "led2-gate-raw-pin",
+      "net": "LED2_GATE_RAW",
+      "layer": "B.Cu",
+      "width": 0.3,
+      "points": [
+        {
+          "pad": "U601.10"
+        },
+        {
+          "via": "led2-gate-raw"
+        }
+      ]
+    },
+    {
+      "id": "led2-gate-raw-res",
+      "net": "LED2_GATE_RAW",
+      "layer": "F.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "via": "led2-gate-raw"
+        },
+        {
+          "pad": "R807.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-gate-pulldown",
+      "net": "LED2_GATE",
+      "layer": "B.Cu",
+      "width": 0.5,
+      "points": [
+        {
+          "pad": "R808.1"
+        },
+        {
+          "pad": "Q601.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-gate-via",
+      "net": "LED2_GATE",
+      "layer": "F.Cu",
+      "width": 0.5,
+      "points": [
+        {
+          "pad": "R807.2"
+        },
+        {
+          "via": "led2-gate"
+        }
+      ]
+    },
+    {
+      "id": "led2-gate-in2",
+      "net": "LED2_GATE",
+      "layer": "In2.Cu",
+      "width": 0.5,
+      "points": [
+        {
+          "via": "led2-gate"
+        },
+        [
+          94.0,
+          91.6
+        ],
+        [
+          81.5,
+          91.6
+        ],
+        [
+          80.46,
+          90.56
+        ],
+        {
+          "pad": "Q601.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-vin-fuse",
+      "net": "+24V_LED2",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "F104.2"
+        },
+        [
+          51.75,
+          71.9
+        ],
+        [
+          53.0,
+          73.15
+        ],
+        [
+          53.0,
+          76.6
+        ],
+        [
+          52.5,
+          77.6
+        ],
+        [
+          52.5,
+          84.0
+        ],
+        {
+          "pad": "C602.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-vin-c601",
+      "net": "+24V_LED2",
+      "layer": "F.Cu",
+      "width": 1.2,
+      "points": [
+        {
+          "pad": "F104.2"
+        },
+        [
+          66.0,
+          68.0
+        ],
+        {
+          "pad": "C601.1"
+        }
+      ]
+    },
+    {
+      "id": "led2-vin-inductor",
+      "net": "+24V_LED2",
+      "layer": "B.Cu",
+      "width": 1.5,
+      "points": [
+        {
+          "pad": "C601.1"
+        },
+        [
+          70.5,
+          72.5
+        ],
+        [
+          74.0,
+          75.3
+        ],
+        {
+          "pad": "L601.1"
+        }
+      ]
+    },
+    {
+      "id": "rtn-shunt-trunk",
+      "net": "RTN_SHUNT",
+      "layer": "B.Cu",
+      "width": 3.0,
+      "points": [
+        {
+          "pad": "Q102.3"
+        },
+        [
+          8.25,
+          77.6
+        ]
+      ]
+    },
+    {
+      "id": "rtn-shunt-r112",
+      "net": "RTN_SHUNT",
+      "layer": "B.Cu",
+      "width": 1.2,
+      "points": [
+        [
+          8.25,
+          77.6
+        ],
+        {
+          "pad": "R112.2"
+        }
+      ]
+    },
+    {
+      "id": "rtn-shunt-r111",
+      "net": "RTN_SHUNT",
+      "layer": "B.Cu",
+      "width": 1.2,
+      "points": [
+        [
+          8.25,
+          77.6
+        ],
+        {
+          "pad": "R111.2"
+        }
+      ]
+    },
+    {
+      "id": "ina-sense-neg",
+      "net": "RTN_SHUNT",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "R111.2"
+        },
+        [
+          9.6,
+          79.0
+        ],
+        [
+          9.6,
+          79.85
+        ],
+        [
+          12.5,
+          79.85
+        ],
+        {
+          "pad": "U102.9"
+        }
+      ]
+    },
+    {
+      "id": "ina-sense-pos",
+      "net": "GND",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U102.10"
+        },
+        [
+          13.0,
+          79.85
+        ],
+        [
+          14.8,
+          79.85
+        ],
+        [
+          14.8,
+          79.0
+        ],
+        {
+          "pad": "R111.1"
+        }
+      ]
+    },
+    {
+      "id": "ina-vs",
+      "net": "+3V3",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U102.6"
+        },
+        {
+          "pad": "C115.1"
+        }
+      ]
+    },
+    {
+      "id": "ina-gnd",
+      "net": "GND",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U102.7"
+        },
+        [
+          11.5,
+          82.95
+        ],
+        {
+          "pad": "C115.2"
+        }
+      ]
+    },
+    {
+      "id": "ina-vbus",
+      "net": "INA_VBUS",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U102.8"
+        },
+        [
+          12.0,
+          82.6
+        ],
+        [
+          13.6,
+          82.6
+        ],
+        [
+          14.25,
+          83.25
+        ],
+        {
+          "pad": "D103.1"
+        },
+        {
+          "pad": "R113.2"
+        }
+      ]
+    },
+    {
+      "id": "revp-gate",
+      "net": "REVP_GATE",
+      "layer": "B.Cu",
+      "width": 0.3,
+      "points": [
+        {
+          "pad": "Q102.1"
+        },
+        [
+          13.34,
+          73.8
+        ],
+        {
+          "pad": "R110.1"
+        },
+        {
+          "pad": "R109.2"
+        }
+      ]
+    },
+    {
+      "id": "revp-mid",
+      "net": "REVP_MID",
+      "layer": "B.Cu",
+      "width": 0.3,
+      "points": [
+        {
+          "pad": "R109.1"
+        },
+        {
+          "pad": "R108.2"
+        }
+      ]
+    },
+    {
+      "id": "ina-3v3-b",
+      "net": "+3V3",
+      "layer": "B.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "pad": "C115.1"
+        },
+        [
+          7.65,
+          81.05
+        ],
+        {
+          "via": "ina-3v3"
+        }
+      ]
+    },
+    {
+      "id": "ina-3v3-f",
+      "net": "+3V3",
+      "layer": "F.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "via": "ina-3v3"
+        },
+        [
+          11.2,
+          79.4
+        ],
+        [
+          12.0,
+          80.2
+        ],
+        {
+          "pad": "U402.5"
+        }
+      ]
+    },
+    {
+      "id": "ina-3v3-sht",
+      "net": "+3V3",
+      "layer": "In2.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "via": "ina-3v3"
+        },
+        {
+          "via": "ina-3v3-sht"
+        }
+      ]
+    },
+    {
+      "id": "sht-3v3",
+      "net": "+3V3",
+      "layer": "F.Cu",
+      "width": 0.4,
+      "points": [
+        {
+          "via": "ina-3v3-sht"
+        },
+        {
+          "pad": "U401.5"
+        }
+      ]
+    },
+    {
+      "id": "u402-gnd",
+      "net": "GND",
+      "layer": "F.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "pad": "U402.2"
+        },
+        [
+          12.0,
+          82.5
+        ],
+        {
+          "via": "u402-gnd"
+        }
+      ]
+    },
+    {
+      "id": "cu-power-trunk-b",
+      "net": "+24V_FUSED",
+      "layer": "B.Cu",
+      "width": 3.0,
+      "points": [
+        [
+          16.8,
+          53.6
+        ],
+        [
+          26.5,
+          53.6
+        ],
+        {
+          "pad": "C101.1"
+        }
+      ]
+    },
+    {
+      "id": "cu-return-input",
+      "net": "PSU_RTN",
+      "layer": "B.Cu",
+      "width": 4.5,
+      "points": [
+        [
+          8.25,
+          56.5
+        ],
+        [
+          8.25,
+          60.5
+        ]
+      ]
+    },
+    {
+      "id": "cu-raw-f",
+      "net": "+24V_RAW",
+      "layer": "F.Cu",
+      "width": 3.0,
+      "points": [
+        {
+          "pad": "J101.1"
+        },
+        {
+          "pad": "F101.1"
+        }
+      ]
+    },
+    {
+      "id": "cu-raw-b",
+      "net": "+24V_RAW",
+      "layer": "B.Cu",
+      "width": 3.0,
+      "points": [
+        {
+          "pad": "J101.1"
+        },
+        {
+          "via": "cu-raw-1"
+        },
+        {
+          "via": "cu-raw-2"
+        },
+        {
+          "via": "cu-raw-3"
+        }
+      ]
+    },
+    {
+      "id": "cu-hub-branch",
+      "net": "+24V_FUSED",
+      "layer": "B.Cu",
+      "width": 3.0,
+      "points": [
+        {
+          "pad": "C101.1"
+        },
+        [
+          27.5,
+          57.0
+        ],
+        [
+          34.4,
+          63.9
+        ],
+        [
+          34.5,
+          63.9
+        ],
+        [
+          37.2,
+          66.6
+        ],
+        [
+          37.2,
+          68.0
+        ],
+        [
+          40.7,
+          71.5
+        ],
+        [
+          41.4,
+          71.5
+        ],
+        [
+          43.4,
+          73.5
+        ],
+        [
+          43.4,
+          74.9
+        ],
+        [
+          43.9,
+          75.1
+        ]
+      ]
+    },
+    {
+      "id": "cu-led2-feed",
+      "net": "+24V_FUSED",
+      "layer": "F.Cu",
+      "width": 2.0,
+      "points": [
+        [
+          43.5,
+          71.65
+        ],
+        [
+          43.25,
+          68.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-ptc-feed",
+      "net": "+24V_FUSED",
+      "layer": "F.Cu",
+      "width": 1.5,
+      "points": [
+        [
+          43.5,
+          71.65
+        ],
+        [
+          43.5,
+          70.8
+        ],
+        [
+          44.6,
+          70.8
+        ],
+        [
+          46.3,
+          72.5
+        ],
+        [
+          46.7,
+          72.9
+        ],
+        [
+          46.7,
+          77.7
+        ],
+        [
+          45.5,
+          78.9
+        ],
+        [
+          45.5,
+          80.9
+        ],
+        [
+          49.3,
+          84.7
+        ],
+        [
+          49.5,
+          84.7
+        ],
+        [
+          50.0,
+          85.2
+        ],
+        [
+          50.0,
+          87.2
+        ],
+        [
+          48.4,
+          88.8
+        ],
+        {
+          "pad": "F102.1"
+        }
+      ]
+    },
+    {
+      "id": "cu-ptc-leg-f",
+      "net": "+24V_PTC",
+      "layer": "F.Cu",
+      "width": 2.0,
+      "points": [
+        {
+          "pad": "F102.2"
+        },
+        [
+          47.9,
+          86.2
+        ],
+        [
+          44.7,
+          83.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-ptc-leg-b",
+      "net": "+24V_PTC",
+      "layer": "B.Cu",
+      "width": 3.0,
+      "points": [
+        [
+          44.7,
+          83.0
+        ],
+        [
+          46.6,
+          84.9
+        ],
+        [
+          46.6,
+          94.5
+        ],
+        {
+          "pad": "J701.1"
+        }
+      ]
+    },
+    {
+      "id": "cu-ptc-drain-f",
+      "net": "PTC_DRAIN",
+      "layer": "F.Cu",
+      "width": 2.4,
+      "points": [
+        {
+          "pad": "J701.2"
+        },
+        [
+          51.0,
+          93.0
+        ],
+        [
+          50.0,
+          92.0
+        ],
+        [
+          39.8,
+          92.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-ptc-drain-tab",
+      "net": "PTC_DRAIN",
+      "layer": "F.Cu",
+      "width": 2.0,
+      "points": [
+        [
+          39.8,
+          92.0
+        ],
+        [
+          38.6,
+          90.8
+        ],
+        [
+          38.6,
+          83.2
+        ]
+      ]
+    },
+    {
+      "id": "cu-led1-feed-f1",
+      "net": "+24V_FUSED",
+      "layer": "F.Cu",
+      "width": 2.0,
+      "points": [
+        {
+          "pad": "F103.1"
+        },
+        [
+          51.0,
+          29.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-led1-feed-b",
+      "net": "+24V_FUSED",
+      "layer": "B.Cu",
+      "width": 2.0,
+      "points": [
+        [
+          51.0,
+          27.8
+        ],
+        [
+          51.0,
+          29.0
+        ],
+        [
+          39.7,
+          40.3
+        ],
+        [
+          39.7,
+          52.0
+        ],
+        [
+          39.2,
+          52.5
+        ],
+        [
+          39.2,
+          55.5
+        ],
+        [
+          39.7,
+          56.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-led1-feed-f2",
+      "net": "+24V_FUSED",
+      "layer": "F.Cu",
+      "width": 2.0,
+      "points": [
+        [
+          39.7,
+          56.0
+        ],
+        [
+          40.4,
+          56.7
+        ],
+        [
+          40.4,
+          58.1
+        ],
+        [
+          38.5,
+          60.0
+        ],
+        [
+          35.7,
+          60.0
+        ],
+        [
+          34.1,
+          58.4
+        ],
+        [
+          29.9,
+          58.4
+        ]
+      ]
+    },
+    {
+      "id": "cu-hub-via-stub",
+      "net": "+24V_FUSED",
+      "layer": "B.Cu",
+      "width": 2.0,
+      "points": [
+        [
+          43.5,
+          71.65
+        ],
+        [
+          44.4,
+          70.9
+        ]
+      ]
+    },
+    {
+      "id": "cu-power-trunk-neck",
+      "net": "+24V_FUSED",
+      "layer": "F.Cu",
+      "width": 2.4,
+      "points": [
+        [
+          15.75,
+          54.3
+        ],
+        [
+          16.4,
+          54.3
+        ]
+      ]
+    },
+    {
+      "id": "cu-power-trunk-f",
+      "net": "+24V_FUSED",
+      "layer": "F.Cu",
+      "width": 3.0,
+      "points": [
+        [
+          16.4,
+          54.3
+        ],
+        [
+          17.2,
+          53.5
+        ],
+        [
+          26.5,
+          53.5
+        ],
+        {
+          "pad": "C101.1"
+        }
+      ]
+    },
+    {
+      "id": "cu-hub-f106",
+      "net": "+24V_FUSED",
+      "layer": "B.Cu",
+      "width": 1.0,
+      "points": [
+        [
+          43.9,
+          75.1
+        ],
+        {
+          "pad": "F106.1"
+        }
+      ]
+    },
+    {
+      "id": "block-oc-b1",
+      "net": "BLOCK_OC",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "block-oc"
+        },
+        [
+          28.75,
+          67.77
+        ],
+        [
+          34.25,
+          67.77
+        ],
+        {
+          "via": "block-oc-2"
+        }
+      ]
+    },
+    {
+      "id": "block-oc-in2",
+      "net": "BLOCK_OC",
+      "layer": "In2.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "block-oc-2"
+        },
+        [
+          35.95,
+          66.67
+        ],
+        {
+          "via": "block-oc-3"
+        }
+      ]
+    },
+    {
+      "id": "block-oc-f",
+      "net": "BLOCK_OC",
+      "layer": "F.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "block-oc-3"
+        },
+        [
+          37.05,
+          61.37
+        ],
+        [
+          40.75,
+          61.37
+        ],
+        {
+          "via": "block-oc-4"
+        }
+      ]
+    },
+    {
+      "id": "block-oc-b2",
+      "net": "BLOCK_OC",
+      "layer": "B.Cu",
+      "width": 0.25,
+      "points": [
+        {
+          "via": "block-oc-4"
+        },
+        [
+          43.35,
+          60.17
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-5",
+      "net": "+12V",
+      "layer": "F.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          39.1,
+          67.2
+        ],
+        [
+          39.0,
+          67.25
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-6",
+      "net": "+12V",
+      "layer": "F.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          39.0,
+          67.25
+        ],
+        [
+          38.25,
+          66.5
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-7",
+      "net": "+12V",
+      "layer": "F.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          38.25,
+          66.5
+        ],
+        [
+          33.75,
+          66.5
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-8",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          33.75,
+          66.5
+        ],
+        [
+          30.25,
+          63.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-9",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          30.25,
+          63.0
+        ],
+        [
+          30.25,
+          62.75
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-10",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          30.25,
+          62.75
+        ],
+        [
+          30.0,
+          62.75
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-11",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          30.0,
+          62.75
+        ],
+        [
+          30.0,
+          62.5
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-12",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          30.0,
+          62.5
+        ],
+        [
+          29.25,
+          62.5
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-13",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          29.25,
+          62.5
+        ],
+        [
+          25.5,
+          58.75
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-14",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          25.5,
+          58.75
+        ],
+        [
+          21.5,
+          58.75
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-15",
+      "net": "+12V",
+      "layer": "In2.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          21.5,
+          58.75
+        ],
+        [
+          21.5,
+          53.25
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-16",
+      "net": "+12V",
+      "layer": "In2.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          21.5,
+          53.25
+        ],
+        [
+          19.0,
+          50.75
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-17",
+      "net": "+12V",
+      "layer": "In2.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          19.0,
+          50.75
+        ],
+        [
+          19.0,
+          49.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-18",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          19.0,
+          49.0
+        ],
+        [
+          15.25,
+          45.25
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-19",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          15.25,
+          45.25
+        ],
+        [
+          15.25,
+          30.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-20",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          15.25,
+          30.0
+        ],
+        [
+          16.25,
+          29.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-21",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          16.25,
+          29.0
+        ],
+        [
+          16.25,
+          25.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-22",
+      "net": "+12V",
+      "layer": "B.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          16.25,
+          25.0
+        ],
+        [
+          15.25,
+          24.0
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-23",
+      "net": "+12V",
+      "layer": "F.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          15.25,
+          24.0
+        ],
+        [
+          16.0,
+          24.75
+        ]
+      ]
+    },
+    {
+      "id": "cu-aux12-track-24",
+      "net": "+12V",
+      "layer": "F.Cu",
+      "width": 0.8,
+      "points": [
+        [
+          16.0,
+          24.75
+        ],
+        [
+          16.0,
+          25.75
+        ]
+      ]
+    }
+  ],
+  "zones": [
+    {
+      "id": "ground-reference",
+      "net": "GND",
+      "layer": "In1.Cu",
+      "clearance": 0.3,
+      "outline": [
+        [
+          0.4,
+          0.4
+        ],
+        [
+          99.6,
+          0.4
+        ],
+        [
+          99.6,
+          99.6
+        ],
+        [
+          0.4,
+          99.6
+        ]
+      ]
+    }
+  ],
+  "fill_keepouts": [
+    {
+      "id": "ina-sense-pos",
+      "layers": [
+        "B.Cu"
+      ],
+      "outline": [
+        [
+          12.72,
+          79.3
+        ],
+        [
+          15.25,
+          79.3
+        ],
+        [
+          15.25,
+          80.2
+        ],
+        [
+          13.45,
+          80.2
+        ],
+        [
+          13.45,
+          82.0
+        ],
+        [
+          12.72,
+          82.0
+        ]
+      ]
+    }
+  ],
+  "connected_groups": [
+    {
+      "net": "LED1_SW",
+      "pads": [
+        "L502.2",
+        "Q501.2",
+        "D501.2"
+      ]
+    },
+    {
+      "net": "LED1_IS",
+      "pads": [
+        "Q501.3",
+        "R501.1"
+      ]
+    },
+    {
+      "net": "LED1_OUT",
+      "pads": [
+        "D501.1",
+        "R502.1",
+        "C511.1",
+        "C508.1"
+      ]
+    },
+    {
+      "net": "LED1_LED_POS",
+      "pads": [
+        "R502.2",
+        "J501.1"
+      ]
+    },
+    {
+      "net": "LED1_L_MID",
+      "pads": [
+        "L501.2",
+        "L502.1"
+      ]
+    },
+    {
+      "net": "+24V_LED1",
+      "pads": [
+        "F103.2",
+        "C501.1",
+        "C502.1",
+        "L501.1"
+      ]
+    },
+    {
+      "net": "LED1_GATE",
+      "pads": [
+        "R803.2",
+        "Q501.1",
+        "R804.1"
+      ]
+    },
+    {
+      "net": "GND",
+      "pads": [
+        "R501.2",
+        "C511.2",
+        "C508.2",
+        "J501.2",
+        "C501.2",
+        "C502.2"
+      ]
+    },
+    {
+      "net": "LED2_SW",
+      "pads": [
+        "L601.2",
+        "Q601.2",
+        "D601.2"
+      ]
+    },
+    {
+      "net": "LED2_IS",
+      "pads": [
+        "Q601.3",
+        "R601.1",
+        "TP08.1",
+        "U601.12"
+      ]
+    },
+    {
+      "net": "LED2_OUT",
+      "pads": [
+        "D601.1",
+        "C608.1",
+        "C609.1",
+        "C611.1",
+        "R602.1"
+      ]
+    },
+    {
+      "net": "LED2_LED_POS",
+      "pads": [
+        "R602.2",
+        "J602.1",
+        "J601.1"
+      ]
+    },
+    {
+      "net": "+24V_LED2",
+      "pads": [
+        "F104.2",
+        "C601.1",
+        "C602.1",
+        "L601.1"
+      ]
+    },
+    {
+      "net": "LED2_GATE",
+      "pads": [
+        "R807.2",
+        "R808.1",
+        "Q601.1"
+      ]
+    },
+    {
+      "net": "LED2_GATE_RAW",
+      "pads": [
+        "U601.10",
+        "R807.1"
+      ]
+    },
+    {
+      "net": "GND",
+      "pads": [
+        "R601.2",
+        "C611.2",
+        "C609.2"
+      ]
+    },
+    {
+      "net": "RTN_SHUNT",
+      "pads": [
+        "Q102.3",
+        "R111.2",
+        "R112.2",
+        "U102.9"
+      ]
+    },
+    {
+      "net": "INA_VBUS",
+      "pads": [
+        "U102.8",
+        "D103.1",
+        "R113.2"
+      ]
+    },
+    {
+      "net": "REVP_GATE",
+      "pads": [
+        "Q102.1",
+        "R110.1",
+        "R109.2"
+      ]
+    },
+    {
+      "net": "+24V_RAW",
+      "pads": [
+        "J101.1",
+        "F101.1"
+      ]
+    },
+    {
+      "net": "PSU_RTN",
+      "pads": [
+        "J101.2",
+        "Q102.2"
+      ]
+    },
+    {
+      "net": "+24V_PTC",
+      "pads": [
+        "F102.2",
+        "J701.1"
+      ]
+    },
+    {
+      "net": "PTC_DRAIN",
+      "pads": [
+        "J701.2",
+        "Q703.2"
+      ]
+    },
+    {
+      "net": "+24V_FUSED",
+      "pads": [
+        "F101.2",
+        "C101.1",
+        "F105.1",
+        "F103.1",
+        "F102.1",
+        "F104.1",
+        "F106.1"
+      ]
+    },
+    {
+      "net": "GND",
+      "pads": [
+        "R111.1",
+        "R112.1",
+        "Q703.3",
+        "J501.2",
+        "J602.2"
+      ]
+    },
+    {
+      "net": "+12V",
+      "pads": [
+        "L101.2",
+        "F401.1",
+        "U201.2"
+      ]
+    }
+  ]
+}
