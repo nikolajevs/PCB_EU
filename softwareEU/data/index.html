@@ -28,7 +28,7 @@
                 <h3>Датчик КЛИМАТА</h3>
                 <div class="metrics-row">
                     <div class="metric-box">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 8px;">
+                        <div class="metric-label-row">
                             <span class="label" style="margin-bottom: 0;">Температура</span>
                             <span id="sensor-status-badge" class="status-badge offline-badge" style="display: none; padding: 2px 8px;">офлайн</span>
                         </div>
@@ -39,28 +39,6 @@
                         <div class="value" id="h-val" style="color: var(--primary)">--.-<span class="unit">%</span></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <h3 id="power-title">Освещение и Силовые цепи</h3>
-                <div class="metrics-row">
-                    <!-- В режиме сушки свет и полив выключены всегда — эти два блока скрываются -->
-                    <div class="metric-box" data-growing-only>
-                        <span class="label">Мощность LED</span>
-                        <div class="value" id="led-val" style="color: var(--warning)">--<span class="unit">%</span></div>
-                    </div>
-                    <div class="metric-box" data-growing-only>
-                        <span class="label">Статус насоса</span>
-                        <div class="value" id="pump-val" style="color: var(--text-muted)">--</div>
-                        <div class="metric-sub" id="water-level">Вода: --</div>
-                        <div class="metric-sub" id="last-water">Полив по расписанию: --</div>
-                    </div>
-                    <div class="metric-box">
-                        <span class="label">Обогреватель</span>
-                        <div class="value" id="heater-val" style="color: var(--text-muted)">--</div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="card">
@@ -81,8 +59,8 @@
 
             <!-- INA226 на плате: вся мощность от блока питания 24 В (свет, обогрев, вентиляторы, насос) -->
             <div class="card">
-                <h3>Питание платы</h3>
-                <div class="metrics-row">
+                <h3>Потребление и освещение</h3>
+                <div class="metrics-row growing-pair">
                     <div class="metric-box">
                         <span class="label">Потребление</span>
                         <div class="value" id="power-val" style="color: var(--warning)">--<span class="unit">Вт</span></div>
@@ -90,8 +68,31 @@
                         <div class="metric-sub" id="energy-val">Сегодня: -- кВт·ч</div>
                         <div class="metric-sub warn" id="power-warning" hidden></div>
                     </div>
+                    <div class="metric-box" data-growing-only>
+                        <span class="label">Лампа (LED)</span>
+                        <div class="value" id="led-val" style="color: var(--warning)">--<span class="unit">%</span></div>
+                    </div>
                 </div>
             </div>
+
+            <div class="card">
+                <h3>Силовые цепи</h3>
+                <div class="metrics-row growing-pair">
+                    <!-- В режиме сушки насос скрывается -->
+                    <div class="metric-box" data-growing-only>
+                        <span class="label">Статус насоса</span>
+                        <div class="value" id="pump-val" style="color: var(--text-muted)">--</div>
+                        <div class="metric-sub" id="water-level">Вода: --</div>
+                        <div class="metric-sub" id="last-water">Полив по расписанию: --</div>
+                    </div>
+                    <div class="metric-box">
+                        <span class="label">Обогреватель</span>
+                        <div class="value" id="heater-val" style="color: var(--text-muted)">--</div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
         <div class="analytics-section">
