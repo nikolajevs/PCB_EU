@@ -1,0 +1,57 @@
+{
+  "source_repository": "https://github.com/nikolajevs/PCB_EU",
+  "source_commit": "b3f286d7aa642983e8ee14f5d93cb4674deb81d8",
+  "source_board_sha256": "c6b4e0382d51009010f3a2ee79a94a5cc2f45494132e5557ee946960d23cc2c7",
+  "export_date": "2026-10-24",
+  "kicad_version": "10.0.5",
+  "archive": "PCB_EU_Gerber_b3f286d.zip",
+  "archive_sha256": "6712b1c9b966ec86f023495711daf586583f3eb1487484ce419bcedef43022b9",
+  "files": {
+    "PCB_EU-B_Cu.gbl": "bcdd3a196dcee8fac0b14a49ca1a90da361db228d915a3a84666e8341c7be9a5",
+    "PCB_EU-B_Mask.gbs": "7256367c3dafadee90ca3e0ad6940e024d0e7ba6cb814d4f247e54ab752e31a7",
+    "PCB_EU-B_Silkscreen.gbo": "44d686e210a26e3f3cc551a1ae59f71dcd13f8e1ee6ec63d5eee98c697be94ee",
+    "PCB_EU-Edge_Cuts.gm1": "efc540d9430d8b65f43f7b443926d99847f09af9c8be19780273a535149969dd",
+    "PCB_EU-F_Cu.gtl": "537fadf1ac8d5e5b0816cbc79099311af95b02b80e9e9ef0f6c4e82c2163fa7d",
+    "PCB_EU-F_Mask.gts": "1b75c50b680a388c274c7bb4df4f1e7e2a40c6f488fa75a7aa1d7b23c2d041ac",
+    "PCB_EU-F_Silkscreen.gto": "89dea39b7cfc71133dd17a8435782d7182807e77dd49909041bd1d6cb0431fe5",
+    "PCB_EU-In1_Cu.g1": "cc06a982affacaa687101965814f1a4b6bfd09591a3e1fbaa52a7bfaf6379cba",
+    "PCB_EU-In2_Cu.g2": "97ad69c547869528fbf25d4f8edc3b53c6f236d04d9803901dc49e96c94885af",
+    "PCB_EU-NPTH.drl": "58fa62ce0984aead90ab03539507a87a69d498ad5cccaa6747ac840df25d26d0",
+    "PCB_EU-PTH.drl": "1f65bbdf9c0b94227d8900d8d447dc9a5c1b9ee8ca9a6394e5cfeee970725cad"
+  },
+  "gerber_validation": {
+    "layers": [
+      "bottom copper",
+      "bottom mask",
+      "bottom silk",
+      "inner_1 copper",
+      "inner_2 copper",
+      "mechanical outline",
+      "top copper",
+      "top mask",
+      "top silk"
+    ],
+    "board_mm": [
+      100,
+      100
+    ],
+    "pth_holes": 409,
+    "npth_holes": 4,
+    "drill_positions_and_diameters_match_pcb": true,
+    "drill_coordinate_tolerance_mm": 0.0005
+  },
+  "drc_validation": {
+    "kicad": "10.0.5",
+    "target_version": "10.0.7",
+    "erc_violations": 0,
+    "drc_geometric_violations": 0,
+    "unconnected_items": 0,
+    "schematic_parity": 0,
+    "silkscreen_only_library_warnings": 77,
+    "warning_validation": "Each DRC UUID matched to a PCB reference independently checked by verify_library_match.py; native runner failed to parse localized Russian Footprint descriptions."
+  },
+  "fabrication_check": {
+    "failures": 0,
+    "warnings": 3
+  }
+}
