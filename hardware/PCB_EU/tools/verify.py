@@ -120,7 +120,7 @@ def main():
     check('UART service connector has explicit 3.3 V-only pin order',pins('J201',{1:'GND',2:'+3V3',3:'UART_TX',4:'UART_RX',5:'ESP_EN',6:'ESP_BOOT'}))
     check('BOOT / EN have external pull-ups and active-low buttons; EN delay 10k / 1u per Espressif',pins('C208',{1:'ESP_EN',2:'GND'}) and p['C208']['mpn']=='CL21B105KBFNNNG' and r('R201','SMD0603-10K','+3V3','ESP_EN') and r('R202','SMD0603-10K','+3V3','ESP_BOOT') and pins('SW201',{1:'ESP_EN',2:'GND'}) and pins('SW202',{1:'ESP_BOOT',2:'GND'}))
     allocated=Counter(x['mpn'] for x in spec['parts'] if x['in_bom'])+Counter(spec['accessories'])
-    check('Every purchasing quantity is allocated to fitted references or assembly accessories',all(x['needed']==allocated[x['mpn']] and x['buy']>=x['needed'] for x in bom) and set(allocated)=={x['mpn'] for x in bom})
+    check('Purchases plus allocated home stock cover every fitted reference and assembly accessory',all(x['needed']==allocated[x['mpn']] and x['buy']>=0 and x.get('on_hand',0)>=0 and x['buy']+x.get('on_hand',0)>=x['needed'] for x in bom) and set(allocated)=={x['mpn'] for x in bom})
     check('No passive SMD footprint is smaller than 0603',all(not re.search(r'_(0201|0402)_',x['footprint']) for x in spec['parts'] if x['symbol'] in ['R','C','CP','L']))
     delivered=sum(Decimal(str(x['line'])) for x in bom)+Decimal('5.87')
     check('Purchased quantities + dated VAT and delivery estimate stay under the 100 EUR ceiling (target ~80 EUR)',delivered<=Decimal('100.00'))
@@ -128,7 +128,7 @@ def main():
     out += [f'PASS {i+1:02d} | {label}' for i,label in enumerate(passed)]
     out += ['', 'Limitations: these checks establish pin/net and BOM consistency, not analog stability,',
             'power sequencing, component temperature, EMC/ESD immunity, or manufacturing readiness.',
-            'Footprint qualification, <=100x100 placement, routing/DRC and new firmware remain pending.']
+            'Physical fit and prototype tests remain pending; current PCB/firmware status is documented in README.md.']
     args.output.write_text('\n'.join(out)+'\n')
     print('\n'.join(out[:6]))
 
