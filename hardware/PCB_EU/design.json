@@ -2428,7 +2428,7 @@
       "ref": "C511",
       "symbol": "C",
       "value": "100n 100V",
-      "mpn": "C0805C104K1RACTU",
+      "mpn": "CL21B104KCFSFNE",
       "nets": {
         "1": "LED1_OUT",
         "2": "GND"
@@ -2910,7 +2910,7 @@
       "ref": "C611",
       "symbol": "C",
       "value": "100n 100V",
-      "mpn": "C0805C104K1RACTU",
+      "mpn": "CL21B104KCFSFNE",
       "nets": {
         "1": "LED2_OUT",
         "2": "GND"

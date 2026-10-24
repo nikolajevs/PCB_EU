@@ -56815,7 +56815,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0805C104K1RACTU"
+		(property "MPN" "CL21B104KCFSFNE"
 			(at 0 0 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -70047,7 +70047,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "C0805C104K1RACTU"
+		(property "MPN" "CL21B104KCFSFNE"
 			(at 0 0 90)
 			(layer "B.SilkS")
 			(hide yes)

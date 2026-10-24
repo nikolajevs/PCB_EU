@@ -336,7 +336,7 @@ for k in (1,2):
     c(sh,ref('C',6),'1n C0G','C1206C102JCGACTU',pre+'RCT')
     c(sh,ref('C',7),'100p C0G','CL31C101JBCNNNC',pre+'OVP')
     for n in range(8,11 if k==1 else 10):c(sh,ref('C',n),'100u 63V','EEUFR1J101LB',pre+'OUT')
-    c(sh,ref('C',11),'100n 100V','C0805C104K1RACTU',pre+'OUT')
+    c(sh,ref('C',11),'100n 100V','CL21B104KCFSFNE',pre+'OUT')
     add(sh,ref('J',1),'J2',f'LED{k} + / GND','DG306-5.0-2P12',[pre+'LED_POS',GND])
     if k==2:add(sh,ref('J',2),'J2','BAR2 + / GND','DG306-5.0-2P12',[pre+'LED_POS',GND])
 
@@ -577,6 +577,9 @@ REVIEW_ROWS={
  'C1206C100J5GAC':[dict(shop='Electrobase',mpn='C1206C100J5GACTU',needed=2,buy=2,unit='шт.',price_unit=0.25,line=0.5,stock='>1000',
   url='https://electrobase.lv/katalogs/kondensatori-mlcc-smd-0201/capacitor-ceramic-mlcc-10pf-50vdc-c0g-5-smd-1206',block='RTC',
   usage='KEMET, 10 пФ / 50 В / C0G / ±5%, 1206: нагрузка кварца Y301 (RTC_X1, RTC_X2), подобрать на плате. Карточка Salvats для C1206C100J5GAC называет Y5V, поэтому покупка у Electrobase; TU — суффикс упаковки (лента); у поставщика >1000 шт. на 23.10.2026',price_date='2026-10-23')],
+ 'C0805C104K1RACTU':[dict(shop='Electrobase',mpn='CL21B104KCFSFNE',needed=2,buy=2,unit='шт.',price_unit=0.12,line=0.24,stock='>1000',
+  url='https://electrobase.lv/katalogs/kondensatori-mlcc-smd-0201/capacitor-ceramic-mlcc-100nf-100v-x7r-10-smd-0805-3',block='LED',
+  usage='Samsung, 100 нФ / 100 В / X7R / ±10%, 0805: локальный HF-байпас выходов LED (C511, C611), не ёмкость COMP. Аналог KEMET C0805C104K1RACTU (его карточка стоит 0,23 EUR; прежняя ссылка -0 не открывалась); у поставщика больше 1000 шт. на 24.10.2026',price_date='2026-10-24')],
  'IRF540ZPBF':[dict(shop='Salvats',mpn='TK22E10N1',needed=1,buy=1,unit='шт.',price_unit=1.38,line=1.38,stock=22,
   url='https://www.salvats.lv/lv/100v-n-fet-tht/22e10n-tranzistors-n-fet-100v-20v-22a-72w-0r0115-to-220',block='LED',
   usage='Toshiba, 100 В, 13,8 мОм, Qg 28 нКл, TO-220 G-D-S; Q501 от GATE LM3429 через 4,7 Ом (Q601 с 23.10.2026 на CSD19534KCS)',price_date='2026-10-23'),
