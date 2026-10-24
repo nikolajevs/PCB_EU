@@ -1,9 +1,9 @@
 EU-LITE schematic connectivity review (from design.json, no KiCad)
 Revision: EU-LITE-0.1-DRAFT
-PASS: 54 checks
-Fitted electrical components: 143
-Stock pieces: 105 in 37 rows; purchased pieces: 41 in 32 rows
-Purchases incl. VAT 28.63 EUR + delivery 5.87 EUR = 34.50 EUR (catalogue snapshot 2026-10-23)
+PASS: 56 checks
+Fitted electrical components: 156
+Stock pieces: 114 in 38 rows; purchased pieces: 45 in 33 rows
+Purchases incl. VAT 28.81 EUR + delivery 5.87 EUR = 34.68 EUR (catalogue snapshot 2026-10-23), without the RGB LED (no price: estimate up to 0.50 EUR)
 Stock lines used up completely (no spare, a mounting error means a repurchase): BSC146N10LS5, EEEFT1E821AP, EEVFK1J471M, INA238AIDGSR, IRL2505, id12
 
 PASS 01 | Part references are unique
@@ -49,17 +49,19 @@ PASS 40 | LED branch fuse F103 6.3 A slow covers the 3.0 A peak input current wi
 PASS 41 | Gate: two 10 R in parallel (5 R) from GATE_RAW, 100k gate pull-down; GATE_RAW touches only U501.10 and the two resistors
 PASS 42 | nDIM: GPIO series 5.1k + one 10k pull-down: HIGH 2.19 V (> 1.6 V hysteresis threshold), Hi-Z 0.60 V (< 1.24 V); correct net names, no capacitor on nDIM
 PASS 43 | Minimum LM3429 nDIM pulse 8.4 us (2 I Vo L / Vin^2 with 47 uH; EU-0.1 with 20 uH: 3.7 us) is below the firmware minimum of 10 us (3 counts at 1 kHz / 8 bit = 11.7 us)
-PASS 44 | PTC driver defaults off: separate NPN and PNP stages, PNP emitter on +12V, 12 V gate drive of the stock BSC146N10LS5, J701 return = drain
-PASS 45 | PTC stays off with the ESP32 internal pull-up (30k worst case) on GPIO32: base 0.40 V < 0.45 V even with 5 % R702; HIGH drive 0.26 mA saturates the NPN
-PASS 46 | PTC gate swing 11.4 V from the PNP, 100 R gate resistor, 2k pull-down (BSC146N10LS5 rated 20 V gate)
-PASS 47 | Q703 conduction loss at the 25 V PSU limit (4.34 A): 0.41 W with RDS(on) max x 1.5 hot; F102 8 A
-PASS 48 | Pump AO3422: 1 gate / 2 source / 3 drain, reset pull-down 100k, SS56 flyback with cathode on fused +24V_PUMP
-PASS 49 | 24 V budget 7.4 A at 21.6 V / 7.5 A at 25 V: below F101 15 A and the PSU 10 A requirement; EU-0.1 with two LED channels was 9.3 A
-PASS 50 | Every stock source exists in the owner CSV, is not archived, and the stock covers the fitted quantity (no hidden shortage)
-PASS 51 | Stock rows in BOM_allocated.json match the design counts and the remaining stock
-PASS 52 | Every purchased MPN is bought at least in the fitted quantity, respecting the shop minimum and multiple, from an allowed shop, with URL and price date
-PASS 53 | Purchase prices equal the frozen catalogue snapshot (procurement_lite.json)
-PASS 54 | Purchases + delivery 34.50 EUR stay under the 100 EUR ceiling and the ~80 EUR target; cheaper than the ~81 EUR of EU-0.1 (81.17 EUR by BOM lines)
+PASS 44 | RGB status LED D901 (common anode on +12V, lead order R/A/G/B): per channel GPIO -> 4k7 -> BC847B base, 100k pull-down, collector -> 2k -> cathode; 4.9/4.4/4.4 mA R/G/B (3-8 mA, below the 20 mA rating), base current saturates the NPN (hFE >= 100), resistor <= 0.125 W
+PASS 45 | RGB channels sit on GPIO4 / GPIO16 / GPIO17 (module pins 26/27/28: not strapping pins, not used by flash or PSRAM on WROOM-32E-N4); each GPIO net reaches only the ESP32 and its base resistor
+PASS 46 | PTC driver defaults off: separate NPN and PNP stages, PNP emitter on +12V, 12 V gate drive of the stock BSC146N10LS5, J701 return = drain
+PASS 47 | PTC stays off with the ESP32 internal pull-up (30k worst case) on GPIO32: base 0.40 V < 0.45 V even with 5 % R702; HIGH drive 0.26 mA saturates the NPN
+PASS 48 | PTC gate swing 11.4 V from the PNP, 100 R gate resistor, 2k pull-down (BSC146N10LS5 rated 20 V gate)
+PASS 49 | Q703 conduction loss at the 25 V PSU limit (4.34 A): 0.41 W with RDS(on) max x 1.5 hot; F102 8 A
+PASS 50 | Pump AO3422: 1 gate / 2 source / 3 drain, reset pull-down 100k, SS56 flyback with cathode on fused +24V_PUMP
+PASS 51 | 24 V budget 7.4 A at 21.6 V / 7.5 A at 25 V: below F101 15 A and the PSU 10 A requirement; EU-0.1 with two LED channels was 9.3 A
+PASS 52 | Every stock source exists in the owner CSV, is not archived, and the stock covers the fitted quantity (no hidden shortage)
+PASS 53 | Stock rows in BOM_allocated.json match the design counts and the remaining stock
+PASS 54 | Every purchased MPN is bought at least in the fitted quantity, respecting the shop minimum and multiple, from an allowed shop, with URL and price date
+PASS 55 | Purchase prices equal the frozen catalogue snapshot (procurement_lite.json); the only line without a price is the RGB LED, which is in neither the stock nor the catalogue (RGB-5MM-CA)
+PASS 56 | Purchases + delivery 34.68 EUR (+ 0.50 EUR estimate for the unpriced RGB LED) stay under the 100 EUR ceiling and the ~80 EUR target; cheaper than the ~81 EUR of EU-0.1 (81.17 EUR by BOM lines)
 
 Limitations: these checks establish pin/net, calculated-value and BOM consistency of the specification, not an ERC of the written .kicad_sch files
 (KiCad was not available), analog stability, power sequencing, component temperature, EMC/ESD immunity or manufacturing readiness.

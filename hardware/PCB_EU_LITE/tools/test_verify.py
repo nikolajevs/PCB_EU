@@ -43,6 +43,11 @@ def mpn(ref, text):
     return f
 
 
+def move_red_to_strapping_pin(spec, bom):
+    nets = part(spec, 'U202')['nets']
+    nets['26'] = None; nets['14'] = 'LED_R_GPIO'
+
+
 def stock_short(spec, bom):
     next(r for r in bom['stock'] if r['id'] == 112)['needed'] = 3
 
@@ -74,6 +79,11 @@ MUTATIONS = {
     'GPIO34 tach pull-up removed (floating input)': net('R206', 1, None),
     'Fan tach signal wired from the header to GPIO34': net('J411', 3, 'FAN1_TACH'),
     'Diode D501 reversed': swap('D501', '1', '2'),
+    'RGB LED anode wired to +3V3 (blue/green Vf cannot be driven)': net('D901', 2, '+3V3'),
+    'RGB green resistor 2k -> 100 R (about 90 mA)': value('R908', '100R'),
+    'RGB blue base pull-down missing (glows during reset)': net('R906', 2, None),
+    'RGB red channel moved to strapping pin GPIO12': move_red_to_strapping_pin,
+    'RGB base resistor 4k7 -> 470k (NPN not saturated)': value('R901', '470k'),
     'Stock overdrawn (3 x BSC146N10LS5, 2 in stock)': stock_short,
     'Purchase price differs from the frozen snapshot': price,
     'Purchase from a shop outside the allowed list': shop,

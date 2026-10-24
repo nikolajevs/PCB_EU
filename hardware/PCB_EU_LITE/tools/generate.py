@@ -105,6 +105,8 @@ ic('INA238', [(10,'IN+','input'),(9,'IN-','input'),(8,'VBUS','input'),(1,'A1','i
              [(6,'VS','power_in'),(4,'SDA','bidirectional'),(5,'SCL','input'),(3,'ALERT','open_collector'),(7,'GND','power_in')])
 # BSC146N10LS5 in TDSON-8-1: S1-S3, G4, D5 (the 5-8 drain pads are one exposed pad); same symbol as ../cheap-version.
 ic('NMOS_SO8', [(4,'G','input')], [(5,'D','passive'),(1,'S','passive'),(2,'S','passive'),(3,'S','passive')], 15.24)
+# 5 mm RGB LED, common anode, KiCad Device:LED_RAGB order: 1 R cathode, 2 anode, 3 G cathode, 4 B cathode (confirm on the purchased part).
+ic('LED_RGB_CA', [(2,'A','passive')], [(1,'R_K','passive'),(3,'G_K','passive'),(4,'B_K','passive')], 15.24)
 ic('SD', [(1,'DAT2','passive'),(2,'DAT3_CS','input'),(3,'CMD_MOSI','input'),(4,'VDD','power_in'),(5,'CLK','input')],
          [(8,'DAT1','passive'),(7,'DAT0_MISO','tri_state'),(6,'VSS','power_in'),('SH','SHELL','passive'),('CD1','CARD_DETECT_1','passive'),('CD2','CARD_DETECT_2','passive')], 30.48)
 for n in [2, 4, 6]:
@@ -157,7 +159,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'LRP2512-R040-1%': 'Resistor_SMD:R_2512_6332Metric', 'CS2512-0R15-1%-HP': 'Resistor_SMD:R_2512_6332Metric',
     'BC847B-DIO': 'Package_TO_SOT_SMD:SOT-23', 'BC857B': 'Package_TO_SOT_SMD:SOT-23', 'BZV55C12': 'Diode_SMD:D_MiniMELF',
     'BC-2001': 'EU_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
-    'C1206C100J5GACTU': C1206, 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
+    'C1206C100J5GACTU': C1206, 'RGB-5MM-CA': 'LED_THT:LED_D5.0mm-4_RGB', 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
     'CRCW12061K20FKTABC': R1206, 'SMD1206 56K 1%': R1206, 'SMD1206-33K-1%': R1206,
 }
 # Footprints already drawn from manufacturer drawings in EU-0.1 / cheap-version (physical fit still pending)
@@ -274,9 +276,9 @@ for ref in ('C204', 'C205', 'C206'):
 r('MCU', 'R201', '100k 1%', 'S55', V3, 'LOGIC_FB'); r('MCU', 'R202', '47k 1%', 'S61', 'LOGIC_FB', GND); r('MCU', 'R203', '100k 1%', 'S55', 'LOGIC_FB', GND)
 en = {str(i): None for i in range(1, 40)}
 en.update({'1': GND, '2': V3, '3': 'ESP_EN', '6': 'FAN1_TACH', '7': 'FAN2_TACH', '8': 'PTC_GPIO', '9': 'PUMP_GPIO', '10': 'LED_PWM_GPIO', '11': 'FAN1_GPIO', '12': 'FAN2_GPIO',
-           '13': 'FLOAT_GPIO', '15': GND, '16': 'SD_CS', '25': 'ESP_BOOT', '30': 'SD_SCK_GPIO', '31': 'SD_MISO', '33': 'I2C_SDA',
+           '13': 'FLOAT_GPIO', '15': GND, '16': 'SD_CS', '25': 'ESP_BOOT', '26': 'LED_R_GPIO', '27': 'LED_G_GPIO', '28': 'LED_B_GPIO', '30': 'SD_SCK_GPIO', '31': 'SD_MISO', '33': 'I2C_SDA',
            '34': 'UART_RX', '35': 'UART_TX', '36': 'I2C_SCL', '37': 'SD_MOSI_GPIO', '38': GND, '39': GND})
-add('MCU', 'U202', 'ESP32', 'ESP32-WROOM-32E-N4', 'ESP32-WROOM-32E-N4', en, note='Antenna keepout and GND pad 39 mandatory; pins 6/7 (GPIO34/35, former tachometers) only pulled up', pos=(285, 69))
+add('MCU', 'U202', 'ESP32', 'ESP32-WROOM-32E-N4', 'ESP32-WROOM-32E-N4', en, note='Antenna keepout and GND pad 39 mandatory; pins 6/7 (GPIO34/35, former tachometers) only pulled up; pins 26/27/28 (GPIO4/16/17) drive the RGB status LED', pos=(285, 69))
 c('MCU', 'C207', '22u 10V', 'S7', V3); c('MCU', 'C208', '100n', 'S54', V3); c('MCU', 'C209', '2u2 RESET', 'S57', 'ESP_EN')
 r('MCU', 'R204', '10k', 'S70', V3, 'ESP_EN'); r('MCU', 'R205', '10k', 'S70', V3, 'ESP_BOOT')
 r('MCU', 'R206', '10k', 'S70', V3, 'FAN1_TACH', 'GPIO34 is input-only without internal pull-up: held high so EU-0.1 firmware reads 0 rpm instead of noise')
@@ -388,6 +390,23 @@ add('Loads', 'J702', 'J2', 'PUMP + / RETURN', 'S93', ['+24V_PUMP', 'PUMP_DRAIN']
 add('Loads', 'Q704', 'NMOS_GSD', 'AO3422', 'AO3422', {1: 'PUMP_GATE', 2: GND, 3: 'PUMP_DRAIN'}, pos=(365, 55))
 r('Loads', 'R707', '1k GATE', 'S62', 'PUMP_GPIO', 'PUMP_GATE'); r('Loads', 'R708', '100k', 'S55', 'PUMP_GATE', GND)
 add('Loads', 'D701', 'D', 'SS56 60V 5A', 'S20', ['+24V_PUMP', 'PUMP_DRAIN'])
+
+# ------------------------------------------------------------------ 08 | RGB status LED
+sheet('Status', '08 | RGB status LED', [
+ 'D901: 5 mm diffused RGB LED, COMMON ANODE (owner decision 24.10.2026), anode on +12V. Lead order assumed R, A, G, B (KiCad LED_RAGB): confirm on the purchased part.',
+ 'Each channel: GPIO -> 4k7 -> BC847B base (100k to GND), collector -> 2k -> LED cathode. The 12 V supply makes the current independent of the Vf of the green and blue dies',
+ '(a 3.3 V supply leaves only 0.1-0.3 V across a resistor for Vf 3.0-3.2 V). ~4.9 mA red, ~4.4 mA green/blue; resistor 49 mW; 100k keeps the LED dark during reset.',
+ 'GPIO4 = red, GPIO16 = green, GPIO17 = blue (module pins 26/27/28; no strapping function, free on WROOM-32E-N4). Drive with LEDC PWM; HIGH = channel on.',
+ 'The 12 V rail is off below ~14 V input, so the indicator is dark exactly when the ESP32 is not running.',
+], 70)
+add('Status', 'D901', 'LED_RGB_CA', 'RGB 5mm CA', 'RGB-5MM-CA', {1: 'LED_R_K', 2: V12, 3: 'LED_G_K', 4: 'LED_B_K'},
+    note='Not in stock and not in the catalogue snapshot: buy a 5 mm diffused common-anode RGB LED (20 mA/channel max); check lead order and the color Vf (red ~2.0 V, green/blue ~3.0-3.3 V)', pos=(120, 70))
+for k, ch in enumerate(('R', 'G', 'B')):
+    q_ = f'Q9{k+1:02d}'
+    add('Status', q_, 'NPN', f'BC847B ({ch})', 'BC847B-DIO', {1: f'LED_{ch}_BASE', 2: GND, 3: f'LED_{ch}_C'}, pos=(60 + 70*k, 130))
+    r('Status', f'R9{k+1:02d}', '4k7', 'S72', f'LED_{ch}_GPIO', f'LED_{ch}_BASE')
+    r('Status', f'R9{k+4:02d}', '100k', 'S73', f'LED_{ch}_BASE', GND)
+    r('Status', f'R9{k+7:02d}', '2k', 'S51', f'LED_{ch}_C', f'LED_{ch}_K', f'{ch} channel current limit: 12 V supply')
 
 # A power flag documents the external/regulator source on each independently fused power net.
 for k, net in enumerate([GND, '+24V_RAW', V24, '+24V_PTC', '+24V_PUMP', '+24V_LED', '+24V_AUX', V12, V3, 'VBAT'], 1):
@@ -537,12 +556,13 @@ def build_bom():
         else:
             b = BUY[src]; n = buy_units(src, need)
             buy_rows.append(dict(shop=b['shop'], mpn=src, sku=b['sku'], needed=need, buy=n, unit='шт.',
-                                 price_unit=b['price'], line=float(Decimal(str(b['price'])) * n), stock=b['stock'], url=b['url'],
-                                 price_date=b['price_date'], refs=refs, accessory_count=0, min_qty=b['min_qty'], multiple=b['multiple']))
+                                 price_unit=b['price'], line=0.0 if b['price'] is None else float(Decimal(str(b['price'])) * n), stock=b['stock'], url=b['url'],
+                                 price_date=b['price_date'], refs=refs, accessory_count=0, min_qty=b['min_qty'], multiple=b['multiple'],
+                                 unpriced=b['price'] is None))
     for key, n in accessories.items():
         b = BUY[key]; buy_rows.append(dict(shop=b['shop'], mpn=key, sku=b['sku'], needed=n, buy=n, unit='шт.', price_unit=b['price'],
                                            line=float(Decimal(str(b['price'])) * n), stock=b['stock'], url=b['url'], price_date=b['price_date'],
-                                           refs=[], accessory_count=n, min_qty=1, multiple=1))
+                                           refs=[], accessory_count=n, min_qty=1, multiple=1, unpriced=False))
     buy_rows.sort(key=lambda x: (x['shop'], x['mpn']))
     return stock_rows, buy_rows
 
@@ -575,20 +595,23 @@ def main():
 
     stock_rows, buy_rows = build_bom()
     totals = defaultdict(Decimal)
-    for row in buy_rows: totals[row['shop']] += Decimal(str(row['line']))
+    for row in buy_rows:
+        if not row['unpriced']: totals[row['shop']] += Decimal(str(row['line']))
     shipping = sum(SHIPPING[s] for s in totals)
+    unpriced = [x['mpn'] for x in buy_rows if x['unpriced']]
     summary = dict(electrical_components=sum(counts.values()), testpads=sum(1 for p in parts if p['symbol'] == 'TP'), accessories=accessories,
                    stock_rows=len(stock_rows), stock_pieces=sum(x['needed'] for x in stock_rows), buy_rows=len(buy_rows),
                    buy_pieces=sum(x['buy'] for x in buy_rows), shop_totals={k: str(v) for k, v in totals.items()},
                    parts_EUR=str(sum(totals.values())), shipping_EUR=str(shipping), total_EUR=str(sum(totals.values()) + shipping),
+                   unpriced_items=unpriced, unpriced_allowance_EUR='0.50',
                    price_basis='Catalogue snapshot 2026-10-23 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order.')
     (HERE/'BOM_allocated.json').write_text(json.dumps(dict(stock=stock_rows, buy=buy_rows, summary=summary), ensure_ascii=False, indent=2) + '\n')
     with (HERE/'BOM_allocated.csv').open('w', newline='', encoding='utf-8-sig') as f:
         w = csv.writer(f, lineterminator='\n')
         w.writerow(['Source', 'Shop', 'MPN_or_shop_SKU', 'Fitted', 'Buy_pieces', 'Price_per_piece_EUR_VAT', 'Line_EUR_VAT', 'References', 'Stock_id', 'Stock_left', 'URL', 'Price_date', 'Notes'])
         for x in buy_rows:
-            w.writerow(['buy', x['shop'], x['mpn'], x['needed'], x['buy'], x['price_unit'], f"{x['line']:.2f}", ' '.join(x['refs']), '', '', x['url'], x['price_date'],
-                        f"минимум {x['min_qty']}, кратность {x['multiple']}; наличие в каталоге: {str(x['stock'])[:24]}"])
+            w.writerow(['buy', x['shop'], x['mpn'], x['needed'], x['buy'], '' if x['unpriced'] else x['price_unit'], '' if x['unpriced'] else f"{x['line']:.2f}", ' '.join(x['refs']), '', '', x['url'], x['price_date'],
+                        ('нет в снимке каталога и на складе: цена не известна, ориентир не выше 0,50 € (оценка); магазин выбрать из разрешённых' if x['unpriced'] else f"минимум {x['min_qty']}, кратность {x['multiple']}; наличие в каталоге: {str(x['stock'])[:24]}")])
         for x in stock_rows:
             w.writerow(['stock', 'Склад', x['mpn'], x['needed'], 0, 0, '0.00', ' '.join(x['refs']), x['id'], x['stock_left'], '', '2026-10-24', f"{x['name']}; {x['value']}; {x['package']}"])
     (HERE/'review/BOM_summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n')

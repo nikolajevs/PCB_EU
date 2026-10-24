@@ -76,7 +76,7 @@ def main():
     check('No one-pin orphan nets', not one_pin)
     nc = sorted(f'{x["ref"]}.{k}' for x in spec['parts'] for k, v in x['nets'].items() if v is None)
     expected_nc = {'U101.2', 'U102.3', 'U301.7', 'U501.8', 'J411.3', 'J421.3', 'J301.CD1', 'J301.CD2'} | \
-        {f'U202.{i}' for i in (4, 5, 14, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29, 32)}
+        {f'U202.{i}' for i in (4, 5, 14, 17, 18, 19, 20, 21, 22, 23, 24, 29, 32)}
     check('Intentional NC pins are exactly the documented ones (PG, ALERT, MFP, LM3429 pin 8, fan tach, SD detect, unused ESP32 pins)', set(nc) == expected_nc)
     check('Every part with a purchasable source has a footprint', all(x['footprint'] for x in spec['parts'] if x['src']))
     check('No passive SMD footprint is smaller than 0603', all(not re.search(r'_(0201|0402)_', x['footprint']) for x in spec['parts'] if x['symbol'] in ['R', 'C', 'CP', 'L']))
@@ -130,7 +130,7 @@ def main():
     rip33 = 3.3 * (1 - 3.3 / 12) / (2.2e-6 * 900e3)
     check(f'ST1S10 with 2.2 uH: ripple {rip33:.2f} A (datasheet window 0.6-1.2 A at 3 A rating), peak at 1 A {1 + rip33 / 2:.2f} A < Isat 2.7 A, LC corner {flc / 1e3:.0f} kHz (datasheet design 18.7 kHz)',
           two('L201', 'LOGIC_SW', '+3V3') and p['L201']['mpn'] == 'SRN2512-2R2M' and rip33 <= 1.25 and 1 + rip33 / 2 < 2.7 and 15e3 < flc < 25e3)
-    gpio = {6: 'FAN1_TACH', 7: 'FAN2_TACH', 8: 'PTC_GPIO', 9: 'PUMP_GPIO', 10: 'LED_PWM_GPIO', 11: 'FAN1_GPIO', 12: 'FAN2_GPIO', 13: 'FLOAT_GPIO', 16: 'SD_CS', 25: 'ESP_BOOT', 30: 'SD_SCK_GPIO', 31: 'SD_MISO',
+    gpio = {6: 'FAN1_TACH', 7: 'FAN2_TACH', 8: 'PTC_GPIO', 9: 'PUMP_GPIO', 10: 'LED_PWM_GPIO', 11: 'FAN1_GPIO', 12: 'FAN2_GPIO', 13: 'FLOAT_GPIO', 16: 'SD_CS', 25: 'ESP_BOOT', 26: 'LED_R_GPIO', 27: 'LED_G_GPIO', 28: 'LED_B_GPIO', 30: 'SD_SCK_GPIO', 31: 'SD_MISO',
             33: 'I2C_SDA', 34: 'UART_RX', 35: 'UART_TX', 36: 'I2C_SCL', 37: 'SD_MOSI_GPIO'}
     check('ESP32 GPIO map is the EU-0.1 map; all four ground contacts, 3V3 and EN are consistent; GPIO34/35 have 10k pull-ups and no connector signal (tach removed)',
           pins('U202', dict(gpio, **{'1': 'GND', '15': 'GND', '38': 'GND', '39': 'GND', '2': '+3V3', '3': 'ESP_EN'})) and p['U202']['mpn'] == 'ESP32-WROOM-32E-N4')
@@ -194,6 +194,20 @@ def main():
     tmin = 2 * iled * 46 * 47e-6 / 24 ** 2
     check(f'Minimum LM3429 nDIM pulse {tmin * 1e6:.1f} us (2 I Vo L / Vin^2 with 47 uH; EU-0.1 with 20 uH: 3.7 us) is below the firmware minimum of 10 us (3 counts at 1 kHz / 8 bit = 11.7 us)', tmin < 10e-6)
 
+    # ---- RGB status LED (common anode on +12V, three NPN low-side switches)
+    vf = {'R': 2.0, 'G': 3.1, 'B': 3.1}
+    ch_ok = True; cur = {}
+    for ch, (qq, rb, rpd, rl) in {'R': ('Q901', 'R901', 'R904', 'R907'), 'G': ('Q902', 'R902', 'R905', 'R908'), 'B': ('Q903', 'R903', 'R906', 'R909')}.items():
+        i_led = (12 - vf[ch] - 0.15) / val(rl); cur[ch] = i_led
+        ch_ok &= (pins(qq, {1: f'LED_{ch}_BASE', 2: 'GND', 3: f'LED_{ch}_C'}) and p[qq]['mpn'] == 'BC847B-DIO' and two(rb, f'LED_{ch}_GPIO', f'LED_{ch}_BASE') and val(rb) == 4700
+                  and two(rpd, f'LED_{ch}_BASE', 'GND') and val(rpd) == 100e3 and two(rl, f'LED_{ch}_C', f'LED_{ch}_K')
+                  and 3e-3 <= i_led <= 8e-3 and (12 - vf[ch]) ** 2 / val(rl) <= 0.125 and (3.3 - 0.7) / val(rb) * 100 >= 2 * i_led)
+    check(f'RGB status LED D901 (common anode on +12V, lead order R/A/G/B): per channel GPIO -> 4k7 -> BC847B base, 100k pull-down, collector -> 2k -> cathode; '
+          f'{cur["R"] * 1e3:.1f}/{cur["G"] * 1e3:.1f}/{cur["B"] * 1e3:.1f} mA R/G/B (3-8 mA, below the 20 mA rating), base current saturates the NPN (hFE >= 100), resistor <= 0.125 W',
+          ch_ok and pins('D901', {1: 'LED_R_K', 2: '+12V', 3: 'LED_G_K', 4: 'LED_B_K'}) and p['D901']['mpn'] == 'RGB-5MM-CA' and 12 < 45)
+    check('RGB channels sit on GPIO4 / GPIO16 / GPIO17 (module pins 26/27/28: not strapping pins, not used by flash or PSRAM on WROOM-32E-N4); each GPIO net reaches only the ESP32 and its base resistor',
+          pins('U202', {26: 'LED_R_GPIO', 27: 'LED_G_GPIO', 28: 'LED_B_GPIO'}) and all(len(real(f'LED_{c_}_GPIO')) == 2 for c_ in 'RGB') and all(len(real(f'LED_{c_}_K')) == 2 for c_ in 'RGB'))
+
     # ---- loads
     check('PTC driver defaults off: separate NPN and PNP stages, PNP emitter on +12V, 12 V gate drive of the stock BSC146N10LS5, J701 return = drain',
           pins('Q701', {1: 'PTC_NPN_B', 2: 'GND', 3: 'PTC_NPN_C'}) and pins('Q702', {1: 'PTC_PNP_B', 2: '+12V', 3: 'PTC_DRV'}) and pins('Q703', {1: 'GND', 2: 'GND', 3: 'GND', 4: 'PTC_GATE', 5: 'PTC_DRAIN'})
@@ -222,16 +236,19 @@ def main():
     allocated = Counter({k: v for k, v in used.items() if not (k[1:].isdigit() and k[0] == 'S')}) + Counter(spec['accessories'])
     buy = {r_['mpn']: r_ for r_ in bom['buy']}
     check('Every purchased MPN is bought at least in the fitted quantity, respecting the shop minimum and multiple, from an allowed shop, with URL and price date',
-          set(allocated) == set(buy) and all(buy[k]['buy'] >= v and buy[k]['buy'] >= buy[k]['min_qty'] and buy[k]['buy'] % buy[k]['multiple'] == 0 and buy[k]['shop'] in ('Salvats', 'Electrobase', 'Lemona')
-                                           and buy[k]['url'].startswith('https://') and buy[k]['price_date'] for k, v in allocated.items()))
-    check('Purchase prices equal the frozen catalogue snapshot (procurement_lite.json)', all(abs(buy[k]['price_unit'] - buy_snapshot[k]['price']) < 1e-9 for k in buy))
+          set(allocated) == set(buy) and all(buy[k]['buy'] >= v and buy[k]['buy'] >= buy[k]['min_qty'] and buy[k]['buy'] % buy[k]['multiple'] == 0 and (buy[k]['unpriced'] or (buy[k]['shop'] in ('Salvats', 'Electrobase', 'Lemona')
+                                           and buy[k]['url'].startswith('https://') and buy[k]['price_date'])) for k, v in allocated.items()))
+    unpriced = sorted(k for k in buy if buy[k]['unpriced'])
+    check(f'Purchase prices equal the frozen catalogue snapshot (procurement_lite.json); the only line without a price is the RGB LED, which is in neither the stock nor the catalogue ({", ".join(unpriced)})',
+          all(abs(buy[k]['price_unit'] - buy_snapshot[k]['price']) < 1e-9 for k in buy if not buy[k]['unpriced']) and unpriced == ['RGB-5MM-CA'] and buy_snapshot['RGB-5MM-CA']['price'] is None and buy['RGB-5MM-CA']['line'] == 0)
     summary = bom['summary']
-    total = Decimal(summary['total_EUR'])
-    check(f'Purchases + delivery {total} EUR stay under the 100 EUR ceiling and the ~80 EUR target; cheaper than the ~81 EUR of EU-0.1 (81.17 EUR by BOM lines)', total <= Decimal('80.00') and total < Decimal('81.17'))
+    total = Decimal(summary['total_EUR']); allowance = Decimal(summary['unpriced_allowance_EUR'])
+    check(f'Purchases + delivery {total} EUR (+ {allowance} EUR estimate for the unpriced RGB LED) stay under the 100 EUR ceiling and the ~80 EUR target; cheaper than the ~81 EUR of EU-0.1 (81.17 EUR by BOM lines)',
+          total + allowance <= Decimal('80.00') and total + allowance < Decimal('81.17'))
     out = ['EU-LITE schematic connectivity review (from design.json, no KiCad)', f'Revision: {spec["revision"]}',
            f'PASS: {len(passed)} checks', f'Fitted electrical components: {sum(x["in_bom"] for x in spec["parts"])}',
            f'Stock pieces: {summary["stock_pieces"]} in {summary["stock_rows"]} rows; purchased pieces: {summary["buy_pieces"]} in {summary["buy_rows"]} rows',
-           f'Purchases incl. VAT {summary["parts_EUR"]} EUR + delivery {summary["shipping_EUR"]} EUR = {total} EUR (catalogue snapshot 2026-10-23)',
+           f'Purchases incl. VAT {summary["parts_EUR"]} EUR + delivery {summary["shipping_EUR"]} EUR = {total} EUR (catalogue snapshot 2026-10-23), without the RGB LED (no price: estimate up to {allowance} EUR)',
            f'Stock lines used up completely (no spare, a mounting error means a repurchase): {", ".join(zero_spare)}', '']
     out += [f'PASS {i+1:02d} | {label}' for i, label in enumerate(passed)]
     out += ['', 'Limitations: these checks establish pin/net, calculated-value and BOM consistency of the specification, not an ERC of the written .kicad_sch files',

@@ -414,5 +414,18 @@
   "multiple": 1,
   "pack": 1,
   "source": "EU-0.1 BOM"
+ },
+ "RGB-5MM-CA": {
+  "shop": "не выбран",
+  "sku": "",
+  "title": "RGB LED 5 mm diffused, common anode, 4 leads (R, A, G, B)",
+  "price": null,
+  "stock": "",
+  "url": "",
+  "price_date": "",
+  "min_qty": 1,
+  "multiple": 1,
+  "pack": 1,
+  "source": "not in catalogue"
  }
 }

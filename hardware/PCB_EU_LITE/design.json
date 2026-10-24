@@ -914,9 +914,9 @@
         "23": null,
         "24": null,
         "25": "ESP_BOOT",
-        "26": null,
-        "27": null,
-        "28": null,
+        "26": "LED_R_GPIO",
+        "27": "LED_G_GPIO",
+        "28": "LED_B_GPIO",
         "29": null,
         "30": "SD_SCK_GPIO",
         "31": "SD_MISO",
@@ -930,7 +930,7 @@
         "39": "GND"
       },
       "footprint": "EU_Parts:ESP32-WROOM-32E_NoVias",
-      "note": "Antenna keepout and GND pad 39 mandatory; pins 6/7 (GPIO34/35, former tachometers) only pulled up",
+      "note": "Antenna keepout and GND pad 39 mandatory; pins 6/7 (GPIO34/35, former tachometers) only pulled up; pins 26/27/28 (GPIO4/16/17) drive the RGB status LED",
       "position": [
         284.48,
         68.58
@@ -2829,6 +2829,258 @@
       "note": "",
       "position": [
         308.61,
+        124.46
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "D901",
+      "symbol": "LED_RGB_CA",
+      "value": "RGB 5mm CA",
+      "mpn": "RGB-5MM-CA",
+      "src": "RGB-5MM-CA",
+      "nets": {
+        "1": "LED_R_K",
+        "2": "+12V",
+        "3": "LED_G_K",
+        "4": "LED_B_K"
+      },
+      "footprint": "LED_THT:LED_D5.0mm-4_RGB",
+      "note": "Not in stock and not in the catalogue snapshot: buy a 5 mm diffused common-anode RGB LED (20 mA/channel max); check lead order and the color Vf (red ~2.0 V, green/blue ~3.0-3.3 V)",
+      "position": [
+        119.38,
+        69.85
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "Q901",
+      "symbol": "NPN",
+      "value": "BC847B (R)",
+      "mpn": "BC847B-DIO",
+      "src": "BC847B-DIO",
+      "nets": {
+        "1": "LED_R_BASE",
+        "2": "GND",
+        "3": "LED_R_C"
+      },
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "note": "",
+      "position": [
+        59.69,
+        129.54
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R901",
+      "symbol": "R",
+      "value": "4k7",
+      "mpn": "Резистор SMD 4,7 кОм, ±5%",
+      "src": "S72",
+      "nets": {
+        "1": "LED_R_GPIO",
+        "2": "LED_R_BASE"
+      },
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "note": "",
+      "position": [
+        45.72,
+        105.41
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R904",
+      "symbol": "R",
+      "value": "100k",
+      "mpn": "Резистор SMD 100 кОм, ±5%",
+      "src": "S73",
+      "nets": {
+        "1": "LED_R_BASE",
+        "2": "GND"
+      },
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "note": "",
+      "position": [
+        106.68,
+        105.41
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R907",
+      "symbol": "R",
+      "value": "2k",
+      "mpn": "Резистор SMD 2 кОм, ±5%",
+      "src": "S51",
+      "nets": {
+        "1": "LED_R_C",
+        "2": "LED_R_K"
+      },
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "note": "R channel current limit: 12 V supply",
+      "position": [
+        173.99,
+        105.41
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "Q902",
+      "symbol": "NPN",
+      "value": "BC847B (G)",
+      "mpn": "BC847B-DIO",
+      "src": "BC847B-DIO",
+      "nets": {
+        "1": "LED_G_BASE",
+        "2": "GND",
+        "3": "LED_G_C"
+      },
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "note": "",
+      "position": [
+        129.54,
+        129.54
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R902",
+      "symbol": "R",
+      "value": "4k7",
+      "mpn": "Резистор SMD 4,7 кОм, ±5%",
+      "src": "S72",
+      "nets": {
+        "1": "LED_G_GPIO",
+        "2": "LED_G_BASE"
+      },
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "note": "",
+      "position": [
+        241.3,
+        105.41
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R905",
+      "symbol": "R",
+      "value": "100k",
+      "mpn": "Резистор SMD 100 кОм, ±5%",
+      "src": "S73",
+      "nets": {
+        "1": "LED_G_BASE",
+        "2": "GND"
+      },
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "note": "",
+      "position": [
+        308.61,
+        105.41
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R908",
+      "symbol": "R",
+      "value": "2k",
+      "mpn": "Резистор SMD 2 кОм, ±5%",
+      "src": "S51",
+      "nets": {
+        "1": "LED_G_C",
+        "2": "LED_G_K"
+      },
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "note": "G channel current limit: 12 V supply",
+      "position": [
+        374.65,
+        105.41
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "Q903",
+      "symbol": "NPN",
+      "value": "BC847B (B)",
+      "mpn": "BC847B-DIO",
+      "src": "BC847B-DIO",
+      "nets": {
+        "1": "LED_B_BASE",
+        "2": "GND",
+        "3": "LED_B_C"
+      },
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "note": "",
+      "position": [
+        199.39,
+        129.54
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R903",
+      "symbol": "R",
+      "value": "4k7",
+      "mpn": "Резистор SMD 4,7 кОм, ±5%",
+      "src": "S72",
+      "nets": {
+        "1": "LED_B_GPIO",
+        "2": "LED_B_BASE"
+      },
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "note": "",
+      "position": [
+        45.72,
+        124.46
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R906",
+      "symbol": "R",
+      "value": "100k",
+      "mpn": "Резистор SMD 100 кОм, ±5%",
+      "src": "S73",
+      "nets": {
+        "1": "LED_B_BASE",
+        "2": "GND"
+      },
+      "footprint": "Resistor_SMD:R_0805_2012Metric",
+      "note": "",
+      "position": [
+        106.68,
+        124.46
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "Status",
+      "ref": "R909",
+      "symbol": "R",
+      "value": "2k",
+      "mpn": "Резистор SMD 2 кОм, ±5%",
+      "src": "S51",
+      "nets": {
+        "1": "LED_B_C",
+        "2": "LED_B_K"
+      },
+      "footprint": "Resistor_SMD:R_1206_3216Metric",
+      "note": "B channel current limit: 12 V supply",
+      "position": [
+        173.99,
         124.46
       ],
       "in_bom": true

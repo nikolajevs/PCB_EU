@@ -307,14 +307,17 @@
       "name": "Резистор SMD",
       "value": "2 кОм, ±5%",
       "package": "1206 (3216)",
-      "needed": 2,
+      "needed": 5,
       "buy": 0,
-      "on_hand": 2,
+      "on_hand": 5,
       "stock_total": 6,
-      "stock_left": 4,
+      "stock_left": 1,
       "refs": [
         "R703",
-        "R706"
+        "R706",
+        "R907",
+        "R908",
+        "R909"
       ],
       "line": 0.0
     },
@@ -558,15 +561,37 @@
       "name": "Резистор SMD",
       "value": "4,7 кОм, ±5%",
       "package": "0805 (2012)",
+      "needed": 6,
+      "buy": 0,
+      "on_hand": 6,
+      "stock_total": 85,
+      "stock_left": 79,
+      "refs": [
+        "R308",
+        "R309",
+        "R702",
+        "R901",
+        "R902",
+        "R903"
+      ],
+      "line": 0.0
+    },
+    {
+      "shop": "Склад",
+      "id": 73,
+      "mpn": "Резистор SMD 100 кОм, ±5%",
+      "name": "Резистор SMD",
+      "value": "100 кОм, ±5%",
+      "package": "0805 (2012)",
       "needed": 3,
       "buy": 0,
       "on_hand": 3,
       "stock_total": 85,
       "stock_left": 82,
       "refs": [
-        "R308",
-        "R309",
-        "R702"
+        "R904",
+        "R905",
+        "R906"
       ],
       "line": 0.0
     },
@@ -716,7 +741,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -737,7 +763,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 5,
-      "multiple": 5
+      "multiple": 5,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -757,7 +784,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -776,7 +804,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -795,7 +824,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -814,7 +844,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -833,7 +864,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -852,7 +884,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Electrobase",
@@ -871,7 +904,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -890,7 +924,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -910,7 +945,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -929,7 +965,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -948,7 +985,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -967,7 +1005,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -984,7 +1023,8 @@
       "refs": [],
       "accessory_count": 1,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1003,26 +1043,31 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
       "mpn": "BC847B-DIO",
       "sku": "BC847B-DIO",
-      "needed": 1,
-      "buy": 1,
+      "needed": 4,
+      "buy": 4,
       "unit": "шт.",
       "price_unit": 0.06,
-      "line": 0.06,
+      "line": 0.24,
       "stock": "336",
       "url": "https://www.salvats.lv/lv/npn-tranzistori-smd/bc847b1f-smd-tranzistors-npn-50v-01a-300mhz-sot23",
       "price_date": "2026-10-23",
       "refs": [
-        "Q701"
+        "Q701",
+        "Q901",
+        "Q902",
+        "Q903"
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1041,7 +1086,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1060,7 +1106,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1079,7 +1126,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1098,7 +1146,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1117,7 +1166,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1136,7 +1186,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1155,7 +1206,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1174,7 +1226,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1193,7 +1246,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1212,7 +1266,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1231,7 +1286,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1252,7 +1308,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1272,7 +1329,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1291,7 +1349,8 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
     },
     {
       "shop": "Salvats",
@@ -1310,26 +1369,51 @@
       ],
       "accessory_count": 0,
       "min_qty": 1,
-      "multiple": 1
+      "multiple": 1,
+      "unpriced": false
+    },
+    {
+      "shop": "не выбран",
+      "mpn": "RGB-5MM-CA",
+      "sku": "",
+      "needed": 1,
+      "buy": 1,
+      "unit": "шт.",
+      "price_unit": null,
+      "line": 0.0,
+      "stock": "",
+      "url": "",
+      "price_date": "",
+      "refs": [
+        "D901"
+      ],
+      "accessory_count": 0,
+      "min_qty": 1,
+      "multiple": 1,
+      "unpriced": true
     }
   ],
   "summary": {
-    "electrical_components": 143,
+    "electrical_components": 156,
     "testpads": 5,
     "accessories": {
       "BAT-CR2032/P": 1
     },
-    "stock_rows": 37,
-    "stock_pieces": 105,
-    "buy_rows": 32,
-    "buy_pieces": 41,
+    "stock_rows": 38,
+    "stock_pieces": 114,
+    "buy_rows": 33,
+    "buy_pieces": 45,
     "shop_totals": {
       "Electrobase": "19.21",
-      "Salvats": "9.42"
+      "Salvats": "9.60"
     },
-    "parts_EUR": "28.63",
+    "parts_EUR": "28.81",
     "shipping_EUR": "5.87",
-    "total_EUR": "34.50",
+    "total_EUR": "34.68",
+    "unpriced_items": [
+      "RGB-5MM-CA"
+    ],
+    "unpriced_allowance_EUR": "0.50",
     "price_basis": "Catalogue snapshot 2026-10-23 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
   }
 }

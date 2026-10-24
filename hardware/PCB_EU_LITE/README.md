@@ -1,12 +1,14 @@
 # EU-LITE — дешёвый аналог EU-0.1 из деталей со склада
 
-**Состояние на 24.10.2026: схема и BOM готовы к проверке в KiCad; PCB нет.** Закупка по каталогу цен: **34.50 €** с НДС и доставкой (28.63 € детали + 5.87 € доставка) против 81,17 € у [EU-0.1](../PCB_EU/README.md#закупка) по строкам её BOM. Плата EU-0.1 и её файлы не менялись.
+**Состояние на 24.10.2026: схема и BOM готовы к проверке в KiCad; PCB нет.** Закупка по каталогу цен: **34,68 €** с НДС и доставкой (28,81 € детали + 5,87 € доставка) плюс RGB-светодиод, которого нет ни на складе, ни в каталоге (оценка до 0,50 €) против 81,17 € у [EU-0.1](../PCB_EU/README.md#закупка) по строкам её BOM. Плата EU-0.1 и её файлы не менялись.
 
 Проект по образцу [cheap-version](https://github.com/nikolajevs/ai/tree/7fa9410ddb7977c46e313506acb037693ad571e1/hardware/cheap-version) (дешёвая PCB_V1 из того же склада): всё, что есть на складе владельца ([stock/sklad-2026-10-24.csv](stock/sklad-2026-10-24.csv)), берётся оттуда; недостающее — из [снимка каталога цен Salvats / Electrobase от 23.10.2026](procurement_lite.json). Отличия от EU-0.1, расчёты и открытые вопросы — в [DESIGN.md](DESIGN.md).
 
 ## Что сохранено и что убрано
 
-Сохранено: вход 24 В с защитой от переполюсовки и предохранителями, ESP32-WROOM-32E-N4 (те же GPIO), 12 В и 3,3 В, **один** LED-канал LM3429 (панель ≈1,117 А), PTC 100 Вт, помпа 24 В, два вентилятора 12 В с PWM, измерение мощности (INA238 вместо INA226), RTC MCP7940N с CR2032, microSD, SHT4x и поплавок.
+Сохранено: вход 24 В с защитой от переполюсовки и предохранителями, ESP32-WROOM-32E-N4 (те же GPIO), 12 В и 3,3 В, **один** LED-канал LM3429 (панель ≈1,117 А), **RGB-светодиод статуса** (GPIO4/16/17), PTC 100 Вт, помпа 24 В, два вентилятора 12 В с PWM, измерение мощности (INA238 вместо INA226), RTC MCP7940N с CR2032, microSD, SHT4x и поплавок.
+
+Добавлено по просьбе владельца 24.10.2026: RGB-светодиод для индикации статуса и процессов (лист «Status»).
 
 Убрано по решению владельца 24.10.2026: второй LED-канал (линейки) и тахометры вентиляторов. Дополнительно, для цены: аппаратная блокировка LED по UVLO/PGOOD (LM2903 + BAT54), USBLC6 на входе поплавка, ESD-диоды вентиляторов и радиатор с изоляцией. Последствия — в [DESIGN.md](DESIGN.md#отличия-от-eu-01) и [DESIGN.md, «Открытые вопросы»](DESIGN.md#открытые-вопросы).
 
@@ -15,12 +17,12 @@
 | Файл | Назначение |
 |---|---|
 | [DESIGN.md](DESIGN.md) | Решения, отличия от EU-0.1, расчёты, склад без запаса, открытые вопросы |
-| [PCB_EU_LITE.kicad_pro](PCB_EU_LITE.kicad_pro), [PCB_EU_LITE.kicad_sch](PCB_EU_LITE.kicad_sch) и 7 листов | Схема (KiCad 10, генерируется `tools/generate.py`) |
+| [PCB_EU_LITE.kicad_pro](PCB_EU_LITE.kicad_pro), [PCB_EU_LITE.kicad_sch](PCB_EU_LITE.kicad_sch) и 8 листов | Схема (KiCad 10, генерируется `tools/generate.py`) |
 | [BOM_allocated.csv](BOM_allocated.csv), [BOM_allocated.json](BOM_allocated.json) | Склад (`stock`, с остатком после сборки) и докупка (`buy`, с URL и датой цены) |
 | [procurement_lite.json](procurement_lite.json) | Снимок каталога цен для 31 докупаемого артикула |
 | [stock/sklad-2026-10-24.csv](stock/sklad-2026-10-24.csv) | Склад владельца (копия присланной выгрузки) |
 | [design.json](design.json) | Полная спецификация выводов, цепей и компонентов |
-| [review/connectivity.txt](review/connectivity.txt) | 54 проверки цепей, расчётов и закупки |
+| [review/connectivity.txt](review/connectivity.txt) | 56 проверок цепей, расчётов и закупки |
 | [review/Bench_checklist.md](review/Bench_checklist.md) | Что измерить при первом включении |
 | [libraries/](libraries) | Символы проекта, две посадки cheap-version (PowerDI5, DTMSS-27) и их 3D |
 
@@ -28,8 +30,7 @@
 
 ## Закупка
 
-
-**Electrobase** — 19.21 € с НДС
+**Electrobase** — 19,21 € с НДС
 
 | Деталь (артикул) | Шт. к покупке | Цена, € | Сумма, € | Позиции на плате |
 |---|---:|---:|---:|---|
@@ -43,7 +44,7 @@
 | [MEM2061-01-188-00-A](https://electrobase.lv/katalogs/savienojumi-kartem/connector-cards-microsd-push-push-smt-gold-flash-pin-8-0) | 1 | 1.74 | 1.74 | J301 |
 | [SMBJ26A-E3/52](https://electrobase.lv/katalogs/diodes-transil-smd-vienvirziena/diode-tvs-600w-289319v-143a-unidirectional-5-smbj) | 1 | 0.50 | 0.50 | D101 |
 
-**Salvats** — 9.42 € с НДС
+**Salvats** — 9,60 € с НДС
 
 | Деталь (артикул) | Шт. к покупке | Цена, € | Сумма, € | Позиции на плате |
 |---|---:|---:|---:|---|
@@ -54,7 +55,7 @@
 | [3413.0330.11](https://www.salvats.lv/lv/drosinataji-smd-1206-32x16x06mm/drosinatajs-smd-1206-15a-63v-fast) | 1 | 0.75 | 0.75 | F101 |
 | [BAT-CR2032/P](https://www.salvats.lv/lv/litija-baterijas/cr2032-litija-baterija-30v-o20x32mm-panasonic-442g) | 1 | 0.75 | 0.75 | комплектующее (CR2032 для BT301) |
 | [BC-2001](https://www.salvats.lv/lv/baterijas-turetaji-1/bateriju-turetajs-metaliska-cemme-cr2032-1-baterija) | 1 | 0.33 | 0.33 | BT301 |
-| [BC847B-DIO](https://www.salvats.lv/lv/npn-tranzistori-smd/bc847b1f-smd-tranzistors-npn-50v-01a-300mhz-sot23) | 1 | 0.06 | 0.06 | Q701 |
+| [BC847B-DIO](https://www.salvats.lv/lv/npn-tranzistori-smd/bc847b1f-smd-tranzistors-npn-50v-01a-300mhz-sot23) | 4 | 0.06 | 0.24 | Q701 Q901 Q902 Q903 |
 | [BC857B](https://www.salvats.lv/lv/pnp-tranzistori-smd/bc857b3f-smd-tranzistors-pnp-50v-01a-hfe220475-035w-200mhz-sot23) | 1 | 0.08 | 0.08 | Q702 |
 | [BZV55C12](https://www.salvats.lv/lv/stabilitroni-smd-bzv55/12v-stabilitrons-smd-bzv55-5-05w-minimelf) | 1 | 0.13 | 0.13 | D103 |
 | [C1206C102JCGACTU](https://www.salvats.lv/lv/kondensatori-keramiskie-smd-1206-1/1nf-1206-c0g-500v-5-smd-kondensators-1206) | 1 | 0.25 | 0.25 | C506 |
@@ -71,9 +72,15 @@
 | [USBLC6-2SC6](https://www.salvats.lv/lv/u/usblc6-2sc6-smd-mikroshema-esd-protection-sot23-6) | 1 | 0.67 | 0.67 | U401 |
 | [ZL201-10G](https://www.salvats.lv/lv/listes-un-nuju-ligzdas/254mm-uz-pcb-10pin-stekers-1) | 1 | 0.16 | 0.16 | J201 |
 
-Со склада идёт 105 шт. в 37 позициях (в основном пассивные, оба понижающих преобразователя, ключи, диод и дроссель LED, INA238, IRL2505, клеммы, разъёмы, кнопки). Склад без запаса: две BSC146N10LS5, INA238, IRL2505, дроссель DTMSS-27, электролиты EEVFK1J471M и EEEFT1E821AP. Полный список с остатками — [BOM_allocated.csv](BOM_allocated.csv).
+**Без цены** — нет ни на складе, ни в снимке каталога
 
-Цены и наличие — из снимка каталога от 23.10.2026 (C1206C100J5GACTU — из BOM EU-0.1 от 23.10.2026, в снимке его нет); доставка 2,99 € (Electrobase) + 2,88 € (Salvats) взята из README EU-0.1 и не перепроверялась. Это не оферта и не заказ. Закупка только в магазинах разрешённого списка (решение 23.10.2026): Semikom в снимке нет, Lemona не использована. AO3422 продаётся пачками по 5: два лишних.
+| Деталь | Шт. | Оценка, € | Позиции на плате |
+|---|---:|---:|---|
+| RGB-светодиод 5 мм, диффузный, **общий анод** (выводы R, анод, G, B; ток до 20 мА на цвет) | 1 | ≤ 0,50 (оценка, не данные каталога) | D901 |
+
+Со склада идёт 114 шт. в 38 позициях (в основном пассивные, оба понижающих преобразователя, ключи, диод и дроссель LED, INA238, IRL2505, клеммы, разъёмы, кнопки). Склад без запаса: две BSC146N10LS5, INA238, IRL2505, дроссель DTMSS-27, электролиты EEVFK1J471M и EEEFT1E821AP. Полный список с остатками — [BOM_allocated.csv](BOM_allocated.csv).
+
+RGB-светодиод покупается в Salvats или Electrobase вместе с остальным (наличие и выводы проверить по карточке при заказе); итог 34,68 € его не включает. Цены и наличие — из снимка каталога от 23.10.2026 (C1206C100J5GACTU — из BOM EU-0.1 от 23.10.2026, в снимке его нет); доставка 2,99 € (Electrobase) + 2,88 € (Salvats) взята из README EU-0.1 и не перепроверялась. Это не оферта и не заказ. Закупка только в магазинах разрешённого списка (решение 23.10.2026): Semikom в снимке нет, Lemona не использована. AO3422 продаётся пачками по 5: два лишних.
 
 ## Проверки
 
@@ -81,10 +88,10 @@
 
 | Проверка | Результат |
 |---|---|
-| `python hardware/PCB_EU_LITE/tools/generate.py` | схемы, `design.json`, BOM; 143 деталей, 5 контрольных площадок |
-| `python hardware/PCB_EU_LITE/tools/verify.py` | 54 проверки: выводы и цепи каждого блока, расчёт 12 В, 3,3 В, тока LED, OVP, порога ILIM, шунта INA238, покупка и остатки склада |
-| `python hardware/PCB_EU_LITE/tools/test_verify.py` | мутационный тест: 21 намеренный дефект (перепутанные выводы, неверные номиналы, превышение склада, чужой магазин) отвергнут проверкой, неизменённый проект проходит |
-| `python hardware/PCB_EU_LITE/tools/check_schematics.py` | записанные листы разобраны как S-выражения: 414 выводов прослежены до меток цепей и совпадают с `design.json`; UUID уникальны |
+| `python hardware/PCB_EU_LITE/tools/generate.py` | схемы, `design.json`, BOM; 156 деталей, 5 контрольных площадок |
+| `python hardware/PCB_EU_LITE/tools/verify.py` | 56 проверок: выводы и цепи каждого блока, расчёт 12 В, 3,3 В, тока LED, OVP, порога ILIM, шунта INA238, покупка и остатки склада |
+| `python hardware/PCB_EU_LITE/tools/test_verify.py` | мутационный тест: 26 намеренных дефектов (перепутанные выводы, неверные номиналы, превышение склада, чужой магазин) отвергнут проверкой, неизменённый проект проходит |
+| `python hardware/PCB_EU_LITE/tools/check_schematics.py` | записанные листы разобраны как S-выражения: 445 выводов прослежены до меток цепей и совпадают с `design.json`; UUID уникальны |
 
 **Не выполнено:** ERC и открытие схемы в KiCad 10.0.7, любая проверка посадок, разводка, DRC, Gerber, сборка прошивки и испытания на плате. Выводы ST1S14, ST1S10, INA238, BSC146N10LS5 и SBRT15U100SP5 не перечитаны по первичным даташитам: сеть закрыта (см. [DESIGN.md](DESIGN.md#открытые-вопросы)). Результат — спецификация, а не готовая плата.
 
