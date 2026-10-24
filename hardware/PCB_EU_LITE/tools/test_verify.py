@@ -102,12 +102,12 @@ def main():
             spec = json.loads((root/'design.json').read_text(encoding='utf-8')); bom = json.loads((root/'BOM_allocated.json').read_text(encoding='utf-8'))
             mutate(spec, bom)
             (root/'design.json').write_text(json.dumps(spec), encoding='utf-8'); (root/'BOM_allocated.json').write_text(json.dumps(bom), encoding='utf-8')
-            res = subprocess.run([sys.executable, '-I', str(HERE/'tools/verify.py'), '--root', str(root)], capture_output=True, text=True)
+            res = subprocess.run([sys.executable, '-I', '-X', 'utf8', str(HERE/'tools/verify.py'), '--root', str(root)], capture_output=True, text=True, encoding='utf-8')
             rejected = res.returncode != 0 and 'AssertionError' in res.stderr
             ok &= rejected
             why = res.stderr.strip().splitlines()[-1].replace('AssertionError: ', '')[:90] if rejected else ''
             print(('REJECTED ' if rejected else 'MISSED   ') + name + (f'  <- {why}' if why else ''))
-    base = subprocess.run([sys.executable, '-I', str(HERE/'tools/verify.py'), '--output', str(Path(tempfile.gettempdir())/'lite_conn.txt')], capture_output=True, text=True)
+    base = subprocess.run([sys.executable, '-I', '-X', 'utf8', str(HERE/'tools/verify.py'), '--output', str(Path(tempfile.gettempdir())/'lite_conn.txt')], capture_output=True, text=True, encoding='utf-8')
     ok &= base.returncode == 0
     print('Unmodified design:', 'PASS' if base.returncode == 0 else 'FAIL')
     sys.exit(0 if ok else 1)

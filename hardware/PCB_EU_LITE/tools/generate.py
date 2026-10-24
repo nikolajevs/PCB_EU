@@ -574,13 +574,15 @@ def main():
     (HERE/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "EU_LITE") (type "KiCad") (uri "${KIPRJMOD}/libraries/EU_LITE.kicad_sym") (options "") (descr "Project pin-verified symbols")))\n')
     fp = [('EU_Mechanical', '${KIPRJMOD}/../PCB_EU/libraries/EU_Mechanical.pretty'), ('EU_Parts', '${KIPRJMOD}/../PCB_EU/libraries/EU_Parts.pretty'),
           ('LITE_Parts', '${KIPRJMOD}/libraries/LITE_Parts.pretty')]
+    fp.extend((lib.stem, '${KIPRJMOD}/libraries/' + lib.name)
+              for lib in sorted((HERE/'libraries').glob('*.pretty')) if lib.stem != 'LITE_Parts')
     (HERE/'fp-lib-table').write_text('(fp_lib_table (version 7)\n' + '\n'.join(
         f'(lib (name {q(n)}) (type "KiCad") (uri "{u}") (options "") (descr "Project footprints; see README.md and ../PCB_EU/libraries/SOURCES.md"))' for n, u in fp) + ')\n')
     for sh, meta in sheets.items(): (HERE/f'{sh}.kicad_sch').write_text(schematic(sh, meta))
     root = [header(ROOT, 'GrowBox | EU-LITE | schematic review'), '(lib_symbols)']
     root.append(textblk(ROOT, 'title', 'GrowBox controller EU-LITE\nCheaper analogue of EU-0.1 from owner stock / 24 V PSU', 20, 17, 2.5))
     root.append(textblk(ROOT, 'scope', 'SCHEMATIC DRAFT EU-LITE-0.1 | 24 October 2026\nConnection/BOM draft. One LED channel, no fan tachometers, no UVLO comparator.\n'
-                        'No PCB placement, routing or manufacturing release. ERC not run (no KiCad in the generating environment).', 20, 40, 1.6))
+                        'Unrouted PCB placement is a separate artifact. Not a manufacturing release.\nCurrent ERC and placement checks: see README.md.', 20, 40, 1.6))
     for k, (sh, meta) in enumerate(sheets.items()):
         x = 25+185*(k % 2); y = 75+42*(k//2); sid = uid('sheet', sh)
         root.append(f'(sheet (at {x} {y}) (size 155 28) (stroke (width 0.254) (type default)) (fill (color 0 0 0 0)) (uuid {q(sid)}) {prop("Sheetname", meta["title"], x+77.5, y-2, False, 1.4)} {prop("Sheetfile", sh+".kicad_sch", x+77.5, y+30, False, 1)} (instances (project {q(ROOT)} (path {q("/"+uid(ROOT))} (page {q(k+2)})))))')
