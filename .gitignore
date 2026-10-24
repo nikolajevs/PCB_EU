@@ -11,6 +11,9 @@ build/
 .pio/
 *.code-workspace
 
+# Локальный кэш KiCad (не часть проекта)
+*.kicad_prl
+
 # Системный мусор
 .DS_Store
 Thumbs.db

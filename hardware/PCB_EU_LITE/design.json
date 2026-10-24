@@ -289,7 +289,7 @@
         "9": "RTN_SHUNT",
         "10": "GND"
       },
-      "footprint": "Package_SO:VSSOP-10_3x3mm_P0.5mm",
+      "footprint": "LITE_Parts:VSSOP-10_3x3mm_P0.5mm",
       "note": "I2C 0x40 (A0=A1=GND). IN+ Kelvin to R111.1, IN- Kelvin to R111.2; VBUS direct from +24V_FUSED. Single piece in stock: no spare",
       "position": [
         240.03,
@@ -1148,7 +1148,7 @@
         "7": null,
         "8": "+3V3"
       },
-      "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+      "footprint": "LITE_Parts:SOIC-8_3.9x4.9mm_P1.27mm",
       "note": "",
       "position": [
         74.93,

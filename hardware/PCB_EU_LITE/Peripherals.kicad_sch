@@ -79,7 +79,7 @@
 (symbol (lib_id "EU_LITE:MCP7940N") (at 74.93 59.69 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "ffdd71bc-bfce-551b-8f63-60039b831ca2")
 (property "Reference" "U301" (at 74.93 50.24 0) (effects (font (size 1.15 1.15)) ))
 (property "Value" "MCP7940N" (at 74.93 69.14 0) (effects (font (size 0.98 0.98)) ))
-(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" (at 74.93 59.69 0) (effects (font (size 1 1)) (hide yes)))
+(property "Footprint" "LITE_Parts:SOIC-8_3.9x4.9mm_P1.27mm" (at 74.93 59.69 0) (effects (font (size 1 1)) (hide yes)))
 (property "Datasheet" "https://ww1.microchip.com/downloads/aemDocuments/documents/MPD/ProductDocuments/DataSheets/MCP7940N-Battery-Backed-I2C-RTCC-with-SRAM-20005010J.pdf" (at 74.93 59.69 0) (effects (font (size 1 1)) (hide yes)))
 (property "MPN" "MCP7940N-I/SN" (at 74.93 59.69 0) (effects (font (size 1 1)) (hide yes)))
 (property "Source" "buy" (at 74.93 59.69 0) (effects (font (size 1 1)) (hide yes)))
