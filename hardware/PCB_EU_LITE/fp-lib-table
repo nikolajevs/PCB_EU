@@ -1,0 +1,4 @@
+(fp_lib_table (version 7)
+(lib (name "EU_Mechanical") (type "KiCad") (uri "${KIPRJMOD}/../PCB_EU/libraries/EU_Mechanical.pretty") (options "") (descr "Project footprints; see README.md and ../PCB_EU/libraries/SOURCES.md"))
+(lib (name "EU_Parts") (type "KiCad") (uri "${KIPRJMOD}/../PCB_EU/libraries/EU_Parts.pretty") (options "") (descr "Project footprints; see README.md and ../PCB_EU/libraries/SOURCES.md"))
+(lib (name "LITE_Parts") (type "KiCad") (uri "${KIPRJMOD}/libraries/LITE_Parts.pretty") (options "") (descr "Project footprints; see README.md and ../PCB_EU/libraries/SOURCES.md")))
