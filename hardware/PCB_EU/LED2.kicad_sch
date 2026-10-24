@@ -694,7 +694,7 @@
 (property "Value" "100n 100V" (at 308.61 185.98 0) (effects (font (size 0.98 0.98)) ))
 (property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 308.61 180.34 0) (effects (font (size 1 1)) (hide yes)))
 (property "Datasheet" "" (at 308.61 180.34 0) (effects (font (size 1 1)) (hide yes)))
-(property "MPN" "C0805C104K1RACTU" (at 308.61 180.34 0) (effects (font (size 1 1)) (hide yes)))
+(property "MPN" "CL21B104KCFSFNE" (at 308.61 180.34 0) (effects (font (size 1 1)) (hide yes)))
 (property "Design_note" "" (at 308.61 180.34 0) (effects (font (size 1 1)) (hide yes)))
 (property "FootprintStatus" "PACKAGE ONLY - verify before PCB" (at 308.61 180.34 0) (effects (font (size 1 1)) (hide yes)))
 (pin "1" (uuid "c56a1363-8ec3-5d4e-8fc8-a24751b3068c"))
