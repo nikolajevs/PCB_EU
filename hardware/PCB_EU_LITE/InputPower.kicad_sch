@@ -532,7 +532,7 @@
 (symbol (lib_id "EU_LITE:INA238") (at 240.03 74.93 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "b2a76eb3-85ee-5d94-82bc-65096a2431ea")
 (property "Reference" "U102" (at 240.03 64.21 0) (effects (font (size 1.15 1.15)) ))
 (property "Value" "INA238" (at 240.03 85.65 0) (effects (font (size 0.98 0.98)) ))
-(property "Footprint" "Package_SO:VSSOP-10_3x3mm_P0.5mm" (at 240.03 74.93 0) (effects (font (size 1 1)) (hide yes)))
+(property "Footprint" "LITE_Parts:VSSOP-10_3x3mm_P0.5mm" (at 240.03 74.93 0) (effects (font (size 1 1)) (hide yes)))
 (property "Datasheet" "https://www.ti.com/lit/ds/symlink/ina238.pdf" (at 240.03 74.93 0) (effects (font (size 1 1)) (hide yes)))
 (property "MPN" "INA238AIDGSR" (at 240.03 74.93 0) (effects (font (size 1 1)) (hide yes)))
 (property "Source" "stock:114" (at 240.03 74.93 0) (effects (font (size 1 1)) (hide yes)))
