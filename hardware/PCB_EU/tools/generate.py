@@ -535,6 +535,9 @@ source_urls={
 REVIEW_BUY={'SMD1206 4K7 1%':3,'SMD1206 5K6 1%':6,'SMD1206-10K-1%':6,'CL31A106KAHNNNE':2,
  'RAD-DY-GF/3':1,'TO220-SET':1,'SMICA-TO220-2':1,'DG306-5.0-2P12':6,'DG301R-5.0-2P12':1}
 REVIEW_USAGE={
+ 'BC-2001':'Держатель CR2032; посадка сверена с чертежом COMF. Остались физическая примерка, контакт батарейки и доступ для её замены',
+ 'MEM2061-01-188-00-A':'GCT microSD push-push; посадка сверена с чертежом GCT. Остались физическая примерка, доступность пайки и извлечения карты',
+ 'SMD2512-4R7':'4,7 Ом / 1 Вт, 2512, 5%; R803 — затвор Q501 TK22E10N1, R807 — затвор Q601 CSD19534KCS; проверить звон и нагрев на прототипе',
  'SMD1206 4K7 1%':'1%: I2C pull-ups ×2, R702 база Q701 (держит PTC выключенным при внутренней подтяжке ESP32)',
  'SMD1206 5K6 1%':'1%: RCSH CH2, два плеча UVLO, series-R GPIO25 → nDIM, делитель затвора Q102 ×2',
  'SMD1206-10K-1%':'1%: верх OVP ×2, верх FB L7987 ×1, опорный делитель UVLO ×2, gate–source Q102 ×1',
@@ -542,8 +545,8 @@ REVIEW_USAGE={
  'CL21B104KBCNNNC':'13 байпасных/фильтрующих конденсаторов в схеме (вкл. VS INA226), покупка 20, остаток 7',
  'CL21B105KBFNNNG':'1 мкФ / 50 В X7R 0805: 4 VCC/VIN, 2 VBIAS, 1 CF, 1 SS, 1 EN ESP32; купить пачку 10',
  'SMD0603-100K':'0603 / 5%: gate Q501/Q601 ×2, gate помпы ×1, gate fan PWM ×2',
- 'DG306-5.0-2P12':'PTC, помпа, LED×3, float (6 шт.). С 22.10.2026 вентиляторы на хидерах KF2510, SHT4x на разъёме XH, PTC на DG306 у нижнего края; 5 лишних штук убраны из покупки 23.10.2026 по решению Игоря (куплено 6, запаса нет)',
- 'DG301R-5.0-2P12':'Вход 24 В J101 (1 шт., 2,5 мм², 16 А). С 22.10.2026 клемма PTC J701 на DG306; вторая штука убрана из покупки 23.10.2026 по решению Игоря (куплено 1, запаса нет)',
+ 'DG306-5.0-2P12':'PTC, помпа, LED×3, float (6 шт.). С 22.10.2026 вентиляторы на хидерах KF2510, SHT4x на разъёме XH, PTC на DG306 у нижнего края; 5 лишних штук убраны из покупки 23.10.2026 по решению Игоря (к покупке 6, запаса нет)',
+ 'DG301R-5.0-2P12':'Вход 24 В J101 (1 шт., 2,5 мм², 16 А). С 22.10.2026 клемма PTC J701 на DG306; вторая штука убрана из покупки 23.10.2026 по решению Игоря (к покупке 1, запаса нет)',
  'RAD-DY-GF/3':'STONECOLD RAD-DY-GF/3, 30×30×15 мм, 8,8 К/Вт по каталогу; радиатор Q501 (LED1). У Q601 (LED2) радиатора нет с 22.10.2026; второй радиатор убран из покупки 23.10.2026',
  'TO220-SET':'TO220-SET: нужна изолирующая втулка под головку винта Q501 (остальное из набора не используется); второй комплект убран из покупки 23.10.2026',
  'SMICA-TO220-2':'NINIGI, силиконовая прокладка со втулкой, 15×20×0,3 мм, для Q501; вторая убрана из покупки 23.10.2026',
@@ -580,18 +583,18 @@ REVIEW_ROWS={
   dict(shop='Electrobase',mpn='CSD19534KCS',needed=1,buy=1,unit='шт.',price_unit=3.09,line=3.09,stock=91,
   url='https://electrobase.lv/katalogs/tranzistori-ar-n-veida-kanalu-tht/transistor-n-mosfet-unipolar-100v-100a-118w-to220-3',block='LED',
   usage='TI NexFET, 100 В, 13,7 мОм тип. (16,5 макс.) при 10 В, Qg 17,1 нКл, TO-220 G-D-S; Q601 от GATE LM3429 через 4,7 Ом, расчётные потери ~0,37 Вт вместо ~0,65 Вт; у поставщика Electrobase 91 шт. на 23.10.2026',price_date='2026-10-23')],
- 'DG306-5.0-2P12':[dict(shop='не выбран',mpn='KF2510-4A',needed=2,buy=2,unit='шт.',price_unit=0.0,line=0.0,stock='',
+ 'DG306-5.0-2P12':[dict(shop='Есть дома',mpn='KF2510-4A',needed=2,buy=0,on_hand=2,unit='шт.',price_unit=0.0,line=0.0,stock='',
   url='',block='Вентиляторы',
-  usage='Прямой хидер 4 контакта 2,54 мм (серия KF2510 / «2510-4P», посадка Molex KK-254) для J411/J421. Магазин и цена не выбраны: ждут проверки BOM',price_date='2026-10-22'),
-  dict(shop='не выбран',mpn='XH2.54-4P-90',needed=1,buy=1,unit='шт.',price_unit=0.0,line=0.0,stock='',
+  usage='Прямой хидер 4 контакта 2,54 мм для J411/J421. Есть дома, подтверждено Игорем 24.10.2026; 2 шт. выделены на плату, покупать не нужно. Сверить фактическую деталь с посадкой Molex KK-254 и порядок проводов вентиляторов',price_date='',confirmation_date='2026-10-24'),
+  dict(shop='Есть дома',mpn='XH2.54-4P-90',needed=1,buy=0,on_hand=1,unit='шт.',price_unit=0.0,line=0.0,stock='',
   url='',block='Интерфейсы',
-  usage='Угловой хидер XH 4 контакта (посадка JST XH S4B-XH-A, шаг 2,50 мм) для внешнего SHT4x, J401. Магазин и цена не выбраны: ждут проверки BOM; сверить шаг и порядок проводов',price_date='2026-10-22')],
+  usage='Угловой хидер XH 4 контакта для SHT4x, J401. Есть дома, подтверждено Игорем 24.10.2026; 1 шт. выделена на плату, покупать не нужно. Сверить шаг с посадкой JST XH S4B-XH-A 2,50 мм и порядок проводов',price_date='',confirmation_date='2026-10-24')],
  'IRF1010ESPBF':[dict(shop='Salvats',mpn='FDB5800',needed=2,buy=2,unit='шт.',price_unit=1.98,line=3.96,stock=4,
   url='https://www.salvats.lv/lv/n-kanalu-lauku-tranzistori-smd/fdb5800-smd-tranzistors-n-fet-loglev125v-60v-20v-80a-242w-0r006-to-263',block='PTC',
   usage='onsemi, 60 В, 6 мОм при 10 В, Vgs ±20 В, D2PAK: Q703 ключ PTC (затвор от 12 В) и Q102 защита от переполюсовки в минусе входа; на складе Salvats 4 шт. на 23.10.2026',price_date='2026-10-23'),
   dict(shop='Electrobase',mpn='INA226AIDGSR',needed=1,buy=1,unit='шт.',price_unit=3.94,line=3.94,stock='',
   url='https://electrobase.lv/katalogs/operacijas-pastiprinataji-smd/ic-instrumentation-amplifier-2755vdc-vssop10-reeltape-0',block='Вход 24 В',
-  usage='TI INA226, VSSOP-10: ток, напряжение и мощность всей платы по I2C (0x40). Цена от Igors 21.10.2026; наличие и продажа поштучно с катушки не подтверждены',price_date='2026-10-21'),
+  usage='TI INA226, VSSOP-10: ток, напряжение и мощность всей платы по I2C (0x40). Продажа поштучно подтверждена Игорем 24.10.2026, купить 1 шт. Цена от 21.10.2026; текущий остаток не уточнялся',price_date='2026-10-21',confirmation_date='2026-10-24'),
   dict(shop='Salvats',mpn='SMD2512-0R01-1%-3W',needed=2,buy=2,unit='шт.',price_unit=0.24,line=0.48,stock=369,
   url='https://www.salvats.lv/lv/rezistori-smd-2512-1w3w/0r01-2512635x32mm-3w-1-smd-55170c-rezistors-thick-film-2512',block='Вход 24 В',
   usage='0R01 2512 3 Вт 1%: R111||R112 = 5 мОм, шунт INA226 в обратном проводе',price_date='2026-10-21'),
@@ -645,7 +648,8 @@ def main():
             row['buy']=REVIEW_BUY[mpn];row['line']=float(Decimal(str(row['price_unit']))*row['buy'])
         if mpn in REVIEW_USAGE:row['usage']=REVIEW_USAGE[mpn]
         if mpn=='SMD0603-1K':row['usage']='1k: tach x2, float x1, pump/fan gates x3, INA226 VBUS x1; 7 of 10 purchased'
-        assert need<=row['buy'],(mpn,need,row['buy'])
+        assert row['buy']>=0 and row.get('on_hand',0)>=0
+        assert need<=row['buy']+row.get('on_hand',0),(mpn,need,row['buy'],row.get('on_hand',0))
     dropped=[row['mpn'] for row in rows if not row['needed']]
     rows=[row for row in rows if row['needed']]
     unknown=set(counts)|set(accessories)
@@ -654,10 +658,11 @@ def main():
     assert not [x['mpn'] for x in rows if not x['needed']], 'Unallocated purchased SKU'
     (HERE/'BOM_allocated.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n')
     with (HERE/'BOM_allocated.csv').open('w',newline='',encoding='utf-8-sig') as f:
-        w=csv.writer(f,lineterminator="\n");w.writerow(['Shop','MPN_or_shop_SKU','Fitted_or_accessory','Buy_pieces','Sale_unit','Price_per_sale_unit_EUR_VAT','Line_EUR_VAT','References','Accessory_count','URL','Price_date'])
-        for row in rows:w.writerow([row['shop'],row['mpn'],row['needed'],row['buy'],row['unit'],row['price_unit'],f'{row["line"]:.2f}',' '.join(row['refs']),row['accessory_count'],row['url'],row.get('price_date',DATE)])
+        w=csv.writer(f,lineterminator="\n");w.writerow(['Shop','MPN_or_shop_SKU','Fitted_or_accessory','Buy_pieces','Sale_unit','Price_per_sale_unit_EUR_VAT','Line_EUR_VAT','References','Accessory_count','URL','Price_date','On_hand_allocated_pieces','Confirmation_date','Notes'])
+        for row in rows:w.writerow([row['shop'],row['mpn'],row['needed'],row['buy'],row['unit'],row['price_unit'],f'{row["line"]:.2f}',' '.join(row['refs']),row['accessory_count'],row['url'],row.get('price_date',DATE),row.get('on_hand',0),row.get('confirmation_date',''),row['usage']])
     totals=defaultdict(Decimal)
-    for row in rows:totals[row['shop']]+=Decimal(str(row['line']))
+    for row in rows:
+        if row['buy']:totals[row['shop']]+=Decimal(str(row['line']))
     summary=dict(electrical_components=sum(counts.values()),testpads=8,accessories=accessories,rows=len(rows),shop_totals={k:str(v) for k,v in totals.items()},shipping_EUR='5.87',total_EUR=str(sum(totals.values())+Decimal('5.87')),price_basis='Dated sourcing snapshot 2026-10-20; quantities now allocated to actual schematic. No reservation or order.')
     (HERE/'review/BOM_summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(summary,ensure_ascii=False,indent=2))

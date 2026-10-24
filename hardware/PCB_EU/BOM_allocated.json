@@ -444,8 +444,9 @@
     "stock": "",
     "url": "https://electrobase.lv/katalogs/operacijas-pastiprinataji-smd/ic-instrumentation-amplifier-2755vdc-vssop10-reeltape-0",
     "block": "Вход 24 В",
-    "usage": "TI INA226, VSSOP-10: ток, напряжение и мощность всей платы по I2C (0x40). Цена от Igors 21.10.2026; наличие и продажа поштучно с катушки не подтверждены",
+    "usage": "TI INA226, VSSOP-10: ток, напряжение и мощность всей платы по I2C (0x40). Продажа поштучно подтверждена Игорем 24.10.2026, купить 1 шт. Цена от 21.10.2026; текущий остаток не уточнялся",
     "price_date": "2026-10-21",
+    "confirmation_date": "2026-10-24",
     "previous_needed": 1,
     "refs": [
       "U102"
@@ -614,7 +615,7 @@
     "stock": 6,
     "url": "https://www.salvats.lv/lv/baterijas-turetaji-1/bateriju-turetajs-metaliska-cemme-cr2032-1-baterija",
     "block": "RTC",
-    "usage": "Держатель CR2032; footprint сверить с чертежом COMF",
+    "usage": "Держатель CR2032; посадка сверена с чертежом COMF. Остались физическая примерка, контакт батарейки и доступ для её замены",
     "previous_needed": 1,
     "refs": [
       "BT301"
@@ -648,7 +649,7 @@
     "stock": "726",
     "url": "https://electrobase.lv/katalogs/savienojumi-kartem/connector-cards-microsd-push-push-smt-gold-flash-pin-8-0",
     "block": "microSD",
-    "usage": "GCT microSD push-push; проверить footprint и доступность пайки",
+    "usage": "GCT microSD push-push; посадка сверена с чертежом GCT. Остались физическая примерка, доступность пайки и извлечения карты",
     "previous_needed": 1,
     "refs": [
       "J301"
@@ -814,7 +815,7 @@
     "stock": 98,
     "url": "https://www.salvats.lv/lv/solis-508mm-1/terminal-blocks-pcb-ar-skruvem-2pin-5mm-25mm2-300v16a-10x76x10mm-taisns",
     "block": "Разъёмы",
-    "usage": "Вход 24 В J101 (1 шт., 2,5 мм², 16 А). С 22.10.2026 клемма PTC J701 на DG306; вторая штука убрана из покупки 23.10.2026 по решению Игоря (куплено 1, запаса нет)",
+    "usage": "Вход 24 В J101 (1 шт., 2,5 мм², 16 А). С 22.10.2026 клемма PTC J701 на DG306; вторая штука убрана из покупки 23.10.2026 по решению Игоря (к покупке 1, запаса нет)",
     "previous_needed": 2,
     "refs": [
       "J101"
@@ -832,7 +833,7 @@
     "stock": 22,
     "url": "https://www.salvats.lv/lv/solis-508mm-1/terminal-blocks-pcb-ar-skruvem-2pin-5mm-15mm2-250v15a-10x8x10mm",
     "block": "Разъёмы",
-    "usage": "PTC, помпа, LED×3, float (6 шт.). С 22.10.2026 вентиляторы на хидерах KF2510, SHT4x на разъёме XH, PTC на DG306 у нижнего края; 5 лишних штук убраны из покупки 23.10.2026 по решению Игоря (куплено 6, запаса нет)",
+    "usage": "PTC, помпа, LED×3, float (6 шт.). С 22.10.2026 вентиляторы на хидерах KF2510, SHT4x на разъёме XH, PTC на DG306 у нижнего края; 5 лишних штук убраны из покупки 23.10.2026 по решению Игоря (к покупке 6, запаса нет)",
     "previous_needed": 11,
     "refs": [
       "J403",
@@ -845,18 +846,20 @@
     "accessory_count": 0
   },
   {
-    "shop": "не выбран",
+    "shop": "Есть дома",
     "mpn": "KF2510-4A",
     "needed": 2,
-    "buy": 2,
+    "buy": 0,
+    "on_hand": 2,
     "unit": "шт.",
     "price_unit": 0.0,
     "line": 0.0,
     "stock": "",
     "url": "",
     "block": "Вентиляторы",
-    "usage": "Прямой хидер 4 контакта 2,54 мм (серия KF2510 / «2510-4P», посадка Molex KK-254) для J411/J421. Магазин и цена не выбраны: ждут проверки BOM",
-    "price_date": "2026-10-22",
+    "usage": "Прямой хидер 4 контакта 2,54 мм для J411/J421. Есть дома, подтверждено Игорем 24.10.2026; 2 шт. выделены на плату, покупать не нужно. Сверить фактическую деталь с посадкой Molex KK-254 и порядок проводов вентиляторов",
+    "price_date": "",
+    "confirmation_date": "2026-10-24",
     "previous_needed": 2,
     "refs": [
       "J411",
@@ -865,18 +868,20 @@
     "accessory_count": 0
   },
   {
-    "shop": "не выбран",
+    "shop": "Есть дома",
     "mpn": "XH2.54-4P-90",
     "needed": 1,
-    "buy": 1,
+    "buy": 0,
+    "on_hand": 1,
     "unit": "шт.",
     "price_unit": 0.0,
     "line": 0.0,
     "stock": "",
     "url": "",
     "block": "Интерфейсы",
-    "usage": "Угловой хидер XH 4 контакта (посадка JST XH S4B-XH-A, шаг 2,50 мм) для внешнего SHT4x, J401. Магазин и цена не выбраны: ждут проверки BOM; сверить шаг и порядок проводов",
-    "price_date": "2026-10-22",
+    "usage": "Угловой хидер XH 4 контакта для SHT4x, J401. Есть дома, подтверждено Игорем 24.10.2026; 1 шт. выделена на плату, покупать не нужно. Сверить шаг с посадкой JST XH S4B-XH-A 2,50 мм и порядок проводов",
+    "price_date": "",
+    "confirmation_date": "2026-10-24",
     "previous_needed": 1,
     "refs": [
       "J401"
@@ -1265,7 +1270,7 @@
     "stock": 81,
     "url": "https://www.salvats.lv/lv/rezistori-smd-2512-1w3w/4r7-2512635x32mm-1w-5-smd-55125c-rezistors-thick-film-2512",
     "block": "LED",
-    "usage": "4,7 Ом / 1 Вт, 2512, 5%, затворы IRF540Z; проверить ringing и нагрев",
+    "usage": "4,7 Ом / 1 Вт, 2512, 5%; R803 — затвор Q501 TK22E10N1, R807 — затвор Q601 CSD19534KCS; проверить звон и нагрев на прототипе",
     "previous_needed": 2,
     "refs": [
       "R803",

@@ -1,5 +1,5 @@
 {
-  "status": "drawing-checked footprint assignments; prototype fit, thermal design, placement and board DRC pending",
+  "status": "drawing-checked assignments listed below; other package assignments and physical fit require qualification; current board DRC status is documented in README.md",
   "date": "2026-10-20",
   "sources": {
     "ust1206": {
