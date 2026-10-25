@@ -54,7 +54,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
+    solid_power = {'led_feed', 'input_raw', 'input_raw_bottom', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
                    'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
@@ -132,6 +132,13 @@ def add_power_zones(board):
     specs = [
         ('+24V_RAW', 'F.Cu', 'input_raw',
          [(5.4,44.5),(24.0,48.8),(24.0,51.2),(5.4,47.0)], 4),
+        # Do not force the clearance-limited B.Cu trace itself wider.  A local
+        # parallel pour follows it instead, so the fill retracts around the
+        # REVP_GATE and +24V_FUSED copper while adding width wherever space
+        # permits between the input terminal and the F101 via.
+        ('+24V_RAW', 'B.Cu', 'input_raw_bottom',
+         route_corridor([(6.0,46.0),(6.0,46.625),(14.129,54.754),
+                         (20.472,54.754),(23.135,52.091)], 1.6), 4),
         ('PSU_RTN', 'F.Cu', 'input_return',
          [(5.4,49.4),(17.2,48.4),(17.2,53.0),(5.4,52.7)], 3),
         # Strengthen only the Q102 side of RTN_SHUNT; the existing INA238
@@ -375,7 +382,7 @@ def main():
         p.SaveBoard(str(args.board), board)
     finally:
         project_path.write_bytes(original_project)
-    print(f'Added three ground pours and 17 local power pours; moved U102 and widened power routes; '
+    print(f'Added three ground pours and 18 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
