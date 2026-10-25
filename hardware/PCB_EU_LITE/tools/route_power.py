@@ -177,7 +177,7 @@ def add_power_zones(board):
          [(57.4,17.8),(64.2,11.1),(66.6,13.5),(60.0,20.2),
           (60.0,34.5),(57.4,34.5)], 3),
         ('+24V_PTC', 'F.Cu', 'ptc_supply',
-         [(44.0,82.5),(49.0,82.5),(49.2,95.2),(43.5,95.2)], 3),
+         [(43.0,82.0),(49.1,82.0),(49.1,96.5),(43.0,96.5)], 3),
         ('PTC_DRAIN', 'F.Cu', 'ptc_return',
          [(49.6,80.0),(56.4,80.0),(56.4,95.2),(49.6,95.2)], 3),
         ('+24V_PUMP', 'F.Cu', 'pump_supply',
@@ -276,6 +276,31 @@ def prepare_return_path(board):
         raise RuntimeError(f'Expected two clearance-limited return segments; found {len(found_limited)}')
 
 
+def widen_led_supply_trunk(board):
+    """Widen selected 24 V LED supply tracks within their clearance limits."""
+    targets = {
+        (board.GetLayerID('F.Cu'), frozenset(((58.75, 38.275), (58.75, 46.914)))): 0.85,
+        (board.GetLayerID('F.Cu'), frozenset(((61.025, 36.0), (58.75, 38.275)))): 1.0,
+        (board.GetLayerID('F.Cu'), frozenset(((61.893, 49.062), (64.106, 51.275)))): 0.8,
+        (board.GetLayerID('In2.Cu'), frozenset(((62.277, 36.666), (67.127, 41.516)))): 1.0,
+        (board.GetLayerID('In2.Cu'), frozenset(((65.0, 13.25), (62.277, 15.973)))): 1.0,
+        (board.GetLayerID('In2.Cu'), frozenset(((62.277, 15.973), (62.277, 36.666)))): 0.8,
+    }
+    found = set()
+    for item in board.GetTracks():
+        if isinstance(item, p.PCB_VIA) or item.GetNetname() != '+24V_LED':
+            continue
+        start, end = item.GetStart(), item.GetEnd()
+        pair = frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+        key = (item.GetLayer(), pair)
+        if key in targets:
+            item.SetWidth(MM(targets[key]))
+            found.add(key)
+    if found != set(targets):
+        raise RuntimeError(f'Expected six LED supply trunk segments; found {len(found)}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--board', type=Path, default=HERE/'PCB_EU_LITE.kicad_pcb')
@@ -287,11 +312,12 @@ def main():
         if zone.GetZoneName().startswith('lite_power/'):
             board.Delete(zone)
     prepare_return_path(board)
+    widen_led_supply_trunk(board)
     add_power_zones(board)
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
     p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 17 local power pours; moved U102 and widened RTN_SHUNT; '
+    print(f'Added three ground pours and 17 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
