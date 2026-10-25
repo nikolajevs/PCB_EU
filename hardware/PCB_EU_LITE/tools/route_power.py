@@ -54,7 +54,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'led_input_inner', 'input_raw', 'input_raw_bottom', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
+    solid_power = {'led_feed', 'led_input_inner', 'led_terminal_bus', 'input_raw', 'input_raw_bottom', 'input_return_inner', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
                    'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
@@ -141,6 +141,11 @@ def add_power_zones(board):
                          (20.472,54.754),(23.135,52.091)], 1.6), 4),
         ('PSU_RTN', 'F.Cu', 'input_return',
          [(5.4,49.4),(17.2,48.4),(17.2,53.0),(5.4,52.7)], 3),
+        # J101.2 and Q102.2 are through-hole pads, so a local In1.Cu strip
+        # creates a continuous parallel return path without adding vias.  It
+        # intentionally ends before the INA238 Kelvin keepout at x=17.7.
+        ('PSU_RTN', 'In1.Cu', 'input_return_inner',
+         route_corridor([(6.0,51.0),(6.54,50.46),(15.5,50.46)], 1.2), 4),
         # Strengthen only the Q102 side of RTN_SHUNT; the existing INA238
         # Kelvin keepout separates this pour from the sense branch.
         ('RTN_SHUNT', 'F.Cu', 'return_q102_bus',
@@ -190,6 +195,11 @@ def add_power_zones(board):
         ('+24V_LED', 'F.Cu', 'led_feed',
          [(57.4,17.8),(64.2,11.1),(66.6,13.5),(60.0,20.2),
           (60.0,34.5),(57.4,34.5)], 3),
+        # This is the quiet DC side after R502.  Reinforce the common LED+
+        # collector to the three parallel terminals without growing the
+        # preceding high-dv/dt LED_OUT switch node.
+        ('LED_POS', 'F.Cu', 'led_terminal_bus',
+         route_corridor([(94.0,61.0),(96.5,63.5),(96.5,87.0),(94.0,87.0)], 1.0), 3),
         ('+24V_PTC', 'F.Cu', 'ptc_supply',
          [(43.0,82.0),(49.1,82.0),(49.1,96.5),(43.0,96.5)], 3),
         ('PTC_DRAIN', 'F.Cu', 'ptc_return',
@@ -389,7 +399,7 @@ def main():
         p.SaveBoard(str(args.board), board)
     finally:
         project_path.write_bytes(original_project)
-    print(f'Added three ground pours and 19 local power pours; moved U102 and widened power routes; '
+    print(f'Added three ground pours and 21 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
