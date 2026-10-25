@@ -54,7 +54,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'input_raw', 'input_raw_bottom', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
+    solid_power = {'led_feed', 'led_input_inner', 'input_raw', 'input_raw_bottom', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
                    'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
@@ -180,6 +180,13 @@ def add_power_zones(board):
         ('+24V_LED', 'F.Cu', 'led_input',
          [(57.5,32.5),(62.5,32.5),(65.7,41.7),(68.0,45.5),(67.7,51.9),
           (63.8,52.6),(61.0,45.0),(57.5,39.5)], 2),
+        # The LED driver can draw up to about 4.36 A peak at the low input
+        # voltage corner.  Its long In2.Cu trunk remains a routed 0.8 mm
+        # conductor for determinism, with this same-net copper beside it
+        # wherever local signal clearances permit.
+        ('+24V_LED', 'In2.Cu', 'led_input_inner',
+         route_corridor([(65.0,13.25),(62.277,15.973),(62.277,36.666),
+                         (67.127,41.516)], 1.2), 3),
         ('+24V_LED', 'F.Cu', 'led_feed',
          [(57.4,17.8),(64.2,11.1),(66.6,13.5),(60.0,20.2),
           (60.0,34.5),(57.4,34.5)], 3),
@@ -382,7 +389,7 @@ def main():
         p.SaveBoard(str(args.board), board)
     finally:
         project_path.write_bytes(original_project)
-    print(f'Added three ground pours and 18 local power pours; moved U102 and widened power routes; '
+    print(f'Added three ground pours and 19 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
