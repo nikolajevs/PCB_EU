@@ -25,8 +25,9 @@
 | [design.json](design.json) | Полная спецификация выводов, цепей и компонентов |
 | [review/connectivity.txt](review/connectivity.txt) | Сохранённый предыдущий полный прогон; актуальные 58 проверок для 75 Вт описаны в разделе «Проверки» |
 | [review/Bench_checklist.md](review/Bench_checklist.md) | Что измерить при первом включении |
+| [review/silkscreen.json](review/silkscreen.json) | Аудит воспроизводимой сборочной шелкографии: размещённые, нативные и намеренно пропущенные метки |
 | [libraries/](libraries) | Символы проекта; собственные посадки PowerDI5, DTMSS-27, VSSOP-10 и SOIC-8; локальная копия BC-2001 с узким коридором GND только для EU-LITE и локальные копии складских посадок; стандартные 3D-модели используют установленную библиотеку KiCad |
-| [tools/route_power.py](tools/route_power.py), [tools/route_complete.py](tools/route_complete.py), [tools/route_progress.py](tools/route_progress.py), [tools/route_bt_ground.py](tools/route_bt_ground.py), [tools/route_rtc.py](tools/route_rtc.py), [tools/route_switch_stage.py](tools/route_switch_stage.py), [tools/route_ground_stitch.py](tools/route_ground_stitch.py), [tools/route_prune_stubs.py](tools/route_prune_stubs.py), [tools/route_led_source.py](tools/route_led_source.py), [tools/route_led_terminals.py](tools/route_led_terminals.py) | Полигонная медь и воспроизводимые шаги частичной разводки, включая перенос и подключение RTC |
+| [tools/route_power.py](tools/route_power.py), [tools/route_complete.py](tools/route_complete.py), [tools/route_progress.py](tools/route_progress.py), [tools/route_bt_ground.py](tools/route_bt_ground.py), [tools/route_rtc.py](tools/route_rtc.py), [tools/route_switch_stage.py](tools/route_switch_stage.py), [tools/route_ground_stitch.py](tools/route_ground_stitch.py), [tools/route_prune_stubs.py](tools/route_prune_stubs.py), [tools/route_led_source.py](tools/route_led_source.py), [tools/route_led_terminals.py](tools/route_led_terminals.py), [tools/silkscreen.py](tools/silkscreen.py) | Полигонная медь, воспроизводимые шаги частичной разводки и финальная сборочная шелкография |
 
 `EU_Mechanical` и `EU_Parts` по-прежнему общие с EU-0.1 (`../PCB_EU/libraries`, см. `fp-lib-table`); исключение — `LITE_Mechanical:Battery_COMF_BC-2001`, локальная копия с коридором GND для батарейного контакта. Исходные библиотеки EU-0.1 не менялись.
 
@@ -93,6 +94,7 @@
 | KiCad ERC | **0 нарушений** |
 | `check_placement.py` | Полный Shapely-прогон (18 193 проверки) относится к более ранней раскладке. После новых переносов отдельный нативный геометрический прогон выполнил 827 проверок для всех 163 позиций, коридоров разъёмов и доступа к пайке; Shapely 2 в доступном Python отсутствует, поэтому полный скрипт не запускался |
 | `test_placement.py` | Не запускался после добавления THT-клеммников; полные регрессионные тесты размещения требуют Shapely 2 |
+| `tools/silkscreen.py --check` | 194 управляемые метки; 160 из 163 позиций, 11 полярных деталей покрыты нативной или добавленной меткой; для 17 деталей с нечётным числом выводов новая полярность не создаётся |
 | KiCad DRC с заливкой зон и проверкой соответствия схеме | **0 ошибок, 0 предупреждений, 0 неподключённых элементов, 0 расхождений со схемой** |
 
 **Размещение.** Все 163 посадочных места схемы находятся внутри платы 100×100 мм: 126 сверху, 36 SMD и BT301 с CR2032 снизу. Сохранены 4 отверстия и четырёхслойный стек. Сверху оставлены высокие и силовые компоненты; снизу размещены RGB, подтяжки microSD, RTC у батарейки, делитель вспомогательного БП и маломощное управление нагрузками. KiCad DRC и нативные проверки куртяр/коридоров прошли; физический корпус, высота деталей и ручная сборка не проверены.
@@ -113,6 +115,8 @@ RTC U301, Y301, C301/C302/C303 остаются на B.Cu у батарейки;
 
 **Воспроизводимость.** `build_board.py` берёт из EU-0.1 только контур и монтажные отверстия; электрические посадки читает из локальных библиотек, все поля и цепи — из свежего netlist, координаты — из `placement.json`. Медь и старые подписи EU-0.1 не переносятся. Сохранение платы изолировано от настоящего `.kicad_pro`: KiCad 10.0.5 больше не затирает его чужими/пустыми настройками. Генератор схем сохраняет регистрацию всех локальных библиотек. Исправлены пути общих 3D-моделей; для U101/U201 стандартная STEP-модель с точным именем отсутствует в установленной KiCad 10.0.5, её визуализация ещё не закрыта.
 
+`tools/silkscreen.py` выполняется после всех шагов разводки. Он управляет отдельной группой сборочной шелкографии, сначала размещает позиции обычных компонентов, затем полезные обозначения контактов разъёмов; крупные подписи разъёмов не занимают место. Размер позиций — 1,0 мм, в плотных местах — не менее 0,8 мм согласно правилу платы; штрих у всех добавленных надписей — 0,15 мм. 160 из 163 позиций разместились без наложения на площадки, переходы, корпуса и штатную шелкографию; три не поместившихся перечислены в `review/silkscreen.json`. Для C101/C102/C110/C508 сохранены штатные знаки `+`, для BT301 и диодов добавлены проверенные по сетям метки. У 17 деталей с нечётным числом реальных выводов генератор не добавляет полярность/pin-1; нативные метки посадок не удаляются.
+
 Из корня репозитория (для Python использовать интерпретатор KiCad с Shapely 2):
 
 ```text
@@ -123,6 +127,8 @@ kicad-cli sch export netlist --format kicadxml -o NETLIST.xml hardware/PCB_EU_LI
 python hardware/PCB_EU_LITE/tools/build_board.py NETLIST.xml
 python hardware/PCB_EU_LITE/tools/check_placement.py NETLIST.xml
 python hardware/PCB_EU_LITE/tools/test_placement.py NETLIST.xml
+python hardware/PCB_EU_LITE/tools/silkscreen.py
+python hardware/PCB_EU_LITE/tools/silkscreen.py --check
 kicad-cli sch erc --format json -o ERC.json hardware/PCB_EU_LITE/PCB_EU_LITE.kicad_sch
 kicad-cli pcb drc --schematic-parity --format json -o DRC.json hardware/PCB_EU_LITE/PCB_EU_LITE.kicad_pcb
 ```
