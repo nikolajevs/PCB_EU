@@ -180,6 +180,11 @@ class Layout:
         self.board = board
         self.fps = {fp.GetReference(): fp for fp in board.GetFootprints()}
         self.bodies = {ref: from_box(fp.GetBoundingBox(False)) for ref, fp in self.fps.items()}
+        self.bodies_by_side = {
+            side: [(ref, body) for ref, body in self.bodies.items()
+                   if side_of(self.fps[ref]) == side]
+            for side in ('F', 'B')
+        }
         self.obstacles = {'F': [], 'B': []}  # (box, ref, kind)
         self.placed = {'F': [], 'B': []}
         self.text_box_cache = {}
@@ -246,7 +251,8 @@ class Layout:
         return (base[0] + x, base[1] + y, base[2] + x, base[3] + y)
 
     def add(self, name, text, ref, side, size=TEXT_MM, anchor=None,
-            max_distance=4, other_pins=(), rotation=0, allow_own_body=False):
+            max_distance=4, other_pins=(), rotation=0, allow_own_body=False,
+            fine=False):
         body = self.bodies[ref]
         trial = self.text_box(text, side, size, 0, 0, rotation)
         half_w = (trial[2] - trial[0]) / 2
@@ -266,7 +272,32 @@ class Layout:
                                    (ax, ay + distance + half_h),
                                    (ax - distance - half_w, ay),
                                    (ax + distance + half_w, ay)))
+        if fine:
+            # The coarse offsets miss narrow but usable gaps. Fit the actual
+            # text bounds against nearby obstacle/label edges; keep the same
+            # collision and nearest-component rules as the ordinary pass.
+            region = expand(body, 4)
+            nearby = [area for area, _, _ in self.obstacles[side]
+                      if intersects(region, area)]
+            nearby += [area for area in self.placed[side]
+                       if intersects(region, area)]
+            xs, ys = {ax}, {ay}
+            for area in [expand(body, .12), *nearby]:
+                xs.update((area[0] - trial[2] - .02,
+                           area[2] - trial[0] + .02))
+                ys.update((area[1] - trial[3] - .02,
+                           area[3] - trial[1] + .02))
+            xs = sorted(x for x in xs if x0 - 3 <= x <= x1 + 3)
+            ys = sorted(y for y in ys if y0 - 3 <= y <= y1 + 3)
+            candidates.extend((x, y) for x in xs for y in ys
+                              if point_box_distance((x, y), body) <= 3)
         candidates = sorted(set(candidates), key=lambda point: math.dist(point, (ax, ay)))
+        # Only nearby components can make a reference ambiguous. Derive the
+        # search radius from all candidate centres rather than a fixed guess.
+        reach = max((point_box_distance(point, body) for point in candidates), default=0)
+        vicinity = expand(body, 2 * reach + .1)
+        neighbors = [other for other_ref, other in self.bodies_by_side[side]
+                     if other_ref != ref and intersects(vicinity, other)]
         for x, y in candidates:
             area = self.text_box(text, side, size, x, y, rotation)
             if not inside_board(area):
@@ -279,14 +310,13 @@ class Layout:
                     continue
             if anchor and any(math.dist((x, y), other) < math.dist((x, y), anchor) + .25 for other in other_pins):
                 continue
-            if self.blocked(side, area, ref, allow_own_body):
-                continue
             if not anchor:
                 own_distance = point_box_distance((x, y), body)
                 if any(point_box_distance((x, y), other) + .05 < own_distance
-                       for other_ref, other in self.bodies.items()
-                       if other_ref != ref and side_of(self.fps[other_ref]) == side):
+                       for other in neighbors):
                     continue
+            if self.blocked(side, area, ref, allow_own_body):
+                continue
             self.placed[side].append(expand(area, LABEL_CLEARANCE_MM))
             entry = dict(name=name, kind='text', text=text, ref=ref, side=side,
                          at=[round(x, 4), round(y, 4)], rotation_deg=rotation,
@@ -509,6 +539,26 @@ def main():
                 reason='no clear space on the component side for low-priority connector reference',
             ))
 
+    # Preserve the established legends and references, then recover omitted
+    # positions from smaller gaps using exact obstacle-edge candidates.
+    recovered = []
+    for omission in sorted(list(layout.skipped), key=lambda item: priorities(item['ref'])):
+        if 'reference' not in omission['reason']:
+            continue
+        ref = omission['ref']
+        side = side_of(layout.fps[ref])
+        variants = [(TEXT_MM, 0, ''), (TEXT_MM, 90, '/vertical')]
+        if not ref.startswith('J'):
+            variants += [(COMPACT_TEXT_MM, 0, '/compact'),
+                         (COMPACT_TEXT_MM, 90, '/compact-vertical')]
+        for size, rotation, suffix in variants:
+            item = layout.add(f'{ref}/reference/{side}{suffix}', ref, ref, side,
+                              size=size, rotation=rotation, fine=True)
+            if item:
+                layout.skipped.remove(omission)
+                recovered.append(ref)
+                break
+
     reference_labels = [
         label for label in layout.labels if '/reference/' in label['name']
     ]
@@ -543,6 +593,7 @@ def main():
         generated_labels=len(layout.labels),
         labels_by_face=dict(Counter(label['side'] for label in layout.labels)),
         references_placed=len(reference_labels),
+        references_recovered_by_edge_search=recovered,
         references_by_face=dict(Counter(label['side'] for label in reference_labels)),
         cross_side_references=cross_side_references,
         compact_references=sum('/compact' in label['name'] for label in layout.labels),
