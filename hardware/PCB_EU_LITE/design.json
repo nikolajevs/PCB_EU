@@ -15,7 +15,7 @@
         "2": "PSU_RTN"
       },
       "footprint": "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal",
-      "note": "KF301-5.0-2P: pin 1 +24 V, pin 2 return. Terminal rating (10-16 A) to confirm: board load up to ~7.5 A (9.3 A at 21.6 V is the EU-0.1 budget with 2 LED channels)",
+      "note": "KF301-5.0-2P: pin 1 +24 V, pin 2 return. Confirm terminal rating: design current envelope 9 A with one 75 W LED channel plus the other loads",
       "position": [
         45.72,
         129.54
@@ -149,7 +149,7 @@
         "3": "RTN_SHUNT"
       },
       "footprint": "Package_TO_SOT_THT:TO-220-3_Vertical",
-      "note": "Stock IRL2505, TO-220 G-D-S, vertical without heatsink (~0.65 W at 7.5 A). Drain tab = PSU_RTN. Vgs max 16 V: gate is clamped by D103",
+      "note": "Stock IRL2505, TO-220 G-D-S, vertical without heatsink. Check dissipation at the 9 A board-current envelope. Drain tab = PSU_RTN. Vgs max 16 V: gate is clamped by D103",
       "position": [
         265.43,
         199.39
@@ -1927,7 +1927,7 @@
         "5": "LED_SW"
       },
       "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
-      "note": "Infineon OptiMOS 5 logic level: S1-S3, G4, D5-8. Stock: 2 pcs (Q501 and Q703), no spare",
+      "note": "Infineon OptiMOS 5 logic level: S1-S3, G4, D5-8. One of two stock parts used for Q501, one spare; Q703 is catalog-sourced CSD19531KCS in TO-220",
       "position": [
         299.72,
         59.69
@@ -2014,15 +2014,15 @@
       "sheet": "LED",
       "ref": "R505",
       "symbol": "R",
-      "value": "6k2 1%",
-      "mpn": "SMD1206-6K2-1%",
-      "src": "SMD1206-6K2-1%",
+      "value": "4k7 1%",
+      "mpn": "SMD1206 4K7 1%",
+      "src": "SMD1206 4K7 1%",
       "nets": {
         "1": "LED_CSH",
         "2": "LED_CSH_MID"
       },
       "footprint": "Resistor_SMD:R_1206_3216Metric",
-      "note": "",
+      "note": "With R506=620R: 5.32k total, ~1.55 A / 75 W-class at 48 V shared by all LED outputs",
       "position": [
         374.65,
         119.38
@@ -2033,9 +2033,9 @@
       "sheet": "LED",
       "ref": "R506",
       "symbol": "R",
-      "value": "1k2 1%",
-      "mpn": "CRCW12061K20FKTABC",
-      "src": "CRCW12061K20FKTABC",
+      "value": "620R 1%",
+      "mpn": "CRCW1206620RFKTABC",
+      "src": "CRCW1206620RFKTABC",
       "nets": {
         "1": "LED_CSH_MID",
         "2": "GND"
@@ -2538,6 +2538,44 @@
       "note": "",
       "position": [
         173.99,
+        219.71
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "LED",
+      "ref": "J502",
+      "symbol": "J2",
+      "value": "LED 2 + / GND",
+      "mpn": "KF301-5.0-2P",
+      "src": "S93",
+      "nets": {
+        "1": "LED_POS",
+        "2": "GND"
+      },
+      "footprint": "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal",
+      "note": "Parallel with J501/J503 after R502: pin 1 LED_POS, pin 2 GND. All three terminals share one LM3429 channel: ~1.55 A total, 75 W-class at ~48 V.",
+      "position": [
+        374.65,
+        100.33
+      ],
+      "in_bom": true
+    },
+    {
+      "sheet": "LED",
+      "ref": "J503",
+      "symbol": "J2",
+      "value": "LED 3 + / GND",
+      "mpn": "KF301-5.0-2P",
+      "src": "S93",
+      "nets": {
+        "1": "LED_POS",
+        "2": "GND"
+      },
+      "footprint": "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal",
+      "note": "Parallel with J501/J502 after R502: pin 1 LED_POS, pin 2 GND. All three terminals share one LM3429 channel: ~1.55 A total, 75 W-class at ~48 V.",
+      "position": [
+        374.65,
         219.71
       ],
       "in_bom": true

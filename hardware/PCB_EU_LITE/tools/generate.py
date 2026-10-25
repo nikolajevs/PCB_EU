@@ -161,6 +161,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'BC847B-DIO': 'Package_TO_SOT_SMD:SOT-23', 'BC857B': 'Package_TO_SOT_SMD:SOT-23', 'BZV55C12': 'Diode_SMD:D_MiniMELF',
     'BC-2001': 'LITE_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
     'C1206C100J5GACTU': C1206, 'OSTAPA57E2A': 'LITE_Parts:LED_OSTAPA57E2A_Formed_P2.54mm', 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
+    'SMD1206 4K7 1%': R1206, 'CRCW1206620RFKTABC': R1206,
     'CRCW12061K20FKTABC': R1206, 'SMD1206 56K 1%': R1206, 'SMD1206-33K-1%': R1206,
 }
 # Footprints already drawn from manufacturer drawings in EU-0.1 / cheap-version (physical fit still pending)
@@ -216,18 +217,18 @@ sheet('InputPower', '01 | 24 V input, reverse polarity, fuses and power monitor'
  'clamped by D103 12 V (IRL2505 Vgs max 16 V): Vgs ~11.7 V at 21.6 V, 12 V at the 42 V TVS clamp. Reverse input: Q102 off, body diode blocked.',
  'Power monitor: R111||R112 = 3.5 mOhm (two 7 mOhm metal strip, stock) between board GND and Q102 source; INA238 U102 at I2C 0x40.',
  'INA238 VBUS takes +24V_FUSED directly (85 V limit): no 1k + zener as with the INA226. IN+ (pin 10) is a Kelvin tap on the GND pad of R111.',
- 'ADCRANGE=1 (+-40.96 mV): full scale 11.7 A, board load 7.3-7.5 A. INA238 registers differ from INA226: firmware port needed.',
+ 'ADCRANGE=1 (+-40.96 mV): full scale 11.7 A; board budget <=9 A with the 75 W LED channel. INA238 registers differ from INA226: firmware port needed.',
  'Fuses: F101 main 15 A; F102 PTC 8 A; F103 LED 6.3 A; F104 12 V buck 2 A; F105 pump 1 A (all slow). Coordination NOT qualified.',
  'Programmer/USB ground must never become the power return. D101 clamps +24V_FUSED at ~42 V.',
 ], 95)
-add('InputPower', 'J101', 'J2', '24 V IN', 'S93', ['+24V_RAW', 'PSU_RTN'], note='KF301-5.0-2P: pin 1 +24 V, pin 2 return. Terminal rating (10-16 A) to confirm: board load up to ~7.5 A (9.3 A at 21.6 V is the EU-0.1 budget with 2 LED channels)')
+add('InputPower', 'J101', 'J2', '24 V IN', 'S93', ['+24V_RAW', 'PSU_RTN'], note='KF301-5.0-2P: pin 1 +24 V, pin 2 return. Confirm terminal rating: design current envelope 9 A with one 75 W LED channel plus the other loads')
 for ref, val, src, a, b in [('F101', '15 A slow', '3413.0330.11', '+24V_RAW', V24), ('F102', '8 A slow', '3413.0327.11', V24, '+24V_PTC'),
                             ('F103', '6.3 A slow', '3413.0224.11', V24, '+24V_LED'), ('F104', '2 A slow', '3403.0169.11', V24, '+24V_AUX'),
                             ('F105', '1 A slow', '3403.0166.11', V24, '+24V_PUMP')]:
     add('InputPower', ref, 'F', val, src, [a, b], note='SCHURTER reflow lands from EU-0.1; fuse clearing I2t/coordination remain unqualified')
 add('InputPower', 'D101', 'TVS', 'SMBJ26A', 'SMBJ26A-E3/52', [V24, GND])
 add('InputPower', 'Q102', 'NMOS', 'IRL2505', 'S78', {1: 'REVP_GATE', 2: 'PSU_RTN', 3: 'RTN_SHUNT'},
-    note='Stock IRL2505, TO-220 G-D-S, vertical without heatsink (~0.65 W at 7.5 A). Drain tab = PSU_RTN. Vgs max 16 V: gate is clamped by D103', pos=(265, 200))
+    note='Stock IRL2505, TO-220 G-D-S, vertical without heatsink. Check dissipation at the 9 A board-current envelope. Drain tab = PSU_RTN. Vgs max 16 V: gate is clamped by D103', pos=(265, 200))
 r('InputPower', 'R108', '10k 1206', 'SMD1206-10K-1%', V24, 'REVP_GATE', 'Gate feed; 90 mW at the 42 V TVS clamp (1206 is required)')
 add('InputPower', 'D103', 'D', 'BZV55C12 12 V', 'BZV55C12', ['REVP_GATE', GND], note='Clamps Q102 gate-source below the IRL2505 16 V limit')
 for ref in ('C101', 'C102'):
@@ -335,13 +336,15 @@ for k in (1, 2):
 
 # ------------------------------------------------------------------ 06 | LED boost (one channel)
 sheet('LED', '06 | LED boost channel (LM3429, one channel)', [
- 'One channel replaces the two of EU-0.1 (owner decision 24.10.2026): panel ~1.117 A nominal (1.24 V x 1k / (7.4k x 0.15 R)). A second load in parallel shares this current.',
+ 'J501/J502/J503 are parallel outputs AFTER R502: one 75 W-class LED channel, ~1.55 A TOTAL at ~48 V (1.235 V x 1k / (5.32k x 0.15 R)).',
  'LM3429 VIN senses the actual 24 V input. RCT is fed from SW through 56k + 6k2, CT 1 nF C0G: same as EU-0.1 LED1 (frequency unchanged).',
- 'L501: stock Feryster DTMSS-27/0.047/15-V, 47 uH, 15 A, standing toroid ~35 mm high (cheap-version). Ripple 0.7 A, peak input current 3.0 A at 21.6 V; IS limit 0.2 V / 0.04 R = 5 A.',
- 'Q501: stock BSC146N10LS5 (TDSON-8, 100 V, 14.6 mOhm, Qgd 2.8 nC) on the LM3429 7 V gate drive; no heatsink: ~0.6 W estimated, needs copper area and a thermal-via field.',
+ 'L501: stock Feryster DTMSS-27/0.047/15-V, 47 uH, 15 A, standing toroid ~35 mm high. Model peak <=4.36 A at 21.6 V, 90% efficiency, 43.5 uH, 1.26 V CSH and 1% resistors.',
+ 'LM3429 IS threshold is 215/245/275 mV min/typ/max (TI Rev H): minimum limit 5.32 A with R501=40 mOhm +1%; modeled current-limit headroom >=20%. Verify real tolerances and heating.',
+ 'Q501: stock BSC146N10LS5 (TDSON-8, 100 V, 14.6 mOhm, Qgd 2.8 nC) on the LM3429 7 V gate drive; no heatsink. The 75 W setpoint needs wide power copper, thermal vias and temperature checks.',
  'Gate resistor 2 x 10 R in parallel = 5 R (stock) instead of 4.7 R. D501: stock SBRT15U100SP5 (100 V, 15 A, PowerDI5): pad 1 cathode, pads 2 anode.',
  'HSP/HSN use equal 1k filters; output bank is BEFORE the LED shunt; LED negative is GND. OVP = 1.24 V x 44 = 54.56 V; 63 V electrolytic and 100 V ceramics.',
  'nDIM: GPIO25 -> 5.1k -> nDIM, 10k to GND (HIGH 2.19 V, Hi-Z 0.6 V). No BAT54/LM2903 hardware block (see 02 | UVLO note).',
+ 'Required firmware setting: at 1 kHz / 8 bit use >=5 PWM counts (19.53 us); the new startup-pulse estimate is ~16 us at 21.6 V / 48 V. Firmware is not changed here.',
  'Boost output has a DC path from VIN even while disabled. Fuse is not semiconductor short-circuit proof. 22u COMP intentionally slow.',
 ], 85)
 nn = {1: '+24V_LED', 2: 'LED_COMP', 3: 'LED_CSH', 4: 'LED_RCT', 5: GND, 6: 'LED_OVP', 7: 'LED_NDIM', 8: None, 9: GND, 10: 'LED_GATE_RAW',
@@ -350,11 +353,12 @@ add('LED', 'U501', 'LM3429', 'LM3429MH/NOPB', 'LM3429MH/NOPB', nn, note='TI PWP0
 add('LED', 'L501', 'L', '47u 15A', 'S12', ['+24V_LED', 'LED_SW'], note='Feryster DTMSS-27/0.047/15-V (stock id 12): 45.5 uH at 1 A, ~42 uH at 5 A. Height ~35 mm: measure the part and check the enclosure', pos=(300, 100))
 add('LED', 'D501', 'D', 'SBRT15U100SP5', 'S8', ['LED_OUT', 'LED_SW'], note='Diodes SBRT15U100SP5-13, stock id 8 (5 pcs). Pad 1 (tab) cathode, pads 2 anode')
 add('LED', 'Q501', 'NMOS_SO8', 'BSC146N10LS5', 'S112', {1: 'LED_IS', 2: 'LED_IS', 3: 'LED_IS', 4: 'LED_GATE', 5: 'LED_SW'},
-    note='Infineon OptiMOS 5 logic level: S1-S3, G4, D5-8. Stock: 2 pcs (Q501 and Q703), no spare', pos=(300, 60))
+    note='Infineon OptiMOS 5 logic level: S1-S3, G4, D5-8. One of two stock parts used for Q501, one spare; Q703 is catalog-sourced CSD19531KCS in TO-220', pos=(300, 60))
 r('LED', 'R501', '0R040 3W', 'LRP2512-R040-1%', 'LED_IS', GND, 'Switch-current sense (IS); source of Q501 -> shunt -> power GND')
 r('LED', 'R502', '0R15 2W', 'CS2512-0R15-1%-HP', 'LED_OUT', 'LED_POS', 'High side LED current shunt, separate Kelvin sense pair')
 r('LED', 'R503', '1k 1%', 'S62', 'LED_OUT', 'LED_HSP'); r('LED', 'R504', '1k 1%', 'S62', 'LED_POS', 'LED_HSN')
-r('LED', 'R505', '6k2 1%', 'SMD1206-6K2-1%', 'LED_CSH', 'LED_CSH_MID'); r('LED', 'R506', '1k2 1%', 'CRCW12061K20FKTABC', 'LED_CSH_MID', GND)
+r('LED', 'R505', '4k7 1%', 'SMD1206 4K7 1%', 'LED_CSH', 'LED_CSH_MID', 'With R506=620R: 5.32k total, ~1.55 A / 75 W-class at 48 V shared by all LED outputs')
+r('LED', 'R506', '620R 1%', 'CRCW1206620RFKTABC', 'LED_CSH_MID', GND)
 r('LED', 'R507', '56k 1%', 'SMD1206 56K 1%', 'LED_SW', 'LED_RT_MID'); r('LED', 'R508', '6k2 1%', 'SMD1206-6K2-1%', 'LED_RT_MID', 'LED_RCT')
 r('LED', 'R509', '33k 1%', 'SMD1206-33K-1%', 'LED_OUT', 'LED_OVP_MID'); r('LED', 'R510', '10k 1%', 'S59', 'LED_OVP_MID', 'LED_OVP')
 r('LED', 'R511', '1k 1%', 'S62', 'LED_OVP', GND)
@@ -369,6 +373,10 @@ for n in range(509, 515):
     c('LED', f'C{n}', '4u7 100V', 'S2', 'LED_OUT')
 c('LED', 'C515', '100n 100V', 'S5', 'LED_OUT')
 add('LED', 'J501', 'J2', 'LED + / GND', 'S93', ['LED_POS', GND])
+add('LED', 'J502', 'J2', 'LED 2 + / GND', 'S93', ['LED_POS', GND],
+    note='Parallel with J501/J503 after R502: pin 1 LED_POS, pin 2 GND. All three terminals share one LM3429 channel: ~1.55 A total, 75 W-class at ~48 V.', pos=(375, 100))
+add('LED', 'J503', 'J2', 'LED 3 + / GND', 'S93', ['LED_POS', GND],
+    note='Parallel with J501/J502 after R502: pin 1 LED_POS, pin 2 GND. All three terminals share one LM3429 channel: ~1.55 A total, 75 W-class at ~48 V.', pos=(375, 220))
 
 # ------------------------------------------------------------------ 07 | PTC heater and pump
 sheet('Loads', '07 | PTC heater and 24 V pump', [
@@ -438,7 +446,7 @@ def geometry(s):
     if kind == 'sw': return line([(-2.54, 0), (2.54, 2.54)])
     if kind == 'y': return rect(-1.27, 2.54, 1.27, -2.54) + line([(-2.54, 2.54), (-2.54, -2.54)]) + line([(2.54, 2.54), (2.54, -2.54)])
     if kind == 'bat': return line([(-.635, 2.54), (-.635, -2.54)]) + line([(.635, 1.27), (.635, -1.27)]) + line([(-3, 3), (-1.5, 3)]) + line([(-2.25, 2.25), (-2.25, 3.75)])
-    if kind == 'nmos': return (HERE/'libraries/NMOS_graphics.sexpr').read_text().rstrip()
+    if kind == 'nmos': return (HERE/'libraries/NMOS_graphics.sexpr').read_text(encoding='utf-8').rstrip()
     if kind in ['npn', 'pnp']:
         body = line([(-2.54, 2.54), (-2.54, -2.54)]) + line([(-2.54, 1.27), (5.08, 3.81), (5.08, 5.08)]) + line([(-2.54, -1.27), (5.08, -3.81), (5.08, -5.08)])
         arrow = [(3.81, -3.386), (2.05, -3.45), (2.75, -1.78), (3.81, -3.386)] if kind == 'npn' else [(0.635, 2.328), (2.8, 2.07), (2.1, 3.74), (0.635, 2.328)]
@@ -574,30 +582,30 @@ def build_bom():
 def main():
     for d in ['libraries', 'review']: (HERE/d).mkdir(exist_ok=True)
     lib = '(kicad_symbol_lib (version 20241209) (generator "kicad_symbol_editor")\n' + '\n'.join(libsymbol(n) for n in sorted(symbols)) + ')\n'
-    (HERE/'libraries/EU_LITE.kicad_sym').write_text(lib)
-    (HERE/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "EU_LITE") (type "KiCad") (uri "${KIPRJMOD}/libraries/EU_LITE.kicad_sym") (options "") (descr "Project pin-verified symbols")))\n')
+    (HERE/'libraries/EU_LITE.kicad_sym').write_text(lib, encoding='utf-8')
+    (HERE/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "EU_LITE") (type "KiCad") (uri "${KIPRJMOD}/libraries/EU_LITE.kicad_sym") (options "") (descr "Project pin-verified symbols")))\n', encoding='utf-8')
     fp = [('EU_Mechanical', '${KIPRJMOD}/../PCB_EU/libraries/EU_Mechanical.pretty'), ('EU_Parts', '${KIPRJMOD}/../PCB_EU/libraries/EU_Parts.pretty'),
           ('LITE_Parts', '${KIPRJMOD}/libraries/LITE_Parts.pretty')]
     fp.extend((lib.stem, '${KIPRJMOD}/libraries/' + lib.name)
               for lib in sorted((HERE/'libraries').glob('*.pretty')) if lib.stem != 'LITE_Parts')
     (HERE/'fp-lib-table').write_text('(fp_lib_table (version 7)\n' + '\n'.join(
-        f'(lib (name {q(n)}) (type "KiCad") (uri "{u}") (options "") (descr "Project footprints; see README.md and ../PCB_EU/libraries/SOURCES.md"))' for n, u in fp) + ')\n')
-    for sh, meta in sheets.items(): (HERE/f'{sh}.kicad_sch').write_text(schematic(sh, meta))
+        f'(lib (name {q(n)}) (type "KiCad") (uri "{u}") (options "") (descr "Project footprints; see README.md and ../PCB_EU/libraries/SOURCES.md"))' for n, u in fp) + ')\n', encoding='utf-8')
+    for sh, meta in sheets.items(): (HERE/f'{sh}.kicad_sch').write_text(schematic(sh, meta), encoding='utf-8')
     root = [header(ROOT, 'GrowBox | EU-LITE | schematic review'), '(lib_symbols)']
     root.append(textblk(ROOT, 'title', 'GrowBox controller EU-LITE\nCheaper analogue of EU-0.1 from owner stock / 24 V PSU', 20, 17, 2.5))
     root.append(textblk(ROOT, 'scope', 'SCHEMATIC DRAFT EU-LITE-0.1 | 24 October 2026\nConnection/BOM draft. One LED channel, no fan tachometers, no UVLO comparator.\n'
-                        'Unrouted PCB placement is a separate artifact. Not a manufacturing release.\nCurrent ERC and placement checks: see README.md.', 20, 40, 1.6))
+                        'PCB electrically routed; design draft, not a manufacturing release.\nSee README.md for current ERC, DRC and placement checks.', 20, 40, 1.6))
     for k, (sh, meta) in enumerate(sheets.items()):
         x = 25+185*(k % 2); y = 75+42*(k//2); sid = uid('sheet', sh)
         root.append(f'(sheet (at {x} {y}) (size 155 28) (stroke (width 0.254) (type default)) (fill (color 0 0 0 0)) (uuid {q(sid)}) {prop("Sheetname", meta["title"], x+77.5, y-2, False, 1.4)} {prop("Sheetfile", sh+".kicad_sch", x+77.5, y+30, False, 1)} (instances (project {q(ROOT)} (path {q("/"+uid(ROOT))} (page {q(k+2)})))))')
     root.append('(sheet_instances (path "/" (page "1"))) (embedded_fonts no))')
-    (HERE/f'{ROOT}.kicad_sch').write_text('\n'.join(root) + '\n')
+    (HERE/f'{ROOT}.kicad_sch').write_text('\n'.join(root) + '\n', encoding='utf-8')
     project_path = HERE/f'{ROOT}.kicad_pro'
-    project = json.loads(project_path.read_text()) if project_path.exists() else dict(meta=dict(filename=f'{ROOT}.kicad_pro', version=3), erc=dict(erc_exclusions=[], meta=dict(version=0)), schematic=dict(meta=dict(version=1)))
+    project = json.loads(project_path.read_text(encoding='utf-8')) if project_path.exists() else dict(meta=dict(filename=f'{ROOT}.kicad_pro', version=3), erc=dict(erc_exclusions=[], meta=dict(version=0)), schematic=dict(meta=dict(version=1)))
     project.setdefault('text_variables', {})['DESIGN_STAGE'] = 'SCHEMATIC_DRAFT'
-    project_path.write_text(json.dumps(project, indent=2) + '\n')
+    project_path.write_text(json.dumps(project, indent=2) + '\n', encoding='utf-8')
     spec = dict(revision=REV, date=DATE, base='EU-0.1 (hardware/PCB_EU) with ../cheap-version substitutions', parts=parts, accessories=accessories, source_urls=source_urls)
-    (HERE/'design.json').write_text(json.dumps(spec, ensure_ascii=False, indent=2) + '\n')
+    (HERE/'design.json').write_text(json.dumps(spec, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
     stock_rows, buy_rows = build_bom()
     totals = defaultdict(Decimal)
@@ -611,7 +619,7 @@ def main():
                    parts_EUR=str(sum(totals.values())), shipping_EUR=str(shipping), total_EUR=str(sum(totals.values()) + shipping),
                    unpriced_items=unpriced, unpriced_allowance_EUR='0.00',
                    price_basis='Catalogue snapshot 2026-10-23, including CSD19531KCS from catalog.db; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order.')
-    (HERE/'BOM_allocated.json').write_text(json.dumps(dict(stock=stock_rows, buy=buy_rows, summary=summary), ensure_ascii=False, indent=2) + '\n')
+    (HERE/'BOM_allocated.json').write_text(json.dumps(dict(stock=stock_rows, buy=buy_rows, summary=summary), ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     with (HERE/'BOM_allocated.csv').open('w', newline='', encoding='utf-8-sig') as f:
         w = csv.writer(f, lineterminator='\n')
         w.writerow(['Source', 'Shop', 'MPN_or_shop_SKU', 'Fitted', 'Buy_pieces', 'Price_per_piece_EUR_VAT', 'Line_EUR_VAT', 'References', 'Stock_id', 'Stock_left', 'URL', 'Price_date', 'Notes'])
@@ -620,7 +628,7 @@ def main():
                         ('нет в снимке каталога и на складе: цена не известна, ориентир не выше 0,50 € (оценка); магазин выбрать из разрешённых' if x['unpriced'] else f"минимум {x['min_qty']}, кратность {x['multiple']}; наличие в каталоге: {str(x['stock'])[:24]}")])
         for x in stock_rows:
             w.writerow(['stock', 'Склад', x['mpn'], x['needed'], 0, 0, '0.00', ' '.join(x['refs']), x['id'], x['stock_left'], '', '2026-10-24', f"{x['name']}; {x['value']}; {x['package']}"])
-    (HERE/'review/BOM_summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n')
+    (HERE/'review/BOM_summary.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 

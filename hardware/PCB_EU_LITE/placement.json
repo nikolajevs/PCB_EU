@@ -1,5 +1,5 @@
 {
-  "stage": "PARTIALLY_ROUTED",
+  "stage": "ROUTED_DRAFT",
   "date": "2026-10-25",
   "board_mm": [
     100,
@@ -29,7 +29,9 @@
     "L501",
     "Q102",
     "SW201",
-    "SW202"
+    "SW202",
+    "J502",
+    "J503"
   ],
   "placements": {
     "BT301": {
@@ -997,6 +999,18 @@
       "y": 49.5,
       "rotation": 0.0,
       "side": "B"
+    },
+    "J502": {
+      "x": 94.0,
+      "y": 74.0,
+      "rotation": 90,
+      "side": "F"
+    },
+    "J503": {
+      "x": 94.0,
+      "y": 87.0,
+      "rotation": 90,
+      "side": "F"
     }
   },
   "bottom_side_allowed": [
@@ -1126,6 +1140,26 @@
         15.45,
         14.5,
         35.45
+      ],
+      "max_edge_gap_mm": 2
+    },
+    "J502": {
+      "edge": "right",
+      "local_access_box": [
+        -3.0,
+        4.6,
+        8.0,
+        24.6
+      ],
+      "max_edge_gap_mm": 2
+    },
+    "J503": {
+      "edge": "right",
+      "local_access_box": [
+        -3.0,
+        4.6,
+        8.0,
+        24.6
       ],
       "max_edge_gap_mm": 2
     }

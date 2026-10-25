@@ -440,5 +440,31 @@
   "multiple": 1,
   "pack": 1,
   "source": "Owner-provided Electrobase product card 2026-10-25; VAT included; no live checkout verification"
+ },
+ "SMD1206 4K7 1%": {
+  "shop": "Salvats",
+  "sku": "SMD1206",
+  "title": "4K7-1206-1% SMD Rezistors, 1206",
+  "price": 0.04,
+  "stock": "347",
+  "url": "https://www.salvats.lv/lv/rezistori-smd-1206-025w/4k7-1206-1-smd-rezistors-1206",
+  "price_date": "2026-10-23",
+  "min_qty": 1,
+  "multiple": 1,
+  "pack": 1,
+  "source": "catalog.db"
+ },
+ "CRCW1206620RFKTABC": {
+  "shop": "Salvats",
+  "sku": "CRCW1206620RFKTABC",
+  "title": "620R-1206-1% SMD Rezistors, 1206",
+  "price": 0.03,
+  "stock": "99",
+  "url": "https://www.salvats.lv/lv/rezistori-smd-1206-025w/620r-1206-1-smd-rezistors-1206",
+  "price_date": "2026-10-23",
+  "min_qty": 1,
+  "multiple": 1,
+  "pack": 1,
+  "source": "catalog.db"
  }
 }
