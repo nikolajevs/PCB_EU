@@ -159,7 +159,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'ZL201-10G': 'Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical', 'UPW1H221MPD': 'Capacitor_THT:CP_Radial_D10.0mm_P5.00mm',
     'LRP2512-R040-1%': 'Resistor_SMD:R_2512_6332Metric', 'CS2512-0R15-1%-HP': 'Resistor_SMD:R_2512_6332Metric',
     'BC847B-DIO': 'Package_TO_SOT_SMD:SOT-23', 'BC857B': 'Package_TO_SOT_SMD:SOT-23', 'BZV55C12': 'Diode_SMD:D_MiniMELF',
-    'BC-2001': 'EU_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
+    'BC-2001': 'LITE_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
     'C1206C100J5GACTU': C1206, 'OSTAPA57E2A': 'LITE_Parts:LED_OSTAPA57E2A_Formed_P2.54mm', 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
     'CRCW12061K20FKTABC': R1206, 'SMD1206 56K 1%': R1206, 'SMD1206-33K-1%': R1206,
 }

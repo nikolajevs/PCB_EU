@@ -1243,7 +1243,7 @@
         "1": "VBAT",
         "2": "GND"
       },
-      "footprint": "EU_Mechanical:Battery_COMF_BC-2001",
+      "footprint": "LITE_Mechanical:Battery_COMF_BC-2001",
       "note": "COMF BC-2001: side pads 1 positive; centre pad 2 negative",
       "position": [
         308.61,
