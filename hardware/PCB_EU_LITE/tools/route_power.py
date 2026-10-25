@@ -6,6 +6,7 @@ current, thermal, or prototype measurements.
 SPDX-License-Identifier: MIT
 """
 import argparse
+import math
 from pathlib import Path
 
 import pcbnew as p
@@ -17,6 +18,35 @@ CLEARANCE = 0.2
 MIN_THICKNESS = 0.25
 
 
+def route_corridor(points, half_width):
+    """Return a mitered copper corridor around a non-reversing route polyline."""
+    directions = []
+    for a, b in zip(points, points[1:]):
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        length = math.hypot(dx, dy)
+        if length == 0:
+            raise ValueError('Route corridor has duplicate consecutive points')
+        directions.append((dx / length, dy / length))
+
+    def offset_side(sign):
+        normals = [(sign * -dy, sign * dx) for dx, dy in directions]
+        result = [(points[0][0] + half_width * normals[0][0],
+                   points[0][1] + half_width * normals[0][1])]
+        for i in range(1, len(points) - 1):
+            previous, following = normals[i - 1], normals[i]
+            denominator = 1 + previous[0] * following[0] + previous[1] * following[1]
+            if denominator < 0.1:
+                raise ValueError('Route corridor has an almost reversing corner')
+            scale = half_width / denominator
+            result.append((points[i][0] + scale * (previous[0] + following[0]),
+                           points[i][1] + scale * (previous[1] + following[1])))
+        result.append((points[-1][0] + half_width * normals[-1][0],
+                       points[-1][1] + half_width * normals[-1][1]))
+        return result
+
+    return offset_side(1) + list(reversed(offset_side(-1)))
+
+
 def add_zone(board, net, layer, name, points, priority=0):
     zone = p.ZONE(board)
     identity(zone, 'lite_power/zone/' + name)
@@ -24,7 +54,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'input_raw', 'pump_return'}
+    solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
     zone.SetThermalReliefGap(MM(0.3))
@@ -105,6 +135,15 @@ def add_power_zones(board):
          [(5.4,49.4),(17.2,48.4),(17.2,53.0),(5.4,52.7)], 3),
         ('+24V_FUSED', 'F.Cu', 'input_24v',
          [(22.3,46.5),(44.5,46.5),(46.8,49.5),(45.2,56.6),(25.0,57.4),(22.3,52.2)], 2),
+        # Add a 4 mm copper corridor to F103. The modeled average LED-driver
+        # input current reaches about 3.9 A at 75 W, 21.6 V, and 90% efficiency.
+        # The pour clips itself around the nearby D101 and LED nets.
+        ('+24V_FUSED', 'F.Cu', 'fused_led_feed',
+         route_corridor([(44.0,46.5),(53.35,42.15),(55.0,42.15),
+                         (56.99,40.16),(56.99,35.29),(56.2,34.5)], 2.0), 3),
+        # Widen the source-side segment feeding the pump fuse F105.
+        ('+24V_FUSED', 'F.Cu', 'fused_pump_feed',
+         route_corridor([(61.5,93.51),(70.01,85.0),(70.75,85.0)], 1.5), 3),
         ('+12V', 'F.Cu', 'logic_12v',
          [(31.0,31.0),(46.8,31.0),(47.0,36.5),(42.0,36.5),(42.0,41.5),(32.0,41.5)], 2),
         ('+24V_LED', 'F.Cu', 'led_input',
@@ -141,7 +180,7 @@ def main():
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
     p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 10 local power pours; tracks/vias={len(board.GetTracks())}; '
+    print(f'Added three ground pours and 12 local power pours; tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
 
