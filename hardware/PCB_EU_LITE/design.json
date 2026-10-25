@@ -1688,7 +1688,7 @@
       "sheet": "Interfaces",
       "ref": "J411",
       "symbol": "J4",
-      "value": "FAN1 2510-4P",
+      "value": "FAN1 2510-4P 90deg",
       "mpn": "KF2510 / KF2540 4P",
       "src": "S87",
       "nets": {
@@ -1697,8 +1697,8 @@
         "3": null,
         "4": "FAN1_PWM"
       },
-      "footprint": "Connector_Molex:Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical",
-      "note": "4-pin PC fan pinout: 1 GND, 2 +12 V, 3 tach (NC), 4 PWM. KF2510 matches Molex KK-254; confirm against the part",
+      "footprint": "LITE_Parts:KF2510_1x04_P2.54mm_RightAngle",
+      "note": "Right-angle 2510-4AW footprint; stock KF2510/KF2540 variant needs physical confirmation. Pinout unchanged: 1 GND, 2 +12 V, 3 tach (NC), 4 PWM. Reference envelope: LHE A2543-WR04; check latch and pin 1 on actual part",
       "position": [
         241.3,
         165.1
@@ -1767,7 +1767,7 @@
       "sheet": "Interfaces",
       "ref": "J421",
       "symbol": "J4",
-      "value": "FAN2 2510-4P",
+      "value": "FAN2 2510-4P 90deg",
       "mpn": "KF2510 / KF2540 4P",
       "src": "S87",
       "nets": {
@@ -1776,8 +1776,8 @@
         "3": null,
         "4": "FAN2_PWM"
       },
-      "footprint": "Connector_Molex:Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical",
-      "note": "4-pin PC fan pinout: 1 GND, 2 +12 V, 3 tach (NC), 4 PWM. KF2510 matches Molex KK-254; confirm against the part",
+      "footprint": "LITE_Parts:KF2510_1x04_P2.54mm_RightAngle",
+      "note": "Right-angle 2510-4AW footprint; stock KF2510/KF2540 variant needs physical confirmation. Pinout unchanged: 1 GND, 2 +12 V, 3 tach (NC), 4 PWM. Reference envelope: LHE A2543-WR04; check latch and pin 1 on actual part",
       "position": [
         45.72,
         185.42
