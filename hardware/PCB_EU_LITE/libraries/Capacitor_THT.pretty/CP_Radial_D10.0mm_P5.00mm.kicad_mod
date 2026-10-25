@@ -38,24 +38,6 @@
 	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
-		(start -2.979646 -2.875)
-		(end -1.979646 -2.875)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "F.SilkS")
-	)
-	(fp_line
-		(start -2.479646 -3.375)
-		(end -2.479646 -2.375)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "F.SilkS")
-	)
-	(fp_line
 		(start 2.5 -5.08)
 		(end 2.5 5.08)
 		(stroke
