@@ -55,7 +55,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
     solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
-                   'fused_main_bus'}
+                   'fused_main_bus', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
     zone.SetThermalReliefGap(MM(0.3))
@@ -126,7 +126,7 @@ def add_power_zones(board):
     # starved to one spoke by the nearby zones.
     for ref, number in (('U102','2'), ('U102','7'), ('U201','2'), ('U201','4'),
                         ('U201','6'), ('U501','1'), ('U501','9'), ('D701','1'), ('Q102','2'),
-                        ('Q703','2'), ('Q703','3'), ('J701','1'), ('J701','2')):
+                        ('Q703','2'), ('Q703','3'), ('J701','1'), ('J701','2'), ('Q102','3')):
         set_full_pad_connection(board, ref, number)
 
     specs = [
@@ -134,6 +134,10 @@ def add_power_zones(board):
          [(5.4,44.5),(24.0,48.8),(24.0,51.2),(5.4,47.0)], 4),
         ('PSU_RTN', 'F.Cu', 'input_return',
          [(5.4,49.4),(17.2,48.4),(17.2,53.0),(5.4,52.7)], 3),
+        # Strengthen only the Q102 side of RTN_SHUNT; the existing INA238
+        # Kelvin keepout separates this pour from the sense branch.
+        ('RTN_SHUNT', 'F.Cu', 'return_q102_bus',
+         route_corridor([(15.5,47.92),(16.817,47.92),(16.817,48.952),(17.591,49.725)], 1.5), 4),
         ('+24V_FUSED', 'F.Cu', 'input_24v',
          [(22.3,46.5),(44.5,46.5),(46.8,49.5),(45.2,56.6),(25.0,57.4),(22.3,52.2)], 2),
         # Add a 4 mm copper corridor to F103. The modeled average LED-driver
@@ -192,7 +196,7 @@ def main():
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
     p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 14 local power pours; tracks/vias={len(board.GetTracks())}; '
+    print(f'Added three ground pours and 15 local power pours; tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
 
