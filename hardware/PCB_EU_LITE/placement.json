@@ -1,5 +1,5 @@
 {
-  "stage": "UNROUTED_PLACEMENT",
+  "stage": "PARTIALLY_ROUTED",
   "date": "2026-10-25",
   "board_mm": [
     100,
@@ -117,8 +117,8 @@
       "side": "F"
     },
     "C203": {
-      "x": 38.0,
-      "y": 33.0,
+      "x": 40.7,
+      "y": 31.5,
       "rotation": 0,
       "side": "F"
     },
