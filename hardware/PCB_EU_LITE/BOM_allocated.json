@@ -689,15 +689,17 @@
       "name": "Клеммник винтовой PCB 2-контактный",
       "value": "2 контакта, шаг 5,0 мм",
       "package": "THT, 2P",
-      "needed": 5,
+      "needed": 7,
       "buy": 0,
-      "on_hand": 5,
+      "on_hand": 7,
       "stock_total": 31,
-      "stock_left": 26,
+      "stock_left": 24,
       "refs": [
         "J101",
         "J403",
         "J501",
+        "J502",
+        "J503",
         "J701",
         "J702"
       ],
@@ -1170,15 +1172,15 @@
     },
     {
       "shop": "Salvats",
-      "mpn": "CRCW12061K20FKTABC",
-      "sku": "CRCW12061K20FKTABC",
+      "mpn": "CRCW1206620RFKTABC",
+      "sku": "CRCW1206620RFKTABC",
       "needed": 1,
       "buy": 1,
       "unit": "шт.",
       "price_unit": 0.03,
       "line": 0.03,
-      "stock": "169",
-      "url": "https://www.salvats.lv/lv/rezistori-smd-1206-025w/1k2-1206-1-smd-rezistors-1206",
+      "stock": "99",
+      "url": "https://www.salvats.lv/lv/rezistori-smd-1206-025w/620r-1206-1-smd-rezistors-1206",
       "price_date": "2026-10-23",
       "refs": [
         "R506"
@@ -1270,6 +1272,26 @@
     },
     {
       "shop": "Salvats",
+      "mpn": "SMD1206 4K7 1%",
+      "sku": "SMD1206",
+      "needed": 1,
+      "buy": 1,
+      "unit": "шт.",
+      "price_unit": 0.04,
+      "line": 0.04,
+      "stock": "347",
+      "url": "https://www.salvats.lv/lv/rezistori-smd-1206-025w/4k7-1206-1-smd-rezistors-1206",
+      "price_date": "2026-10-23",
+      "refs": [
+        "R505"
+      ],
+      "accessory_count": 0,
+      "min_qty": 1,
+      "multiple": 1,
+      "unpriced": false
+    },
+    {
+      "shop": "Salvats",
       "mpn": "SMD1206 56K 1%",
       "sku": "SMD1206",
       "needed": 1,
@@ -1332,17 +1354,16 @@
       "shop": "Salvats",
       "mpn": "SMD1206-6K2-1%",
       "sku": "SMD1206-6K2-1%",
-      "needed": 3,
-      "buy": 3,
+      "needed": 2,
+      "buy": 2,
       "unit": "шт.",
       "price_unit": 0.03,
-      "line": 0.09,
+      "line": 0.06,
       "stock": "830",
       "url": "https://www.salvats.lv/lv/rezistori-smd-1206-025w/6k2-1206-1-smd-rezistors-1206",
       "price_date": "2026-10-23",
       "refs": [
         "R102",
-        "R505",
         "R508"
       ],
       "accessory_count": 0,
@@ -1413,22 +1434,22 @@
     }
   ],
   "summary": {
-    "electrical_components": 156,
+    "electrical_components": 158,
     "testpads": 5,
     "accessories": {
       "BAT-CR2032/P": 1
     },
     "stock_rows": 38,
-    "stock_pieces": 113,
-    "buy_rows": 34,
+    "stock_pieces": 115,
+    "buy_rows": 35,
     "buy_pieces": 46,
     "shop_totals": {
       "Electrobase": "20.06",
-      "Salvats": "12.55"
+      "Salvats": "12.56"
     },
-    "parts_EUR": "32.61",
+    "parts_EUR": "32.62",
     "shipping_EUR": "5.87",
-    "total_EUR": "38.48",
+    "total_EUR": "38.49",
     "unpriced_items": [],
     "unpriced_allowance_EUR": "0.00",
     "price_basis": "Catalogue snapshot 2026-10-23, including CSD19531KCS from catalog.db; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
