@@ -2604,19 +2604,17 @@
     {
       "sheet": "Loads",
       "ref": "Q703",
-      "symbol": "NMOS_SO8",
-      "value": "BSC146N10LS5",
-      "mpn": "BSC146N10LS5",
-      "src": "S112",
+      "symbol": "NMOS",
+      "value": "CSD19531KCS",
+      "mpn": "CSD19531KCS",
+      "src": "CSD19531KCS",
       "nets": {
-        "1": "GND",
-        "2": "GND",
-        "3": "GND",
-        "4": "PTC_GATE",
-        "5": "PTC_DRAIN"
+        "1": "PTC_GATE",
+        "2": "PTC_DRAIN",
+        "3": "GND"
       },
-      "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
-      "note": "Stock BSC146N10LS5 (second and last piece)",
+      "footprint": "Package_TO_SOT_THT:TO-220-3_Vertical",
+      "note": "Salvats catalog snapshot 2026-10-23; TI datasheet: 100 V, TO-220, RDS(on) max 7.7 mOhm at VGS=10 V. Tab = drain; ~0.22 W at 4.34 A with 1.5x hot-resistance estimate. Check physical temperature; insulate live tab from grounded heatsink.",
       "position": [
         265.43,
         54.61
@@ -3360,6 +3358,7 @@
     "BAT-CR2032/P": 1
   },
   "source_urls": {
+    "CSD19531KCS": "https://www.ti.com/lit/ds/symlink/csd19531kcs.pdf",
     "OSTAPA57E2A": "https://www.optosupply.com/uppic/2020811188683.pdf",
     "LM3429MH/NOPB": "https://www.ti.com/lit/ds/symlink/lm3429.pdf",
     "S26": "https://www.st.com/resource/en/datasheet/st1s14.pdf",

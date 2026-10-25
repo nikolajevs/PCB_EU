@@ -7,14 +7,13 @@
       "name": "MOSFET N-канальный силовой",
       "value": "100 В, 44 А",
       "package": "PG-TDSON-8 / SuperSO8",
-      "needed": 2,
+      "needed": 1,
       "buy": 0,
-      "on_hand": 2,
+      "on_hand": 1,
       "stock_total": 2,
-      "stock_left": 0,
+      "stock_left": 1,
       "refs": [
-        "Q501",
-        "Q703"
+        "Q501"
       ],
       "line": 0.0
     },
@@ -1231,6 +1230,26 @@
     },
     {
       "shop": "Salvats",
+      "mpn": "CSD19531KCS",
+      "sku": "CSD19531KCS",
+      "needed": 1,
+      "buy": 1,
+      "unit": "шт.",
+      "price_unit": 2.95,
+      "line": 2.95,
+      "stock": "В наличии 7 шт. (снимок каталога 2026-10-23)",
+      "url": "https://www.salvats.lv/lv/100v-n-fet-tht/csd19531kcs-tranzistors-n-fet-100v-vgs2233v-20v-100a-214w-0r0073-to-220",
+      "price_date": "2026-10-23",
+      "refs": [
+        "Q703"
+      ],
+      "accessory_count": 0,
+      "min_qty": 1,
+      "multiple": 1,
+      "unpriced": false
+    },
+    {
+      "shop": "Salvats",
       "mpn": "LRP2512-R040-1%",
       "sku": "LRP2512-R040-1%",
       "needed": 1,
@@ -1400,18 +1419,18 @@
       "BAT-CR2032/P": 1
     },
     "stock_rows": 38,
-    "stock_pieces": 114,
-    "buy_rows": 33,
-    "buy_pieces": 45,
+    "stock_pieces": 113,
+    "buy_rows": 34,
+    "buy_pieces": 46,
     "shop_totals": {
       "Electrobase": "20.06",
-      "Salvats": "9.60"
+      "Salvats": "12.55"
     },
-    "parts_EUR": "29.66",
+    "parts_EUR": "32.61",
     "shipping_EUR": "5.87",
-    "total_EUR": "35.53",
+    "total_EUR": "38.48",
     "unpriced_items": [],
     "unpriced_allowance_EUR": "0.00",
-    "price_basis": "Catalogue snapshot 2026-10-23; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
+    "price_basis": "Catalogue snapshot 2026-10-23, including CSD19531KCS from catalog.db; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
   }
 }

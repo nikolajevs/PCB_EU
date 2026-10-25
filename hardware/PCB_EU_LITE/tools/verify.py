@@ -209,17 +209,17 @@ def main():
           pins('U202', {26: 'LED_R_GPIO', 27: 'LED_G_GPIO', 28: 'LED_B_GPIO'}) and all(len(real(f'LED_{c_}_GPIO')) == 2 for c_ in 'RGB') and all(len(real(f'LED_{c_}_K')) == 2 for c_ in 'RGB'))
 
     # ---- loads
-    check('PTC driver defaults off: separate NPN and PNP stages, PNP emitter on +12V, 12 V gate drive of the stock BSC146N10LS5, J701 return = drain',
-          pins('Q701', {1: 'PTC_NPN_B', 2: 'GND', 3: 'PTC_NPN_C'}) and pins('Q702', {1: 'PTC_PNP_B', 2: '+12V', 3: 'PTC_DRV'}) and pins('Q703', {1: 'GND', 2: 'GND', 3: 'GND', 4: 'PTC_GATE', 5: 'PTC_DRAIN'})
-          and p['Q703']['mpn'] == 'BSC146N10LS5' and two('R702', 'PTC_NPN_B', 'GND') and two('R706', 'PTC_GATE', 'GND') and pins('J701', {1: '+24V_PTC', 2: 'PTC_DRAIN'}))
+    check('PTC driver defaults off: separate NPN and PNP stages, PNP emitter on +12V, 12 V gate drive of CSD19531KCS (1=G, 2=D/tab, 3=S), J701 return = drain',
+          pins('Q701', {1: 'PTC_NPN_B', 2: 'GND', 3: 'PTC_NPN_C'}) and pins('Q702', {1: 'PTC_PNP_B', 2: '+12V', 3: 'PTC_DRV'}) and pins('Q703', {1: 'PTC_GATE', 2: 'PTC_DRAIN', 3: 'GND'})
+          and p['Q703']['mpn'] == 'CSD19531KCS' and p['Q703']['footprint'] == 'Package_TO_SOT_THT:TO-220-3_Vertical' and two('R702', 'PTC_NPN_B', 'GND') and two('R706', 'PTC_GATE', 'GND') and pins('J701', {1: '+24V_PTC', 2: 'PTC_DRAIN'}))
     vb = 3.6 * val('R702') * 1.05 / (30e3 + val('R701') + val('R702') * 1.05)
     check(f'PTC stays off with the ESP32 internal pull-up (30k worst case) on GPIO32: base {vb:.2f} V < 0.45 V even with 5 % R702; HIGH drive {(3.3 - 0.7) / val("R701") * 1e3:.2f} mA saturates the NPN',
           two('R701', 'PTC_GPIO', 'PTC_NPN_B') and vb < 0.45 and (3.3 - 0.7) / val('R701') * 100 > (12 - 0.7 - 0.2) / val('R703') + (12 - 0.7) / val('R704'))
     vg = 12 * val('R706') / (val('R706') + val('R705'))
-    check(f'PTC gate swing {vg:.1f} V from the PNP, 100 R gate resistor, 2k pull-down (BSC146N10LS5 rated 20 V gate)', two('R705', 'PTC_DRV', 'PTC_GATE') and two('R703', 'PTC_NPN_C', 'PTC_PNP_B') and two('R704', '+12V', 'PTC_PNP_B') and 10 <= vg <= 12)
+    check(f'PTC gate swing {vg:.1f} V from the PNP, 100 R gate resistor, 2k pull-down (CSD19531KCS rated ±20 V gate)', two('R705', 'PTC_DRV', 'PTC_GATE') and two('R703', 'PTC_NPN_C', 'PTC_PNP_B') and two('R704', '+12V', 'PTC_PNP_B') and 10 <= vg <= 12)
     ptc_max = 100 * (25 / 24) ** 2 / 25
-    check(f'Q703 conduction loss at the 25 V PSU limit ({ptc_max:.2f} A): {ptc_max ** 2 * 0.0146 * 1.5:.2f} W with RDS(on) max x 1.5 hot; F102 8 A',
-          ptc_max ** 2 * 0.0146 * 1.5 < 0.5 and ptc_max < 8 * 0.73)
+    check(f'Q703 conduction loss at the 25 V PSU limit ({ptc_max:.2f} A): {ptc_max ** 2 * 0.0077 * 1.5:.2f} W with RDS(on) max x 1.5 hot; F102 8 A',
+          ptc_max ** 2 * 0.0077 * 1.5 < 0.5 and ptc_max < 8 * 0.73)
     check('Pump AO3422: 1 gate / 2 source / 3 drain, reset pull-down 100k, SS56 flyback with cathode on fused +24V_PUMP',
           pins('Q704', {1: 'PUMP_GATE', 2: 'GND', 3: 'PUMP_DRAIN'}) and pins('D701', {1: '+24V_PUMP', 2: 'PUMP_DRAIN'}) and two('R708', 'PUMP_GATE', 'GND') and val('R708') == 100e3 and p['D701']['mpn'] == 'SS56' and pins('J702', {1: '+24V_PUMP', 2: 'PUMP_DRAIN'}))
     lo_i = {v: 100 * (v / 24) ** 2 / v + iled * 48 / 0.92 / v + 12 * 1.1 / 0.88 / v + 6 / 24 * (v / 24) for v in (21.6, 25.0)}
@@ -248,7 +248,7 @@ def main():
     out = ['EU-LITE schematic connectivity review (from design.json, no KiCad)', f'Revision: {spec["revision"]}',
            f'PASS: {len(passed)} checks', f'Fitted electrical components: {sum(x["in_bom"] for x in spec["parts"])}',
            f'Stock pieces: {summary["stock_pieces"]} in {summary["stock_rows"]} rows; purchased pieces: {summary["buy_pieces"]} in {summary["buy_rows"]} rows',
-           f'Purchases incl. VAT {summary["parts_EUR"]} EUR + delivery {summary["shipping_EUR"]} EUR = {total} EUR (catalogue 2026-10-23; RGB owner quote 2026-10-25), including OSTAPA57E2A',
+           f'Purchases incl. VAT {summary["parts_EUR"]} EUR + delivery {summary["shipping_EUR"]} EUR = {total} EUR (catalogue 2026-10-23; RGB owner quote 2026-10-25), including CSD19531KCS and OSTAPA57E2A',
            f'Stock lines used up completely (no spare, a mounting error means a repurchase): {", ".join(zero_spare)}', '']
     out += [f'PASS {i+1:02d} | {label}' for i, label in enumerate(passed)]
     out += ['', 'Limitations: these checks establish pin/net, calculated-value and BOM consistency of the specification, not an ERC of the written .kicad_sch files',
