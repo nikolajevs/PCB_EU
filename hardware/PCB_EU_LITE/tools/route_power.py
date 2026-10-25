@@ -137,7 +137,7 @@ def add_power_zones(board):
         # Strengthen only the Q102 side of RTN_SHUNT; the existing INA238
         # Kelvin keepout separates this pour from the sense branch.
         ('RTN_SHUNT', 'F.Cu', 'return_q102_bus',
-         route_corridor([(15.5,47.92),(16.817,47.92),(16.817,48.952),(17.591,49.725)], 1.5), 4),
+         route_corridor([(15.5,47.92),(16.817,47.92),(16.817,48.952),(17.591,49.725)], 3.0), 4),
         ('+24V_FUSED', 'F.Cu', 'input_24v',
          [(22.3,46.5),(44.5,46.5),(46.8,49.5),(45.2,56.6),(25.0,57.4),(22.3,52.2)], 2),
         # Add a 4 mm copper corridor to F103. The modeled average LED-driver
