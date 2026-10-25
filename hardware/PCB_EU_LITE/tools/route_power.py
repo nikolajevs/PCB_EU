@@ -54,7 +54,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'led_input_inner', 'led_terminal_bus', 'input_raw', 'input_raw_bottom', 'input_return_inner', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
+    solid_power = {'led_feed', 'led_input_inner', 'led_terminal_bus', 'input_raw', 'input_raw_bottom', 'input_return_inner', 'q102_drain_thermal', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
                    'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
@@ -146,6 +146,11 @@ def add_power_zones(board):
         # intentionally ends before the INA238 Kelvin keepout at x=17.7.
         ('PSU_RTN', 'In1.Cu', 'input_return_inner',
          route_corridor([(6.0,51.0),(6.54,50.46),(15.5,50.46)], 1.2), 4),
+        # The IRL2505 drain/tab is Q102.2.  This deliberately small B.Cu
+        # island adds local thermal copper through its plated pad without
+        # approaching the +24V_RAW diagonal or the RTN_SHUNT Kelvin area.
+        ('PSU_RTN', 'B.Cu', 'q102_drain_thermal',
+         route_corridor([(13.0,50.46),(15.5,50.46)], 1.0), 4),
         # Strengthen only the Q102 side of RTN_SHUNT; the existing INA238
         # Kelvin keepout separates this pour from the sense branch.
         ('RTN_SHUNT', 'F.Cu', 'return_q102_bus',
@@ -399,7 +404,7 @@ def main():
         p.SaveBoard(str(args.board), board)
     finally:
         project_path.write_bytes(original_project)
-    print(f'Added three ground pours and 21 local power pours; moved U102 and widened power routes; '
+    print(f'Added three ground pours and 22 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
