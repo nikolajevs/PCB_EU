@@ -176,7 +176,7 @@
 (symbol (lib_id "EU_LITE:BAT") (at 308.61 119.38 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "45b8d1bb-909b-5a32-a622-62f643d62149")
 (property "Reference" "BT301" (at 308.61 113.74 0) (effects (font (size 1.15 1.15)) ))
 (property "Value" "CR2032 + BC-2001" (at 308.61 125.02 0) (effects (font (size 0.98 0.98)) ))
-(property "Footprint" "EU_Mechanical:Battery_COMF_BC-2001" (at 308.61 119.38 0) (effects (font (size 1 1)) (hide yes)))
+(property "Footprint" "LITE_Mechanical:Battery_COMF_BC-2001" (at 308.61 119.38 0) (effects (font (size 1 1)) (hide yes)))
 (property "Datasheet" "" (at 308.61 119.38 0) (effects (font (size 1 1)) (hide yes)))
 (property "MPN" "BC-2001" (at 308.61 119.38 0) (effects (font (size 1 1)) (hide yes)))
 (property "Source" "buy" (at 308.61 119.38 0) (effects (font (size 1 1)) (hide yes)))

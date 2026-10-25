@@ -143,6 +143,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'S13': 'Capacitor_SMD:CP_Elec_16x17.5', 'S14': 'Capacitor_SMD:CP_Elec_10x10.5',
     'S26': SOIC8EP, 'S27': SOIC8EP, 'S114': 'LITE_Parts:VSSOP-10_3x3mm_P0.5mm',
     'S112': 'Package_TO_SOT_SMD:TDSON-8-1', 'S78': 'Package_TO_SOT_THT:TO-220-3_Vertical',
+    'CSD19531KCS': 'Package_TO_SOT_THT:TO-220-3_Vertical',
     'S8': 'LITE_Parts:Diodes_PowerDI5', 'S20': 'Diode_SMD:D_SMC', 'S12': 'LITE_Parts:L_Feryster_DTMSS-27_V',
     'S31': 'Inductor_SMD:L_1008_2520Metric', 'S93': KF301,
     'S90': 'Connector_JST:JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal',
@@ -158,7 +159,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'ZL201-10G': 'Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical', 'UPW1H221MPD': 'Capacitor_THT:CP_Radial_D10.0mm_P5.00mm',
     'LRP2512-R040-1%': 'Resistor_SMD:R_2512_6332Metric', 'CS2512-0R15-1%-HP': 'Resistor_SMD:R_2512_6332Metric',
     'BC847B-DIO': 'Package_TO_SOT_SMD:SOT-23', 'BC857B': 'Package_TO_SOT_SMD:SOT-23', 'BZV55C12': 'Diode_SMD:D_MiniMELF',
-    'BC-2001': 'EU_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
+    'BC-2001': 'LITE_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
     'C1206C100J5GACTU': C1206, 'OSTAPA57E2A': 'LITE_Parts:LED_OSTAPA57E2A_Formed_P2.54mm', 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
     'CRCW12061K20FKTABC': R1206, 'SMD1206 56K 1%': R1206, 'SMD1206-33K-1%': R1206,
 }
@@ -372,8 +373,8 @@ add('LED', 'J501', 'J2', 'LED + / GND', 'S93', ['LED_POS', GND])
 # ------------------------------------------------------------------ 07 | PTC heater and pump
 sheet('Loads', '07 | PTC heater and 24 V pump', [
  'PTC is ON/OFF only, no fast PWM. External independent thermal cut-out is required in series with the heater.',
- 'GPIO32 HIGH turns on Q701 NPN, Q702 PNP, then Q703 power MOSFET (stock BSC146N10LS5, 12 V gate drive); LOW / Hi-Z turns it off.',
- 'Q703 BSC146N10LS5: S1-S3 = GND, G4, D5 = PTC_DRAIN (exposed pad). ~0.4 W at 4.3 A: copper area and thermal vias required (as Q501).',
+ 'GPIO32 HIGH turns on Q701 NPN, Q702 PNP, then Q703 power MOSFET CSD19531KCS (TO-220, 12 V gate drive); LOW / Hi-Z turns it off.',
+ 'Q703 CSD19531KCS: 1=G, 2=D/tab, 3=S. RDS(on) max 7.7 mOhm at VGS=10 V; ~0.22 W at 4.34 A using 1.5x hot resistance. Verify temperature under load; TO-220 tab is live at PTC_DRAIN.',
  'The stock IRS4427S is NOT used as driver: its input threshold left 0.14 V of margin at 3.3 V (owner decision in ../cheap-version, 04.10.2026).',
  'Pump GPIO33 HIGH turns on Q704 AO3422. D701 SS56 flyback: cathode to fused +24V_PUMP, anode to PUMP_DRAIN.',
  'R702 4k7 keeps Q701 off (<0.4 V) even with the ESP32 internal pull-up on GPIO32; HIGH still gives ~0.13 mA base.',
@@ -382,7 +383,8 @@ sheet('Loads', '07 | PTC heater and 24 V pump', [
 add('Loads', 'J701', 'J2', 'PTC + / RETURN', 'S93', ['+24V_PTC', 'PTC_DRAIN'])
 add('Loads', 'Q701', 'NPN', 'BC847B-DIO', 'BC847B-DIO', {1: 'PTC_NPN_B', 2: GND, 3: 'PTC_NPN_C'}, pos=(65, 55))
 add('Loads', 'Q702', 'PNP', 'BC857B', 'BC857B', {1: 'PTC_PNP_B', 2: V12, 3: 'PTC_DRV'}, pos=(165, 55))
-add('Loads', 'Q703', 'NMOS_SO8', 'BSC146N10LS5', 'S112', {1: GND, 2: GND, 3: GND, 4: 'PTC_GATE', 5: 'PTC_DRAIN'}, note='Stock BSC146N10LS5 (second and last piece)', pos=(265, 55))
+add('Loads', 'Q703', 'NMOS', 'CSD19531KCS', 'CSD19531KCS', {1: 'PTC_GATE', 2: 'PTC_DRAIN', 3: GND},
+    note='Salvats catalog snapshot 2026-10-23; TI datasheet: 100 V, TO-220, RDS(on) max 7.7 mOhm at VGS=10 V. Tab = drain; ~0.22 W at 4.34 A with 1.5x hot-resistance estimate. Check physical temperature; insulate live tab from grounded heatsink.', pos=(265, 55))
 r('Loads', 'R701', '10k', 'S70', 'PTC_GPIO', 'PTC_NPN_B'); r('Loads', 'R702', '4k7', 'S72', 'PTC_NPN_B', GND)
 r('Loads', 'R703', '2k', 'S51', 'PTC_NPN_C', 'PTC_PNP_B'); r('Loads', 'R704', '10k', 'S70', V12, 'PTC_PNP_B')
 r('Loads', 'R705', '100R', 'S71', 'PTC_DRV', 'PTC_GATE'); r('Loads', 'R706', '2k', 'S51', 'PTC_GATE', GND)
@@ -436,7 +438,7 @@ def geometry(s):
     if kind == 'sw': return line([(-2.54, 0), (2.54, 2.54)])
     if kind == 'y': return rect(-1.27, 2.54, 1.27, -2.54) + line([(-2.54, 2.54), (-2.54, -2.54)]) + line([(2.54, 2.54), (2.54, -2.54)])
     if kind == 'bat': return line([(-.635, 2.54), (-.635, -2.54)]) + line([(.635, 1.27), (.635, -1.27)]) + line([(-3, 3), (-1.5, 3)]) + line([(-2.25, 2.25), (-2.25, 3.75)])
-    if kind == 'nmos': return (HERE/'libraries/NMOS_graphics.sexpr').read_text()
+    if kind == 'nmos': return (HERE/'libraries/NMOS_graphics.sexpr').read_text().rstrip()
     if kind in ['npn', 'pnp']:
         body = line([(-2.54, 2.54), (-2.54, -2.54)]) + line([(-2.54, 1.27), (5.08, 3.81), (5.08, 5.08)]) + line([(-2.54, -1.27), (5.08, -3.81), (5.08, -5.08)])
         arrow = [(3.81, -3.386), (2.05, -3.45), (2.75, -1.78), (3.81, -3.386)] if kind == 'npn' else [(0.635, 2.328), (2.8, 2.07), (2.1, 3.74), (0.635, 2.328)]
@@ -478,6 +480,7 @@ def textblk(name, key, t, x, y, size=1.1):
 
 
 source_urls = {
+ 'CSD19531KCS': 'https://www.ti.com/lit/ds/symlink/csd19531kcs.pdf',
  'OSTAPA57E2A': 'https://www.optosupply.com/uppic/2020811188683.pdf',
  'LM3429MH/NOPB': 'https://www.ti.com/lit/ds/symlink/lm3429.pdf',
  'S26': 'https://www.st.com/resource/en/datasheet/st1s14.pdf',
@@ -607,7 +610,7 @@ def main():
                    buy_pieces=sum(x['buy'] for x in buy_rows), shop_totals={k: str(v) for k, v in totals.items()},
                    parts_EUR=str(sum(totals.values())), shipping_EUR=str(shipping), total_EUR=str(sum(totals.values()) + shipping),
                    unpriced_items=unpriced, unpriced_allowance_EUR='0.00',
-                   price_basis='Catalogue snapshot 2026-10-23; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order.')
+                   price_basis='Catalogue snapshot 2026-10-23, including CSD19531KCS from catalog.db; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order.')
     (HERE/'BOM_allocated.json').write_text(json.dumps(dict(stock=stock_rows, buy=buy_rows, summary=summary), ensure_ascii=False, indent=2) + '\n')
     with (HERE/'BOM_allocated.csv').open('w', newline='', encoding='utf-8-sig') as f:
         w = csv.writer(f, lineterminator='\n')

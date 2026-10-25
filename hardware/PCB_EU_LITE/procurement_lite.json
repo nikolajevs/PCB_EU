@@ -1,4 +1,17 @@
 {
+ "CSD19531KCS": {
+  "shop": "Salvats",
+  "sku": "CSD19531KCS",
+  "title": "CSD19531KCS Tranzistors N-FET, 100V, Vgs(2.2...3.3V), ±20V, 100A, 214W, 0R0073, TO-220",
+  "price": 2.95,
+  "stock": "В наличии 7 шт. (снимок каталога 2026-10-23)",
+  "url": "https://www.salvats.lv/lv/100v-n-fet-tht/csd19531kcs-tranzistors-n-fet-100v-vgs2233v-20v-100a-214w-0r0073-to-220",
+  "price_date": "2026-10-23",
+  "min_qty": 1,
+  "multiple": 1,
+  "pack": 1,
+  "source": "catalog.db"
+ },
  "ESP32-WROOM-32E-N4": {
   "shop": "Electrobase",
   "sku": "EB152133148",

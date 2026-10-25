@@ -19,6 +19,199 @@
 (symbol "J2_1_1"
 (pin passive line (at -10.16 1.27 0) (length 5.08) (name "1" (effects (font (size 0.95 0.95)) )) (number "1" (effects (font (size 0.95 0.95)) )))
 (pin passive line (at -10.16 -1.27 0) (length 5.08) (name "2" (effects (font (size 0.95 0.95)) )) (number "2" (effects (font (size 0.95 0.95)) )))))
+(symbol "EU_LITE:NMOS" (pin_names (offset 0.762) (hide yes))
+(in_bom yes) (on_board yes)
+(property "Reference" "NMOS" (at 0 5 0) (effects (font (size 1 1)) ))
+(property "Value" "NMOS" (at 0 -5 0) (effects (font (size 1 1)) ))
+(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+(property "Datasheet" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
+(symbol "NMOS_0_1" 				(polyline
+					(pts
+						(xy 0.254 1.905)
+						(xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.254 0)
+						(xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286)
+						(xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508)
+						(xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27)
+						(xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.778)
+						(xy 3.302 -1.778)
+						(xy 3.302 1.778)
+						(xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0)
+						(xy 2.032 0.381)
+						(xy 2.032 -0.381)
+						(xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54)
+						(xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54)
+						(xy 2.54 0)
+						(xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.921 0.381)
+						(xy 3.683 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381)
+						(xy 2.921 -0.254)
+						(xy 3.683 -0.254)
+						(xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				))
+(symbol "NMOS_1_1"
+(pin input line (at -5.08 0 0) (length 2.54) (name "G" (effects (font (size 0.95 0.95)) )) (number "1" (effects (font (size 0.95 0.95)) )))
+(pin passive line (at 2.54 5.08 270) (length 2.54) (name "D" (effects (font (size 0.95 0.95)) )) (number "2" (effects (font (size 0.95 0.95)) )))
+(pin passive line (at 2.54 -5.08 90) (length 2.54) (name "S" (effects (font (size 0.95 0.95)) )) (number "3" (effects (font (size 0.95 0.95)) )))))
 (symbol "EU_LITE:NMOS_GSD" (pin_names (offset 0.762) (hide yes))
 (in_bom yes) (on_board yes)
 (property "Reference" "NMOS_GSD" (at 0 5 0) (effects (font (size 1 1)) ))
@@ -207,26 +400,11 @@
 					(fill
 						(type none)
 					)
-				)
-			
-)
+				))
 (symbol "NMOS_GSD_1_1"
 (pin input line (at -5.08 0 0) (length 2.54) (name "G" (effects (font (size 0.95 0.95)) )) (number "1" (effects (font (size 0.95 0.95)) )))
 (pin passive line (at 2.54 -5.08 90) (length 2.54) (name "S" (effects (font (size 0.95 0.95)) )) (number "2" (effects (font (size 0.95 0.95)) )))
 (pin passive line (at 2.54 5.08 270) (length 2.54) (name "D" (effects (font (size 0.95 0.95)) )) (number "3" (effects (font (size 0.95 0.95)) )))))
-(symbol "EU_LITE:NMOS_SO8" (pin_names (offset 0.762))
-(in_bom yes) (on_board yes)
-(property "Reference" "U" (at 0 5 0) (effects (font (size 1 1)) ))
-(property "Value" "NMOS_SO8" (at 0 -5 0) (effects (font (size 1 1)) ))
-(property "Footprint" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-(property "Datasheet" "" (at 0 0 0) (effects (font (size 1 1)) (hide yes)))
-(symbol "NMOS_SO8_0_1" (rectangle (start -7.62 6.35) (end 7.62 -6.35) (stroke (width 0.254) (type default)) (fill (type background))))
-(symbol "NMOS_SO8_1_1"
-(pin input line (at -12.7 3.81 0) (length 5.08) (name "G" (effects (font (size 0.95 0.95)) )) (number "4" (effects (font (size 0.95 0.95)) )))
-(pin passive line (at 12.7 3.81 180) (length 5.08) (name "D" (effects (font (size 0.95 0.95)) )) (number "5" (effects (font (size 0.95 0.95)) )))
-(pin passive line (at 12.7 1.27 180) (length 5.08) (name "S" (effects (font (size 0.95 0.95)) )) (number "1" (effects (font (size 0.95 0.95)) )))
-(pin passive line (at 12.7 -1.27 180) (length 5.08) (name "S" (effects (font (size 0.95 0.95)) )) (number "2" (effects (font (size 0.95 0.95)) )))
-(pin passive line (at 12.7 -3.81 180) (length 5.08) (name "S" (effects (font (size 0.95 0.95)) )) (number "3" (effects (font (size 0.95 0.95)) )))))
 (symbol "EU_LITE:NPN" (pin_names (offset 0.762) (hide yes))
 (in_bom yes) (on_board yes)
 (property "Reference" "NPN" (at 0 5 0) (effects (font (size 1 1)) ))
@@ -260,7 +438,7 @@
 (pin passive line (at -7.62 0 0) (length 5.08) (name "~" (effects (font (size 0.95 0.95)) )) (number "1" (effects (font (size 0.95 0.95)) )))
 (pin passive line (at 7.62 0 180) (length 5.08) (name "~" (effects (font (size 0.95 0.95)) )) (number "2" (effects (font (size 0.95 0.95)) ))))))
 (text "07 | PTC heater and 24 V pump" (at 12.7 12.7 0) (effects (font (size 2 2)) (justify left top)) (uuid "5c8efabc-6bc8-5e82-991d-8321a9a6d149"))
-(text "PTC is ON/OFF only, no fast PWM. External independent thermal cut-out is required in series with the heater.\nGPIO32 HIGH turns on Q701 NPN, Q702 PNP, then Q703 power MOSFET (stock BSC146N10LS5, 12 V gate drive); LOW / Hi-Z turns it off.\nQ703 BSC146N10LS5: S1-S3 = GND, G4, D5 = PTC_DRAIN (exposed pad). ~0.4 W at 4.3 A: copper area and thermal vias required (as Q501).\nThe stock IRS4427S is NOT used as driver: its input threshold left 0.14 V of margin at 3.3 V (owner decision in ../cheap-version, 04.10.2026).\nPump GPIO33 HIGH turns on Q704 AO3422. D701 SS56 flyback: cathode to fused +24V_PUMP, anode to PUMP_DRAIN.\nR702 4k7 keeps Q701 off (<0.4 V) even with the ESP32 internal pull-up on GPIO32; HIGH still gives ~0.13 mA base.\n100k GPIO/gate pulls stay active during reset. Pump stall current and fuse coordination still unmeasured." (at 12.7 251 0) (effects (font (size 1.02 1.02)) (justify left top)) (uuid "6d7e8ddb-c5ff-5801-bca8-0a5c03db80bb"))
+(text "PTC is ON/OFF only, no fast PWM. External independent thermal cut-out is required in series with the heater.\nGPIO32 HIGH turns on Q701 NPN, Q702 PNP, then Q703 power MOSFET CSD19531KCS (TO-220, 12 V gate drive); LOW / Hi-Z turns it off.\nQ703 CSD19531KCS: 1=G, 2=D/tab, 3=S. RDS(on) max 7.7 mOhm at VGS=10 V; ~0.22 W at 4.34 A using 1.5x hot resistance. Verify temperature under load; TO-220 tab is live at PTC_DRAIN.\nThe stock IRS4427S is NOT used as driver: its input threshold left 0.14 V of margin at 3.3 V (owner decision in ../cheap-version, 04.10.2026).\nPump GPIO33 HIGH turns on Q704 AO3422. D701 SS56 flyback: cathode to fused +24V_PUMP, anode to PUMP_DRAIN.\nR702 4k7 keeps Q701 off (<0.4 V) even with the ESP32 internal pull-up on GPIO32; HIGH still gives ~0.13 mA base.\n100k GPIO/gate pulls stay active during reset. Pump stall current and fuse coordination still unmeasured." (at 12.7 251 0) (effects (font (size 1.02 1.02)) (justify left top)) (uuid "6d7e8ddb-c5ff-5801-bca8-0a5c03db80bb"))
 (symbol (lib_id "EU_LITE:J2") (at 45.72 105.41 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "a0b00430-4f2f-550d-bba2-a800afbe2b71")
 (property "Reference" "J701" (at 45.72 98.5 0) (effects (font (size 1.15 1.15)) ))
 (property "Value" "PTC + / RETURN" (at 45.72 112.32 0) (effects (font (size 0.98 0.98)) ))
@@ -315,31 +493,25 @@
 (global_label "+12V" (shape bidirectional) (at 170.18 44.45 90) (effects (font (size 0.9 0.9)) (justify left)) (uuid "7509fbe3-b059-5125-b725-6c23b59344a5") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 170.18 44.45 0) (effects (font (size 1 1)) (hide yes))))
 (wire (pts (xy 170.18 59.69) (xy 170.18 64.77)) (stroke (width 0) (type default)) (uuid "d3be9729-51d2-5565-8600-2d4ded3bb655"))
 (global_label "PTC_DRV" (shape bidirectional) (at 170.18 64.77 270) (effects (font (size 0.9 0.9)) (justify right)) (uuid "79d90966-0f8b-5d18-8d2b-d6bfd2841548") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 170.18 64.77 0) (effects (font (size 1 1)) (hide yes))))
-(symbol (lib_id "EU_LITE:NMOS_SO8") (at 265.43 54.61 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "ae8d6d48-2ca9-5eff-9b1c-1a9fc65ed361")
-(property "Reference" "Q703" (at 265.43 45.16 0) (effects (font (size 1.15 1.15)) ))
-(property "Value" "BSC146N10LS5" (at 265.43 64.06 0) (effects (font (size 0.98 0.98)) ))
-(property "Footprint" "Package_TO_SOT_SMD:TDSON-8-1" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
-(property "Datasheet" "https://www.infineon.com/dgdl/Infineon-BSC146N10LS5-DS-v02_00-EN.pdf" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
-(property "MPN" "BSC146N10LS5" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
-(property "Source" "stock:112" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
-(property "Design_note" "Stock BSC146N10LS5 (second and last piece)" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
-(property "FootprintStatus" "DRAWING CHECKED in EU-0.1/cheap-version - physical fit pending" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
-(pin "4" (uuid "e3f9cd64-45a5-5b5f-a35e-70cb72b68db3"))
-(pin "5" (uuid "1aed8036-3213-5b97-895d-4ad426ba24ed"))
+(symbol (lib_id "EU_LITE:NMOS") (at 265.43 54.61 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "ae8d6d48-2ca9-5eff-9b1c-1a9fc65ed361")
+(property "Reference" "Q703" (at 257.81 48.97 0) (effects (font (size 1.15 1.15)) ))
+(property "Value" "CSD19531KCS" (at 257.81 60.25 0) (effects (font (size 0.98 0.98)) ))
+(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
+(property "Datasheet" "https://www.ti.com/lit/ds/symlink/csd19531kcs.pdf" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
+(property "MPN" "CSD19531KCS" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
+(property "Source" "buy" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
+(property "Design_note" "Salvats catalog snapshot 2026-10-23; TI datasheet: 100 V, TO-220, RDS(on) max 7.7 mOhm at VGS=10 V. Tab = drain; ~0.22 W at 4.34 A with 1.5x hot-resistance estimate. Check physical temperature; insulate live tab from grounded heatsink." (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
+(property "FootprintStatus" "PACKAGE ONLY - verify before PCB" (at 265.43 54.61 0) (effects (font (size 1 1)) (hide yes)))
 (pin "1" (uuid "20e97de0-3ec1-56ec-b197-e62245d3abae"))
 (pin "2" (uuid "a80b2c3f-ad38-518e-b844-4fd44ded7b1b"))
 (pin "3" (uuid "4f2bfffb-f00f-5bce-9b72-1f258fc81d4d"))
 (instances (project "PCB_EU_LITE" (path "/6650c329-4f4f-5b7a-a019-ee8e8f2772e1/c30ecf18-b1b2-59a9-9724-01d4f444e536" (reference "Q703") (unit 1)))) )
-(wire (pts (xy 252.73 50.8) (xy 247.65 50.8)) (stroke (width 0) (type default)) (uuid "23884339-faad-536b-8a9b-ba678ac5a498"))
-(global_label "PTC_GATE" (shape bidirectional) (at 247.65 50.8 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid "2aa47dd0-f975-5110-971b-84b1aed69364") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 247.65 50.8 0) (effects (font (size 1 1)) (hide yes))))
-(wire (pts (xy 278.13 50.8) (xy 283.21 50.8)) (stroke (width 0) (type default)) (uuid "b279e3a3-37b3-5acd-a091-d87e11715f8b"))
-(global_label "PTC_DRAIN" (shape bidirectional) (at 283.21 50.8 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid "b3d1a683-1f7d-520a-907c-e07d920ccbc8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 283.21 50.8 0) (effects (font (size 1 1)) (hide yes))))
-(wire (pts (xy 278.13 53.34) (xy 283.21 53.34)) (stroke (width 0) (type default)) (uuid "0bc6a32d-2356-5eac-ae65-154622080285"))
-(global_label "GND" (shape bidirectional) (at 283.21 53.34 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid "108cbe54-da1b-5eed-92d9-9d428eeb1efa") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 283.21 53.34 0) (effects (font (size 1 1)) (hide yes))))
-(wire (pts (xy 278.13 55.88) (xy 283.21 55.88)) (stroke (width 0) (type default)) (uuid "76ddad4c-4f77-5c0b-9cdf-0f3cc466b574"))
-(global_label "GND" (shape bidirectional) (at 283.21 55.88 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid "90e0881d-015d-5194-b238-67f92f9e5b2b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 283.21 55.88 0) (effects (font (size 1 1)) (hide yes))))
-(wire (pts (xy 278.13 58.42) (xy 283.21 58.42)) (stroke (width 0) (type default)) (uuid "b21d9c75-775b-50a6-a73e-9ffa457b495f"))
-(global_label "GND" (shape bidirectional) (at 283.21 58.42 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid "70c1ed64-95f3-5877-bfd0-046e3dbe0642") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 283.21 58.42 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 260.35 54.61) (xy 255.27 54.61)) (stroke (width 0) (type default)) (uuid "0bc6a32d-2356-5eac-ae65-154622080285"))
+(global_label "PTC_GATE" (shape bidirectional) (at 255.27 54.61 180) (effects (font (size 0.9 0.9)) (justify right)) (uuid "108cbe54-da1b-5eed-92d9-9d428eeb1efa") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 255.27 54.61 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 267.97 49.53) (xy 267.97 44.45)) (stroke (width 0) (type default)) (uuid "76ddad4c-4f77-5c0b-9cdf-0f3cc466b574"))
+(global_label "PTC_DRAIN" (shape bidirectional) (at 267.97 44.45 90) (effects (font (size 0.9 0.9)) (justify left)) (uuid "90e0881d-015d-5194-b238-67f92f9e5b2b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 267.97 44.45 0) (effects (font (size 1 1)) (hide yes))))
+(wire (pts (xy 267.97 59.69) (xy 267.97 64.77)) (stroke (width 0) (type default)) (uuid "b21d9c75-775b-50a6-a73e-9ffa457b495f"))
+(global_label "GND" (shape bidirectional) (at 267.97 64.77 270) (effects (font (size 0.9 0.9)) (justify right)) (uuid "70c1ed64-95f3-5877-bfd0-046e3dbe0642") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 267.97 64.77 0) (effects (font (size 1 1)) (hide yes))))
 (symbol (lib_id "EU_LITE:R") (at 106.68 105.41 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "b6c88492-85b0-59d2-a5c4-d51b64552fa6")
 (property "Reference" "R701" (at 106.68 99.77 0) (effects (font (size 1.15 1.15)) ))
 (property "Value" "10k" (at 106.68 111.05 0) (effects (font (size 0.98 0.98)) ))
