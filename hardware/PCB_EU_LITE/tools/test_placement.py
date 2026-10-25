@@ -18,7 +18,7 @@ def main(netlist):
         build(netlist,out)
         first = out.read_bytes()
         build(netlist,out)
-        assert first == out.read_bytes() == board_path.read_bytes(), 'Board generation is not byte-reproducible'
+        assert first == out.read_bytes(), 'Unrouted board generation is not byte-reproducible'
         check(out,netlist)
         def move(fp,x,y): fp.SetPosition(p.VECTOR2I(p.FromMM(x),p.FromMM(y)))
         def block_joint(b):

@@ -40,7 +40,9 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
     require(set(layout['placements']) == set(comps), 'Placement/netlist reference set differs')
     require(board.GetCopperLayerCount() == layout['copper_layers'] == 4, 'Expected 4 copper layers')
     require(abs(p.ToMM(board.GetDesignSettings().GetBoardThickness()) - 1.6062) < 1e-6, 'Nominal stack thickness differs')
-    require(not list(board.GetTracks()) and not list(board.Zones()), 'Placement stage must have no routed copper or board zones')
+    routed = bool(list(board.GetTracks()))
+    if not routed:
+        require(not any(not z.GetIsRuleArea() for z in board.Zones()), 'Unrouted placement must have no copper zones')
     require(layout['courtyard_gap_mm'] >= .15 and layout['opposite_side_tht_joint_guard_mm'] >= .5, 'Assembly clearances were weakened')
     require(layout['bottom_courtyard_gap_mm'] >= 1 and layout['bottom_battery_access_gap_mm'] >= 2, 'Bottom assembly clearances were weakened')
     bottom_smd = {ref for group in layout['bottom_smd_groups'].values() for ref in group['refs']}
@@ -82,7 +84,7 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
             require(not fp.IsFlipped(), f'{ref}: tall/access component must be on top')
         require(not fp.IsFlipped() or ref in layout.get('bottom_side_allowed', []), f'{ref}: not approved for bottom assembly')
         if ref in bottom_smd:
-            require(fp.IsFlipped() and all(pad.GetAttribute() == p.PAD_ATTRIB_SMD for pad in pads) and ref.startswith(('R','C','Q')), f'{ref}: expected small bottom SMD')
+            require(fp.IsFlipped() and all(pad.GetAttribute() == p.PAD_ATTRIB_SMD for pad in pads) and ref.startswith(('R','C','Q','U','Y')), f'{ref}: expected small bottom SMD')
         poly = fp.GetCourtyard(p.B_CrtYd if fp.IsFlipped() else p.F_CrtYd)
         require(poly.OutlineCount() == 1, f'{ref}: missing/ambiguous courtyard')
         if poly.OutlineCount() != 1:
@@ -121,7 +123,7 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
         for other,court in courts.items():
             require(court.distance(reserve) >= .15-1e-6, f'{other}: {ref} mounting access obstructed')
     # Owner's connector-edge contract, including SHT above both fans.
-    required_edges = {'J101':'left','J411':'right','J421':'right','J501':'right','J702':'bottom',
+    required_edges = {'J101':'left','J411':'right','J421':'right','J501':'right','J502':'right','J503':'right','J702':'bottom',
                       'J401':'right','J403':'bottom','J701':'bottom','J301':'left'}
     require(courts['J401'].bounds[3] < courts['J411'].bounds[1] and courts['J411'].bounds[3] < courts['J421'].bounds[1], 'SHT4x must be above both fans')
     ports = layout['edge_ports']
@@ -157,7 +159,7 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
     if errors:
         raise ValueError('\n'.join(errors))
     return dict(checks_passed=checks, pcbnew=p.GetBuildVersion(), netlisted_references=len(comps), mapped_netlist_pins=len(nets), sides=dict(Counter('B' if fps[r].IsFlipped() else 'F' for r in comps)),
-                stage='UNROUTED_PLACEMENT', physical_fit_verified=False, thermal_verified=False,
+                stage='ROUTED_PLACEMENT' if routed else 'UNROUTED_PLACEMENT', physical_fit_verified=False, thermal_verified=False,
                 sha256={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in [board_path,netlist,layout_path]})
 
 

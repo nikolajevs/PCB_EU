@@ -77,10 +77,10 @@
       "side": "F"
     },
     "C107": {
-      "x": 10.0,
-      "y": 55.0,
-      "rotation": 0.0,
-      "side": "F"
+      "x": 28.25,
+      "y": 70.5,
+      "rotation": 270.0,
+      "side": "B"
     },
     "C110": {
       "x": 36.0,
@@ -1015,6 +1015,7 @@
   },
   "bottom_side_allowed": [
     "BT301",
+    "C107",
     "C301",
     "C302",
     "C303",
@@ -1224,6 +1225,10 @@
         "C303"
       ],
       "purpose": "RTC oscillator, load capacitors and local decoupling beside the battery on B.Cu"
+    },
+    "AUX_BYPASS": {
+      "refs": ["C107"],
+      "purpose": "Local VIN bypass for U101; ground returns to its ground pad via the plane"
     },
     "LED_BYPASS": {
       "refs": [

@@ -4,19 +4,19 @@
   "standard_text_mm": 1.0,
   "compact_text_mm": 0.8,
   "stroke_mm": 0.15,
-  "generated_labels": 144,
+  "generated_labels": 143,
   "labels_by_face": {
     "B": 37,
-    "F": 107
+    "F": 106
   },
-  "references_placed": 115,
+  "references_placed": 114,
   "references_by_face": {
-    "F": 79,
+    "F": 78,
     "B": 36
   },
   "cross_side_references": [],
-  "compact_references": 21,
-  "vertical_references": 27,
+  "compact_references": 24,
+  "vertical_references": 26,
   "component_polarity_labels": 2,
   "connector_pin_labels": 27,
   "capacitor_plus_omitted_in_local_footprints": [
@@ -748,18 +748,18 @@
       "uuid": "25a0b6fa-9b36-5330-897c-bbbdac1e9bb7"
     },
     {
-      "name": "R905/reference/B/vertical",
+      "name": "R905/reference/B/compact-vertical",
       "kind": "text",
       "text": "R905",
       "ref": "R905",
       "side": "B",
       "at": [
-        27.6233,
-        71.5
+        23.4937,
+        69.0
       ],
       "rotation_deg": 90,
-      "size_mm": 1.0,
-      "uuid": "2fd4b3b0-d5de-5230-8c26-12890a56975f"
+      "size_mm": 0.8,
+      "uuid": "9f2494bc-75d9-5261-be4d-6f3f4122b86e"
     },
     {
       "name": "R906/reference/B",
@@ -909,7 +909,7 @@
       "side": "F",
       "at": [
         18.2681,
-        69.2325
+        69.225
       ],
       "rotation_deg": 0,
       "size_mm": 0.8,
@@ -936,7 +936,7 @@
       "ref": "U201",
       "side": "F",
       "at": [
-        36.9325,
+        36.925,
         42.8732
       ],
       "rotation_deg": 0,
@@ -978,7 +978,7 @@
       "ref": "U401",
       "side": "F",
       "at": [
-        15.9125,
+        15.905,
         79.4768
       ],
       "rotation_deg": 0,
@@ -1040,20 +1040,6 @@
       "rotation_deg": 90,
       "size_mm": 1.0,
       "uuid": "c80e5f80-d9d8-5923-b5e0-e0c5bbe197c8"
-    },
-    {
-      "name": "C107/reference/F",
-      "kind": "text",
-      "text": "C107",
-      "ref": "C107",
-      "side": "F",
-      "at": [
-        8.0,
-        56.9032
-      ],
-      "rotation_deg": 0,
-      "size_mm": 1.0,
-      "uuid": "febb92b8-1ff1-58cf-bef4-af95aa3b9323"
     },
     {
       "name": "C110/reference/F",
@@ -1154,18 +1140,18 @@
       "uuid": "2b408735-f22f-565e-82f1-6638d18d2c96"
     },
     {
-      "name": "C302/reference/B",
+      "name": "C302/reference/B/compact",
       "kind": "text",
       "text": "C302",
       "ref": "C302",
       "side": "B",
       "at": [
-        61.7,
-        49.9267
+        61.2,
+        50.8438
       ],
       "rotation_deg": 0,
-      "size_mm": 1.0,
-      "uuid": "46d6ff57-a747-5c05-8153-de81d89397b1"
+      "size_mm": 0.8,
+      "uuid": "5e9f016c-0821-5e19-b354-635a6b6a8224"
     },
     {
       "name": "C303/reference/B",
@@ -1413,7 +1399,7 @@
       "side": "F",
       "at": [
         51.6938,
-        40.0225
+        40.03
       ],
       "rotation_deg": 90,
       "size_mm": 0.8,
@@ -1434,6 +1420,20 @@
       "uuid": "b92a9cca-2c2b-57ed-b9f9-4543599d8138"
     },
     {
+      "name": "D103/reference/F/compact",
+      "kind": "text",
+      "text": "D103",
+      "ref": "D103",
+      "side": "F",
+      "at": [
+        8.2771,
+        56.5
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "4833b042-b685-558c-8d5b-758cc76e48df"
+    },
+    {
       "name": "D701/reference/F/compact-vertical",
       "kind": "text",
       "text": "D701",
@@ -1441,7 +1441,7 @@
       "side": "F",
       "at": [
         68.9062,
-        81.0225
+        81.03
       ],
       "rotation_deg": 90,
       "size_mm": 0.8,
@@ -1482,7 +1482,7 @@
       "ref": "F102",
       "side": "F",
       "at": [
-        50.3912,
+        50.4062,
         86.0
       ],
       "rotation_deg": 90,
@@ -1595,7 +1595,7 @@
       "side": "B",
       "at": [
         57.2,
-        47.0418
+        47.0267
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -1624,8 +1624,8 @@
       "ref": "J101",
       "side": "F",
       "at": [
-        6.0,
-        54.8483
+        5.5,
+        55.1732
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -2034,20 +2034,6 @@
       "net": "PUMP_DRAIN"
     },
     {
-      "name": "J101/reference/F/vertical",
-      "kind": "text",
-      "text": "J101",
-      "ref": "J101",
-      "side": "F",
-      "at": [
-        4.1725,
-        56.2595
-      ],
-      "rotation_deg": 90,
-      "size_mm": 1.0,
-      "uuid": "30ac2412-0e87-544f-913c-bc81341daee4"
-    },
-    {
       "name": "J403/reference/F",
       "kind": "text",
       "text": "J403",
@@ -2055,7 +2041,7 @@
       "side": "F",
       "at": [
         27.7405,
-        93.8275
+        93.835
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -2096,7 +2082,7 @@
       "ref": "J501",
       "side": "F",
       "at": [
-        93.8275,
+        93.835,
         51.8268
       ],
       "rotation_deg": 0,
@@ -2110,7 +2096,7 @@
       "ref": "J503",
       "side": "F",
       "at": [
-        93.8275,
+        93.835,
         91.1732
       ],
       "rotation_deg": 0,
@@ -2125,7 +2111,7 @@
       "side": "F",
       "at": [
         69.2595,
-        93.8275
+        93.835
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -2245,6 +2231,10 @@
       "reason": "no clear space on the component side for readable reference"
     },
     {
+      "ref": "C107",
+      "reason": "no clear space on the component side for readable reference"
+    },
+    {
       "ref": "C112",
       "reason": "no clear space on the component side for readable reference"
     },
@@ -2282,10 +2272,6 @@
     },
     {
       "ref": "C507",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "D103",
       "reason": "no clear space on the component side for readable reference"
     },
     {
@@ -2351,6 +2337,10 @@
       "reason": "no clear space within 6 mm of pin"
     },
     {
+      "ref": "J101",
+      "reason": "no clear space on the component side for low-priority connector reference"
+    },
+    {
       "ref": "J201",
       "reason": "no clear space on the component side for low-priority connector reference"
     },
@@ -2371,6 +2361,6 @@
       "reason": "no clear space on the component side for low-priority connector reference"
     }
   ],
-  "base_pcb_sha256": "12aeb951fd07bed0f876fadb4a1fe14068ce56a63ceb6da324378d58563419c3",
-  "generated_pcb_sha256": "297ad580f286d5e047694e0097627901b9de14696bb3174920ec7901c032a389"
+  "base_pcb_sha256": "36581a3c09d07cf24b28b274dc7029cc6b10e0a36c7b6b0ea291e8bf47ec68ff",
+  "generated_pcb_sha256": "37e323ee18c067d343bf57cc808ef0943046e72f90aef23b57fe0c6a87853379"
 }
