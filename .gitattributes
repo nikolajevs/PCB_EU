@@ -4,3 +4,6 @@
 # Preserve original vendor model bytes and recorded SHA-256 values
 *.step -text
 *.stp -text
+
+# Fabrication manifests hash the exact native KiCad output, including CRLF.
+hardware/PCB_EU_LITE/fabrication/**/gerber/* -text whitespace=cr-at-eol
