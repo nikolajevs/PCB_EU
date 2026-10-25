@@ -98,18 +98,9 @@ def apply(board, netlist):
         track.SetNet(board.FindNet('LED_POS'))
         identity(track, f'lite_route/LED-terminals/positive/{index}')
         board.Add(track)
-    for number, y in ((1, 61.0), (2, 74.0), (3, 87.0)):
-        for label, text, x, yy in (
-                ('name', f'LED{number}', 94.0, y + 3.9),
-                ('plus', '+', 87.6, y), ('minus', '-', 87.6, y - 5.0)):
-            item = p.PCB_TEXT(board)
-            item.SetText(text)
-            item.SetLayer(p.F_SilkS)
-            item.SetPosition(p.VECTOR2I(MM(x), MM(yy)))
-            item.SetTextSize(p.VECTOR2I(MM(0.9), MM(0.9)))
-            item.SetTextThickness(MM(0.15))
-            identity(item, f'lite_route/LED-terminals/label/{number}/{label}')
-            board.Add(item)
+    # Connector names and polarity legends are generated after all routing by
+    # tools/silkscreen.py.  Keeping them out of this one-time routing pass
+    # lets the silk generator remove collisions and apply one consistent rule.
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
 

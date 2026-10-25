@@ -54,7 +54,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
+    solid_power = {'led_feed', 'led_input_inner', 'led_terminal_bus', 'input_raw', 'input_raw_bottom', 'input_return_inner', 'q102_drain_thermal', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
                    'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
@@ -132,8 +132,25 @@ def add_power_zones(board):
     specs = [
         ('+24V_RAW', 'F.Cu', 'input_raw',
          [(5.4,44.5),(24.0,48.8),(24.0,51.2),(5.4,47.0)], 4),
+        # Do not force the clearance-limited B.Cu trace itself wider.  A local
+        # parallel pour follows it instead, so the fill retracts around the
+        # REVP_GATE and +24V_FUSED copper while adding width wherever space
+        # permits between the input terminal and the F101 via.
+        ('+24V_RAW', 'B.Cu', 'input_raw_bottom',
+         route_corridor([(6.0,46.0),(6.0,46.625),(14.129,54.754),
+                         (20.472,54.754),(23.135,52.091)], 1.6), 4),
         ('PSU_RTN', 'F.Cu', 'input_return',
          [(5.4,49.4),(17.2,48.4),(17.2,53.0),(5.4,52.7)], 3),
+        # J101.2 and Q102.2 are through-hole pads, so a local In1.Cu strip
+        # creates a continuous parallel return path without adding vias.  It
+        # intentionally ends before the INA238 Kelvin keepout at x=17.7.
+        ('PSU_RTN', 'In1.Cu', 'input_return_inner',
+         route_corridor([(6.0,51.0),(6.54,50.46),(15.5,50.46)], 1.2), 4),
+        # The IRL2505 drain/tab is Q102.2.  This deliberately small B.Cu
+        # island adds local thermal copper through its plated pad without
+        # approaching the +24V_RAW diagonal or the RTN_SHUNT Kelvin area.
+        ('PSU_RTN', 'B.Cu', 'q102_drain_thermal',
+         route_corridor([(13.0,50.46),(15.5,50.46)], 1.0), 4),
         # Strengthen only the Q102 side of RTN_SHUNT; the existing INA238
         # Kelvin keepout separates this pour from the sense branch.
         ('RTN_SHUNT', 'F.Cu', 'return_q102_bus',
@@ -173,9 +190,21 @@ def add_power_zones(board):
         ('+24V_LED', 'F.Cu', 'led_input',
          [(57.5,32.5),(62.5,32.5),(65.7,41.7),(68.0,45.5),(67.7,51.9),
           (63.8,52.6),(61.0,45.0),(57.5,39.5)], 2),
+        # The LED driver can draw up to about 4.36 A peak at the low input
+        # voltage corner.  Its long In2.Cu trunk remains a routed 0.8 mm
+        # conductor for determinism, with this same-net copper beside it
+        # wherever local signal clearances permit.
+        ('+24V_LED', 'In2.Cu', 'led_input_inner',
+         route_corridor([(65.0,13.25),(62.277,15.973),(62.277,36.666),
+                         (67.127,41.516)], 1.2), 3),
         ('+24V_LED', 'F.Cu', 'led_feed',
          [(57.4,17.8),(64.2,11.1),(66.6,13.5),(60.0,20.2),
           (60.0,34.5),(57.4,34.5)], 3),
+        # This is the quiet DC side after R502.  Reinforce the common LED+
+        # collector to the three parallel terminals without growing the
+        # preceding high-dv/dt LED_OUT switch node.
+        ('LED_POS', 'F.Cu', 'led_terminal_bus',
+         route_corridor([(94.0,61.0),(96.5,63.5),(96.5,87.0),(94.0,87.0)], 1.0), 3),
         ('+24V_PTC', 'F.Cu', 'ptc_supply',
          [(43.0,82.0),(49.1,82.0),(49.1,96.5),(43.0,96.5)], 3),
         ('PTC_DRAIN', 'F.Cu', 'ptc_return',
@@ -375,7 +404,7 @@ def main():
         p.SaveBoard(str(args.board), board)
     finally:
         project_path.write_bytes(original_project)
-    print(f'Added three ground pours and 17 local power pours; moved U102 and widened power routes; '
+    print(f'Added three ground pours and 22 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
