@@ -149,10 +149,10 @@ def add_power_zones(board):
         # Widen the source-side segment feeding the pump fuse F105.
         ('+24V_FUSED', 'F.Cu', 'fused_pump_feed',
          route_corridor([(61.5,93.51),(70.01,85.0),(70.75,85.0)], 1.5), 3),
-        # Add copper to the source-side bus from F102 toward the lower power rail.
+        # Widen the fused source-side branch from F102 toward the lower power rail.
         ('+24V_FUSED', 'F.Cu', 'fused_ptc_feed',
          route_corridor([(48.0,87.3),(48.0,88.65),(48.1,88.76),
-                         (48.1,94.08),(50.13,96.11),(60.49,96.11)], 1.5), 4),
+                         (48.1,94.08),(50.13,96.11),(60.49,96.11)], 2.0), 4),
         # Keep a 3 mm corridor by R706 so its GND pad retains two thermal spokes.
         ('+24V_FUSED', 'F.Cu', 'fused_main_bus',
          route_corridor([(42.93,59.06),(42.93,67.68),(43.25,68.0),
