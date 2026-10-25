@@ -123,9 +123,9 @@
       "side": "F"
     },
     "C204": {
-      "x": 37.0,
-      "y": 50.0,
-      "rotation": 90.0,
+      "x": 33.8,
+      "y": 31.5,
+      "rotation": 180.0,
       "side": "F"
     },
     "C205": {
@@ -429,9 +429,9 @@
       "side": "F"
     },
     "L201": {
-      "x": 37.0,
-      "y": 44.0,
-      "rotation": 0.0,
+      "x": 37.3,
+      "y": 32.0,
+      "rotation": 90.0,
       "side": "F"
     },
     "L501": {
@@ -1001,9 +1001,13 @@
   },
   "bottom_side_allowed": [
     "BT301",
+    "C301",
+    "C302",
+    "C303",
     "C304",
     "C305",
     "C403",
+    "C503",
     "Q901",
     "Q902",
     "Q903",
@@ -1030,7 +1034,9 @@
     "R906",
     "R907",
     "R908",
-    "R909"
+    "R909",
+    "U301",
+    "Y301"
   ],
   "edge_ports": {
     "J101": {
@@ -1174,6 +1180,22 @@
         "C403"
       ],
       "purpose": "Low-current load control and float filter; power switches and PTC gate resistor stay on top"
+    },
+    "RTC": {
+      "refs": [
+        "U301",
+        "Y301",
+        "C301",
+        "C302",
+        "C303"
+      ],
+      "purpose": "RTC oscillator, load capacitors and local decoupling beside the battery on B.Cu"
+    },
+    "LED_BYPASS": {
+      "refs": [
+        "C503"
+      ],
+      "purpose": "LED VCC bypass beside its existing B.Cu routing"
     }
   },
   "bottom_courtyard_gap_mm": 1.0,
