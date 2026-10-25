@@ -55,7 +55,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
     solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
-                   'fused_main_bus', 'fused_main_bus_wide', 'return_q102_bus'}
+                   'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
     zone.SetThermalReliefGap(MM(0.3))
@@ -159,7 +159,12 @@ def add_power_zones(board):
                          (45.31,70.19),(50.06,70.19),(51.36,71.5),(54.5,71.5),
                          (60.55,77.55),(75.72,77.55),(81.06,82.89),(81.06,87.12),
                          (80.46,87.72),(73.47,87.72),(70.75,85.0)], 1.5), 4),
-        # Widen the remainder of the high-current bus to 4 mm after R706.
+        # Widen the source-side run, leaving a 3 mm gap around R706's GND pad.
+        ('+24V_FUSED', 'F.Cu', 'fused_main_bus_source',
+         route_corridor([(42.93,59.06),(42.93,67.68),(43.25,68.0),
+                         (45.31,70.19),(50.06,70.19),(51.36,71.5),(54.5,71.5),
+                         (60.55,77.55)], 2.0), 5),
+        # Widen the load-side run to 4 mm after R706.
         ('+24V_FUSED', 'F.Cu', 'fused_main_bus_wide',
          route_corridor([(66.0,77.55),(75.72,77.55),(81.06,82.89),(81.06,87.12),
                          (80.46,87.72),(73.47,87.72),(70.75,85.0)], 2.0), 5),
@@ -286,7 +291,7 @@ def main():
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
     p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 16 local power pours; moved U102 and widened RTN_SHUNT; '
+    print(f'Added three ground pours and 17 local power pours; moved U102 and widened RTN_SHUNT; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
