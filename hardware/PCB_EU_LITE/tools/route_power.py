@@ -1,4 +1,4 @@
-"""Add the EU-LITE ground plane and local high-current copper zones.
+"""Add the EU-LITE ground plane and strengthen local power copper.
 
 The pours are deliberately local around the PTC, pump, 24 V input, LED driver,
 and 3.3 V converter. They supplement the routed tracks; they do not replace
@@ -55,7 +55,7 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
     solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
-                   'fused_main_bus', 'return_q102_bus'}
+                   'fused_main_bus', 'fused_main_bus_source', 'fused_main_bus_wide', 'return_q102_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
     zone.SetThermalReliefGap(MM(0.3))
@@ -149,17 +149,25 @@ def add_power_zones(board):
         # Widen the source-side segment feeding the pump fuse F105.
         ('+24V_FUSED', 'F.Cu', 'fused_pump_feed',
          route_corridor([(61.5,93.51),(70.01,85.0),(70.75,85.0)], 1.5), 3),
-        # Add copper to the source-side bus from F102 toward the lower power rail.
+        # Widen the fused source-side branch from F102 toward the lower power rail.
         ('+24V_FUSED', 'F.Cu', 'fused_ptc_feed',
          route_corridor([(48.0,87.3),(48.0,88.65),(48.1,88.76),
-                         (48.1,94.08),(50.13,96.11),(60.49,96.11)], 1.5), 4),
-        # Follow the long fused distribution run between the input-zone branch,
-        # F104 and the F105 feeder; clearances are applied during zone fill.
+                         (48.1,94.08),(50.13,96.11),(60.49,96.11)], 2.0), 4),
+        # Keep a 3 mm corridor by R706 so its GND pad retains two thermal spokes.
         ('+24V_FUSED', 'F.Cu', 'fused_main_bus',
          route_corridor([(42.93,59.06),(42.93,67.68),(43.25,68.0),
                          (45.31,70.19),(50.06,70.19),(51.36,71.5),(54.5,71.5),
                          (60.55,77.55),(75.72,77.55),(81.06,82.89),(81.06,87.12),
                          (80.46,87.72),(73.47,87.72),(70.75,85.0)], 1.5), 4),
+        # Widen the source-side run, leaving a 3 mm gap around R706's GND pad.
+        ('+24V_FUSED', 'F.Cu', 'fused_main_bus_source',
+         route_corridor([(42.93,59.06),(42.93,67.68),(43.25,68.0),
+                         (45.31,70.19),(50.06,70.19),(51.36,71.5),(54.5,71.5),
+                         (60.55,77.55)], 2.0), 5),
+        # Widen the load-side run to 4 mm after R706.
+        ('+24V_FUSED', 'F.Cu', 'fused_main_bus_wide',
+         route_corridor([(66.0,77.55),(75.72,77.55),(81.06,82.89),(81.06,87.12),
+                         (80.46,87.72),(73.47,87.72),(70.75,85.0)], 2.0), 5),
         ('+12V', 'F.Cu', 'logic_12v',
          [(31.0,31.0),(46.8,31.0),(47.0,36.5),(42.0,36.5),(42.0,41.5),(32.0,41.5)], 2),
         ('+24V_LED', 'F.Cu', 'led_input',
@@ -169,7 +177,7 @@ def add_power_zones(board):
          [(57.4,17.8),(64.2,11.1),(66.6,13.5),(60.0,20.2),
           (60.0,34.5),(57.4,34.5)], 3),
         ('+24V_PTC', 'F.Cu', 'ptc_supply',
-         [(44.0,82.5),(49.0,82.5),(49.2,95.2),(43.5,95.2)], 3),
+         [(43.0,82.0),(49.1,82.0),(49.1,96.5),(43.0,96.5)], 3),
         ('PTC_DRAIN', 'F.Cu', 'ptc_return',
          [(49.6,80.0),(56.4,80.0),(56.4,95.2),(49.6,95.2)], 3),
         ('+24V_PUMP', 'F.Cu', 'pump_supply',
@@ -268,22 +276,106 @@ def prepare_return_path(board):
         raise RuntimeError(f'Expected two clearance-limited return segments; found {len(found_limited)}')
 
 
+def widen_led_supply_trunk(board):
+    """Widen selected 24 V LED supply tracks within their clearance limits."""
+    targets = {
+        (board.GetLayerID('F.Cu'), frozenset(((58.75, 38.275), (58.75, 46.914)))): 0.85,
+        (board.GetLayerID('F.Cu'), frozenset(((61.025, 36.0), (58.75, 38.275)))): 1.0,
+        (board.GetLayerID('F.Cu'), frozenset(((61.893, 49.062), (64.106, 51.275)))): 0.8,
+        (board.GetLayerID('In2.Cu'), frozenset(((62.277, 36.666), (67.127, 41.516)))): 1.0,
+        (board.GetLayerID('In2.Cu'), frozenset(((65.0, 13.25), (62.277, 15.973)))): 1.0,
+        (board.GetLayerID('In2.Cu'), frozenset(((62.277, 15.973), (62.277, 36.666)))): 0.8,
+    }
+    found = set()
+    for item in board.GetTracks():
+        if isinstance(item, p.PCB_VIA) or item.GetNetname() != '+24V_LED':
+            continue
+        start, end = item.GetStart(), item.GetEnd()
+        pair = frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+        key = (item.GetLayer(), pair)
+        if key in targets:
+            item.SetWidth(MM(targets[key]))
+            found.add(key)
+    if found != set(targets):
+        raise RuntimeError(f'Expected six LED supply trunk segments; found {len(found)}')
+
+
+def widen_ptc_trunk(board):
+    """Widen the PTC feed and drain tracks inside their high-current pours."""
+    targets = {
+        ('+24V_PTC', frozenset(((46.0, 94.0), (46.0, 84.898)))),
+        ('+24V_PTC', frozenset(((46.0, 84.898), (46.198, 84.7)))),
+        ('+24V_PTC', frozenset(((48.0, 84.7), (46.198, 84.7)))),
+        ('PTC_DRAIN', frozenset(((51.0, 94.0), (51.0, 84.95)))),
+    }
+    found = set()
+    for item in board.GetTracks():
+        if isinstance(item, p.PCB_VIA) or item.GetNetname() not in {'+24V_PTC', 'PTC_DRAIN'}:
+            continue
+        start, end = item.GetStart(), item.GetEnd()
+        pair = frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+        key = (item.GetNetname(), pair)
+        if key in targets:
+            item.SetWidth(MM(1.5))
+            found.add(key)
+    if found != targets:
+        raise RuntimeError(f'Expected four PTC trunk segments; found {len(found)}')
+
+
+def widen_input_trunks(board):
+    """Reinforce the input return and the short +24V_RAW fuse-side escape.
+
+    The longer +24V_RAW B.Cu run stays at 1.2 mm: trial widths caused
+    clearances/shorts to REVP_GATE and +24V_FUSED. This deliberately targets
+    only the F.Cu escape and the wider return path that pass native DRC.
+    """
+    targets = {
+        ('+24V_RAW', board.GetLayerID('F.Cu'), frozenset(((23.500, 50.300), (23.500, 51.652)))): 1.6,
+        ('+24V_RAW', board.GetLayerID('F.Cu'), frozenset(((23.500, 51.726), (23.500, 51.652)))): 1.6,
+        ('PSU_RTN', board.GetLayerID('F.Cu'), frozenset(((6.540, 50.460), (6.000, 51.000)))): 2.0,
+        ('PSU_RTN', board.GetLayerID('F.Cu'), frozenset(((15.500, 50.460), (6.540, 50.460)))): 2.0,
+    }
+    found = set()
+    for item in board.GetTracks():
+        if isinstance(item, p.PCB_VIA):
+            continue
+        start, end = item.GetStart(), item.GetEnd()
+        pair = frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+        key = (item.GetNetname(), item.GetLayer(), pair)
+        if key in targets:
+            item.SetWidth(MM(targets[key]))
+            found.add(key)
+    if found != set(targets):
+        raise RuntimeError(f'Expected four input power tracks to widen; found {len(found)}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--board', type=Path, default=HERE/'PCB_EU_LITE.kicad_pcb')
     args = ap.parse_args()
-    if not args.board.with_suffix('.kicad_pro').exists():
+    project_path = args.board.with_suffix('.kicad_pro')
+    if not project_path.exists():
         raise RuntimeError('Copy the matching .kicad_pro beside the board before zone filling')
-    board = p.LoadBoard(str(args.board))
-    for zone in list(board.Zones()):
-        if zone.GetZoneName().startswith('lite_power/'):
-            board.Delete(zone)
-    prepare_return_path(board)
-    add_power_zones(board)
-    p.ZONE_FILLER(board).Fill(board.Zones())
-    board.BuildConnectivity()
-    p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 15 local power pours; moved U102 and widened RTN_SHUNT; '
+    original_project = project_path.read_bytes()
+    try:
+        board = p.LoadBoard(str(args.board))
+        for zone in list(board.Zones()):
+            if zone.GetZoneName().startswith('lite_power/'):
+                board.Delete(zone)
+        prepare_return_path(board)
+        widen_led_supply_trunk(board)
+        widen_ptc_trunk(board)
+        widen_input_trunks(board)
+        add_power_zones(board)
+        p.ZONE_FILLER(board).Fill(board.Zones())
+        board.BuildConnectivity()
+        p.SaveBoard(str(args.board), board)
+    finally:
+        project_path.write_bytes(original_project)
+    print(f'Added three ground pours and 17 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
