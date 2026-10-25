@@ -2837,17 +2837,17 @@
       "sheet": "Status",
       "ref": "D901",
       "symbol": "LED_RGB_CA",
-      "value": "RGB 5mm CA",
-      "mpn": "RGB-5MM-CA",
-      "src": "RGB-5MM-CA",
+      "value": "OSTAPA57E2A",
+      "mpn": "OSTAPA57E2A",
+      "src": "OSTAPA57E2A",
       "nets": {
-        "1": "LED_R_K",
-        "2": "+12V",
-        "3": "LED_G_K",
-        "4": "LED_B_K"
+        "1": "LED_G_K",
+        "2": "LED_B_K",
+        "3": "+12V",
+        "4": "LED_R_K"
       },
-      "footprint": "LED_THT:LED_D5.0mm-4_RGB",
-      "note": "Not in stock and not in the catalogue snapshot: buy a 5 mm diffused common-anode RGB LED (20 mA/channel max); check lead order and the color Vf (red ~2.0 V, green/blue ~3.0-3.3 V)",
+      "footprint": "LITE_Parts:LED_OSTAPA57E2A_Formed_P2.54mm",
+      "note": "Electrobase EB1854986288, owner quote 2026-10-25: EUR 0.85 incl. VAT. Manufacturer Ver.a.1.1: flat top, pins G/B/A/R; formed-lead footprint, 1.0 mm holes, 1.8 mm pads. Check formed fit before soldering.",
       "position": [
         119.38,
         69.85
@@ -3360,6 +3360,7 @@
     "BAT-CR2032/P": 1
   },
   "source_urls": {
+    "OSTAPA57E2A": "https://www.optosupply.com/uppic/2020811188683.pdf",
     "LM3429MH/NOPB": "https://www.ti.com/lit/ds/symlink/lm3429.pdf",
     "S26": "https://www.st.com/resource/en/datasheet/st1s14.pdf",
     "S27": "https://www.st.com/resource/en/datasheet/st1s10.pdf",

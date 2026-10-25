@@ -415,17 +415,17 @@
   "pack": 1,
   "source": "EU-0.1 BOM"
  },
- "RGB-5MM-CA": {
-  "shop": "не выбран",
-  "sku": "",
-  "title": "RGB LED 5 mm diffused, common anode, 4 leads (R, A, G, B)",
-  "price": null,
-  "stock": "",
-  "url": "",
-  "price_date": "",
+ "OSTAPA57E2A": {
+  "shop": "Electrobase",
+  "sku": "EB1854986288",
+  "title": "OPTOSUPPLY OSTAPA57E2A RGB 5mm, diffused, common anode; pins 1 G, 2 B, 3 A, 4 R",
+  "price": 0.85,
+  "stock": "99 (supplier warehouse, owner quote)",
+  "url": "https://electrobase.lv/katalogs/diodes-led-tht-18mm/led-rgb-5mm-140deg-front-convex-231vdc-noof-term-4-round",
+  "price_date": "2026-10-25",
   "min_qty": 1,
   "multiple": 1,
   "pack": 1,
-  "source": "not in catalogue"
+  "source": "Owner-provided Electrobase product card 2026-10-25; VAT included; no live checkout verification"
  }
 }

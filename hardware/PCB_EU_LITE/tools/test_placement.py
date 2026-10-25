@@ -23,7 +23,8 @@ def main(netlist):
         def move(fp,x,y): fp.SetPosition(p.VECTOR2I(p.FromMM(x),p.FromMM(y)))
         def block_joint(b):
             fp=b.FindFootprintByReference('R901')
-            fp.Flip(fp.GetPosition(),False)
+            if not fp.IsFlipped():
+                fp.Flip(fp.GetPosition(),False)
             pad=next(iter(b.FindFootprintByReference('L501').Pads()))
             fp.SetPosition(pad.GetPosition())
         cases = [
@@ -37,6 +38,9 @@ def main(netlist):
             ('fan faces inward', lambda b: b.FindFootprintByReference('J411').SetOrientationDegrees(-90), 'wrong edge/mating orientation'),
             ('card far from UART', lambda b: move(b.FindFootprintByReference('J301'),60,80), 'microSD must remain near UART'),
             ('blocked connector access', lambda b: move(b.FindFootprintByReference('C209'),99,44), 'connector/card access obstructed'),
+            ('bottom hot-air gap', lambda b: move(b.FindFootprintByReference('R902'),20,73), 'courtyard gap < 1.0'),
+            ('SHT below fans', lambda b: move(b.FindFootprintByReference('J401'),90,75), 'SHT4x must be above'),
+            ('LED undersized annulus', lambda b: next(iter(b.FindFootprintByReference('D901').Pads())).SetSize(p.VECTOR2I(p.FromMM(1.07),p.FromMM(1.8))), 'incorrect hole/annulus'),
         ]
         for name,mutate,expected in cases:
             b = p.LoadBoard(str(board_path));mutate(b);p.SaveBoard(str(out),b)

@@ -889,6 +889,26 @@
     },
     {
       "shop": "Electrobase",
+      "mpn": "OSTAPA57E2A",
+      "sku": "EB1854986288",
+      "needed": 1,
+      "buy": 1,
+      "unit": "шт.",
+      "price_unit": 0.85,
+      "line": 0.85,
+      "stock": "99 (supplier warehouse, owner quote)",
+      "url": "https://electrobase.lv/katalogs/diodes-led-tht-18mm/led-rgb-5mm-140deg-front-convex-231vdc-noof-term-4-round",
+      "price_date": "2026-10-25",
+      "refs": [
+        "D901"
+      ],
+      "accessory_count": 0,
+      "min_qty": 1,
+      "multiple": 1,
+      "unpriced": false
+    },
+    {
+      "shop": "Electrobase",
       "mpn": "SMBJ26A-E3/52",
       "sku": "SMBJ26A-E3/52",
       "needed": 1,
@@ -1371,26 +1391,6 @@
       "min_qty": 1,
       "multiple": 1,
       "unpriced": false
-    },
-    {
-      "shop": "не выбран",
-      "mpn": "RGB-5MM-CA",
-      "sku": "",
-      "needed": 1,
-      "buy": 1,
-      "unit": "шт.",
-      "price_unit": null,
-      "line": 0.0,
-      "stock": "",
-      "url": "",
-      "price_date": "",
-      "refs": [
-        "D901"
-      ],
-      "accessory_count": 0,
-      "min_qty": 1,
-      "multiple": 1,
-      "unpriced": true
     }
   ],
   "summary": {
@@ -1404,16 +1404,14 @@
     "buy_rows": 33,
     "buy_pieces": 45,
     "shop_totals": {
-      "Electrobase": "19.21",
+      "Electrobase": "20.06",
       "Salvats": "9.60"
     },
-    "parts_EUR": "28.81",
+    "parts_EUR": "29.66",
     "shipping_EUR": "5.87",
-    "total_EUR": "34.68",
-    "unpriced_items": [
-      "RGB-5MM-CA"
-    ],
-    "unpriced_allowance_EUR": "0.50",
-    "price_basis": "Catalogue snapshot 2026-10-23 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
+    "total_EUR": "35.53",
+    "unpriced_items": [],
+    "unpriced_allowance_EUR": "0.00",
+    "price_basis": "Catalogue snapshot 2026-10-23; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
   }
 }

@@ -54,9 +54,13 @@ LINES = {
 }
 # Not present in the scraped database: the price and URL are taken from the EU-0.1 BOM (owner checked, 23.10.2026).
 FROM_EU01 = {'C1206C100J5GACTU': ('Electrobase', 'C1206C100J5GACTU')}
-# Neither in stock nor in the catalogue: no price and no shop, flagged in the BOM (owner's choice of 24.10.2026: 5 mm, common anode).
-NOT_IN_CATALOG = {'RGB-5MM-CA': dict(shop='не выбран', sku='', title='RGB LED 5 mm diffused, common anode, 4 leads (R, A, G, B)', price=None, stock='',
-                                     url='', price_date='', min_qty=1, multiple=1, pack=1, source='not in catalogue')}
+# Owner-provided Electrobase quote, retained when refreshing the scraped catalogue snapshot.
+OWNER_QUOTES = {'OSTAPA57E2A': dict(shop='Electrobase', sku='EB1854986288',
+    title='OPTOSUPPLY OSTAPA57E2A RGB 5mm, diffused, common anode; pins 1 G, 2 B, 3 A, 4 R',
+    price=0.85, stock='99 (supplier warehouse, owner quote)',
+    url='https://electrobase.lv/katalogs/diodes-led-tht-18mm/led-rgb-5mm-140deg-front-convex-231vdc-noof-term-4-round',
+    price_date='2026-10-25', min_qty=1, multiple=1, pack=1,
+    source='Owner-provided Electrobase product card 2026-10-25; VAT included; no live checkout verification')}
 
 
 def main():
@@ -78,7 +82,7 @@ def main():
         r = eu01[mpn]
         out[key] = dict(shop=shop, sku=mpn, title=r['usage'][:90], price=r['price_unit'], stock=str(r['stock']), url=r['url'],
                         price_date=r.get('price_date', '2026-10-23'), min_qty=1, multiple=1, pack=1, source='EU-0.1 BOM')
-    out.update(NOT_IN_CATALOG)
+    out.update(OWNER_QUOTES)
     (HERE / 'procurement_lite.json').write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     for k, v in out.items():
         print(f"{v['shop'][:4]} {k:22} {str(v['price']):>5} min={v['min_qty']}x{v['multiple']} pack={v['pack']} {v['price_date']} {v['stock'][:12]}")
