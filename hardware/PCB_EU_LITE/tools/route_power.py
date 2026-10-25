@@ -1,4 +1,4 @@
-"""Add the EU-LITE ground plane and local high-current copper zones.
+"""Add the EU-LITE ground plane and strengthen local power copper.
 
 The pours are deliberately local around the PTC, pump, 24 V input, LED driver,
 and 3.3 V converter. They supplement the routed tracks; they do not replace
@@ -324,23 +324,57 @@ def widen_ptc_trunk(board):
         raise RuntimeError(f'Expected four PTC trunk segments; found {len(found)}')
 
 
+def widen_input_trunks(board):
+    """Reinforce the input return and the short +24V_RAW fuse-side escape.
+
+    The longer +24V_RAW B.Cu run stays at 1.2 mm: trial widths caused
+    clearances/shorts to REVP_GATE and +24V_FUSED. This deliberately targets
+    only the F.Cu escape and the wider return path that pass native DRC.
+    """
+    targets = {
+        ('+24V_RAW', board.GetLayerID('F.Cu'), frozenset(((23.500, 50.300), (23.500, 51.652)))): 1.6,
+        ('+24V_RAW', board.GetLayerID('F.Cu'), frozenset(((23.500, 51.726), (23.500, 51.652)))): 1.6,
+        ('PSU_RTN', board.GetLayerID('F.Cu'), frozenset(((6.540, 50.460), (6.000, 51.000)))): 2.0,
+        ('PSU_RTN', board.GetLayerID('F.Cu'), frozenset(((15.500, 50.460), (6.540, 50.460)))): 2.0,
+    }
+    found = set()
+    for item in board.GetTracks():
+        if isinstance(item, p.PCB_VIA):
+            continue
+        start, end = item.GetStart(), item.GetEnd()
+        pair = frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+        key = (item.GetNetname(), item.GetLayer(), pair)
+        if key in targets:
+            item.SetWidth(MM(targets[key]))
+            found.add(key)
+    if found != set(targets):
+        raise RuntimeError(f'Expected four input power tracks to widen; found {len(found)}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--board', type=Path, default=HERE/'PCB_EU_LITE.kicad_pcb')
     args = ap.parse_args()
-    if not args.board.with_suffix('.kicad_pro').exists():
+    project_path = args.board.with_suffix('.kicad_pro')
+    if not project_path.exists():
         raise RuntimeError('Copy the matching .kicad_pro beside the board before zone filling')
-    board = p.LoadBoard(str(args.board))
-    for zone in list(board.Zones()):
-        if zone.GetZoneName().startswith('lite_power/'):
-            board.Delete(zone)
-    prepare_return_path(board)
-    widen_led_supply_trunk(board)
-    widen_ptc_trunk(board)
-    add_power_zones(board)
-    p.ZONE_FILLER(board).Fill(board.Zones())
-    board.BuildConnectivity()
-    p.SaveBoard(str(args.board), board)
+    original_project = project_path.read_bytes()
+    try:
+        board = p.LoadBoard(str(args.board))
+        for zone in list(board.Zones()):
+            if zone.GetZoneName().startswith('lite_power/'):
+                board.Delete(zone)
+        prepare_return_path(board)
+        widen_led_supply_trunk(board)
+        widen_ptc_trunk(board)
+        widen_input_trunks(board)
+        add_power_zones(board)
+        p.ZONE_FILLER(board).Fill(board.Zones())
+        board.BuildConnectivity()
+        p.SaveBoard(str(args.board), board)
+    finally:
+        project_path.write_bytes(original_project)
     print(f'Added three ground pours and 17 local power pours; moved U102 and widened power routes; '
           f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
