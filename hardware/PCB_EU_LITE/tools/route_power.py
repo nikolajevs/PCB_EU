@@ -301,6 +301,29 @@ def widen_led_supply_trunk(board):
         raise RuntimeError(f'Expected six LED supply trunk segments; found {len(found)}')
 
 
+def widen_ptc_trunk(board):
+    """Widen the PTC feed and drain tracks inside their high-current pours."""
+    targets = {
+        ('+24V_PTC', frozenset(((46.0, 94.0), (46.0, 84.898)))),
+        ('+24V_PTC', frozenset(((46.0, 84.898), (46.198, 84.7)))),
+        ('+24V_PTC', frozenset(((48.0, 84.7), (46.198, 84.7)))),
+        ('PTC_DRAIN', frozenset(((51.0, 94.0), (51.0, 84.95)))),
+    }
+    found = set()
+    for item in board.GetTracks():
+        if isinstance(item, p.PCB_VIA) or item.GetNetname() not in {'+24V_PTC', 'PTC_DRAIN'}:
+            continue
+        start, end = item.GetStart(), item.GetEnd()
+        pair = frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+        key = (item.GetNetname(), pair)
+        if key in targets:
+            item.SetWidth(MM(1.5))
+            found.add(key)
+    if found != targets:
+        raise RuntimeError(f'Expected four PTC trunk segments; found {len(found)}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--board', type=Path, default=HERE/'PCB_EU_LITE.kicad_pcb')
@@ -313,6 +336,7 @@ def main():
             board.Delete(zone)
     prepare_return_path(board)
     widen_led_supply_trunk(board)
+    widen_ptc_trunk(board)
     add_power_zones(board)
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
