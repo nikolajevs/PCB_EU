@@ -54,7 +54,8 @@ def add_zone(board, net, layer, name, points, priority=0):
     zone.SetNet(board.FindNet(net))
     zone.SetLocalClearance(MM(CLEARANCE))
     zone.SetMinThickness(MM(MIN_THICKNESS))
-    solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed'}
+    solid_power = {'led_feed', 'input_raw', 'pump_return', 'fused_led_feed', 'fused_pump_feed', 'fused_ptc_feed',
+                   'fused_main_bus'}
     connection = p.ZONE_CONNECTION_FULL if name in solid_power else p.ZONE_CONNECTION_THERMAL
     zone.SetPadConnection(connection)
     zone.SetThermalReliefGap(MM(0.3))
@@ -148,6 +149,13 @@ def add_power_zones(board):
         ('+24V_FUSED', 'F.Cu', 'fused_ptc_feed',
          route_corridor([(48.0,87.3),(48.0,88.65),(48.1,88.76),
                          (48.1,94.08),(50.13,96.11),(60.49,96.11)], 1.5), 4),
+        # Follow the long fused distribution run between the input-zone branch,
+        # F104 and the F105 feeder; clearances are applied during zone fill.
+        ('+24V_FUSED', 'F.Cu', 'fused_main_bus',
+         route_corridor([(42.93,59.06),(42.93,67.68),(43.25,68.0),
+                         (45.31,70.19),(50.06,70.19),(51.36,71.5),(54.5,71.5),
+                         (60.55,77.55),(75.72,77.55),(81.06,82.89),(81.06,87.12),
+                         (80.46,87.72),(73.47,87.72),(70.75,85.0)], 1.5), 4),
         ('+12V', 'F.Cu', 'logic_12v',
          [(31.0,31.0),(46.8,31.0),(47.0,36.5),(42.0,36.5),(42.0,41.5),(32.0,41.5)], 2),
         ('+24V_LED', 'F.Cu', 'led_input',
@@ -184,7 +192,7 @@ def main():
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
     p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 13 local power pours; tracks/vias={len(board.GetTracks())}; '
+    print(f'Added three ground pours and 14 local power pours; tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
 
