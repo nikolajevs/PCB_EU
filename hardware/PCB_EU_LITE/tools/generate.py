@@ -105,8 +105,8 @@ ic('INA238', [(10,'IN+','input'),(9,'IN-','input'),(8,'VBUS','input'),(1,'A1','i
              [(6,'VS','power_in'),(4,'SDA','bidirectional'),(5,'SCL','input'),(3,'ALERT','open_collector'),(7,'GND','power_in')])
 # BSC146N10LS5 in TDSON-8-1: S1-S3, G4, D5 (the 5-8 drain pads are one exposed pad); same symbol as ../cheap-version.
 ic('NMOS_SO8', [(4,'G','input')], [(5,'D','passive'),(1,'S','passive'),(2,'S','passive'),(3,'S','passive')], 15.24)
-# 5 mm RGB LED, common anode, KiCad Device:LED_RAGB order: 1 R cathode, 2 anode, 3 G cathode, 4 B cathode (confirm on the purchased part).
-ic('LED_RGB_CA', [(2,'A','passive')], [(1,'R_K','passive'),(3,'G_K','passive'),(4,'B_K','passive')], 15.24)
+# OptoSupply OSTAPA57E2A, datasheet Ver.a.1.1: 1 G cathode, 2 B cathode, 3 common anode, 4 R cathode.
+ic('LED_RGB_CA', [(3,'A','passive')], [(4,'R_K','passive'),(1,'G_K','passive'),(2,'B_K','passive')], 15.24)
 ic('SD', [(1,'DAT2','passive'),(2,'DAT3_CS','input'),(3,'CMD_MOSI','input'),(4,'VDD','power_in'),(5,'CLK','input')],
          [(8,'DAT1','passive'),(7,'DAT0_MISO','tri_state'),(6,'VSS','power_in'),('SH','SHELL','passive'),('CD1','CARD_DETECT_1','passive'),('CD2','CARD_DETECT_2','passive')], 30.48)
 for n in [2, 4, 6]:
@@ -159,7 +159,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'LRP2512-R040-1%': 'Resistor_SMD:R_2512_6332Metric', 'CS2512-0R15-1%-HP': 'Resistor_SMD:R_2512_6332Metric',
     'BC847B-DIO': 'Package_TO_SOT_SMD:SOT-23', 'BC857B': 'Package_TO_SOT_SMD:SOT-23', 'BZV55C12': 'Diode_SMD:D_MiniMELF',
     'BC-2001': 'EU_Mechanical:Battery_COMF_BC-2001', 'C1206C102JCGACTU': C1206, 'CL31C101JBCNNNC': C1206,
-    'C1206C100J5GACTU': C1206, 'RGB-5MM-CA': 'LED_THT:LED_D5.0mm-4_RGB', 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
+    'C1206C100J5GACTU': C1206, 'OSTAPA57E2A': 'LITE_Parts:LED_OSTAPA57E2A_Formed_P2.54mm', 'SMD1206-10K-1%': R1206, 'CRCW120682K0FKTABC': R1206, 'SMD1206-6K2-1%': R1206,
     'CRCW12061K20FKTABC': R1206, 'SMD1206 56K 1%': R1206, 'SMD1206-33K-1%': R1206,
 }
 # Footprints already drawn from manufacturer drawings in EU-0.1 / cheap-version (physical fit still pending)
@@ -393,14 +393,14 @@ add('Loads', 'D701', 'D', 'SS56 60V 5A', 'S20', ['+24V_PUMP', 'PUMP_DRAIN'])
 
 # ------------------------------------------------------------------ 08 | RGB status LED
 sheet('Status', '08 | RGB status LED', [
- 'D901: 5 mm diffused RGB LED, COMMON ANODE (owner decision 24.10.2026), anode on +12V. Lead order assumed R, A, G, B (KiCad LED_RAGB): confirm on the purchased part.',
+ 'D901: OptoSupply OSTAPA57E2A, diffused RGB, COMMON ANODE on +12V. Pins 1 G, 2 B, 3 A, 4 R. Form leads from 1.25 to 2.54 mm pitch; body raised 5 mm above PCB.',
  'Each channel: GPIO -> 4k7 -> BC847B base (100k to GND), collector -> 2k -> LED cathode. The 12 V supply makes the current independent of the Vf of the green and blue dies',
  '(a 3.3 V supply leaves only 0.1-0.3 V across a resistor for Vf 3.0-3.2 V). ~4.9 mA red, ~4.4 mA green/blue; resistor 49 mW; 100k keeps the LED dark during reset.',
  'GPIO4 = red, GPIO16 = green, GPIO17 = blue (module pins 26/27/28; no strapping function, free on WROOM-32E-N4). Drive with LEDC PWM; HIGH = channel on.',
  'The 12 V rail is off below ~14 V input, so the indicator is dark exactly when the ESP32 is not running.',
 ], 70)
-add('Status', 'D901', 'LED_RGB_CA', 'RGB 5mm CA', 'RGB-5MM-CA', {1: 'LED_R_K', 2: V12, 3: 'LED_G_K', 4: 'LED_B_K'},
-    note='Not in stock and not in the catalogue snapshot: buy a 5 mm diffused common-anode RGB LED (20 mA/channel max); check lead order and the color Vf (red ~2.0 V, green/blue ~3.0-3.3 V)', pos=(120, 70))
+add('Status', 'D901', 'LED_RGB_CA', 'OSTAPA57E2A', 'OSTAPA57E2A', {1: 'LED_G_K', 2: 'LED_B_K', 3: V12, 4: 'LED_R_K'},
+    note='Electrobase EB1854986288, owner quote 2026-10-25: EUR 0.85 incl. VAT. Manufacturer Ver.a.1.1: flat top, pins G/B/A/R; formed-lead footprint, 1.0 mm holes, 1.8 mm pads. Check formed fit before soldering.', pos=(120, 70))
 for k, ch in enumerate(('R', 'G', 'B')):
     q_ = f'Q9{k+1:02d}'
     add('Status', q_, 'NPN', f'BC847B ({ch})', 'BC847B-DIO', {1: f'LED_{ch}_BASE', 2: GND, 3: f'LED_{ch}_C'}, pos=(60 + 70*k, 130))
@@ -478,6 +478,7 @@ def textblk(name, key, t, x, y, size=1.1):
 
 
 source_urls = {
+ 'OSTAPA57E2A': 'https://www.optosupply.com/uppic/2020811188683.pdf',
  'LM3429MH/NOPB': 'https://www.ti.com/lit/ds/symlink/lm3429.pdf',
  'S26': 'https://www.st.com/resource/en/datasheet/st1s14.pdf',
  'S27': 'https://www.st.com/resource/en/datasheet/st1s10.pdf',
@@ -605,8 +606,8 @@ def main():
                    stock_rows=len(stock_rows), stock_pieces=sum(x['needed'] for x in stock_rows), buy_rows=len(buy_rows),
                    buy_pieces=sum(x['buy'] for x in buy_rows), shop_totals={k: str(v) for k, v in totals.items()},
                    parts_EUR=str(sum(totals.values())), shipping_EUR=str(shipping), total_EUR=str(sum(totals.values()) + shipping),
-                   unpriced_items=unpriced, unpriced_allowance_EUR='0.50',
-                   price_basis='Catalogue snapshot 2026-10-23 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order.')
+                   unpriced_items=unpriced, unpriced_allowance_EUR='0.00',
+                   price_basis='Catalogue snapshot 2026-10-23; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order.')
     (HERE/'BOM_allocated.json').write_text(json.dumps(dict(stock=stock_rows, buy=buy_rows, summary=summary), ensure_ascii=False, indent=2) + '\n')
     with (HERE/'BOM_allocated.csv').open('w', newline='', encoding='utf-8-sig') as f:
         w = csv.writer(f, lineterminator='\n')

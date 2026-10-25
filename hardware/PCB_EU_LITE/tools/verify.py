@@ -202,9 +202,9 @@ def main():
         ch_ok &= (pins(qq, {1: f'LED_{ch}_BASE', 2: 'GND', 3: f'LED_{ch}_C'}) and p[qq]['mpn'] == 'BC847B-DIO' and two(rb, f'LED_{ch}_GPIO', f'LED_{ch}_BASE') and val(rb) == 4700
                   and two(rpd, f'LED_{ch}_BASE', 'GND') and val(rpd) == 100e3 and two(rl, f'LED_{ch}_C', f'LED_{ch}_K')
                   and 3e-3 <= i_led <= 8e-3 and (12 - vf[ch]) ** 2 / val(rl) <= 0.125 and (3.3 - 0.7) / val(rb) * 100 >= 2 * i_led)
-    check(f'RGB status LED D901 (common anode on +12V, lead order R/A/G/B): per channel GPIO -> 4k7 -> BC847B base, 100k pull-down, collector -> 2k -> cathode; '
+    check(f'RGB status LED D901 (common anode on +12V, OSTAPA57E2A lead order G/B/A/R): per channel GPIO -> 4k7 -> BC847B base, 100k pull-down, collector -> 2k -> cathode; '
           f'{cur["R"] * 1e3:.1f}/{cur["G"] * 1e3:.1f}/{cur["B"] * 1e3:.1f} mA R/G/B (3-8 mA, below the 20 mA rating), base current saturates the NPN (hFE >= 100), resistor <= 0.125 W',
-          ch_ok and pins('D901', {1: 'LED_R_K', 2: '+12V', 3: 'LED_G_K', 4: 'LED_B_K'}) and p['D901']['mpn'] == 'RGB-5MM-CA' and 12 < 45)
+          ch_ok and pins('D901', {1: 'LED_G_K', 2: 'LED_B_K', 3: '+12V', 4: 'LED_R_K'}) and p['D901']['mpn'] == 'OSTAPA57E2A' and 12 < 45)
     check('RGB channels sit on GPIO4 / GPIO16 / GPIO17 (module pins 26/27/28: not strapping pins, not used by flash or PSRAM on WROOM-32E-N4); each GPIO net reaches only the ESP32 and its base resistor',
           pins('U202', {26: 'LED_R_GPIO', 27: 'LED_G_GPIO', 28: 'LED_B_GPIO'}) and all(len(real(f'LED_{c_}_GPIO')) == 2 for c_ in 'RGB') and all(len(real(f'LED_{c_}_K')) == 2 for c_ in 'RGB'))
 
@@ -239,23 +239,23 @@ def main():
           set(allocated) == set(buy) and all(buy[k]['buy'] >= v and buy[k]['buy'] >= buy[k]['min_qty'] and buy[k]['buy'] % buy[k]['multiple'] == 0 and (buy[k]['unpriced'] or (buy[k]['shop'] in ('Salvats', 'Electrobase', 'Lemona')
                                            and buy[k]['url'].startswith('https://') and buy[k]['price_date'])) for k, v in allocated.items()))
     unpriced = sorted(k for k in buy if buy[k]['unpriced'])
-    check(f'Purchase prices equal the frozen catalogue snapshot (procurement_lite.json); the only line without a price is the RGB LED, which is in neither the stock nor the catalogue ({", ".join(unpriced)})',
-          all(abs(buy[k]['price_unit'] - buy_snapshot[k]['price']) < 1e-9 for k in buy if not buy[k]['unpriced']) and unpriced == ['RGB-5MM-CA'] and buy_snapshot['RGB-5MM-CA']['price'] is None and buy['RGB-5MM-CA']['line'] == 0)
+    check(f'Purchase prices equal the frozen catalogue snapshot (procurement_lite.json); all lines including the owner-quoted OSTAPA57E2A have prices; unpriced ({", ".join(unpriced)})',
+          all(abs(buy[k]['price_unit'] - buy_snapshot[k]['price']) < 1e-9 for k in buy if not buy[k]['unpriced']) and not unpriced and buy_snapshot['OSTAPA57E2A']['price'] == .85 and buy['OSTAPA57E2A']['line'] == .85)
     summary = bom['summary']
     total = Decimal(summary['total_EUR']); allowance = Decimal(summary['unpriced_allowance_EUR'])
-    check(f'Purchases + delivery {total} EUR (+ {allowance} EUR estimate for the unpriced RGB LED) stay under the 100 EUR ceiling and the ~80 EUR target; cheaper than the ~81 EUR of EU-0.1 (81.17 EUR by BOM lines)',
+    check(f'Purchases + delivery {total} EUR (unpriced allowance {allowance} EUR) stay under the 100 EUR ceiling and the ~80 EUR target; cheaper than the ~81 EUR of EU-0.1 (81.17 EUR by BOM lines)',
           total + allowance <= Decimal('80.00') and total + allowance < Decimal('81.17'))
     out = ['EU-LITE schematic connectivity review (from design.json, no KiCad)', f'Revision: {spec["revision"]}',
            f'PASS: {len(passed)} checks', f'Fitted electrical components: {sum(x["in_bom"] for x in spec["parts"])}',
            f'Stock pieces: {summary["stock_pieces"]} in {summary["stock_rows"]} rows; purchased pieces: {summary["buy_pieces"]} in {summary["buy_rows"]} rows',
-           f'Purchases incl. VAT {summary["parts_EUR"]} EUR + delivery {summary["shipping_EUR"]} EUR = {total} EUR (catalogue snapshot 2026-10-23), without the RGB LED (no price: estimate up to {allowance} EUR)',
+           f'Purchases incl. VAT {summary["parts_EUR"]} EUR + delivery {summary["shipping_EUR"]} EUR = {total} EUR (catalogue 2026-10-23; RGB owner quote 2026-10-25), including OSTAPA57E2A',
            f'Stock lines used up completely (no spare, a mounting error means a repurchase): {", ".join(zero_spare)}', '']
     out += [f'PASS {i+1:02d} | {label}' for i, label in enumerate(passed)]
     out += ['', 'Limitations: these checks establish pin/net, calculated-value and BOM consistency of the specification, not an ERC of the written .kicad_sch files',
-            '(KiCad was not available), analog stability, power sequencing, component temperature, EMC/ESD immunity or manufacturing readiness.',
+            'or analog stability, power sequencing, component temperature, EMC/ESD immunity or manufacturing readiness.',
             'Pin tables: ST1S14 and ST1S10 from ../cheap-version (checked there against the datasheets; the ST1S14 table also matched a datasheet excerpt found by web search),',
             'INA238 from a TI datasheet translation and a third-party listing found by web search; no primary datasheet PDF could be fetched in this session.',
-            'No PCB exists yet; physical fit and prototype tests remain pending.']
+            'For separate KiCad/PCB checks see README; physical fit and prototype tests remain pending.']
     args.output.write_text('\n'.join(out) + '\n', encoding='utf-8')
     print('\n'.join(out[:8]))
 

@@ -42,6 +42,9 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
     require(abs(p.ToMM(board.GetDesignSettings().GetBoardThickness()) - 1.6062) < 1e-6, 'Nominal stack thickness differs')
     require(not list(board.GetTracks()) and not list(board.Zones()), 'Placement stage must have no routed copper or board zones')
     require(layout['courtyard_gap_mm'] >= .15 and layout['opposite_side_tht_joint_guard_mm'] >= .5, 'Assembly clearances were weakened')
+    require(layout['bottom_courtyard_gap_mm'] >= 1 and layout['bottom_battery_access_gap_mm'] >= 2, 'Bottom assembly clearances were weakened')
+    bottom_smd = {ref for group in layout['bottom_smd_groups'].values() for ref in group['refs']}
+    require(set(layout['bottom_side_allowed']) == bottom_smd | {'BT301'}, 'Bottom assembly list differs')
     edges = [d for d in board.GetDrawings() if d.GetLayer() == p.Edge_Cuts]
     def xy(v): return (round(p.ToMM(v.x),6),round(p.ToMM(v.y),6))
     expected = {frozenset(e) for e in [((0,0),(100,0)),((100,0),(100,100)),((100,100),(0,100)),((0,100),(0,0))]}
@@ -77,7 +80,9 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
         tall = any(pad.GetAttribute() == p.PAD_ATTRIB_PTH for pad in pads) or ref.startswith(('J','L','BT','SW')) or ref in {'C110','C508'}
         if (tall and ref not in layout.get('bottom_side_allowed', [])) or ref in layout['top_side_required']:
             require(not fp.IsFlipped(), f'{ref}: tall/access component must be on top')
-        require(not fp.IsFlipped() or ref in layout.get('bottom_side_allowed', []), f'{ref}: only the battery may be on bottom')
+        require(not fp.IsFlipped() or ref in layout.get('bottom_side_allowed', []), f'{ref}: not approved for bottom assembly')
+        if ref in bottom_smd:
+            require(fp.IsFlipped() and all(pad.GetAttribute() == p.PAD_ATTRIB_SMD for pad in pads) and ref.startswith(('R','C','Q')), f'{ref}: expected small bottom SMD')
         poly = fp.GetCourtyard(p.B_CrtYd if fp.IsFlipped() else p.F_CrtYd)
         require(poly.OutlineCount() == 1, f'{ref}: missing/ambiguous courtyard')
         if poly.OutlineCount() != 1:
@@ -102,7 +107,10 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
     for i,ref in enumerate(refs):
         for other in refs[i+1:]:
             if fps[ref].IsFlipped() == fps[other].IsFlipped():
-                require(courts[ref].distance(courts[other]) >= layout['courtyard_gap_mm']-1e-6, f'{ref}/{other}: courtyard gap < 0.15 mm')
+                gap = layout['courtyard_gap_mm']
+                if fps[ref].IsFlipped():
+                    gap = layout['bottom_battery_access_gap_mm'] if 'BT301' in (ref,other) else layout['bottom_courtyard_gap_mm']
+                require(courts[ref].distance(courts[other]) >= gap-1e-6, f'{ref}/{other}: courtyard gap < {gap} mm')
             else:
                 require(not any(j.intersects(courts[other]) for j in joints[ref]) and not any(j.intersects(courts[ref]) for j in joints[other]), f'{ref}/{other}: THT solder access obstructed')
     for ref,(x,y) in holes.items():
@@ -112,9 +120,10 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
         reserve = box(x-3.2,y-3.2,x+3.2,y+3.2)
         for other,court in courts.items():
             require(court.distance(reserve) >= .15-1e-6, f'{other}: {ref} mounting access obstructed')
-    # Owner's connector-edge contract: card beside UART is the only left-edge exception.
-    required_edges = {'J101':'right','J411':'right','J421':'right','J501':'right','J702':'right',
-                      'J401':'bottom','J403':'bottom','J701':'bottom','J301':'left'}
+    # Owner's connector-edge contract, including SHT above both fans.
+    required_edges = {'J101':'left','J411':'right','J421':'right','J501':'right','J702':'bottom',
+                      'J401':'right','J403':'bottom','J701':'bottom','J301':'left'}
+    require(courts['J401'].bounds[3] < courts['J411'].bounds[1] and courts['J411'].bounds[3] < courts['J421'].bounds[1], 'SHT4x must be above both fans')
     ports = layout['edge_ports']
     require(set(ports) == set(required_edges) == {r for r in comps if r.startswith('J') and r!='J201'}, 'Edge connector list incomplete')
     uart=fps['J201']
@@ -140,6 +149,11 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
         pads=sorted(fp.Pads(),key=lambda pad:int(pad.GetNumber()))
         require(len(pads)==4 and all(pad.GetAttribute()==p.PAD_ATTRIB_PTH and xy(pad.GetDrillSize())==(1,1) for pad in pads), f'{ref}: incorrect 2510 holes')
         require(all(abs(((xy(a.GetPosition())[0]-xy(b.GetPosition())[0])**2+(xy(a.GetPosition())[1]-xy(b.GetPosition())[1])**2)**.5-2.54)<1e-6 for a,b in zip(pads,pads[1:])), f'{ref}: incorrect 2.54 mm pitch')
+    led = fps['D901']
+    pads = sorted(led.Pads(), key=lambda pad:int(pad.GetNumber()))
+    require(led.GetFPID().GetUniStringLibId() == 'LITE_Parts:LED_OSTAPA57E2A_Formed_P2.54mm' and len(pads)==4, 'D901: expected formed-lead footprint')
+    require(all(xy(pad.GetDrillSize())==(1,1) and xy(pad.GetSize())==(1.8,1.8) for pad in pads), 'D901: incorrect hole/annulus')
+    require([pad.GetNetname() for pad in pads] == ['LED_G_K','LED_B_K','+12V','LED_R_K'], 'D901: incorrect G/B/A/R pinout')
     if errors:
         raise ValueError('\n'.join(errors))
     return dict(checks_passed=checks, pcbnew=p.GetBuildVersion(), netlisted_references=len(comps), mapped_netlist_pins=len(nets), sides=dict(Counter('B' if fps[r].IsFlipped() else 'F' for r in comps)),

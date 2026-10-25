@@ -79,7 +79,7 @@ MUTATIONS = {
     'GPIO34 tach pull-up removed (floating input)': net('R206', 1, None),
     'Fan tach signal wired from the header to GPIO34': net('J411', 3, 'FAN1_TACH'),
     'Diode D501 reversed': swap('D501', '1', '2'),
-    'RGB LED anode wired to +3V3 (blue/green Vf cannot be driven)': net('D901', 2, '+3V3'),
+    'RGB LED anode wired to +3V3 (blue/green Vf cannot be driven)': net('D901', 3, '+3V3'),
     'RGB green resistor 2k -> 100 R (about 90 mA)': value('R908', '100R'),
     'RGB blue base pull-down missing (glows during reset)': net('R906', 2, None),
     'RGB red channel moved to strapping pin GPIO12': move_red_to_strapping_pin,

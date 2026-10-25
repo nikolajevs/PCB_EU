@@ -9,15 +9,13 @@
   "buy_rows": 33,
   "buy_pieces": 45,
   "shop_totals": {
-    "Electrobase": "19.21",
+    "Electrobase": "20.06",
     "Salvats": "9.60"
   },
-  "parts_EUR": "28.81",
+  "parts_EUR": "29.66",
   "shipping_EUR": "5.87",
-  "total_EUR": "34.68",
-  "unpriced_items": [
-    "RGB-5MM-CA"
-  ],
-  "unpriced_allowance_EUR": "0.50",
-  "price_basis": "Catalogue snapshot 2026-10-23 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
+  "total_EUR": "35.53",
+  "unpriced_items": [],
+  "unpriced_allowance_EUR": "0.00",
+  "price_basis": "Catalogue snapshot 2026-10-23; OSTAPA57E2A owner Electrobase quote 2026-10-25 (procurement_lite.json); delivery as in the EU-0.1 README of 24.10.2026, not rechecked. No reservation or order."
 }
