@@ -4,19 +4,32 @@
   "standard_text_mm": 1.0,
   "compact_text_mm": 0.8,
   "stroke_mm": 0.15,
-  "generated_labels": 144,
+  "generated_labels": 154,
   "labels_by_face": {
     "B": 37,
-    "F": 107
+    "F": 117
   },
-  "references_placed": 115,
+  "references_placed": 125,
+  "references_recovered_by_edge_search": [
+    "R111",
+    "R112",
+    "R509",
+    "R512",
+    "R515",
+    "Q703",
+    "L101",
+    "SW201",
+    "J201",
+    "J301",
+    "J401"
+  ],
   "references_by_face": {
-    "F": 79,
+    "F": 89,
     "B": 36
   },
   "cross_side_references": [],
-  "compact_references": 21,
-  "vertical_references": 27,
+  "compact_references": 29,
+  "vertical_references": 29,
   "component_polarity_labels": 2,
   "connector_pin_labels": 27,
   "capacitor_plus_omitted_in_local_footprints": [
@@ -748,18 +761,18 @@
       "uuid": "25a0b6fa-9b36-5330-897c-bbbdac1e9bb7"
     },
     {
-      "name": "R905/reference/B/vertical",
+      "name": "R905/reference/B/compact-vertical",
       "kind": "text",
       "text": "R905",
       "ref": "R905",
       "side": "B",
       "at": [
-        27.6233,
-        71.5
+        23.4937,
+        69.0
       ],
       "rotation_deg": 90,
-      "size_mm": 1.0,
-      "uuid": "2fd4b3b0-d5de-5230-8c26-12890a56975f"
+      "size_mm": 0.8,
+      "uuid": "9f2494bc-75d9-5261-be4d-6f3f4122b86e"
     },
     {
       "name": "R906/reference/B",
@@ -909,7 +922,7 @@
       "side": "F",
       "at": [
         18.2681,
-        69.2325
+        69.225
       ],
       "rotation_deg": 0,
       "size_mm": 0.8,
@@ -936,7 +949,7 @@
       "ref": "U201",
       "side": "F",
       "at": [
-        36.9325,
+        36.925,
         42.8732
       ],
       "rotation_deg": 0,
@@ -978,7 +991,7 @@
       "ref": "U401",
       "side": "F",
       "at": [
-        15.9125,
+        15.905,
         79.4768
       ],
       "rotation_deg": 0,
@@ -1040,20 +1053,6 @@
       "rotation_deg": 90,
       "size_mm": 1.0,
       "uuid": "c80e5f80-d9d8-5923-b5e0-e0c5bbe197c8"
-    },
-    {
-      "name": "C107/reference/F",
-      "kind": "text",
-      "text": "C107",
-      "ref": "C107",
-      "side": "F",
-      "at": [
-        8.0,
-        56.9032
-      ],
-      "rotation_deg": 0,
-      "size_mm": 1.0,
-      "uuid": "febb92b8-1ff1-58cf-bef4-af95aa3b9323"
     },
     {
       "name": "C110/reference/F",
@@ -1154,18 +1153,18 @@
       "uuid": "2b408735-f22f-565e-82f1-6638d18d2c96"
     },
     {
-      "name": "C302/reference/B",
+      "name": "C302/reference/B/compact",
       "kind": "text",
       "text": "C302",
       "ref": "C302",
       "side": "B",
       "at": [
-        61.7,
-        49.9267
+        61.2,
+        50.8438
       ],
       "rotation_deg": 0,
-      "size_mm": 1.0,
-      "uuid": "46d6ff57-a747-5c05-8153-de81d89397b1"
+      "size_mm": 0.8,
+      "uuid": "5e9f016c-0821-5e19-b354-635a6b6a8224"
     },
     {
       "name": "C303/reference/B",
@@ -1413,7 +1412,7 @@
       "side": "F",
       "at": [
         51.6938,
-        40.0225
+        40.03
       ],
       "rotation_deg": 90,
       "size_mm": 0.8,
@@ -1434,6 +1433,20 @@
       "uuid": "b92a9cca-2c2b-57ed-b9f9-4543599d8138"
     },
     {
+      "name": "D103/reference/F/compact",
+      "kind": "text",
+      "text": "D103",
+      "ref": "D103",
+      "side": "F",
+      "at": [
+        8.2771,
+        56.5
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "4833b042-b685-558c-8d5b-758cc76e48df"
+    },
+    {
       "name": "D701/reference/F/compact-vertical",
       "kind": "text",
       "text": "D701",
@@ -1441,7 +1454,7 @@
       "side": "F",
       "at": [
         68.9062,
-        81.0225
+        81.03
       ],
       "rotation_deg": 90,
       "size_mm": 0.8,
@@ -1482,7 +1495,7 @@
       "ref": "F102",
       "side": "F",
       "at": [
-        50.3912,
+        50.4062,
         86.0
       ],
       "rotation_deg": 90,
@@ -1595,7 +1608,7 @@
       "side": "B",
       "at": [
         57.2,
-        47.0418
+        47.0267
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -1624,8 +1637,8 @@
       "ref": "J101",
       "side": "F",
       "at": [
-        6.0,
-        54.8483
+        5.5,
+        55.1732
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -2034,20 +2047,6 @@
       "net": "PUMP_DRAIN"
     },
     {
-      "name": "J101/reference/F/vertical",
-      "kind": "text",
-      "text": "J101",
-      "ref": "J101",
-      "side": "F",
-      "at": [
-        4.1725,
-        56.2595
-      ],
-      "rotation_deg": 90,
-      "size_mm": 1.0,
-      "uuid": "30ac2412-0e87-544f-913c-bc81341daee4"
-    },
-    {
       "name": "J403/reference/F",
       "kind": "text",
       "text": "J403",
@@ -2055,7 +2054,7 @@
       "side": "F",
       "at": [
         27.7405,
-        93.8275
+        93.835
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
@@ -2096,7 +2095,7 @@
       "ref": "J501",
       "side": "F",
       "at": [
-        93.8275,
+        93.835,
         51.8268
       ],
       "rotation_deg": 0,
@@ -2110,7 +2109,7 @@
       "ref": "J503",
       "side": "F",
       "at": [
-        93.8275,
+        93.835,
         91.1732
       ],
       "rotation_deg": 0,
@@ -2125,11 +2124,165 @@
       "side": "F",
       "at": [
         69.2595,
-        93.8275
+        93.835
       ],
       "rotation_deg": 0,
       "size_mm": 1.0,
       "uuid": "b268740c-5e2b-52a4-8008-196b22b7c744"
+    },
+    {
+      "name": "R111/reference/F/compact",
+      "kind": "text",
+      "text": "R111",
+      "ref": "R111",
+      "side": "F",
+      "at": [
+        19.4171,
+        54.8637
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "59efbc7f-5f5e-5cf3-bd96-93f02ee2aa38"
+    },
+    {
+      "name": "R112/reference/F/compact",
+      "kind": "text",
+      "text": "R112",
+      "ref": "R112",
+      "side": "F",
+      "at": [
+        22.6529,
+        58.6763
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "12cc06bc-e798-5692-8cb1-5c10166a862c"
+    },
+    {
+      "name": "R509/reference/F",
+      "kind": "text",
+      "text": "R509",
+      "ref": "R509",
+      "side": "F",
+      "at": [
+        63.3814,
+        63.8183
+      ],
+      "rotation_deg": 0,
+      "size_mm": 1.0,
+      "uuid": "beea9672-636a-5202-89ab-882eabbee619"
+    },
+    {
+      "name": "R512/reference/F/compact",
+      "kind": "text",
+      "text": "R512",
+      "ref": "R512",
+      "side": "F",
+      "at": [
+        71.8671,
+        38.4331
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "dacf77ed-10cf-55c6-af54-6db9648a2f53"
+    },
+    {
+      "name": "R515/reference/F/compact",
+      "kind": "text",
+      "text": "R515",
+      "ref": "R515",
+      "side": "F",
+      "at": [
+        60.1612,
+        53.9737
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "fade5d10-5125-5cee-a108-cb78013942d6"
+    },
+    {
+      "name": "Q703/reference/F/compact",
+      "kind": "text",
+      "text": "Q703",
+      "ref": "Q703",
+      "side": "F",
+      "at": [
+        58.3619,
+        75.8987
+      ],
+      "rotation_deg": 0,
+      "size_mm": 0.8,
+      "uuid": "85b0dcd5-d6fb-59e8-9dd0-b47285b708e8"
+    },
+    {
+      "name": "L101/reference/F/vertical",
+      "kind": "text",
+      "text": "L101",
+      "ref": "L101",
+      "side": "F",
+      "at": [
+        42.5033,
+        63.7633
+      ],
+      "rotation_deg": 90,
+      "size_mm": 1.0,
+      "uuid": "c492e3a0-0305-5403-ad7b-cbfa742ce2c4"
+    },
+    {
+      "name": "SW201/reference/F/vertical",
+      "kind": "text",
+      "text": "SW201",
+      "ref": "SW201",
+      "side": "F",
+      "at": [
+        3.4867,
+        57.1884
+      ],
+      "rotation_deg": 90,
+      "size_mm": 1.0,
+      "uuid": "577a71d3-79e3-5129-af7e-ae52f02eddb9"
+    },
+    {
+      "name": "J201/reference/F/vertical",
+      "kind": "text",
+      "text": "J201",
+      "ref": "J201",
+      "side": "F",
+      "at": [
+        1.2167,
+        16.1
+      ],
+      "rotation_deg": 90,
+      "size_mm": 1.0,
+      "uuid": "87770b06-ab67-5ff2-a29c-a050feacf3cc"
+    },
+    {
+      "name": "J301/reference/F",
+      "kind": "text",
+      "text": "J301",
+      "ref": "J301",
+      "side": "F",
+      "at": [
+        19.1495,
+        31.2802
+      ],
+      "rotation_deg": 0,
+      "size_mm": 1.0,
+      "uuid": "c8332928-7784-53bd-bd03-0803b4016384"
+    },
+    {
+      "name": "J401/reference/F",
+      "kind": "text",
+      "text": "J401",
+      "ref": "J401",
+      "side": "F",
+      "at": [
+        93.5605,
+        21.9633
+      ],
+      "rotation_deg": 0,
+      "size_mm": 1.0,
+      "uuid": "ff656910-f901-588e-9118-f42ebd9b3a31"
     }
   ],
   "omitted": [
@@ -2150,14 +2303,6 @@
     },
     {
       "ref": "R102",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "R111",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "R112",
       "reason": "no clear space on the component side for readable reference"
     },
     {
@@ -2189,18 +2334,6 @@
       "reason": "no clear space on the component side for readable reference"
     },
     {
-      "ref": "R509",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "R512",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "R515",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
       "ref": "R516",
       "reason": "no clear space on the component side for readable reference"
     },
@@ -2214,10 +2347,6 @@
     },
     {
       "ref": "Q411",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "Q703",
       "reason": "no clear space on the component side for readable reference"
     },
     {
@@ -2242,6 +2371,10 @@
     },
     {
       "ref": "C106",
+      "reason": "no clear space on the component side for readable reference"
+    },
+    {
+      "ref": "C107",
       "reason": "no clear space on the component side for readable reference"
     },
     {
@@ -2285,10 +2418,6 @@
       "reason": "no clear space on the component side for readable reference"
     },
     {
-      "ref": "D103",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
       "ref": "D501",
       "reason": "no clear space on the component side for readable reference"
     },
@@ -2301,15 +2430,7 @@
       "reason": "no clear space on the component side for readable reference"
     },
     {
-      "ref": "L101",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
       "ref": "L201",
-      "reason": "no clear space on the component side for readable reference"
-    },
-    {
-      "ref": "SW201",
       "reason": "no clear space on the component side for readable reference"
     },
     {
@@ -2351,15 +2472,7 @@
       "reason": "no clear space within 6 mm of pin"
     },
     {
-      "ref": "J201",
-      "reason": "no clear space on the component side for low-priority connector reference"
-    },
-    {
-      "ref": "J301",
-      "reason": "no clear space on the component side for low-priority connector reference"
-    },
-    {
-      "ref": "J401",
+      "ref": "J101",
       "reason": "no clear space on the component side for low-priority connector reference"
     },
     {
@@ -2371,6 +2484,6 @@
       "reason": "no clear space on the component side for low-priority connector reference"
     }
   ],
-  "base_pcb_sha256": "12aeb951fd07bed0f876fadb4a1fe14068ce56a63ceb6da324378d58563419c3",
-  "generated_pcb_sha256": "297ad580f286d5e047694e0097627901b9de14696bb3174920ec7901c032a389"
+  "base_pcb_sha256": "36581a3c09d07cf24b28b274dc7029cc6b10e0a36c7b6b0ea291e8bf47ec68ff",
+  "generated_pcb_sha256": "e93b5102dc673816e15cca2e5316efc4bddce4ea7879c0f39e8fa67774bfb9fe"
 }

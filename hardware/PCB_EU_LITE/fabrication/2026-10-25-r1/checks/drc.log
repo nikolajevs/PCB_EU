@@ -1,0 +1,6 @@
+23:42:24: Error: Can't create registry key 'HKCU\Software\kicad-cli' (error 5: ???????? ? ???????.)
+23:42:24: Error: Can't open registry key 'HKCU\Software\kicad-cli' (error 5: ???????? ? ???????.)
+Найдено 35 нарушений
+Найдено 0 неподключенных элементов
+Найдено 0 проблем с соответствием схеме
+Отчет DRC сохранен в C:/Users/igors/Documents/Codex/2026-10-24/https-github-com-nikolajevs-pcb-eu/work/PCB_EU/hardware/PCB_EU_LITE/fabrication/2026-10-25-r1/checks/drc.json

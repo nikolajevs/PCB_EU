@@ -1,0 +1,11 @@
+23:42:30: Error: Can't create registry key 'HKCU\Software\kicad-cli' (error 5: ???????? ? ???????.)
+23:42:30: Error: Can't open registry key 'HKCU\Software\kicad-cli' (error 5: ???????? ? ???????.)
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-F_Cu.gtl'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-In1_Cu.g1'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-In2_Cu.g2'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-B_Cu.gbl'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-F_Silkscreen.gto'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-B_Silkscreen.gbo'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-F_Mask.gts'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-B_Mask.gbs'.
+Начерчено в 'C:\Users\igors\Documents\Codex\2026-10-24\https-github-com-nikolajevs-pcb-eu\work\PCB_EU\hardware\PCB_EU_LITE\fabrication\2026-10-25-r1\gerber\PCB_EU_LITE-Edge_Cuts.gm1'.

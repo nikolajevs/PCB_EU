@@ -602,6 +602,16 @@ def main():
     (HERE/f'{ROOT}.kicad_sch').write_text('\n'.join(root) + '\n', encoding='utf-8')
     project_path = HERE/f'{ROOT}.kicad_pro'
     project = json.loads(project_path.read_text(encoding='utf-8')) if project_path.exists() else dict(meta=dict(filename=f'{ROOT}.kicad_pro', version=3), erc=dict(erc_exclusions=[], meta=dict(version=0)), schematic=dict(meta=dict(version=1)))
+    settings = project.setdefault('board', {}).setdefault('design_settings', {})
+    settings.setdefault('drc_exclusions', [])
+    settings.setdefault('rules', {}).update({
+        'min_clearance': 0.2, 'min_copper_edge_clearance': 0.3,
+        'min_hole_clearance': 0.2, 'min_hole_to_hole': 0.25,
+        'min_track_width': 0.2, 'min_via_diameter': 0.5,
+        'min_via_annular_width': 0.1, 'min_through_hole_diameter': 0.3,
+        'min_text_height': 0.8, 'min_text_thickness': 0.15,
+        'min_silk_clearance': 0.15,
+    })
     project.setdefault('text_variables', {})['DESIGN_STAGE'] = 'SCHEMATIC_DRAFT'
     project_path.write_text(json.dumps(project, indent=2) + '\n', encoding='utf-8')
     spec = dict(revision=REV, date=DATE, base='EU-0.1 (hardware/PCB_EU) with ../cheap-version substitutions', parts=parts, accessories=accessories, source_urls=source_urls)

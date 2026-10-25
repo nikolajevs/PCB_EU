@@ -1,0 +1,4 @@
+00:00:59: Error: Can't create registry key 'HKCU\Software\kicad-cli' (error 5: ???????? ? ???????.)
+00:00:59: Error: Can't open registry key 'HKCU\Software\kicad-cli' (error 5: ???????? ? ???????.)
+Найдено 0 нарушений
+Отчёт ERC сохранен в C:/Users/igors/Documents/Codex/2026-10-24/https-github-com-nikolajevs-pcb-eu/work/PCB_EU/hardware/PCB_EU_LITE/fabrication/2026-10-26-r2/checks/erc.json
