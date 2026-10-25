@@ -13,6 +13,7 @@ import xml.etree.ElementTree as ET
 
 import pcbnew as p
 from shapely.geometry import Polygon, box
+from shapely.affinity import rotate, translate
 
 HERE = Path(__file__).resolve().parents[1]
 
@@ -111,6 +112,34 @@ def check(board_path, netlist, layout_path=HERE/'placement.json'):
         reserve = box(x-3.2,y-3.2,x+3.2,y+3.2)
         for other,court in courts.items():
             require(court.distance(reserve) >= .15-1e-6, f'{other}: {ref} mounting access obstructed')
+    # Owner's connector-edge contract: card beside UART is the only left-edge exception.
+    required_edges = {'J101':'right','J411':'right','J421':'right','J501':'right','J702':'right',
+                      'J401':'bottom','J403':'bottom','J701':'bottom','J301':'left'}
+    ports = layout['edge_ports']
+    require(set(ports) == set(required_edges) == {r for r in comps if r.startswith('J') and r!='J201'}, 'Edge connector list incomplete')
+    uart=fps['J201']
+    require(xy(uart.GetPosition()) == (4,9.75) and uart.GetOrientationDegrees() == 0 and not uart.IsFlipped(), 'UART must remain at its original placement')
+    require(courts['J301'].distance(courts['J201']) <= 6, 'microSD must remain near UART')
+    for ref,edge in required_edges.items():
+        cfg=ports[ref];fp=fps[ref]
+        angle={'right':90,'bottom':0,'left':-90}[edge]
+        require(cfg['edge']==edge and abs(fp.GetOrientationDegrees()-angle)<1e-6 and not fp.IsFlipped(), f'{ref}: wrong edge/mating orientation')
+        x,y=xy(fp.GetPosition());front=cfg['local_access_box'][1]
+        gap={'right':100-x-front,'bottom':100-y-front,'left':x-front}[edge]
+        require(0 <= gap <= cfg['max_edge_gap_mm'] <= 2, f'{ref}: mating face is not at the required board edge')
+        access=translate(rotate(box(*cfg['local_access_box']),-fp.GetOrientationDegrees(),origin=(0,0)),x,y)
+        require(cfg['local_access_box'][3]-front >= 20, f'{ref}: access corridor shorter than 20 mm')
+        for other,court in courts.items():
+            if other!=ref and not fps[other].IsFlipped():
+                require(not access.intersects(court), f'{ref}/{other}: connector/card access obstructed')
+        for hole,(hx,hy) in holes.items():
+            require(not access.intersects(box(hx-3.2,hy-3.2,hx+3.2,hy+3.2)), f'{ref}: access obstructed by {hole} mounting hardware')
+    for ref in ('J411','J421'):
+        fp=fps[ref]
+        require(fp.GetFPID().GetUniStringLibId() == 'LITE_Parts:KF2510_1x04_P2.54mm_RightAngle', f'{ref}: expected right-angle 2510 footprint')
+        pads=sorted(fp.Pads(),key=lambda pad:int(pad.GetNumber()))
+        require(len(pads)==4 and all(pad.GetAttribute()==p.PAD_ATTRIB_PTH and xy(pad.GetDrillSize())==(1,1) for pad in pads), f'{ref}: incorrect 2510 holes')
+        require(all(abs(((xy(a.GetPosition())[0]-xy(b.GetPosition())[0])**2+(xy(a.GetPosition())[1]-xy(b.GetPosition())[1])**2)**.5-2.54)<1e-6 for a,b in zip(pads,pads[1:])), f'{ref}: incorrect 2.54 mm pitch')
     if errors:
         raise ValueError('\n'.join(errors))
     return dict(checks_passed=checks, pcbnew=p.GetBuildVersion(), netlisted_references=len(comps), mapped_netlist_pins=len(nets), sides=dict(Counter('B' if fps[r].IsFlipped() else 'F' for r in comps)),

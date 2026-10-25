@@ -146,7 +146,7 @@ SRC_FP = {   # footprint per source (stock id 'S<n>' or purchase key)
     'S8': 'LITE_Parts:Diodes_PowerDI5', 'S20': 'Diode_SMD:D_SMC', 'S12': 'LITE_Parts:L_Feryster_DTMSS-27_V',
     'S31': 'Inductor_SMD:L_1008_2520Metric', 'S93': KF301,
     'S90': 'Connector_JST:JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal',
-    'S87': 'Connector_Molex:Molex_KK-254_AE-6410-04A_1x04_P2.54mm_Vertical',
+    'S87': 'LITE_Parts:KF2510_1x04_P2.54mm_RightAngle',
     'S95': 'Button_Switch_THT:SW_PUSH_6mm_H9.5mm',
     'ESP32-WROOM-32E-N4': 'EU_Parts:ESP32-WROOM-32E_NoVias', 'LM3429MH/NOPB': 'EU_Mechanical:TI_PWP0014A_LM3429',
     'MCP7940N-I/SN': 'LITE_Parts:SOIC-8_3.9x4.9mm_P1.27mm', 'ABS07-32.768KHZ-7-T': 'EU_Mechanical:Crystal_Abracon_ABS07',
@@ -326,8 +326,8 @@ add('Interfaces', 'F401', 'F', '2 A slow', '3403.0169.11', [V12, '+12V_FANS'])
 for k in (1, 2):
     i = 410 if k == 1 else 420
     sh = 'Interfaces'; prefix = f'FAN{k}'
-    add(sh, f'J{i+1}', 'J4', f'FAN{k} 2510-4P', 'S87', [GND, '+12V_FANS', None, prefix + '_PWM'],
-        note='4-pin PC fan pinout: 1 GND, 2 +12 V, 3 tach (NC), 4 PWM. KF2510 matches Molex KK-254; confirm against the part')
+    add(sh, f'J{i+1}', 'J4', f'FAN{k} 2510-4P 90deg', 'S87', [GND, '+12V_FANS', None, prefix + '_PWM'],
+        note='Right-angle 2510-4AW footprint; stock KF2510/KF2540 variant needs physical confirmation. Pinout unchanged: 1 GND, 2 +12 V, 3 tach (NC), 4 PWM. Reference envelope: LHE A2543-WR04; check latch and pin 1 on actual part')
     add(sh, f'Q{i+1}', 'NMOS_GSD', f'FAN{k} AO3422', 'AO3422', {1: prefix + '_GATE', 2: GND, 3: prefix + '_PWM'}, pos=(65 if k == 1 else 195, 100))
     r(sh, f'R{i+1}', '1k GATE', 'S62', prefix + '_GPIO', prefix + '_GATE', '25 kHz edge timing must be checked')
     r(sh, f'R{i+2}', '100k', 'S55', prefix + '_GATE', GND)

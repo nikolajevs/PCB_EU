@@ -24,7 +24,8 @@ def main(netlist):
         def block_joint(b):
             fp=b.FindFootprintByReference('R901')
             fp.Flip(fp.GetPosition(),False)
-            move(fp,80,31.75)
+            pad=next(iter(b.FindFootprintByReference('L501').Pads()))
+            fp.SetPosition(pad.GetPosition())
         cases = [
             ('component outside', lambda b: move(b.FindFootprintByReference('C209'),115,20), 'outside board margin'),
             ('overlapping courtyards', lambda b: move(b.FindFootprintByReference('C209'),*tuple(p.ToMM(v) for v in [b.FindFootprintByReference('C208').GetPosition().x,b.FindFootprintByReference('C208').GetPosition().y])), 'courtyard gap'),
@@ -32,6 +33,10 @@ def main(netlist):
             ('wrong pad net', lambda b: next(iter(b.FindFootprintByReference('R111').Pads())).SetNetCode(0), 'net differs'),
             ('blocked THT solder access', block_joint, 'THT solder access'),
             ('disabled RF rule', lambda b: next(iter(b.FindFootprintByReference('U202').Zones())).SetDoNotAllowTracks(False), 'antenna keepout'),
+            ('UART moved', lambda b: move(b.FindFootprintByReference('J201'),7,10), 'UART must remain'),
+            ('fan faces inward', lambda b: b.FindFootprintByReference('J411').SetOrientationDegrees(-90), 'wrong edge/mating orientation'),
+            ('card far from UART', lambda b: move(b.FindFootprintByReference('J301'),60,80), 'microSD must remain near UART'),
+            ('blocked connector access', lambda b: move(b.FindFootprintByReference('C209'),99,44), 'connector/card access obstructed'),
         ]
         for name,mutate,expected in cases:
             b = p.LoadBoard(str(board_path));mutate(b);p.SaveBoard(str(out),b)
@@ -53,7 +58,7 @@ def main(netlist):
             raise AssertionError('Builder overwrote routed copper')
         assert out.read_bytes()==copper
     assert all(f.read_bytes()==content for f,content in originals.items()), 'Source board/project modified by checks'
-    print('PASS | identical regeneration; 6 placement mutations rejected; routed copper protected; source projects unchanged')
+    print(f'PASS | identical regeneration; {len(cases)} placement mutations rejected; routed copper protected; source projects unchanged')
 
 
 if __name__ == '__main__':
