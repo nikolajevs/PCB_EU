@@ -124,7 +124,7 @@ def add_power_zones(board):
 
     # Use direct copper on these compact SMD pins where the thermal relief was
     # starved to one spoke by the nearby zones.
-    for ref, number in (('U102','2'), ('U102','7'), ('U201','2'), ('U201','4'),
+    for ref, number in (('U102','2'), ('U102','7'), ('U102','10'), ('U201','2'), ('U201','4'),
                         ('U201','6'), ('U501','1'), ('U501','9'), ('D701','1'), ('Q102','2'),
                         ('Q703','2'), ('Q703','3'), ('J701','1'), ('J701','2'), ('Q102','3')):
         set_full_pad_connection(board, ref, number)
@@ -182,6 +182,92 @@ def add_power_zones(board):
         add_zone(board, net, layer, name, points, priority)
 
 
+def prepare_return_path(board):
+    """Move INA238 away from the return trunk and widen the three freed segments."""
+    fp = next((f for f in board.GetFootprints() if f.GetReference() == 'U102'), None)
+    if fp is None:
+        raise RuntimeError('Cannot find footprint U102')
+    target_y = MM(45.2)
+    delta_y = target_y - fp.GetPosition().y
+    if delta_y:
+        if abs(p.ToMM(delta_y) + 0.8) > 0.005:
+            raise RuntimeError(f'Unexpected U102 Y position {p.ToMM(fp.GetPosition().y):.3f} mm')
+        moved = {}
+        for pad in fp.Pads():
+            old = pad.GetPosition()
+            moved[(old.x, old.y)] = p.VECTOR2I(old.x, old.y + delta_y)
+        for item in board.GetTracks():
+            if isinstance(item, p.PCB_VIA):
+                continue
+            start, end = item.GetStart(), item.GetEnd()
+            if (start.x, start.y) in moved:
+                item.SetStart(moved[(start.x, start.y)])
+            if (end.x, end.y) in moved:
+                item.SetEnd(moved[(end.x, end.y)])
+        fp.SetPosition(p.VECTOR2I(fp.GetPosition().x, target_y))
+
+    def pair(item):
+        start, end = item.GetStart(), item.GetEnd()
+        return frozenset(((round(p.ToMM(start.x), 3), round(p.ToMM(start.y), 3)),
+                          (round(p.ToMM(end.x), 3), round(p.ToMM(end.y), 3))))
+
+    # These three short segments only routed GND between the old U102.7 escape
+    # and a GND trunk. The full GND plane now connects both ends directly.
+    redundant_gnd = {
+        frozenset(((20.0, 43.0), (20.0, 43.017))),
+        frozenset(((20.0, 43.017), (19.696, 42.713))),
+        frozenset(((19.696, 42.713), (16.975, 42.713))),
+    }
+    for item in list(board.GetTracks()):
+        if (not isinstance(item, p.PCB_VIA) and item.GetNetname() == 'GND'
+                and item.GetLayer() == p.F_Cu and pair(item) in redundant_gnd):
+            board.Delete(item)
+
+    widened_segments = {
+        frozenset(((17.591, 49.725), (16.817, 48.952))),
+        frozenset(((17.591, 49.725), (19.488, 49.725))),
+        frozenset(((19.488, 49.725), (20.0, 50.237))),
+    }
+    found = set()
+    for item in board.GetTracks():
+        if (isinstance(item, p.PCB_VIA) or item.GetNetname() != 'RTN_SHUNT'
+                or item.GetLayer() != p.F_Cu or pair(item) not in widened_segments):
+            continue
+        item.SetWidth(MM(1.4))
+        found.add(pair(item))
+    if found != widened_segments:
+        raise RuntimeError(f'Expected three return segments to widen; found {len(found)}')
+
+    medium_segments = {
+        frozenset(((15.5, 47.92), (16.817, 47.92))),
+        frozenset(((16.817, 48.952), (16.817, 47.92))),
+        frozenset(((21.733, 53.370), (22.4, 54.038))),
+    }
+    found_medium = set()
+    for item in board.GetTracks():
+        if (isinstance(item, p.PCB_VIA) or item.GetNetname() != 'RTN_SHUNT'
+                or item.GetLayer() != p.F_Cu or pair(item) not in medium_segments):
+            continue
+        item.SetWidth(MM(1.3))
+        found_medium.add(pair(item))
+    if found_medium != medium_segments:
+        raise RuntimeError(f'Expected three return segments to widen; found {len(found_medium)}')
+
+    clearance_limited_segments = {
+        frozenset(((20.0, 50.237), (21.733, 51.970))),
+        frozenset(((21.733, 51.970), (21.733, 53.370))),
+    }
+    found_limited = set()
+    for item in board.GetTracks():
+        if (isinstance(item, p.PCB_VIA) or item.GetNetname() != 'RTN_SHUNT'
+                or item.GetLayer() != p.F_Cu or pair(item) not in clearance_limited_segments):
+            continue
+        item.SetWidth(MM(1.2))
+        found_limited.add(pair(item))
+    if found_limited != clearance_limited_segments:
+        raise RuntimeError(f'Expected two clearance-limited return segments; found {len(found_limited)}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--board', type=Path, default=HERE/'PCB_EU_LITE.kicad_pcb')
@@ -192,11 +278,13 @@ def main():
     for zone in list(board.Zones()):
         if zone.GetZoneName().startswith('lite_power/'):
             board.Delete(zone)
+    prepare_return_path(board)
     add_power_zones(board)
     p.ZONE_FILLER(board).Fill(board.Zones())
     board.BuildConnectivity()
     p.SaveBoard(str(args.board), board)
-    print(f'Added three ground pours and 15 local power pours; tracks/vias={len(board.GetTracks())}; '
+    print(f'Added three ground pours and 15 local power pours; moved U102 and widened RTN_SHUNT; '
+          f'tracks/vias={len(board.GetTracks())}; '
           f'unconnected={board.GetConnectivity().GetUnconnectedCount(False)}')
 
 
