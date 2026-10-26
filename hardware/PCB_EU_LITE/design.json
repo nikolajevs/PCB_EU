@@ -64,7 +64,7 @@
       "sheet": "InputPower",
       "ref": "F103",
       "symbol": "F",
-      "value": "6.3 A slow",
+      "value": "6.3 A fast",
       "mpn": "3413.0224.11",
       "src": "3413.0224.11",
       "nets": {

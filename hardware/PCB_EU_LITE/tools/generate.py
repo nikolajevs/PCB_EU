@@ -218,12 +218,12 @@ sheet('InputPower', '01 | 24 V input, reverse polarity, fuses and power monitor'
  'Power monitor: R111||R112 = 3.5 mOhm (two 7 mOhm metal strip, stock) between board GND and Q102 source; INA238 U102 at I2C 0x40.',
  'INA238 VBUS takes +24V_FUSED directly (85 V limit): no 1k + zener as with the INA226. IN+ (pin 10) is a Kelvin tap on the GND pad of R111.',
  'ADCRANGE=1 (+-40.96 mV): full scale 11.7 A; board budget <=9 A with the 75 W LED channel. INA238 registers differ from INA226: firmware port needed.',
- 'Fuses: F101 main 15 A; F102 PTC 8 A; F103 LED 6.3 A; F104 12 V buck 2 A; F105 pump 1 A (all slow). Coordination NOT qualified.',
+ 'Fuses: F101 main 15 A; F102 PTC 8 A; F103 LED 6.3 A USI fast; F104 12 V buck 2 A; F105 pump 1 A (all except F103 slow). Coordination NOT qualified.',
  'Programmer/USB ground must never become the power return. D101 clamps +24V_FUSED at ~42 V.',
 ], 95)
 add('InputPower', 'J101', 'J2', '24 V IN', 'S93', ['+24V_RAW', 'PSU_RTN'], note='KF301-5.0-2P: pin 1 +24 V, pin 2 return. Confirm terminal rating: design current envelope 9 A with one 75 W LED channel plus the other loads')
 for ref, val, src, a, b in [('F101', '15 A slow', '3413.0330.11', '+24V_RAW', V24), ('F102', '8 A slow', '3413.0327.11', V24, '+24V_PTC'),
-                            ('F103', '6.3 A slow', '3413.0224.11', V24, '+24V_LED'), ('F104', '2 A slow', '3403.0169.11', V24, '+24V_AUX'),
+                            ('F103', '6.3 A fast', '3413.0224.11', V24, '+24V_LED'), ('F104', '2 A slow', '3403.0169.11', V24, '+24V_AUX'),
                             ('F105', '1 A slow', '3403.0166.11', V24, '+24V_PUMP')]:
     add('InputPower', ref, 'F', val, src, [a, b], note='SCHURTER reflow lands from EU-0.1; fuse clearing I2t/coordination remain unqualified')
 add('InputPower', 'D101', 'TVS', 'SMBJ26A', 'SMBJ26A-E3/52', [V24, GND])
