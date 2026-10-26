@@ -31,6 +31,7 @@ def main():
     sys.path.insert(0, str(HERE/'tools'))
     from check_placement import check as placement_check
     from fabrication_checks import check as board_check
+    from check_power_paths import check as power_check
     from gerbonara import LayerStack
 
     version = subprocess.check_output([args.kicad_cli,'version'],text=True).strip()
@@ -65,7 +66,8 @@ def main():
     (checks/'placement.json').write_text(json.dumps(placement,indent=2)+'\n',encoding='utf-8')
     physical = board_check(board)
     (checks/'board.json').write_text(json.dumps(physical,indent=2)+'\n',encoding='utf-8')
-    print('PASS | placement, manufacturing geometry and same-net Kelvin isolation',flush=True)
+    (checks/'power_paths.json').write_text(json.dumps(power_check(board),indent=2)+'\n',encoding='utf-8')
+    print('PASS | placement, manufacturing geometry, power paths and same-net Kelvin isolation',flush=True)
     run('drc',[args.kicad_cli,'pcb','drc','--schematic-parity','--format','json','-o',str(checks/'drc.json'),str(board)])
     drc = json.loads((checks/'drc.json').read_text(encoding='utf-8'))
     import pcbnew as p

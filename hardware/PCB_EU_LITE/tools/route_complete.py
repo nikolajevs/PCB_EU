@@ -19,9 +19,9 @@ MM = p.FromMM
 GRID = 0.1
 WINDOW = 12.0
 LAYERS = [p.F_Cu, p.In2_Cu, p.B_Cu]
-# Use the board-rule minimum 0.5 mm via with a 0.3 mm drill. This leaves a
-# 0.1 mm annular ring and passes the 0.5 mm minimum-diameter DRC constraint.
-VIA = (0.5, 0.3)
+# Preserve a 0.15 mm annular ring on newly routed vias.
+VIA = (0.6, 0.3)
+COPPER_LAYERS = (p.F_Cu, p.In1_Cu, p.In2_Cu, p.B_Cu)
 WIDTH = {'HEAVY24': 0.8, 'LOAD': 0.5, 'PWR': 0.3}
 DEFAULT_WIDTH = 0.25
 # The Lite project does not define KiCad net classes yet. These overrides also
@@ -111,7 +111,8 @@ class Grid:
                 x, y = self.xy(i, j)
                 if shape.Collide(p.SHAPE_CIRCLE(p.VECTOR2I(MM(x), MM(y)), MM(radius)), MM(clr)):
                     if kind == 'track':
-                        self.track[layer][i * self.ny + j] = 1
+                        if layer in self.track:
+                            self.track[layer][i * self.ny + j] = 1
                     else:
                         self.via[i * self.ny + j] = 1
 
@@ -158,7 +159,7 @@ class Grid:
                 if not near(box):
                     continue
                 if pad.GetNetCode() != netcode:
-                    for layer in LAYERS:
+                    for layer in COPPER_LAYERS:
                         if pad.IsOnLayer(layer):
                             self.mark(layer, pad.GetEffectiveShape(layer), clearance_of(pad), box)
                     if preserve_escapes:
@@ -179,9 +180,9 @@ class Grid:
                 # hole-to-hole spacing applies to every net
                 self.block_disc(p.ToMM(c.x), p.ToMM(c.y), VIA[1] + 0.3, [], True)
                 if t.GetNetCode() != netcode:
-                    for layer in LAYERS:
+                    for layer in COPPER_LAYERS:
                         self.mark(layer, t.GetEffectiveShape(layer), clearance_of(t), box)
-            elif t.GetNetCode() != netcode and t.GetLayer() in LAYERS:
+            elif t.GetNetCode() != netcode and t.GetLayer() in COPPER_LAYERS:
                 self.mark(t.GetLayer(), t.GetEffectiveShape(), clearance_of(t), box)
         rules = [*board.Zones(), *(z for fp in board.GetFootprints() for z in fp.Zones())]
         for z in rules:
