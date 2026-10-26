@@ -202,7 +202,8 @@ def main():
     ilim = 0.215 / (val('R501') * 1.01)
     check(f'IS minimum 215 mV / (0.040 R +1%) = {ilim:.2f} A versus modeled peak {max(ipk.values()):.2f} A (1.26 V CSH, 1% setpoint resistors, 21.6 V, Vf 48 V, 43.5 uH, 400 kHz, 90% efficiency): >=1.2x headroom for the 75 W design',
           ilim >= 1.2 * max(ipk.values()) and max(ipk.values()) < 6.3 * 0.73 and p['L501']['src'] == 'S12')
-    check(f'LED branch fuse F103 6.3 A slow covers the modeled {max(ipk.values()):.2f} A input peak with margin', max(ipk.values()) < 6.3 * 0.73)
+    check(f'F103 is the 6.3 A USI fast fuse 3413.0224.11; modeled input peak {max(ipk.values()):.2f} A is below the steady-current allowance, NOT proof of inrush/I2t coordination',
+          p['F103']['mpn'] == '3413.0224.11' and p['F103']['value'] == '6.3 A fast' and max(ipk.values()) < 6.3 * 0.73)
     check('Gate: two 10 R in parallel (5 R) from GATE_RAW, 100k gate pull-down; GATE_RAW touches only U501.10 and the two resistors',
           abs(par(val('R512'), val('R513')) - 5) < 1e-9 and two('R512', 'LED_GATE_RAW', 'LED_GATE') and two('R513', 'LED_GATE_RAW', 'LED_GATE') and two('R514', 'LED_GATE', 'GND')
           and real('LED_GATE_RAW') == {('U501', '10'), ('R512', '1'), ('R513', '1')} and 'U801' not in p)

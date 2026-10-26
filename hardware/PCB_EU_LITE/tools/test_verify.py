@@ -67,6 +67,7 @@ MUTATIONS = {
     '3.3 V divider bottom resistor dropped to 100k only': value('R202', '100k 1%'),
     'INA238 IN+ and IN- swapped': swap('U102', '9', '10'),
     'Q102 drain and source swapped': swap('Q102', '2', '3'),
+    'F103 fast fuse mislabeled slow': value('F103', '6.3 A slow'),
     'Reverse-polarity gate without zener (12 V -> 24 V)': net('D103', 2, 'REVP_GATE'),
     'LM3429 OVP divider top 33k -> 47k (59.5 V)': value('R509', '47k 1%'),
     'LED sense resistor 0R15 -> 0R10 (about 2.3 A)': value('R502', '0R10 2W'),
